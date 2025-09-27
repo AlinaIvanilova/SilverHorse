@@ -1,0 +1,20 @@
+/* style.css */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* висота екрану */
+    background-image: url('mainphoto.png'); /* ім'я файлу твоєї фотографії */
+    background-size: cover;   /* фото займає весь екран */
+    background-position: center; /* центр фото */
+    background-repeat: no-repeat; /* не повторювати фото */
+    display: flex;
+    justify-content: center;  /* по центру горизонтально */
+    align-items: center;      /* по центру вертикально */
+    flex-direction: column;   /* текст над фото по вертикалі */
+    color: white;             /* колір тексту */
+    text-align: center;
+}
+h1 {
+    font-size: 3em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* щоб текст був видимим на фото */
+}
