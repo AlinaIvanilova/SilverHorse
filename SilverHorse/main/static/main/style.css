@@ -13,8 +13,41 @@ body {
     flex-direction: column;   /* текст над фото по вертикалі */
     color: white;             /* колір тексту */
     text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Текстовий блок */
+.hero-text {
+    background-color: rgba(0, 0, 0, 0.5); /* напівпрозорий фон */
+    padding: 20px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+
+/* Заголовок */
+.hero-text h1 {
+    font-size: 4em;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 8px black;
+}
+
+/* Підзаголовок */
+.hero-text p {
+    font-size: 1.5em;
+    margin-top: 10px;
+    font-style: italic;
+    text-shadow: 2px 2px 6px black;
 }
 h1 {
     font-size: 3em;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* щоб текст був видимим на фото */
+    color: white; /* темно-сірий, можна змінити на чорний (#000) */
+    text-shadow: 2px 2px 6px rgba(255,255,255,0.3); /* легка підсвітка */
+    margin-top: -150px; /* підняти текст вище */
+    background: rgba(255, 255, 255, 0.4); /* напівпрозорий світлий фон */
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-family: 'Roboto', sans-serif; /* гарний сучасний шрифт */
 }
