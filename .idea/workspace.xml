@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="2.2. I added beautiful text on the main photo.">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="2.3 I updated text to saw beautiful animated. I did: updated only style.css">
+      <change afterPath="$PROJECT_DIR$/SilverHorse/main/templates/main/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/main/templates/main/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/main/static/main/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/static/main/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/main/templates/main/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/templates/main/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="2.2-beautiful-text" />
+        <entry key="$PROJECT_DIR$" value="2.3-beautiful-text-updated" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,7 +58,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "2.3-beautiful-text-updated",
+    "git-widget-placeholder": "3-add-registration",
     "last_opened_file_path": "C:/Users/A/SilverHorse/SilverHorse/main/static/main"
   }
 }]]></component>
@@ -130,7 +133,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759078521594</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="2.3 I updated text to saw beautiful animated. I did: updated only style.css">
+      <option name="closed" value="true" />
+      <created>1760287107380</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1760287107380</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -140,7 +151,8 @@
     <MESSAGE value="save version 1 - step 2" />
     <MESSAGE value="2.1-do-Photo-main = I added background. Now I have there the beautiful photo in the back." />
     <MESSAGE value="2.2. I added beautiful text on the main photo." />
-    <option name="LAST_COMMIT_MESSAGE" value="2.2. I added beautiful text on the main photo." />
+    <MESSAGE value="2.3 I updated text to saw beautiful animated. I did: updated only style.css" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.3 I updated text to saw beautiful animated. I did: updated only style.css" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
