@@ -1,53 +1,92 @@
 /* style.css */
+
+/* === ОСНОВНИЙ СТИЛЬ === */
 body {
     margin: 0;
     padding: 0;
-    height: 100vh; /* висота екрану */
-    background-image: url('mainphoto.png'); /* ім'я файлу твоєї фотографії */
-    background-size: cover;   /* фото займає весь екран */
-    background-position: center; /* центр фото */
-    background-repeat: no-repeat; /* не повторювати фото */
+    height: 100vh;
+    background-image: url('mainphoto.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
-    justify-content: center;  /* по центру горизонтально */
-    align-items: center;      /* по центру вертикально */
-    flex-direction: column;   /* текст над фото по вертикалі */
-    color: white;             /* колір тексту */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    transition: background 2s ease-in-out;
+
+    /* ✨ Анімації */
+    animation: zoomInOut 15s ease-in-out infinite, fadeIn 1.5s ease-in forwards;
 }
 
-/* Текстовий блок */
+/* === ТЕКСТОВИЙ БЛОК === */
 .hero-text {
-    background-color: rgba(0, 0, 0, 0.5); /* напівпрозорий фон */
-    padding: 20px 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.55);
+    padding: 25px 50px;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    animation: fadeUp 2.5s ease-out, float 6s ease-in-out infinite;
 }
 
-/* Заголовок */
+/* === ЗАГОЛОВОК === */
 .hero-text h1 {
     font-size: 4em;
     margin: 0;
     text-transform: uppercase;
     font-weight: bold;
-    letter-spacing: 3px;
-    text-shadow: 3px 3px 8px black;
+    letter-spacing: 4px;
+    color: white;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.9);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Підзаголовок */
+/* ✨ Ефект блиску */
+.hero-text h1::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+    animation: shine 5s linear infinite;
+}
+
+/* === ПІДЗАГОЛОВОК === */
 .hero-text p {
     font-size: 1.5em;
-    margin-top: 10px;
+    margin-top: 12px;
     font-style: italic;
-    text-shadow: 2px 2px 6px black;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
 }
-h1 {
-    font-size: 3em;
-    color: white; /* темно-сірий, можна змінити на чорний (#000) */
-    text-shadow: 2px 2px 6px rgba(255,255,255,0.3); /* легка підсвітка */
-    margin-top: -150px; /* підняти текст вище */
-    background: rgba(255, 255, 255, 0.4); /* напівпрозорий світлий фон */
-    padding: 15px 30px;
-    border-radius: 12px;
-    font-family: 'Roboto', sans-serif; /* гарний сучасний шрифт */
+
+/* === АНІМАЦІЇ === */
+@keyframes zoomInOut {
+    0%, 100% { background-size: 100%; }
+    50% { background-size: 110%; }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes shine {
+    0% { left: -75%; }
+    100% { left: 125%; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

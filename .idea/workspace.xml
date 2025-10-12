@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="2.1-do-Photo-main = I added background. Now I have there the beautiful photo in the back.">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="2.2. I added beautiful text on the main photo.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/main/static/main/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/static/main/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/main/templates/main/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/templates/main/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="2-step-startapp-main" />
+        <entry key="$PROJECT_DIR$" value="2.2-beautiful-text" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -50,16 +49,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;2.1-do-Photo-main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/A/SilverHorse/SilverHorse/main/static/main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "2.3-beautiful-text-updated",
+    "last_opened_file_path": "C:/Users/A/SilverHorse/SilverHorse/main/static/main"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\A\SilverHorse\SilverHorse\main\static\main" />
@@ -123,7 +122,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758978288945</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="2.2. I added beautiful text on the main photo.">
+      <option name="closed" value="true" />
+      <created>1759078521594</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1759078521594</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -132,7 +139,8 @@
     <MESSAGE value="Add admin" />
     <MESSAGE value="save version 1 - step 2" />
     <MESSAGE value="2.1-do-Photo-main = I added background. Now I have there the beautiful photo in the back." />
-    <option name="LAST_COMMIT_MESSAGE" value="2.1-do-Photo-main = I added background. Now I have there the beautiful photo in the back." />
+    <MESSAGE value="2.2. I added beautiful text on the main photo." />
+    <option name="LAST_COMMIT_MESSAGE" value="2.2. I added beautiful text on the main photo." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
