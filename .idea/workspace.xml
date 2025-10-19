@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="3.1 fix btn. All the btn work good">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="4 added about us panel. The main page - done">
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/main/static/main/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/static/main/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/main/templates/main/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/templates/main/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/SilverHorse/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/SilverHorse/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/SilverHorse/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/SilverHorse/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/main/templates/main/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/templates/main/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="3.1-fix-registration" />
+        <entry key="$PROJECT_DIR$" value="4-add-about-us" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,7 +62,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "4-add-about-us",
+    "git-widget-placeholder": "5-start-new-app",
     "last_opened_file_path": "C:/Users/A/SilverHorse/SilverHorse/main/static/main"
   }
 }]]></component>
@@ -155,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760867895415</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="4 added about us panel. The main page - done">
+      <option name="closed" value="true" />
+      <created>1760897322686</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1760897322686</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -168,6 +182,7 @@
     <MESSAGE value="2.3 I updated text to saw beautiful animated. I did: updated only style.css" />
     <MESSAGE value="3.1 new branch" />
     <MESSAGE value="3.1 fix btn. All the btn work good" />
-    <option name="LAST_COMMIT_MESSAGE" value="3.1 fix btn. All the btn work good" />
+    <MESSAGE value="4 added about us panel. The main page - done" />
+    <option name="LAST_COMMIT_MESSAGE" value="4 added about us panel. The main page - done" />
   </component>
 </project>

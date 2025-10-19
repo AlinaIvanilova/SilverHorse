@@ -20,7 +20,8 @@ from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),  # головна сторінка
-    path('', include('main.urls')),     # усі інші шляхи з app 'main'
+    path('', views.home, name='home'),          # головна сторінка
+    path('', include('main.urls')),             # всі інші шляхи з main
+    path('dashboard/', include('userspace.urls')),  # шляхи з userspace
 ]
 
