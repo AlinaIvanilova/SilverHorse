@@ -20,5 +20,28 @@
         <h1>Silver Horse</h1>
         <p>Відчуй свободу дикого степу разом із нами</p>
     </div>
+
+
+<!-- Про нас (slide-out panel) -->
+<div id="about-btn">Про нас</div>
+<div id="about-panel">
+    <h2>Про нас</h2>
+    <p>
+        Ласкаво просимо у світ Silver Horse — унікальної платформи, де ви можете взяти на себе роль керівника конюшні. Керуйте кіньми, плануйте тренування, організовуйте змагання та приймайте стратегічні рішення, що впливають на успіх вашої конюшні.
+    <br><br>
+        Чи готові ви перевірити свої управлінські здібності та побудувати найкращу конюшню? Зареєструйтесь і розпочніть свою пригоду вже сьогодні — майбутнє вашої конюшні у ваших руках.
+    <br><br>
+        З любов’ю, <strong>Dont push the horses</strong>
+    </p>
+</div>
+
+<script>
+    const btn = document.getElementById('about-btn');
+    const panel = document.getElementById('about-panel');
+
+    btn.addEventListener('click', () => {
+        panel.classList.toggle('open');
+    });
+</script>
 </body>
 </html>
