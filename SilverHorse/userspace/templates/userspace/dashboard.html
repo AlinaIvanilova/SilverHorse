@@ -3,16 +3,39 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Мій профіль</title>
-    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+    <title>Silver Horse — Профіль</title>
+
+    <!-- Можна залишити старий стиль, але тепер головний — dashboard.css -->
+
+    <link rel="stylesheet" href="{% static 'userspace/dashboard.css' %}">
 </head>
 <body>
-    <div class="profile-container">
+
+    <!-- Верхня панель з іконкою профілю -->
+    <header class="top-bar">
+        <div class="logo">Silver Horse</div>
+        <div class="profile-menu">
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="profile-icon">
+                <img src="{% static 'userspace/profile-icon.png' %}" alt="Профіль">
+            </label>
+
+            <div class="dropdown">
+                <a href="#">👤 Профіль</a>
+                <a href="#">💎 Підписка</a>
+                <a href="#">⚙️ Обліковий запис</a>
+                <a href="#">🌍 Мова</a>
+                <a href="{% url 'logout' %}">🚪 Вийти</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основний контент профілю -->
+    <main class="profile-container">
         <h1>Вітаємо, {{ user.username }}!</h1>
         <p>Ви успішно увійшли в свій профіль.</p>
+        <p>Це твоя панель користувача 🐎</p>
+    </main>
 
-        <a href="{% url 'logout' %}" class="logout-btn">Вийти</a>
-    </div>
 </body>
 </html>
-

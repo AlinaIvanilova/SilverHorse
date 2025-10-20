@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="4 added about us panel. The main page - done">
-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/dashboard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" afterDir="false" />
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="5 I started new app. Right now my users can login, after he or she will go to my new page where wrote &quot;Ви успішно увійшли в свій профіль.&quot;">
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/dashboard.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/scene-beautiful-summer-day.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/SilverHorse/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/SilverHorse/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/SilverHorse/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/SilverHorse/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/main/templates/main/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/templates/main/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/dashboard.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="4-add-about-us" />
+        <entry key="$PROJECT_DIR$" value="5-start-new-app" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,7 +59,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "5-start-new-app",
+    "git-widget-placeholder": "5.1-start-develop-main-page-for-users",
     "last_opened_file_path": "C:/Users/A/SilverHorse/SilverHorse/main/static/main"
   }
 }]]></component>
@@ -71,6 +68,7 @@
       <recent name="C:\Users\A\SilverHorse\SilverHorse\main\static\main" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\A\PycharmProjects\SilverHorse\SilverHorse\userspace\static\userspace" />
       <recent name="C:\Users\A\SilverHorse\SilverHorse\main\static\main" />
     </key>
   </component>
@@ -169,8 +167,27 @@
       <option name="project" value="LOCAL" />
       <updated>1760897322686</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="5 I started new app. Right now my users can login, after he or she will go to my new page where wrote &quot;Ви успішно увійшли в свій профіль.&quot;">
+      <option name="closed" value="true" />
+      <created>1760899608947</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1760899608947</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Zero" />
@@ -183,6 +200,7 @@
     <MESSAGE value="3.1 new branch" />
     <MESSAGE value="3.1 fix btn. All the btn work good" />
     <MESSAGE value="4 added about us panel. The main page - done" />
-    <option name="LAST_COMMIT_MESSAGE" value="4 added about us panel. The main page - done" />
+    <MESSAGE value="5 I started new app. Right now my users can login, after he or she will go to my new page where wrote &quot;Ви успішно увійшли в свій профіль.&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="5 I started new app. Right now my users can login, after he or she will go to my new page where wrote &quot;Ви успішно увійшли в свій профіль.&quot;" />
   </component>
 </project>
