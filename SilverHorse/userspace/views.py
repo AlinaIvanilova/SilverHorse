@@ -11,3 +11,7 @@ def dashboard_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')  # Після виходу користувач повернеться на головну
+
+@login_required
+def messages_view(request):
+    return render(request, 'userspace/messages.html')  # створиш цей шаблон пізніше

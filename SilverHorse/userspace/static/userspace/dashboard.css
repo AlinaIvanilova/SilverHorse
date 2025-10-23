@@ -28,6 +28,27 @@ body {
     color: #fff;
 }
 
+/* Контейнер для кнопок зверху (повідомлення + профіль) */
+.top-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* відстань між кнопками */
+}
+
+/* Кнопка повідомлень */
+.message-btn img {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid #666;
+    transition: 0.3s;
+}
+
+.message-btn img:hover {
+    border-color: #fff;
+}
+
 /* Іконка профілю */
 .profile-menu {
     position: relative;
@@ -85,3 +106,7 @@ body {
     color: #fff;
 }
 
+/* Основний контент профілю */
+.profile-container {
+    padding: 50px 30px;
+}

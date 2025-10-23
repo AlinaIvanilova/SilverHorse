@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Повідомлення — Silver Horse</title>
+    <link rel="stylesheet" href="{% static 'userspace/dashboard.css' %}">
+</head>
+<body>
+
+<header class="top-bar">
+    <div class="logo">Silver Horse</div>
+    <div class="top-buttons">
+        <!-- Профіль -->
+        <div class="profile-menu">
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="profile-icon">
+                <img src="{% static 'userspace/avatar.png' %}" alt="Профіль">
+            </label>
+
+            <div class="dropdown">
+                <a href="#">👤 Профіль</a>
+                <a href="#">💎 Підписка</a>
+                <a href="#">⚙️ Обліковий запис</a>
+                <a href="#">🌍 Мова</a>
+                <a href="{% url 'logout' %}">🚪 Вийти</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="profile-container">
+    <h1>Тут будуть твої повідомлення 📨</h1>
+    <p>Це тестова сторінка повідомлень.</p>
+</main>
+
+</body>
+</html>
