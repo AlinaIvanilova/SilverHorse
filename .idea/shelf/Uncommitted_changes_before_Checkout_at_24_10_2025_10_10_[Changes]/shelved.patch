@@ -1,0 +1,121 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c26cf16d-e3eb-408e-9cb2-a4199e428b6d\" name=\"Changes\" comment=\"5.2 fix button exit\">\r\n      <change afterPath=\"$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/base.html\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/messages.html\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/SilverHorse/db.sqlite3\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/SilverHorse/db.sqlite3\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/SilverHorse/userspace/static/userspace/dashboard.css\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/SilverHorse/userspace/static/userspace/dashboard.css\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/dashboard.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/dashboard.html\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/SilverHorse/userspace/urls.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/SilverHorse/userspace/urls.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/SilverHorse/userspace/views.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/SilverHorse/userspace/views.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n        <option value=\"HTML File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"5.2-develop-profil\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;AlinaIvanilova&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\"><![CDATA[{\r\n  \"selectedUrlAndAccountId\": {\r\n    \"url\": \"https://github.com/AlinaIvanilova/SilverHorse.git\",\r\n    \"accountId\": \"aa5884a2-c91c-4f46-8c11-1327823f14b5\"\r\n  }\r\n}]]></component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 2\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"33103pmGwGRmF7pwWxsAzFBk3yX\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"DefaultHtmlFileTemplate\": \"HTML File\",\r\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"git-widget-placeholder\": \"5.3-develop-message\",\r\n    \"last_opened_file_path\": \"C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/userspace\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\OMEN\\PycharmProjects\\SilverHorse\\SilverHorse\\userspace\\static\\userspace\" />\r\n      <recent name=\"C:\\Users\\A\\SilverHorse\\SilverHorse\\main\\static\\main\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\A\\PycharmProjects\\SilverHorse\\SilverHorse\\userspace\\static\\userspace\" />\r\n      <recent name=\"C:\\Users\\A\\SilverHorse\\SilverHorse\\main\\static\\main\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-PY-252.26830.99\" />\r\n        <option value=\"bundled-python-sdk-164cda30dcd9-0af03a5fa574-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.26830.99\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c26cf16d-e3eb-408e-9cb2-a4199e428b6d\" name=\"Changes\" comment=\"\" />\r\n      <created>1758469074875</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1758469074875</updated>\r\n      <workItem from=\"1761035789300\" duration=\"2451000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Zero\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1758469188108</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1758469188108</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"install Django\\startproject.\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1758469581395</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1758469581395</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Add admin\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1758470007740</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1758470007741</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"save version 1 - step 2\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1758471557387</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1758471557387</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"2.1-do-Photo-main = I added background. Now I have there the beautiful photo in the back.\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1758978288945</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1758978288945</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"2.2. I added beautiful text on the main photo.\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1759078521594</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1759078521594</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"2.3 I updated text to saw beautiful animated. I did: updated only style.css\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1760287107380</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1760287107380</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"3.1 new branch\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1760860892057</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1760860892058</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"3.1 fix btn. All the btn work good\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1760867895415</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1760867895415</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"4 added about us panel. The main page - done\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1760897322686</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1760897322686</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"5 I started new app. Right now my users can login, after he or she will go to my new page where wrote &quot;Ви успішно увійшли в свій профіль.&quot;\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1760899608947</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1760899608947</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"5.2 fix button exit\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1761036690476</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1761036690476</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"13\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Zero\" />\r\n    <MESSAGE value=\"install Django\\startproject.\" />\r\n    <MESSAGE value=\"Add admin\" />\r\n    <MESSAGE value=\"save version 1 - step 2\" />\r\n    <MESSAGE value=\"2.1-do-Photo-main = I added background. Now I have there the beautiful photo in the back.\" />\r\n    <MESSAGE value=\"2.2. I added beautiful text on the main photo.\" />\r\n    <MESSAGE value=\"2.3 I updated text to saw beautiful animated. I did: updated only style.css\" />\r\n    <MESSAGE value=\"3.1 new branch\" />\r\n    <MESSAGE value=\"3.1 fix btn. All the btn work good\" />\r\n    <MESSAGE value=\"4 added about us panel. The main page - done\" />\r\n    <MESSAGE value=\"5 I started new app. Right now my users can login, after he or she will go to my new page where wrote &quot;Ви успішно увійшли в свій профіль.&quot;\" />\r\n    <MESSAGE value=\"5.2 fix button exit\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"5.2 fix button exit\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" suspend=\"THREAD\" type=\"python-line\">\r\n          <url>file://$PROJECT_DIR$/SilverHorse/userspace/urls.py</url>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 70f710ec0b898a29b3fce731d98d2a255d5d6719)
++++ b/.idea/workspace.xml	(date 1761194222779)
+@@ -4,16 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="5.2 fix button exit">
+-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/base.html" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/messages.html" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/SilverHorse/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/db.sqlite3" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/dashboard.css" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/dashboard.html" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views.py" afterDir="false" />
+-    </list>
++    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="5.3" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -41,12 +32,12 @@
+     &quot;assignee&quot;: &quot;AlinaIvanilova&quot;
+   }
+ }</component>
+-  <component name="GithubPullRequestsUISettings"><![CDATA[{
+-  "selectedUrlAndAccountId": {
+-    "url": "https://github.com/AlinaIvanilova/SilverHorse.git",
+-    "accountId": "aa5884a2-c91c-4f46-8c11-1327823f14b5"
++  <component name="GithubPullRequestsUISettings">{
++  &quot;selectedUrlAndAccountId&quot;: {
++    &quot;url&quot;: &quot;https://github.com/AlinaIvanilova/SilverHorse.git&quot;,
++    &quot;accountId&quot;: &quot;aa5884a2-c91c-4f46-8c11-1327823f14b5&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="ProjectColorInfo">{
+   &quot;associatedIndex&quot;: 2
+ }</component>
+@@ -55,23 +46,23 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "DefaultHtmlFileTemplate": "HTML File",
+-    "ModuleVcsDetector.initialDetectionPerformed": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+-    "RunOnceActivity.git.unshallow": "true",
+-    "git-widget-placeholder": "5.3-develop-message",
+-    "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/userspace",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
++    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;5.3-develop-message&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/userspace&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="C:\Users\OMEN\PycharmProjects\SilverHorse\SilverHorse\userspace\static\userspace" />
+@@ -98,6 +89,7 @@
+       <option name="presentableId" value="Default" />
+       <updated>1758469074875</updated>
+       <workItem from="1761035789300" duration="2451000" />
++      <workItem from="1761194142505" duration="80000" />
+     </task>
+     <task id="LOCAL-00001" summary="Zero">
+       <option name="closed" value="true" />
+@@ -195,7 +187,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1761036690476</updated>
+     </task>
+-    <option name="localTasksCounter" value="13" />
++    <task id="LOCAL-00013" summary="5.3">
++      <option name="closed" value="true" />
++      <created>1761194165781</created>
++      <option name="number" value="00013" />
++      <option name="presentableId" value="LOCAL-00013" />
++      <option name="project" value="LOCAL" />
++      <updated>1761194165781</updated>
++    </task>
++    <option name="localTasksCounter" value="14" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -225,7 +225,8 @@
+     <MESSAGE value="4 added about us panel. The main page - done" />
+     <MESSAGE value="5 I started new app. Right now my users can login, after he or she will go to my new page where wrote &quot;Ви успішно увійшли в свій профіль.&quot;" />
+     <MESSAGE value="5.2 fix button exit" />
+-    <option name="LAST_COMMIT_MESSAGE" value="5.2 fix button exit" />
++    <MESSAGE value="5.3" />
++    <option name="LAST_COMMIT_MESSAGE" value="5.3" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>

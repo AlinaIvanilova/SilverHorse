@@ -3,16 +3,23 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Silver Horse</title>
+    <title>{% block title %}Silver Horse{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'userspace/dashboard.css' %}">
 </head>
 <body>
 
-    <!-- Верхня панель -->
+    <!-- Фіксований верхній хедер -->
     <header class="top-bar">
-        <div class="logo">Silver Horse</div>
+        <!-- Лого з іконкою -->
+        <div class="logo-with-icon">
+            <a href="{% url 'dashboard' %}">
+                <img src="{% static 'userspace/my-icon.png' %}" alt="Іконка" class="logo-icon">
+                Silver Horse
+            </a>
+        </div>
+
         <div class="top-buttons">
-            <!-- Кнопка повідомлень -->
+            <!-- Повідомлення -->
             <a href="{% url 'messages' %}" class="message-btn">
                 <img src="{% static 'userspace/message-icon.png' %}" alt="Повідомлення" title="Повідомлення">
             </a>
@@ -23,7 +30,6 @@
                 <label for="menu-toggle" class="profile-icon">
                     <img src="{% static 'userspace/avatar.png' %}" alt="Профіль">
                 </label>
-
                 <div class="dropdown">
                     <a href="#">👤 Профіль</a>
                     <a href="#">💎 Підписка</a>
@@ -36,15 +42,9 @@
     </header>
 
     <!-- Основний контент -->
-    <main class="profile-container">
-        {% if page == 'dashboard' %}
-            <h1>Вітаємо, {{ user.username }}!</h1>
-            <p>Ви успішно увійшли в свій профіль.</p>
-            <p>Це твоя панель користувача 🐎</p>
-        {% elif page == 'messages' %}
-            <h1>Твої повідомлення</h1>
-            <p>Тут будуть всі твої повідомлення.</p>
-        {% endif %}
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
     </main>
 
 </body>

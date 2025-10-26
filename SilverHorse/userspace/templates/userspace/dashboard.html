@@ -1,46 +1,10 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <title>Silver Horse — Профіль</title>
-    <link rel="stylesheet" href="{% static 'userspace/dashboard.css' %}">
-</head>
-<body>
+{% extends "userspace/base.html" %}
+{% block title %}Профіль — Silver Horse{% endblock %}
 
-    <!-- Верхня панель -->
-    <header class="top-bar">
-        <div class="logo">Silver Horse</div>
-        <div class="top-buttons">
-            <!-- Кнопка повідомлень -->
-            <a href="{% url 'messages' %}" class="message-btn">
-                <img src="{% static 'userspace/message-icon.png' %}" alt="Повідомлення" title="Повідомлення">
-            </a>
-
-            <!-- Профіль -->
-            <div class="profile-menu">
-                <input type="checkbox" id="menu-toggle">
-                <label for="menu-toggle" class="profile-icon">
-                    <img src="{% static 'userspace/avatar.png' %}" alt="Профіль">
-                </label>
-
-                <div class="dropdown">
-                    <a href="#">👤 Профіль</a>
-                    <a href="#">💎 Підписка</a>
-                    <a href="#">⚙️ Обліковий запис</a>
-                    <a href="#">🌍 Мова</a>
-                    <a href="{% url 'logout' %}">🚪 Вийти</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Основний контент профілю -->
-    <main class="profile-container">
-        <h1>Вітаємо, {{ user.username }}!</h1>
-        <p>Ви успішно увійшли в свій профіль.</p>
-        <p>Це твоя панель користувача 🐎</p>
-    </main>
-
-</body>
-</html>
+{% block content %}
+<div class="profile-container">
+    <h1>Вітаємо, {{ user.username }}!</h1>
+    <p>Ви успішно увійшли в свій профіль.</p>
+    <p>Це твоя панель користувача 🐎</p>
+</div>
+{% endblock %}

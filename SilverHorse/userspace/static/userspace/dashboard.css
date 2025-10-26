@@ -1,98 +1,120 @@
-/* === Основний стиль для сторінки профілю === */
+/* =========================
+   Загальні налаштування
+========================= */
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     color: white;
-    height: 100vh;
-
-    /* фон з твоєю картинкою */
-    background-image: url('../userspace/scene-beautiful-summer-day.png'); /* вкажи правильне розширення */
-    background-size: cover;       /* картинка покриває весь екран */
-    background-position: center;  /* центр картинки */
-    background-repeat: no-repeat; /* без повтору */
+    min-height: 100vh;
+    background-image: url('../userspace/scene-beautiful-summer-day.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-/* Верхня панель */
+/* =========================
+   Фіксований хедер
+========================= */
 .top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: #111;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #111;
-    padding: 10px 30px;
+    padding: 0 25px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    z-index: 1000;
 }
 
-.logo {
+.logo a {
+    color: #fff;
     font-size: 1.3rem;
     font-weight: bold;
-    color: #fff;
+    text-decoration: none;
 }
 
-/* Контейнер для кнопок зверху (повідомлення + профіль) */
+/* =========================
+   Кнопки у хедері
+========================= */
 .top-buttons {
     display: flex;
     align-items: center;
-    gap: 15px; /* відстань між кнопками */
+    gap: 15px;
+    padding-right: 10px;
 }
 
-/* Кнопка повідомлень */
+/* Повідомлення */
 .message-btn img {
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
-    border-radius: 50%;
-    border: 2px solid #666;
     transition: 0.3s;
+    filter: brightness(0) invert(1) contrast(1.2); /* робимо білими */
+    border: none; /* прибираємо круглий бордер */
+    border-radius: 0; /* прибираємо округлення */
 }
 
 .message-btn img:hover {
-    border-color: #fff;
+    transform: scale(1.1); /* легке збільшення при ховері */
 }
 
-/* Іконка профілю */
+/* =========================
+   Профіль
+========================= */
 .profile-menu {
     position: relative;
 }
 
 .profile-icon img {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
-    border: 2px solid #666;
     transition: 0.3s;
+    filter: brightness(0) invert(1) contrast(1.2); /* робимо білими */
+    border: none; /* прибираємо круглий бордер */
+    border-radius: 0; /* прибираємо округлення */
 }
 
 .profile-icon img:hover {
-    border-color: #fff;
+    transform: scale(1.1); /* легке збільшення при ховері */
 }
 
-/* Ховаємо чекбокс */
+/* =========================
+   Випадаюче меню
+========================= */
 #menu-toggle {
     display: none;
 }
 
-/* Випадаюче меню */
 .dropdown {
     position: absolute;
     top: 50px;
     right: 0;
+    transform: translateX(-10px);
     background: #222;
     border: 1px solid #444;
     border-radius: 10px;
     display: none;
     flex-direction: column;
     width: 180px;
+    max-width: 90vw;
     box-shadow: 0 0 10px rgba(0,0,0,0.7);
     overflow: hidden;
+    z-index: 2000;
 }
 
-/* Показ меню при натисканні на іконку */
 #menu-toggle:checked + .profile-icon + .dropdown {
     display: flex;
 }
 
-/* Стиль пунктів меню */
 .dropdown a {
     text-decoration: none;
     color: #ddd;
@@ -106,7 +128,71 @@ body {
     color: #fff;
 }
 
-/* Основний контент профілю */
+/* =========================
+   Основний контент
+========================= */
+.main-content {
+    padding-top: 70px;
+}
+
 .profile-container {
     padding: 50px 30px;
 }
+
+/* =========================
+   Адаптивність
+========================= */
+@media (max-width: 600px) {
+    .top-bar {
+        padding: 0 15px;
+    }
+
+    .top-buttons {
+        gap: 10px;
+    }
+
+    .profile-icon img,
+    .message-btn img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .dropdown {
+        width: 150px;
+        transform: translateX(-5px);
+    }
+
+    .profile-container {
+        padding: 30px 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .dropdown {
+        width: 130px;
+        transform: translateX(-5px);
+    }
+
+    .profile-icon img,
+    .message-btn img {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+.logo-with-icon a {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* відстань між іконкою та текстом */
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 45px;   /* можна змінити розмір */
+    height: 45px;
+    filter: brightness(0) invert(1) contrast(1.2); /* робимо білою, якщо іконка чорна */
+}
+
