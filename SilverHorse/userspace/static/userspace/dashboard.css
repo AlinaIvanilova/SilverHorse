@@ -168,7 +168,7 @@ body {
 }
 
 /* =========================
-   Футер
+   Футер (оновлений і вирівняний текст)
 ========================= */
 .site-footer {
     position: fixed;
@@ -192,49 +192,51 @@ body {
 }
 
 /* Контакти футера */
-.footer-contacts span {
-    display: inline-block;
+.footer-contacts {
+    display: flex;
+    gap: 30px;
+    align-items: center;
     margin-right: 50px;
 }
 
-/* Соцмережі */
-.footer-socials a {
-    margin-right: 20px;
+.footer-socials {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+
 }
 
-/* Джерела і права */
-.footer-sources {
-    margin-top: 15px;
-    font-size: 0.9rem;
-    color: #ccc;
+.footer-socials a img {
+    width: 25px;
+    height: 25px;
+    transition: transform 0.3s, filter 0.3s;
 }
 
-.footer-rights {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #ccc;
+.footer-socials a img:hover {
+    transform: scale(1.2);
+    filter: brightness(1.5) contrast(1.2);
 }
 
 .footer-bottom {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-top: 15px;
-    color: #ccc;
+    gap: 15px;
 }
 
-/* =========================
-   Адаптивність
-========================= */
-@media (max-width: 600px) {
-    .top-bar { padding: 0 15px; }
-    .top-buttons { gap: 10px; }
-    .profile-icon img, .message-btn img { width: 32px; height: 32px; }
-    .dropdown { width: 150px; transform: translateX(-5px); }
-    .profile-container { padding: 30px 15px; }
+.footer-button {
+    background: #222;
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    transition: background 0.3s, color 0.3s;
 }
 
-@media (max-width: 400px) {
-    .dropdown { width: 130px; transform: translateX(-5px); }
-    .profile-icon img, .message-btn img { width: 28px; height: 28px; }
+.footer-button:hover {
+    background: #444;
+    color: #ffd700;
+}
+.footer-socials a:last-child {
+    margin-right: 50px; /* відстань після Telegram */
 }

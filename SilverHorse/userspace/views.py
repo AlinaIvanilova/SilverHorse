@@ -15,3 +15,9 @@ def logout_view(request):
 @login_required
 def messages_view(request):
     return render(request, 'userspace/messages.html')  # створиш цей шаблон пізніше
+
+
+
+
+def sources(request):
+    return render(request, 'userspace/sources.html')
