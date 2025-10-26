@@ -41,11 +41,38 @@
         </div>
     </header>
 
+    <!-- Фіксований підхедер з навігацією -->
+    <nav class="sub-header">
+        <ul>
+            <li><a href="#">Конярство</a></li>
+            <li><a href="#">Кінноспортивний комплекс</a></li>
+            <li><a href="#">Торгівля</a></li>
+        </ul>
+    </nav>
+
     <!-- Основний контент -->
     <main class="main-content">
         {% block content %}
         {% endblock %}
     </main>
+
+    <!-- Футер -->
+    <footer class="site-footer">
+        <p>© 2025 Silver Horse. Всі права захищені.</p>
+    </footer>
+
+    <!-- Скрипт для проявлення футера при прокручуванні -->
+    <script>
+        const footer = document.querySelector('.site-footer');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) { // поріг прокрутки
+                footer.classList.add('show-footer');
+            } else {
+                footer.classList.remove('show-footer');
+            }
+        });
+    </script>
 
 </body>
 </html>

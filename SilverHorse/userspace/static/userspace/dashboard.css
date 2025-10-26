@@ -196,3 +196,68 @@ body {
     filter: brightness(0) invert(1) contrast(1.2); /* робимо білою, якщо іконка чорна */
 }
 
+.sub-header {
+    position: fixed;
+    top: 60px; /* під основним хедером, висота якого 60px */
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: #222;             /* темний фон */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    z-index: 950;                 /* нижче за хедер, але вище за контент */
+}
+
+.sub-header ul {
+    display: flex;
+    list-style: none;
+    gap: 40px;                     /* відстань між кнопками */
+    margin: 0;
+    padding: 0;
+}
+
+.sub-header ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;            /* легке округлення кнопок */
+    transition: background 0.3s, color 0.3s;
+}
+
+.sub-header ul li a:hover {
+    background: #444;               /* фон при наведенні */
+    color: #ffd700;                 /* колір тексту при наведенні */
+}
+
+/* Основний контент не перекриває підхедер */
+.main-content {
+    padding-top: 115px; /* 60px хедер + 50px підхедер + 5px відступ */
+}
+.site-footer {
+    position: fixed;
+    bottom: -100px;          /* спочатку футер схований за екраном */
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: #111;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
+    transition: bottom 0.5s ease; /* плавне проявлення */
+    z-index: 900;
+}
+
+/* Клас, який показує футер */
+.site-footer.show-footer {
+    bottom: 0;
+}
+
+.main-content {
+    min-height: 150vh; /* 150% висоти вікна — буде прокрутка */
+    padding-top: 120px; /* відступ від хедера і підхедера */
+}
