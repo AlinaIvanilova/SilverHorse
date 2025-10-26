@@ -261,3 +261,22 @@ body {
     min-height: 150vh; /* 150% висоти вікна — буде прокрутка */
     padding-top: 120px; /* відступ від хедера і підхедера */
 }
+
+/* Контейнер контактів у футері */
+.footer-contacts span {
+    display: inline-block; /* щоб margin спрацьовував */
+    margin-right: 20px;    /* відстань між елементами */
+}
+
+/* Соціальні іконки */
+.footer-socials a {
+    margin-right: 15px;   /* відстань між іконками */
+}
+
+/* Можна додати відступ зверху та знизу футера */
+.site-footer {
+    padding: 20px 0;
+    text-align: center;
+    background-color: #111;
+    color: white;
+}

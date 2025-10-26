@@ -10,7 +10,6 @@
 
     <!-- Фіксований верхній хедер -->
     <header class="top-bar">
-        <!-- Лого з іконкою -->
         <div class="logo-with-icon">
             <a href="{% url 'dashboard' %}">
                 <img src="{% static 'userspace/my-icon.png' %}" alt="Іконка" class="logo-icon">
@@ -19,12 +18,10 @@
         </div>
 
         <div class="top-buttons">
-            <!-- Повідомлення -->
             <a href="{% url 'messages' %}" class="message-btn">
                 <img src="{% static 'userspace/message-icon.png' %}" alt="Повідомлення" title="Повідомлення">
             </a>
 
-            <!-- Профіль -->
             <div class="profile-menu">
                 <input type="checkbox" id="menu-toggle">
                 <label for="menu-toggle" class="profile-icon">
@@ -56,17 +53,15 @@
         {% endblock %}
     </main>
 
-    <!-- Футер -->
-    <footer class="site-footer">
-        <p>© 2025 Silver Horse. Всі права захищені.</p>
-    </footer>
+    <!-- Підключення футера -->
+    {% include 'userspace/footer.html' %}
 
     <!-- Скрипт для проявлення футера при прокручуванні -->
     <script>
         const footer = document.querySelector('.site-footer');
 
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 100) { // поріг прокрутки
+            if (window.pageYOffset > 100) {
                 footer.classList.add('show-footer');
             } else {
                 footer.classList.remove('show-footer');
