@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="7.2 I tried for a very long time to make an active button and not break the footer, but I managed to do it.">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="7.3 added some text to the sources used, but didn't put it into a nice design.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/sources.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/sources.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/dashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/messages.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/messages.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="7.1-footer" />
+        <entry key="$PROJECT_DIR$" value="7.3-text" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,7 +58,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "7.2-footer-used-sources",
+    "git-widget-placeholder": "8-update-page-messege",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/userspace",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -94,7 +96,8 @@
       <workItem from="1761035789300" duration="2451000" />
       <workItem from="1761393960235" duration="110000" />
       <workItem from="1761483398953" duration="7844000" />
-      <workItem from="1761499163126" duration="4695000" />
+      <workItem from="1761499163126" duration="5032000" />
+      <workItem from="1761543107358" duration="1388000" />
     </task>
     <task id="LOCAL-00001" summary="Zero">
       <option name="closed" value="true" />
@@ -232,7 +235,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761503312944</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="7.3 added some text to the sources used, but didn't put it into a nice design.">
+      <option name="closed" value="true" />
+      <created>1761504107211</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1761504107211</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,6 +278,7 @@
     <MESSAGE value="7.1 Updated the footer, added text, added icons." />
     <MESSAGE value="7.1 Updated" />
     <MESSAGE value="7.2 I tried for a very long time to make an active button and not break the footer, but I managed to do it." />
-    <option name="LAST_COMMIT_MESSAGE" value="7.2 I tried for a very long time to make an active button and not break the footer, but I managed to do it." />
+    <MESSAGE value="7.3 added some text to the sources used, but didn't put it into a nice design." />
+    <option name="LAST_COMMIT_MESSAGE" value="7.3 added some text to the sources used, but didn't put it into a nice design." />
   </component>
 </project>

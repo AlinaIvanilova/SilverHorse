@@ -2,8 +2,70 @@
 {% block title %}Повідомлення — Silver Horse{% endblock %}
 
 {% block content %}
-<div class="profile-container">
-    <h1>Твої повідомлення 📨</h1>
-    <p>Тут будуть всі твої повідомлення.</p>
+<div class="messages-page">
+  <div class="messages-sidebar">
+    <button class="tab-button active" data-tab="notifications">Сповіщення</button>
+    <button class="tab-button" data-tab="chats">Повідомлення</button>
+    <button class="tab-button" data-tab="system">Системні повідомлення</button>
+    <button class="tab-button" data-tab="blacklist">Чорний список</button>
+    <button class="tab-button" data-tab="notes">Блокнот</button>
+    <button class="tab-button" data-tab="write">Написати</button>
+  </div>
+
+  <div class="messages-content">
+    <div id="notifications" class="tab-content active">
+      <h2>Сповіщення</h2>
+      <p>Тут будуть повідомлення від системи (наприклад, про покупку предметів).</p>
+    </div>
+
+    <div id="chats" class="tab-content">
+      <h2>Повідомлення</h2>
+      <p>Тут можна переглядати або вести переписку з іншими користувачами.</p>
+    </div>
+
+    <div id="system" class="tab-content">
+      <h2>Системні повідомлення</h2>
+      <p>Тут з’являтимуться важливі повідомлення від адміністрації чи івенти.</p>
+    </div>
+
+    <div id="blacklist" class="tab-content">
+      <h2>Чорний список</h2>
+      <p>Тут відображатимуться користувачі, яких ти заблокувала.</p>
+    </div>
+
+    <div id="notes" class="tab-content">
+      <h2>Блокнот</h2>
+      <p>Можеш залишати собі нотатки чи важливі записи тут.</p>
+    </div>
+
+    <div id="write" class="tab-content">
+      <h2>Написати користувачу</h2>
+      <form class="write-form">
+        <input type="text" placeholder="Введи ім’я користувача" required>
+        <textarea placeholder="Твоє повідомлення..." rows="4" required></textarea>
+        <button type="submit">Відправити</button>
+      </form>
+    </div>
+  </div>
 </div>
+
+<script>
+  const buttons = document.querySelectorAll(".tab-button");
+  const tabs = document.querySelectorAll(".tab-content");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // Активна кнопка
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // Активний контент
+      const target = btn.getAttribute("data-tab");
+      tabs.forEach((tab) => {
+        tab.classList.remove("active");
+        if (tab.id === target) tab.classList.add("active");
+      });
+    });
+  });
+</script>
 {% endblock %}

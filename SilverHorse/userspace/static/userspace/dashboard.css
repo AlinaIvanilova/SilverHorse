@@ -1,5 +1,5 @@
 /* =========================
-   Загальні налаштування
+   🌿 Загальні налаштування
 ========================= */
 * {
     box-sizing: border-box;
@@ -10,14 +10,11 @@ body {
     font-family: 'Roboto', sans-serif;
     color: white;
     min-height: 100vh;
-    background-image: url('../userspace/scene-beautiful-summer-day.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: center / cover no-repeat url('../userspace/scene-beautiful-summer-day.png');
 }
 
 /* =========================
-   Фіксований хедер
+   📌 Фіксований хедер
 ========================= */
 .top-bar {
     position: fixed;
@@ -34,6 +31,7 @@ body {
     z-index: 1000;
 }
 
+/* Лого */
 .logo-with-icon a {
     display: flex;
     align-items: center;
@@ -51,7 +49,7 @@ body {
 }
 
 /* =========================
-   Кнопки у хедері
+   🔘 Кнопки у хедері
 ========================= */
 .top-buttons {
     display: flex;
@@ -66,8 +64,6 @@ body {
     cursor: pointer;
     transition: 0.3s;
     filter: brightness(0) invert(1) contrast(1.2);
-    border: none;
-    border-radius: 0;
 }
 
 .message-btn img:hover,
@@ -76,7 +72,7 @@ body {
 }
 
 /* =========================
-   Профіль і випадаюче меню
+   👤 Профіль і меню
 ========================= */
 .profile-menu {
     position: relative;
@@ -121,7 +117,7 @@ body {
 }
 
 /* =========================
-   Підхедер / навігація
+   🧭 Підхедер / навігація
 ========================= */
 .sub-header {
     position: fixed;
@@ -160,7 +156,7 @@ body {
 }
 
 /* =========================
-   Основний контент
+   📄 Основний контент
 ========================= */
 .main-content {
     padding-top: 115px; /* хедер + підхедер */
@@ -168,7 +164,7 @@ body {
 }
 
 /* =========================
-   Футер (оновлений і вирівняний текст)
+   ⚓ Футер
 ========================= */
 .site-footer {
     position: fixed;
@@ -191,19 +187,19 @@ body {
     bottom: 0;
 }
 
-/* Контакти футера */
+/* Контактна частина */
 .footer-contacts {
     display: flex;
-    gap: 30px;
     align-items: center;
+    gap: 30px;
     margin-right: 50px;
 }
 
+/* Соцмережі */
 .footer-socials {
     display: flex;
-    gap: 15px;
     align-items: center;
-
+    gap: 15px;
 }
 
 .footer-socials a img {
@@ -217,6 +213,12 @@ body {
     filter: brightness(1.5) contrast(1.2);
 }
 
+/* Відступ після Telegram */
+.footer-socials a:last-child {
+    margin-right: 50px;
+}
+
+/* Нижній блок футера */
 .footer-bottom {
     display: flex;
     align-items: center;
@@ -237,6 +239,194 @@ body {
     background: #444;
     color: #ffd700;
 }
-.footer-socials a:last-child {
-    margin-right: 50px; /* відстань після Telegram */
+
+/* =========================
+   💬 Сторінка повідомлень
+========================= */
+.messages-container {
+    max-width: 1000px;
+    margin: 130px auto;
+    background: rgba(20, 20, 20, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    padding: 30px;
+    color: #fff;
+    backdrop-filter: blur(5px);
+}
+
+.messages-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.messages-layout {
+    display: flex;
+    gap: 30px;
+}
+
+/* Ліва частина (контент) */
+.messages-content {
+    flex: 1;
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+.message-placeholder {
+    text-align: center;
+    color: #bbb;
+    font-style: italic;
+}
+
+/* Права частина (панель) */
+.messages-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.msg-tab {
+    background: #222;
+    color: #fff;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: left;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.msg-tab:hover {
+    background: #333;
+    transform: scale(1.03);
+}
+
+.msg-tab.active {
+    background: #444;
+    color: #ffd700;
+    font-weight: bold;
+}
+/* =========================
+   💬 Сторінка повідомлень з вкладками
+========================= */
+.messages-container {
+    max-width: 1000px;
+    margin: 130px auto;
+    background: rgba(20, 20, 20, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    padding: 30px;
+    color: #fff;
+    backdrop-filter: blur(5px);
+}
+
+.messages-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.messages-page {
+    display: flex;
+    gap: 20px;
+    padding: 30px;
+    color: white;
+}
+
+/* =========================
+   🎛️ Права панель (вкладки)
+========================= */
+.messages-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 220px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.tab-button {
+    background: transparent;
+    border: 2px solid #888;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(3px);
+}
+
+.tab-button.active {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: white;
+}
+
+/* =========================
+   📨 Контент вкладок
+========================= */
+.messages-content {
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 25px;
+    border-radius: 15px;
+    min-height: 350px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================
+   ✏️ Форма написання повідомлення
+========================= */
+.write-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.write-form input,
+.write-form textarea {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    color: #222;
+}
+
+.write-form button {
+    background: #4a9eff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.write-form button:hover {
+    background: #1e6fd9;
 }
