@@ -1,3 +1,4 @@
+# userspace/views.py
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
@@ -36,10 +37,15 @@ def messages_page(request):
     form = MessageForm(request.POST or None)
 
     if request.method == 'POST' and form.is_valid():
-        message = form.save(commit=False)
-        message.sender = request.user
+        # Отримуємо користувача з імені, яке ввів користувач
+        receiver = form.cleaned_data['receiver_username']
+        message = Message(
+            sender=request.user,
+            receiver=receiver,
+            text=form.cleaned_data['text']
+        )
         message.save()
-        return redirect('messages_page')  # після відправки перезавантажуємо сторінку
+        return redirect('messages_page')
 
     # Повідомлення, де користувач є отримувачем
     messages_received = Message.objects.filter(receiver=request.user).order_by('-created_at')
@@ -59,8 +65,11 @@ def send_message(request):
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
-            message = form.save(commit=False)
-            message.sender = request.user
+            message = Message(
+                sender=request.user,
+                receiver=form.cleaned_data['receiver_username'],  # <-- отримуємо User-об’єкт
+                text=form.cleaned_data['text']
+            )
             message.save()
             return redirect('messages_page')
     else:

@@ -1,21 +1,26 @@
+# userspace/forms.py
 from django import forms
 from django.contrib.auth.models import User
 from .models import Message
 
 class MessageForm(forms.ModelForm):
-    receiver = forms.ModelChoiceField(
-        queryset=User.objects.all(),
+    receiver_username = forms.CharField(
         label="Отримувач",
-        empty_label="Оберіть користувача"
+        widget=forms.TextInput(attrs={'placeholder': 'Введіть ім’я користувача'})
     )
     text = forms.CharField(
-        widget=forms.Textarea(attrs={
-            'rows': 4,
-            'placeholder': 'Твоє повідомлення...'
-        }),
+        widget=forms.Textarea(attrs={'rows': 4, 'placeholder': 'Твоє повідомлення...'}),
         label="Повідомлення"
     )
 
     class Meta:
         model = Message
-        fields = ['receiver', 'text']
+        fields = ['text']  # поле receiver обробимо вручну
+
+    def clean_receiver_username(self):
+        username = self.cleaned_data.get('receiver_username')
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise forms.ValidationError("Користувача з таким іменем не знайдено.")
+        return user
