@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="8.1 I made a function where users can write to each other, I didn't make a beautiful design, but I made the main function through urls, views... And also added the ability for the Administrator to work with messages.">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="8.2 Changed the function of sending messages so that the User writes to another User, instead of choosing. And also changed the time zone in settings.py.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/messages.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/messages.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="8.1-Added-func-sending-messages-between-users" />
+        <entry key="$PROJECT_DIR$" value="8.2-updated-func-sending-messages" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -59,7 +61,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "8.2",
+    "git-widget-placeholder": "8.3",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/userspace",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -99,7 +101,7 @@
       <workItem from="1761483398953" duration="7844000" />
       <workItem from="1761499163126" duration="5032000" />
       <workItem from="1761543107358" duration="4513000" />
-      <workItem from="1761583163472" duration="1456000" />
+      <workItem from="1761583163472" duration="3066000" />
     </task>
     <task id="LOCAL-00001" summary="Zero">
       <option name="closed" value="true" />
@@ -261,7 +263,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761547376560</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="8.2 Changed the function of sending messages so that the User writes to another User, instead of choosing. And also changed the time zone in settings.py.">
+      <option name="closed" value="true" />
+      <created>1761584947766</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1761584947766</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,6 +309,7 @@
     <MESSAGE value="7.3 added some text to the sources used, but didn't put it into a nice design." />
     <MESSAGE value="8 Updated the message page, added buttons and design." />
     <MESSAGE value="8.1 I made a function where users can write to each other, I didn't make a beautiful design, but I made the main function through urls, views... And also added the ability for the Administrator to work with messages." />
-    <option name="LAST_COMMIT_MESSAGE" value="8.1 I made a function where users can write to each other, I didn't make a beautiful design, but I made the main function through urls, views... And also added the ability for the Administrator to work with messages." />
+    <MESSAGE value="8.2 Changed the function of sending messages so that the User writes to another User, instead of choosing. And also changed the time zone in settings.py." />
+    <option name="LAST_COMMIT_MESSAGE" value="8.2 Changed the function of sending messages so that the User writes to another User, instead of choosing. And also changed the time zone in settings.py." />
   </component>
 </project>

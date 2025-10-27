@@ -1,7 +1,7 @@
 # userspace/forms.py
 from django import forms
 from django.contrib.auth.models import User
-from .models import Message
+from .models import Message, Note
 
 class MessageForm(forms.ModelForm):
     receiver_username = forms.CharField(
@@ -24,3 +24,17 @@ class MessageForm(forms.ModelForm):
         except User.DoesNotExist:
             raise forms.ValidationError("Користувача з таким іменем не знайдено.")
         return user
+
+
+class NoteForm(forms.ModelForm):
+    class Meta:
+        model = Note
+        fields = ['title', 'content']
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Заголовок (необов’язково)'}),
+            'content': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Твоя нотатка...'}),
+        }
+        labels = {
+            'title': 'Заголовок',
+            'content': 'Текст',
+        }

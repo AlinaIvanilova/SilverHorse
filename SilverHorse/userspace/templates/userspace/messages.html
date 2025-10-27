@@ -1,11 +1,9 @@
-<!--messages.html -->
-
 {% extends "userspace/base.html" %}
 {% block title %}Повідомлення — Silver Horse{% endblock %}
 
 {% block content %}
 <div class="messages-page">
-  <!-- Бічна панель з вкладками -->
+  <!-- Бічна панель -->
   <div class="messages-sidebar">
     <button class="tab-button active" data-tab="notifications">Сповіщення</button>
     <button class="tab-button" data-tab="chats">Повідомлення</button>
@@ -15,7 +13,7 @@
     <button class="tab-button" data-tab="write">Написати</button>
   </div>
 
-  <!-- Основний контент вкладок -->
+  <!-- Основний контент -->
   <div class="messages-content">
 
     <!-- Вкладка Сповіщення -->
@@ -41,34 +39,59 @@
       {% endif %}
     </div>
 
-    <!-- Інші вкладки: system, blacklist, notes -->
+    <!-- Системні повідомлення -->
     <div id="system" class="tab-content">
       <h2>Системні повідомлення</h2>
       <p>Тут з’являтимуться важливі повідомлення від адміністрації чи івенти.</p>
     </div>
+
+    <!-- Чорний список -->
     <div id="blacklist" class="tab-content">
       <h2>Чорний список</h2>
       <p>Тут відображатимуться користувачі, яких ти заблокувала.</p>
     </div>
+
+    <!-- 🟡 Блокнот -->
     <div id="notes" class="tab-content">
-      <h2>Блокнот</h2>
-      <p>Можеш залишати собі нотатки чи важливі записи тут.</p>
+      <h2>Твій блокнот</h2>
+
+      <form method="post" action="{% url 'messages_page' %}">
+        {% csrf_token %}
+        {{ note_form.as_p }}
+        <button type="submit" name="note-submit">Зберегти нотатку</button>
+      </form>
+
+      <hr>
+
+      {% if notes %}
+        <ul class="notes-list">
+          {% for note in notes %}
+            <li class="note-item">
+              <strong>{{ note.title|default:"Без заголовка" }}</strong><br>
+              {{ note.content|linebreaks }}
+              <span class="timestamp">{{ note.created_at|date:"d.m.Y H:i" }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>У тебе ще немає нотаток. Напиши першу!</p>
+      {% endif %}
     </div>
 
-    <!-- Вкладка Написати -->
+    <!-- Написати користувачу -->
     <div id="write" class="tab-content">
       <h2>Написати користувачу</h2>
-      <form method="post" action="{% url 'send_message' %}">
+      <form method="post" action="{% url 'messages_page' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Відправити</button>
+        <button type="submit" name="msg-submit">Відправити</button>
       </form>
     </div>
 
   </div>
 </div>
 
-<!-- JS для перемикання вкладок -->
+<!-- JS для вкладок -->
 <script>
   const buttons = document.querySelectorAll(".tab-button");
   const tabs = document.querySelectorAll(".tab-content");

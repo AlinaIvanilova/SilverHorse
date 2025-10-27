@@ -1,9 +1,8 @@
-# userspace/views.py
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
-from .models import Message
-from .forms import MessageForm
+from .models import Message, Note
+from .forms import MessageForm, NoteForm
 
 # -------------------------
 # Дашборд
@@ -29,50 +28,44 @@ def sources(request):
 
 
 # -------------------------
-# Сторінка повідомлень (вкладки)
+# Сторінка повідомлень і блокноту (вкладки)
 # -------------------------
 @login_required
 def messages_page(request):
-    # Форма для відправки повідомлення
-    form = MessageForm(request.POST or None)
+    # Форма повідомлення
+    message_form = MessageForm(request.POST or None, prefix='msg')
+    # Форма нотатки
+    note_form = NoteForm(request.POST or None, prefix='note')
 
-    if request.method == 'POST' and form.is_valid():
-        # Отримуємо користувача з імені, яке ввів користувач
-        receiver = form.cleaned_data['receiver_username']
-        message = Message(
-            sender=request.user,
-            receiver=receiver,
-            text=form.cleaned_data['text']
-        )
-        message.save()
-        return redirect('messages_page')
-
-    # Повідомлення, де користувач є отримувачем
-    messages_received = Message.objects.filter(receiver=request.user).order_by('-created_at')
-
-    return render(request, 'userspace/messages.html', {
-        'form': form,
-        'messages_received': messages_received,
-        'user': request.user,
-    })
-
-
-# -------------------------
-# Окрема сторінка "Написати повідомлення"
-# -------------------------
-@login_required
-def send_message(request):
-    if request.method == 'POST':
-        form = MessageForm(request.POST)
-        if form.is_valid():
+    # Обробка відправки повідомлення
+    if request.method == 'POST' and 'msg-submit' in request.POST:
+        if message_form.is_valid():
+            receiver = message_form.cleaned_data['receiver_username']
             message = Message(
                 sender=request.user,
-                receiver=form.cleaned_data['receiver_username'],  # <-- отримуємо User-об’єкт
-                text=form.cleaned_data['text']
+                receiver=receiver,
+                text=message_form.cleaned_data['text']
             )
             message.save()
             return redirect('messages_page')
-    else:
-        form = MessageForm()
 
-    return render(request, 'userspace/send_message.html', {'form': form})
+    # Обробка створення нотатки
+    if request.method == 'POST' and 'note-submit' in request.POST:
+        if note_form.is_valid():
+            note = note_form.save(commit=False)
+            note.user = request.user
+            note.save()
+            return redirect('messages_page')
+
+    # Повідомлення для користувача
+    messages_received = Message.objects.filter(receiver=request.user).order_by('-created_at')
+    # Нотатки для користувача
+    notes = Note.objects.filter(user=request.user).order_by('-created_at')
+
+    return render(request, 'userspace/messages.html', {
+        'form': message_form,
+        'note_form': note_form,
+        'messages_received': messages_received,
+        'notes': notes,
+        'user': request.user,
+    })
