@@ -430,3 +430,73 @@ body {
 .write-form button:hover {
     background: #1e6fd9;
 }
+
+.messages-page {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.messages-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 180px;
+}
+
+.tab-button {
+  padding: 10px 15px;
+  border: none;
+  background: #222;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.tab-button.active,
+.tab-button:hover {
+  background: #444;
+  color: #ffd700;
+}
+
+.messages-content {
+  flex: 1;
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 400px;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.write-form input,
+.write-form textarea,
+.write-form button {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+}
+
+.write-form button {
+  background: #222;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.write-form button:hover {
+  background: #444;
+  color: #ffd700;
+}

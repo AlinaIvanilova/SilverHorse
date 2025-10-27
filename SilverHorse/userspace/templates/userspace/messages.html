@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="messages-page">
+  <!-- Бічна панель з вкладками -->
   <div class="messages-sidebar">
     <button class="tab-button active" data-tab="notifications">Сповіщення</button>
     <button class="tab-button" data-tab="chats">Повідомлення</button>
@@ -12,58 +13,73 @@
     <button class="tab-button" data-tab="write">Написати</button>
   </div>
 
+  <!-- Основний контент вкладок -->
   <div class="messages-content">
+
+    <!-- Вкладка Сповіщення -->
     <div id="notifications" class="tab-content active">
       <h2>Сповіщення</h2>
       <p>Тут будуть повідомлення від системи (наприклад, про покупку предметів).</p>
     </div>
 
+    <!-- Вкладка Повідомлення -->
     <div id="chats" class="tab-content">
       <h2>Повідомлення</h2>
-      <p>Тут можна переглядати або вести переписку з іншими користувачами.</p>
+      {% if messages_received %}
+        <ul class="chat-messages">
+          {% for msg in messages_received %}
+            <li class="{% if msg.sender == user %}sent{% else %}received{% endif %}">
+              <strong>{{ msg.sender.username }}:</strong> {{ msg.text }}
+              <span class="timestamp">{{ msg.created_at|date:"d.m.Y H:i" }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Тут поки що немає повідомлень.</p>
+      {% endif %}
     </div>
 
+    <!-- Інші вкладки: system, blacklist, notes -->
     <div id="system" class="tab-content">
       <h2>Системні повідомлення</h2>
       <p>Тут з’являтимуться важливі повідомлення від адміністрації чи івенти.</p>
     </div>
-
     <div id="blacklist" class="tab-content">
       <h2>Чорний список</h2>
       <p>Тут відображатимуться користувачі, яких ти заблокувала.</p>
     </div>
-
     <div id="notes" class="tab-content">
       <h2>Блокнот</h2>
       <p>Можеш залишати собі нотатки чи важливі записи тут.</p>
     </div>
 
+    <!-- Вкладка Написати -->
     <div id="write" class="tab-content">
       <h2>Написати користувачу</h2>
-      <form class="write-form">
-        <input type="text" placeholder="Введи ім’я користувача" required>
-        <textarea placeholder="Твоє повідомлення..." rows="4" required></textarea>
+      <form method="post" action="{% url 'send_message' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
         <button type="submit">Відправити</button>
       </form>
     </div>
+
   </div>
 </div>
 
+<!-- JS для перемикання вкладок -->
 <script>
   const buttons = document.querySelectorAll(".tab-button");
   const tabs = document.querySelectorAll(".tab-content");
 
-  buttons.forEach((btn) => {
+  buttons.forEach(btn => {
     btn.addEventListener("click", () => {
-      // Активна кнопка
-      buttons.forEach((b) => b.classList.remove("active"));
+      buttons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
 
-      // Активний контент
       const target = btn.getAttribute("data-tab");
-      tabs.forEach((tab) => {
+      tabs.forEach(tab => {
         tab.classList.remove("active");
-        if (tab.id === target) tab.classList.add("active");
+        if(tab.id === target) tab.classList.add("active");
       });
     });
   });
