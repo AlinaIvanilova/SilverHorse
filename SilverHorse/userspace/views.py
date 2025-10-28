@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from .models import Message, Note, BlockedUser
 from .forms import MessageForm, NoteForm, BlockUserForm
 
+
 # -------------------------
 # Дашборд
 # -------------------------
@@ -32,7 +33,7 @@ def sources(request):
 
 
 # -------------------------
-# Сторінка повідомлень і блокноту (вкладки)
+# Сторінка повідомлень і блокноту
 # -------------------------
 @login_required
 def messages_page(request):
@@ -97,7 +98,7 @@ def messages_page(request):
 
 
 # -------------------------
-# Блокування користувача (окрема функція для urls)
+# Окрема функція для блокування (для URL)
 # -------------------------
 @login_required
 def block_user_view(request):
@@ -114,7 +115,7 @@ def block_user_view(request):
                     messages.success(request, f"Ви заблокували {username}.")
             except User.DoesNotExist:
                 messages.error(request, "Користувача з таким ім’ям не існує.")
-        return redirect('messages_page')
+    return redirect('messages_page')
 
 
 # -------------------------

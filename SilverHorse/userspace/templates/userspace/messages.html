@@ -50,15 +50,15 @@
       <h2>Чорний список</h2>
 
       <!-- Форма для блокування користувача -->
-      <form method="post" action="{% url 'block_user' %}">
+      <form method="post" action="{% url 'messages_page' %}">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Заблокувати користувача</button>
+        {{ block_form.as_p }}
+        <button type="submit" name="block-submit">Заблокувати користувача</button>
       </form>
 
       <hr>
 
-      <!-- Список заблокованих користувачів з кнопкою Розблокувати -->
+      <!-- Список заблокованих користувачів -->
       <h3>Заблоковані користувачі</h3>
       {% if blocked_users %}
         <ul class="blacklist-list">
@@ -116,7 +116,7 @@
   </div>
 </div>
 
-<!-- JS для вкладок -->
+<!-- JS для перемикання вкладок -->
 <script>
   const buttons = document.querySelectorAll(".tab-button");
   const tabs = document.querySelectorAll(".tab-content");
@@ -129,7 +129,7 @@
       const target = btn.getAttribute("data-tab");
       tabs.forEach(tab => {
         tab.classList.remove("active");
-        if(tab.id === target) tab.classList.add("active");
+        if (tab.id === target) tab.classList.add("active");
       });
     });
   });
