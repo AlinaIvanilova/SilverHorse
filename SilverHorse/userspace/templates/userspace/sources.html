@@ -3,23 +3,24 @@
 {% block title %}Використані джерела{% endblock %}
 
 {% block content %}
-<h1>Використані джерела</h1>
-<p>На цій сторінці представлені всі джерела, які були використані під час розробки проекту:</p>
+<div class="sources-page">
+    <h1>Використані джерела</h1>
+    <p>На цій сторінці представлені всі джерела, які були використані під час розробки проекту:</p>
 
-<ul>
-    <li>
-        <a href="https://www.flaticon.com/" target="_blank" rel="noopener noreferrer">
-            Flaticon — іконки, використані у проекті
-        </a>
-    </li>
-    <li>
-        <a href="https://www.freepik.com/" target="_blank" rel="noopener noreferrer">
-            Freepik — штучний інтелект для генерації зображень
-        </a>
-    </li>
-    <li>Джерело 3 — опис</li>
-</ul>
+    <ul>
+        <li>
+            <a href="https://www.flaticon.com/" target="_blank" rel="noopener noreferrer">
+                Flaticon — іконки, використані у проекті
+            </a>
+        </li>
+        <li>
+            <a href="https://www.freepik.com/" target="_blank" rel="noopener noreferrer">
+                Freepik — штучний інтелект для генерації зображень
+            </a>
+        </li>
+        <li>Джерело 3 — опис</li>
+    </ul>
 
-
-<a href="{% url 'dashboard' %}">← Повернутись на головну</a>
+    <a href="{% url 'dashboard' %}" class="back-btn">← Повернутись на головну</a>
+</div>
 {% endblock %}
