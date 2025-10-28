@@ -41,23 +41,39 @@ def messages_page(request):
     note_form = NoteForm(request.POST or None, prefix='note')
     block_form = BlockUserForm(request.POST or None, prefix='block')
 
+    # -------------------------
     # Відправка повідомлення
+    # -------------------------
     if request.method == 'POST' and 'msg-submit' in request.POST:
         if message_form.is_valid():
             receiver_username = message_form.cleaned_data['receiver_username']
+            text = message_form.cleaned_data['text']
+
             try:
                 receiver = User.objects.get(username=receiver_username)
-                Message.objects.create(
-                    sender=request.user,
-                    receiver=receiver,
-                    text=message_form.cleaned_data['text']
-                )
+
+                # 🔒 Перевірка блокування:
+                # 1. Якщо поточний користувач заблокував отримувача
+                if BlockedUser.objects.filter(blocker=request.user, blocked=receiver).exists():
+                    messages.error(request, f"Ви заблокували {receiver_username} — повідомлення неможливо відправити.")
+                    return redirect('messages_page')
+
+                # 2. Якщо отримувач заблокував поточного користувача
+                if BlockedUser.objects.filter(blocker=receiver, blocked=request.user).exists():
+                    messages.error(request, f"Ви не можете писати {receiver_username}, бо ви у нього в чорному списку.")
+                    return redirect('messages_page')
+
+                # Якщо блокування немає — відправляємо
+                Message.objects.create(sender=request.user, receiver=receiver, text=text)
                 messages.success(request, f"Повідомлення відправлено {receiver_username}.")
+
             except User.DoesNotExist:
                 messages.error(request, "Користувача з таким ім’ям не існує.")
             return redirect('messages_page')
 
+    # -------------------------
     # Створення нотатки
+    # -------------------------
     if request.method == 'POST' and 'note-submit' in request.POST:
         if note_form.is_valid():
             note = note_form.save(commit=False)
@@ -66,7 +82,9 @@ def messages_page(request):
             messages.success(request, "Нотатка збережена.")
             return redirect('messages_page')
 
+    # -------------------------
     # Блокування користувача
+    # -------------------------
     if request.method == 'POST' and 'block-submit' in request.POST:
         if block_form.is_valid():
             username = block_form.cleaned_data['username']
@@ -81,7 +99,9 @@ def messages_page(request):
                 messages.error(request, "Користувача з таким ім’ям не існує.")
             return redirect('messages_page')
 
+    # -------------------------
     # Дані для шаблону
+    # -------------------------
     messages_received = Message.objects.filter(receiver=request.user).order_by('-created_at')
     notes = Note.objects.filter(user=request.user).order_by('-created_at')
     blocked_users = BlockedUser.objects.filter(blocker=request.user).order_by('-created_at')
@@ -98,7 +118,7 @@ def messages_page(request):
 
 
 # -------------------------
-# Окрема функція для блокування (для URL)
+# Окрема функція для блокування (через URL)
 # -------------------------
 @login_required
 def block_user_view(request):

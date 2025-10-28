@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="Dying while developing a blacklist (version 1)">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="8.5 Suddenly I realized what the error was in the list of blocked users and now everything works correctly.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="8.4--developing-blacklist" />
+        <entry key="$PROJECT_DIR$" value="8.5-update-bloked-list" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,7 +57,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "8.5",
+    "git-widget-placeholder": "8.6-",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/userspace",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -96,7 +98,7 @@
       <workItem from="1761499163126" duration="5032000" />
       <workItem from="1761543107358" duration="4513000" />
       <workItem from="1761583163472" duration="8258000" />
-      <workItem from="1761645054419" duration="637000" />
+      <workItem from="1761645054419" duration="1693000" />
     </task>
     <task id="LOCAL-00001" summary="Zero">
       <option name="closed" value="true" />
@@ -290,7 +292,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761645372834</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="8.5 Suddenly I realized what the error was in the list of blocked users and now everything works correctly.">
+      <option name="closed" value="true" />
+      <created>1761645968619</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1761645968622</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -332,6 +342,7 @@
     <MESSAGE value="8.3 Updated the &quot;Блокнот&quot;." />
     <MESSAGE value="8.3 Updated the &quot;Блокнот&quot;" />
     <MESSAGE value="Dying while developing a blacklist (version 1)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dying while developing a blacklist (version 1)" />
+    <MESSAGE value="8.5 Suddenly I realized what the error was in the list of blocked users and now everything works correctly." />
+    <option name="LAST_COMMIT_MESSAGE" value="8.5 Suddenly I realized what the error was in the list of blocked users and now everything works correctly." />
   </component>
 </project>
