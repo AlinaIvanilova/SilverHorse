@@ -500,3 +500,8 @@ body {
   background: #444;
   color: #ffd700;
 }
+
+.unread {
+    background-color: rgba(255, 255, 0, 0.2);
+    font-weight: bold;
+}
