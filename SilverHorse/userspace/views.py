@@ -1,40 +1,30 @@
-# userspace/views.py
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import Message, Note, BlockedUser
+from .models import Message, Note, BlockedUser, SystemMessage
 from .forms import MessageForm, NoteForm, BlockUserForm
-
 
 # -------------------------
 # Дашборд
-# -------------------------
 @login_required
 def dashboard_view(request):
     return render(request, 'userspace/dashboard.html')
 
-
 # -------------------------
 # Вихід з акаунта
-# -------------------------
 def logout_view(request):
     logout(request)
     return redirect('home')
 
-
 # -------------------------
 # Сторінка джерел
-# -------------------------
 def sources(request):
     return render(request, 'userspace/sources.html')
 
-
 # -------------------------
 # Сторінка повідомлень і блокноту
-# -------------------------
 @login_required
 def messages_page(request):
     message_form = MessageForm(request.POST or None, prefix='msg')
@@ -43,7 +33,6 @@ def messages_page(request):
 
     # -------------------------
     # Відправка повідомлення
-    # -------------------------
     if request.method == 'POST' and 'msg-submit' in request.POST:
         if message_form.is_valid():
             receiver_username = message_form.cleaned_data['receiver_username']
@@ -52,18 +41,14 @@ def messages_page(request):
             try:
                 receiver = User.objects.get(username=receiver_username)
 
-                # 🔒 Перевірка блокування:
-                # 1. Якщо поточний користувач заблокував отримувача
                 if BlockedUser.objects.filter(blocker=request.user, blocked=receiver).exists():
                     messages.error(request, f"Ви заблокували {receiver_username} — повідомлення неможливо відправити.")
                     return redirect('messages_page')
 
-                # 2. Якщо отримувач заблокував поточного користувача
                 if BlockedUser.objects.filter(blocker=receiver, blocked=request.user).exists():
                     messages.error(request, f"Ви не можете писати {receiver_username}, бо ви у нього в чорному списку.")
                     return redirect('messages_page')
 
-                # Якщо блокування немає — відправляємо
                 Message.objects.create(sender=request.user, receiver=receiver, text=text)
                 messages.success(request, f"Повідомлення відправлено {receiver_username}.")
 
@@ -73,7 +58,6 @@ def messages_page(request):
 
     # -------------------------
     # Створення нотатки
-    # -------------------------
     if request.method == 'POST' and 'note-submit' in request.POST:
         if note_form.is_valid():
             note = note_form.save(commit=False)
@@ -84,7 +68,6 @@ def messages_page(request):
 
     # -------------------------
     # Блокування користувача
-    # -------------------------
     if request.method == 'POST' and 'block-submit' in request.POST:
         if block_form.is_valid():
             username = block_form.cleaned_data['username']
@@ -101,10 +84,20 @@ def messages_page(request):
 
     # -------------------------
     # Дані для шаблону
-    # -------------------------
     messages_received = Message.objects.filter(receiver=request.user).order_by('-created_at')
     notes = Note.objects.filter(user=request.user).order_by('-created_at')
     blocked_users = BlockedUser.objects.filter(blocker=request.user).order_by('-created_at')
+
+    # -------------------------
+    # Перше системне повідомлення при реєстрації
+    if not SystemMessage.objects.filter(user=request.user).exists():
+        SystemMessage.objects.create(
+            user=request.user,
+            title="Вітаємо!",
+            content="Дякуємо за успішну реєстрацію на Silver Horse."
+        )
+
+    system_messages = SystemMessage.objects.filter(user=request.user).order_by('-created_at')
 
     return render(request, 'userspace/messages.html', {
         'form': message_form,
@@ -113,13 +106,12 @@ def messages_page(request):
         'messages_received': messages_received,
         'notes': notes,
         'blocked_users': blocked_users,
+        'system_messages': system_messages,
         'user': request.user,
     })
 
-
 # -------------------------
-# Окрема функція для блокування (через URL)
-# -------------------------
+# Блокування користувача через URL
 @login_required
 def block_user_view(request):
     if request.method == 'POST':
@@ -137,10 +129,8 @@ def block_user_view(request):
                 messages.error(request, "Користувача з таким ім’ям не існує.")
     return redirect('messages_page')
 
-
 # -------------------------
 # Розблокування користувача
-# -------------------------
 @login_required
 def unblock_user_view(request, user_id):
     if request.method == 'POST':

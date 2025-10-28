@@ -42,7 +42,19 @@
     <!-- Системні повідомлення -->
     <div id="system" class="tab-content">
       <h2>Системні повідомлення</h2>
-      <p>Тут з’являтимуться важливі повідомлення від адміністрації чи івенти.</p>
+      {% if system_messages %}
+        <ul class="system-messages">
+          {% for msg in system_messages %}
+            <li>
+              <strong>{{ msg.title }}</strong><br>
+              {{ msg.content|linebreaks }}
+              <span class="timestamp">{{ msg.created_at|date:"d.m.Y H:i" }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Поки що немає системних повідомлень.</p>
+      {% endif %}
     </div>
 
     <!-- Чорний список -->
