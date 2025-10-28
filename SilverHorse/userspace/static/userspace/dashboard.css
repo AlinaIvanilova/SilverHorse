@@ -10,7 +10,10 @@ body {
     font-family: 'Roboto', sans-serif;
     color: white;
     min-height: 100vh;
-    background: center / cover no-repeat url('../userspace/scene-beautiful-summer-day.png');
+    background-image: url('../userspace/scene-beautiful-summer-day.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /* =========================
@@ -317,34 +320,68 @@ body {
 .write-form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    max-width: 400px;
+    gap: 15px;
+    max-width: 500px;
     width: 100%;
+    margin: 0 auto;
+    background: rgba(0,0,0,0.6);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7), 0 0 40px rgba(74,158,255,0.3);
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.write-form:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0,0,0,0.8), 0 0 50px rgba(74,158,255,0.5);
 }
 
 .write-form input,
 .write-form textarea {
     border: none;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 15px;
-    background: rgba(255,255,255,0.8);
-    color: #222;
+    border-radius: 15px;
+    padding: 12px;
+    font-size: 16px;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    transition: background 0.3s, box-shadow 0.3s;
+    outline: none;
+}
+
+.write-form input::placeholder,
+.write-form textarea::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+.write-form input:focus,
+.write-form textarea:focus {
+    background: rgba(255,255,255,0.25);
+    box-shadow: 0 0 10px rgba(74,158,255,0.5);
+}
+
+.write-form textarea {
+    resize: vertical;
+    min-height: 120px;
+    max-height: 250px;
 }
 
 .write-form button {
-    background: #4a9eff;
+    background: linear-gradient(135deg, #4a9eff, #1e6fd9);
     border: none;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 15px;
+    padding: 12px;
     font-size: 16px;
     color: white;
+    font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
 }
 
 .write-form button:hover {
-    background: #1e6fd9;
+    background: linear-gradient(135deg, #1e6fd9, #4a9eff);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
 /* =========================
@@ -393,3 +430,96 @@ body {
     font-size: 14px;
     margin-top: 5px;
 }
+/* =========================
+   🔘 Кнопки загальні
+========================= */
+button:not(.tab-button),
+.mark-read-btn,
+.footer-button {
+    background: #222;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+button:not(.tab-button):hover,
+.mark-read-btn:hover,
+.footer-button:hover {
+    background: #444;
+    color: #ffd700;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4), 0 0 6px rgba(255,215,0,0.5);
+}
+
+button:not(.tab-button):active,
+.mark-read-btn:active,
+.footer-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* =========================
+   ✨ Кнопка Відправити
+========================= */
+.send-btn {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 22px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(255,204,0,0.9), rgba(255,221,51,0.9));
+    color: #111;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 10px rgba(255,204,0,0.4);
+    transition: all 0.3s ease;
+}
+
+.send-btn:hover {
+    background: linear-gradient(135deg, rgba(255,221,51,1), rgba(255,204,0,1));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.45), 0 0 15px rgba(255,221,51,0.6);
+}
+
+.send-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 10px rgba(255,204,0,0.4);
+}
+
+/* =========================
+   ✏️ Поля вводу у формах
+========================= */
+.messages-content form input[type="text"],
+.messages-content form input[type="number"],
+.messages-content form textarea {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Плейсхолдер */
+.messages-content form input::placeholder,
+.messages-content form textarea::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+/* Hover і фокус */
+.messages-content form input:hover,
+.messages-content form textarea:hover,
+.messages-content form input:focus,
+.messages-content form textarea:focus {
+    background: rgba(255,255,255,0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4), 0 0 6px rgba(255,215,0,0.3);
+    color: #fff;
+}
+

@@ -135,7 +135,7 @@
       <form method="post" action="{% url 'messages_page' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" name="msg-submit">Відправити</button>
+        <button type="submit" name="msg-submit" class="send-btn">Відправити</button>
       </form>
     </div>
 
