@@ -3,10 +3,17 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('dashboard/', views.dashboard_view, name='dashboard'),              # головна сторінка профілю
-    path('dashboard/messages/', views.messages_page, name='messages_page'),  # сторінка повідомлень
-    path('logout/', views.logout_view, name='logout'),                       # вихід
-    path('sources/', views.sources, name='sources'),                         # сторінка джерел
-    path('block/', views.block_user_view, name='block_user'),                # блокування користувачів
-    path('unblock/<int:user_id>/', views.unblock_user_view, name='unblock_user'),  # розблокування користувачів
+    path('dashboard/', views.dashboard_view, name='dashboard'),
+    path('dashboard/messages/', views.messages_page, name='messages_page'),
+    path('logout/', views.logout_view, name='logout'),
+    path('sources/', views.sources, name='sources'),
+    path('block/', views.block_user_view, name='block_user'),
+    path('unblock/<int:user_id>/', views.unblock_user_view, name='unblock_user'),
+
+    # ⚡ Позначити системне повідомлення як прочитане
+    path(
+        'system_message/<int:message_id>/read/',
+        views.mark_message_read,  # ім’я тепер збігається з функцією у views.py
+        name='mark_message_read'
+    ),
 ]

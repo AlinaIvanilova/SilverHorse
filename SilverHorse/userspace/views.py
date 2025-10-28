@@ -1,10 +1,9 @@
-# userspace/views.py
-
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.urls import reverse
 from .models import Message, Note, BlockedUser, SystemMessage
 from .forms import MessageForm, NoteForm, BlockUserForm
 
@@ -41,9 +40,7 @@ def messages_page(request):
     note_form = NoteForm(request.POST or None, prefix='note')
     block_form = BlockUserForm(request.POST or None, prefix='block')
 
-    # -------------------------
     # Відправлення повідомлення
-    # -------------------------
     if request.method == 'POST' and 'msg-submit' in request.POST:
         if message_form.is_valid():
             receiver_username = message_form.cleaned_data['receiver_username']
@@ -61,7 +58,6 @@ def messages_page(request):
                     messages.error(request, f"Ви не можете писати {receiver_username}, бо ви у нього в чорному списку.")
                     return redirect('messages_page')
 
-                # Створюємо повідомлення
                 Message.objects.create(sender=request.user, receiver=receiver, text=text)
                 messages.success(request, f"Повідомлення відправлено користувачу {receiver_username}.")
 
@@ -69,9 +65,7 @@ def messages_page(request):
                 messages.error(request, "Користувача з таким ім’ям не існує.")
             return redirect('messages_page')
 
-    # -------------------------
     # Створення нотатки
-    # -------------------------
     if request.method == 'POST' and 'note-submit' in request.POST:
         if note_form.is_valid():
             note = note_form.save(commit=False)
@@ -80,9 +74,7 @@ def messages_page(request):
             messages.success(request, "Нотатка збережена.")
             return redirect('messages_page')
 
-    # -------------------------
     # Блокування користувача
-    # -------------------------
     if request.method == 'POST' and 'block-submit' in request.POST:
         if block_form.is_valid():
             username = block_form.cleaned_data['username']
@@ -97,16 +89,12 @@ def messages_page(request):
                 messages.error(request, "Користувача з таким ім’ям не існує.")
             return redirect('messages_page')
 
-    # -------------------------
-    # Дані для шаблону
-    # -------------------------
+    # Дані для відображення
     messages_received = Message.objects.filter(receiver=request.user).order_by('-created_at')
     notes = Note.objects.filter(user=request.user).order_by('-created_at')
     blocked_users = BlockedUser.objects.filter(blocker=request.user).order_by('-created_at')
 
-    # -------------------------
-    # Перше системне повідомлення (створюється автоматично при першому вході)
-    # -------------------------
+    # Перше системне повідомлення
     if not SystemMessage.objects.filter(user=request.user).exists():
         SystemMessage.objects.create(
             user=request.user,
@@ -116,9 +104,7 @@ def messages_page(request):
                     "керувати чорним списком і отримувати новини від системи."
         )
 
-    # -------------------------
     # Отримання системних повідомлень
-    # -------------------------
     system_messages = SystemMessage.objects.filter(user=request.user).order_by('-created_at')
 
     return render(request, 'userspace/messages.html', {
@@ -131,6 +117,20 @@ def messages_page(request):
         'system_messages': system_messages,
         'user': request.user,
     })
+
+
+# -------------------------
+# Позначити системне повідомлення як прочитане
+# -------------------------
+@login_required
+def mark_message_read(request, message_id):
+    """Позначає системне повідомлення як прочитане."""
+    message = get_object_or_404(SystemMessage, id=message_id, user=request.user)
+    if request.method == "POST":
+        message.is_read = True
+        message.save()
+        messages.success(request, "Повідомлення позначено як прочитане.")
+    return redirect('messages_page')
 
 
 # -------------------------

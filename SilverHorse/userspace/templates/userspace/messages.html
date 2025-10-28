@@ -55,6 +55,16 @@
               <div class="system-message-body">
                 {{ msg.content|linebreaks }}
               </div>
+
+              {% if not msg.is_read %}
+              <!-- Виправлено ім'я URL -->
+              <form method="post" action="{% url 'mark_message_read' msg.id %}" class="mark-read-form">
+                {% csrf_token %}
+                <button type="submit" class="mark-read-btn">Позначити як прочитане</button>
+              </form>
+              {% else %}
+              <p class="read-status">✔ Прочитано</p>
+              {% endif %}
             </li>
           {% endfor %}
         </ul>

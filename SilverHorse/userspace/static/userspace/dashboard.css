@@ -14,7 +14,7 @@ body {
 }
 
 /* =========================
-   📌 Фіксований хедер
+   📌 Хедер
 ========================= */
 .top-bar {
     position: fixed;
@@ -72,7 +72,7 @@ body {
 }
 
 /* =========================
-   👤 Профіль і меню
+   👤 Профільне меню
 ========================= */
 .profile-menu {
     position: relative;
@@ -86,14 +86,12 @@ body {
     position: absolute;
     top: 50px;
     right: 0;
-    transform: translateX(-10px);
     background: #222;
     border: 1px solid #444;
     border-radius: 10px;
     display: none;
     flex-direction: column;
     width: 180px;
-    max-width: 90vw;
     box-shadow: 0 0 10px rgba(0,0,0,0.7);
     overflow: hidden;
     z-index: 2000;
@@ -117,12 +115,11 @@ body {
 }
 
 /* =========================
-   🧭 Підхедер / навігація
+   🧭 Підхедер
 ========================= */
 .sub-header {
     position: fixed;
     top: 60px;
-    left: 0;
     width: 100%;
     height: 50px;
     background: #222;
@@ -159,8 +156,8 @@ body {
    📄 Основний контент
 ========================= */
 .main-content {
-    padding-top: 115px; /* хедер + підхедер */
-    min-height: 150vh;  /* щоб була прокрутка */
+    padding-top: 115px;
+    min-height: 150vh;
 }
 
 /* =========================
@@ -168,7 +165,7 @@ body {
 ========================= */
 .site-footer {
     position: fixed;
-    bottom: -100px; /* спочатку схований */
+    bottom: -100px;
     left: 0;
     width: 100%;
     background: #111;
@@ -187,7 +184,6 @@ body {
     bottom: 0;
 }
 
-/* Контактна частина */
 .footer-contacts {
     display: flex;
     align-items: center;
@@ -195,7 +191,6 @@ body {
     margin-right: 50px;
 }
 
-/* Соцмережі */
 .footer-socials {
     display: flex;
     align-items: center;
@@ -213,12 +208,10 @@ body {
     filter: brightness(1.5) contrast(1.2);
 }
 
-/* Відступ після Telegram */
 .footer-socials a:last-child {
     margin-right: 50px;
 }
 
-/* Нижній блок футера */
 .footer-bottom {
     display: flex;
     align-items: center;
@@ -241,7 +234,7 @@ body {
 }
 
 /* =========================
-   💬 Сторінка повідомлень
+   💬 Повідомлення
 ========================= */
 .messages-container {
     max-width: 1000px;
@@ -252,104 +245,28 @@ body {
     padding: 30px;
     color: #fff;
     backdrop-filter: blur(5px);
-}
-
-.messages-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.messages-layout {
-    display: flex;
-    gap: 30px;
-}
-
-/* Ліва частина (контент) */
-.messages-content {
-    flex: 1;
-    background: #1a1a1a;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-}
-
-.message-placeholder {
-    text-align: center;
-    color: #bbb;
-    font-style: italic;
-}
-
-/* Права частина (панель) */
-.messages-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.msg-tab {
-    background: #222;
-    color: #fff;
-    border: none;
-    padding: 12px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    text-align: left;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.msg-tab:hover {
-    background: #333;
-    transform: scale(1.03);
-}
-
-.msg-tab.active {
-    background: #444;
-    color: #ffd700;
-    font-weight: bold;
-}
-/* =========================
-   💬 Сторінка повідомлень з вкладками
-========================= */
-.messages-container {
-    max-width: 1000px;
-    margin: 130px auto;
-    background: rgba(20, 20, 20, 0.8);
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    padding: 30px;
-    color: #fff;
-    backdrop-filter: blur(5px);
-}
-
-.messages-header {
-    text-align: center;
-    margin-bottom: 20px;
 }
 
 .messages-page {
     display: flex;
     gap: 20px;
-    padding: 30px;
+    padding: 20px;
     color: white;
 }
 
-/* =========================
-   🎛️ Права панель (вкладки)
-========================= */
 .messages-sidebar {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 220px;
-    background: rgba(0, 0, 0, 0.6);
+    min-width: 200px;
+    background: rgba(0,0,0,0.6);
     padding: 15px;
     border-radius: 15px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(255,255,255,0.1);
 }
 
 .tab-button {
-    background: transparent;
+    background: #222;
     border: 2px solid #888;
     border-radius: 10px;
     padding: 10px;
@@ -360,25 +277,24 @@ body {
 }
 
 .tab-button:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255,255,255,0.15);
     transform: translateX(3px);
 }
 
 .tab-button.active {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255,255,255,0.25);
     border-color: white;
+    color: #ffd700;
+    font-weight: bold;
 }
 
-/* =========================
-   📨 Контент вкладок
-========================= */
 .messages-content {
-    flex-grow: 1;
-    background: rgba(0, 0, 0, 0.5);
+    flex: 1;
+    background: rgba(0,0,0,0.5);
     padding: 25px;
     border-radius: 15px;
     min-height: 350px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(255,255,255,0.05);
 }
 
 .tab-content {
@@ -402,8 +318,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100%;
     max-width: 400px;
+    width: 100%;
 }
 
 .write-form input,
@@ -412,7 +328,7 @@ body {
     border-radius: 10px;
     padding: 10px;
     font-size: 15px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255,255,255,0.8);
     color: #222;
 }
 
@@ -431,77 +347,49 @@ body {
     background: #1e6fd9;
 }
 
-.messages-page {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
+/* =========================
+   📨 Системні повідомлення
+========================= */
+.system-message-item {
+    background: rgba(255,255,255,0.1);
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: 0.3s;
 }
 
-.messages-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-width: 180px;
+.system-message-item.unread {
+    border-left: 4px solid #ffcc00;
+    background: rgba(255,255,255,0.2);
 }
 
-.tab-button {
-  padding: 10px 15px;
-  border: none;
-  background: #222;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background 0.3s, color 0.3s;
+.system-message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.tab-button.active,
-.tab-button:hover {
-  background: #444;
-  color: #ffd700;
+.mark-read-form {
+    margin-top: 8px;
 }
 
-.messages-content {
-  flex: 1;
-  background: rgba(0,0,0,0.6);
-  padding: 20px;
-  border-radius: 10px;
-  min-height: 400px;
+.mark-read-btn {
+    background-color: #ffcc00;
+    color: #000;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
 }
 
-.tab-content {
-  display: none;
+.mark-read-btn:hover {
+    background-color: #ffd633;
 }
 
-.tab-content.active {
-  display: block;
-}
-
-.write-form input,
-.write-form textarea,
-.write-form button {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  font-size: 1rem;
-}
-
-.write-form button {
-  background: #222;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s;
-}
-
-.write-form button:hover {
-  background: #444;
-  color: #ffd700;
-}
-
-.unread {
-    background-color: rgba(255, 255, 0, 0.2);
-    font-weight: bold;
+.read-status {
+    color: #aaa;
+    font-size: 14px;
+    margin-top: 5px;
 }
