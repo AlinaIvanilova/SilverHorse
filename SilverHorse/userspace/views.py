@@ -1,8 +1,12 @@
+# userspace/views.py
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
-from .models import Message, Note
-from .forms import MessageForm, NoteForm
+from django.contrib import messages
+from django.contrib.auth.models import User
+from .models import Message, Note, BlockedUser
+from .forms import MessageForm, NoteForm, BlockUserForm
 
 # -------------------------
 # Дашборд
@@ -32,40 +36,95 @@ def sources(request):
 # -------------------------
 @login_required
 def messages_page(request):
-    # Форма повідомлення
     message_form = MessageForm(request.POST or None, prefix='msg')
-    # Форма нотатки
     note_form = NoteForm(request.POST or None, prefix='note')
+    block_form = BlockUserForm(request.POST or None, prefix='block')
 
-    # Обробка відправки повідомлення
+    # Відправка повідомлення
     if request.method == 'POST' and 'msg-submit' in request.POST:
         if message_form.is_valid():
-            receiver = message_form.cleaned_data['receiver_username']
-            message = Message(
-                sender=request.user,
-                receiver=receiver,
-                text=message_form.cleaned_data['text']
-            )
-            message.save()
+            receiver_username = message_form.cleaned_data['receiver_username']
+            try:
+                receiver = User.objects.get(username=receiver_username)
+                Message.objects.create(
+                    sender=request.user,
+                    receiver=receiver,
+                    text=message_form.cleaned_data['text']
+                )
+                messages.success(request, f"Повідомлення відправлено {receiver_username}.")
+            except User.DoesNotExist:
+                messages.error(request, "Користувача з таким ім’ям не існує.")
             return redirect('messages_page')
 
-    # Обробка створення нотатки
+    # Створення нотатки
     if request.method == 'POST' and 'note-submit' in request.POST:
         if note_form.is_valid():
             note = note_form.save(commit=False)
             note.user = request.user
             note.save()
+            messages.success(request, "Нотатка збережена.")
             return redirect('messages_page')
 
-    # Повідомлення для користувача
+    # Блокування користувача
+    if request.method == 'POST' and 'block-submit' in request.POST:
+        if block_form.is_valid():
+            username = block_form.cleaned_data['username']
+            try:
+                user_to_block = User.objects.get(username=username)
+                if user_to_block == request.user:
+                    messages.error(request, "Ви не можете заблокувати себе.")
+                else:
+                    BlockedUser.objects.get_or_create(blocker=request.user, blocked=user_to_block)
+                    messages.success(request, f"Ви заблокували {username}.")
+            except User.DoesNotExist:
+                messages.error(request, "Користувача з таким ім’ям не існує.")
+            return redirect('messages_page')
+
+    # Дані для шаблону
     messages_received = Message.objects.filter(receiver=request.user).order_by('-created_at')
-    # Нотатки для користувача
     notes = Note.objects.filter(user=request.user).order_by('-created_at')
+    blocked_users = BlockedUser.objects.filter(blocker=request.user).order_by('-created_at')
 
     return render(request, 'userspace/messages.html', {
         'form': message_form,
         'note_form': note_form,
+        'block_form': block_form,
         'messages_received': messages_received,
         'notes': notes,
+        'blocked_users': blocked_users,
         'user': request.user,
     })
+
+
+# -------------------------
+# Блокування користувача (окрема функція для urls)
+# -------------------------
+@login_required
+def block_user_view(request):
+    if request.method == 'POST':
+        form = BlockUserForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            try:
+                user_to_block = User.objects.get(username=username)
+                if user_to_block == request.user:
+                    messages.error(request, "Ви не можете заблокувати себе.")
+                else:
+                    BlockedUser.objects.get_or_create(blocker=request.user, blocked=user_to_block)
+                    messages.success(request, f"Ви заблокували {username}.")
+            except User.DoesNotExist:
+                messages.error(request, "Користувача з таким ім’ям не існує.")
+        return redirect('messages_page')
+
+
+# -------------------------
+# Розблокування користувача
+# -------------------------
+@login_required
+def unblock_user_view(request, user_id):
+    if request.method == 'POST':
+        blocked = BlockedUser.objects.filter(blocker=request.user, blocked_id=user_id)
+        if blocked.exists():
+            blocked.delete()
+            messages.success(request, "Користувача розблоковано.")
+    return redirect('messages_page')

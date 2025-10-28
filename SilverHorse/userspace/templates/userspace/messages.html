@@ -48,13 +48,38 @@
     <!-- Чорний список -->
     <div id="blacklist" class="tab-content">
       <h2>Чорний список</h2>
-      <p>Тут відображатимуться користувачі, яких ти заблокувала.</p>
+
+      <!-- Форма для блокування користувача -->
+      <form method="post" action="{% url 'block_user' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Заблокувати користувача</button>
+      </form>
+
+      <hr>
+
+      <!-- Список заблокованих користувачів з кнопкою Розблокувати -->
+      <h3>Заблоковані користувачі</h3>
+      {% if blocked_users %}
+        <ul class="blacklist-list">
+          {% for item in blocked_users %}
+            <li>
+              {{ item.blocked.username }}
+              <form method="post" action="{% url 'unblock_user' item.blocked.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Розблокувати</button>
+              </form>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Поки що у тебе немає заблокованих користувачів.</p>
+      {% endif %}
     </div>
 
-    <!-- 🟡 Блокнот -->
+    <!-- Блокнот -->
     <div id="notes" class="tab-content">
       <h2>Твій блокнот</h2>
-
       <form method="post" action="{% url 'messages_page' %}">
         {% csrf_token %}
         {{ note_form.as_p }}

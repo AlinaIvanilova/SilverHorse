@@ -1,7 +1,7 @@
 # userspace/forms.py
 from django import forms
 from django.contrib.auth.models import User
-from .models import Message, Note
+from .models import Message, Note, BlockedUser
 
 class MessageForm(forms.ModelForm):
     receiver_username = forms.CharField(
@@ -38,3 +38,19 @@ class NoteForm(forms.ModelForm):
             'title': 'Заголовок',
             'content': 'Текст',
         }
+
+
+class BlockUserForm(forms.Form):
+    username = forms.CharField(
+        max_length=150,
+        label="Ім'я користувача",
+        widget=forms.TextInput(attrs={'placeholder': 'Введіть ім’я користувача'})
+    )
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise forms.ValidationError("Користувача з таким іменем не знайдено.")
+        return user
