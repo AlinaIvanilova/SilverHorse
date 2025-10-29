@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="10.1 I finished the design in the messages.">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="10.2 I finished the design in the sources(css and html).">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/dashboard.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="10.1-finished-design-messages" />
+        <entry key="$PROJECT_DIR$" value="10.2-finished-design-sources" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,7 +57,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "10.2-finished-design-sources",
+    "git-widget-placeholder": "10.3-updated-design-messages",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/userspace",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -97,7 +99,9 @@
       <workItem from="1761543107358" duration="4513000" />
       <workItem from="1761583163472" duration="8258000" />
       <workItem from="1761645054419" duration="4193000" />
-      <workItem from="1761666744878" duration="10423000" />
+      <workItem from="1761666744878" duration="10964000" />
+      <workItem from="1761716787908" duration="166000" />
+      <workItem from="1761719039165" duration="953000" />
     </task>
     <task id="LOCAL-00001" summary="Zero">
       <option name="closed" value="true" />
@@ -339,7 +343,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761677072347</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="10.2 I finished the design in the sources(css and html).">
+      <option name="closed" value="true" />
+      <created>1761677623003</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1761677623003</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,7 +369,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2.2. I added beautiful text on the main photo." />
     <MESSAGE value="2.3 I updated text to saw beautiful animated. I did: updated only style.css" />
     <MESSAGE value="3.1 new branch" />
     <MESSAGE value="3.1 fix btn. All the btn work good" />
@@ -382,6 +393,7 @@
     <MESSAGE value="9.1 added the ability for the administrator to write a system message to all users." />
     <MESSAGE value="10 updated the function to mark a message as read. And also played a little with the administrator panel. And fixed a bug that I found myself... Yes, I'm a genius." />
     <MESSAGE value="10.1 I finished the design in the messages." />
-    <option name="LAST_COMMIT_MESSAGE" value="10.1 I finished the design in the messages." />
+    <MESSAGE value="10.2 I finished the design in the sources(css and html)." />
+    <option name="LAST_COMMIT_MESSAGE" value="10.2 I finished the design in the sources(css and html)." />
   </component>
 </project>
