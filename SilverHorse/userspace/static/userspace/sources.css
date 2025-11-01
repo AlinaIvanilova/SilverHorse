@@ -1,0 +1,80 @@
+/* =========================
+   📚 Використані джерела
+========================= */
+.sources-page {
+  padding: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.sources-page h1 {
+  color: #ffd700;
+  margin-bottom: 15px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.sources-page p {
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.sources-page ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sources-page ul li {
+  margin-bottom: 12px;
+  font-size: 1rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.sources-page ul li:hover {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+.sources-page a {
+  color: #ffd700;
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.sources-page a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px #ffd700;
+}
+
+/* Повернутись на головну як кнопка */
+.sources-page .back-btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 204, 0, 0.9), rgba(255, 221, 51, 0.9));
+  color: #111;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 204, 0, 0.4);
+}
+
+.sources-page .back-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 221, 51, 1), rgba(255, 204, 0, 1));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45), 0 0 15px rgba(255, 221, 51, 0.6);
+}
+
+.sources-page .back-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 204, 0, 0.4);
+}

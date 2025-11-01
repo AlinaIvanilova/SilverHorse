@@ -1,0 +1,84 @@
+/* =========================
+   🔘 Кнопки загальні
+========================= */
+button:not(.tab-button),
+.mark-read-btn,
+.footer-button {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+button:not(.tab-button):hover,
+.mark-read-btn:hover,
+.footer-button:hover {
+  background: #444;
+  color: #ffd700;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), 0 0 6px rgba(255, 215, 0, 0.5);
+}
+
+button:not(.tab-button):active,
+.mark-read-btn:active,
+.footer-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================
+   ✨ Кнопка Відправити
+========================= */
+.send-btn {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 22px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 204, 0, 0.9), rgba(255, 221, 51, 0.9));
+  color: #111;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 204, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.send-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 221, 51, 1), rgba(255, 204, 0, 1));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45), 0 0 15px rgba(255, 221, 51, 0.6);
+}
+
+.send-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 204, 0, 0.4);
+}
+
+/* =========================
+   🔘 Кнопки табів
+========================= */
+.tab-button {
+  background: #222;
+  border: 2px solid #888;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(3px);
+}
+
+.tab-button.active {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: white;
+  color: #ffd700;
+  font-weight: bold;
+}

@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Silver Horse{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'userspace/dashboard.css' %}">
+
+    <!-- ✅ Підключаємо головний файл стилів, який імпортує всі інші -->
+    <link rel="stylesheet" href="{% static 'userspace/main.css' %}">
 </head>
 <body>
 
-    <!-- Фіксований верхній хедер -->
+    <!-- 🌿 Фіксований верхній хедер -->
     <header class="top-bar">
         <div class="logo-with-icon">
             <a href="{% url 'dashboard' %}">
@@ -38,7 +40,7 @@
         </div>
     </header>
 
-    <!-- Фіксований підхедер з навігацією -->
+    <!-- 🌾 Фіксований підхедер з навігацією -->
     <nav class="sub-header">
         <ul>
             <li><a href="#">Конярство</a></li>
@@ -47,16 +49,16 @@
         </ul>
     </nav>
 
-    <!-- Основний контент -->
+    <!-- 🧩 Основний контент -->
     <main class="main-content">
         {% block content %}
         {% endblock %}
     </main>
 
-    <!-- Підключення футера -->
+    <!-- 🌙 Підключення футера -->
     {% include 'userspace/footer.html' %}
 
-    <!-- Скрипт для проявлення футера при прокручуванні -->
+    <!-- 📜 Скрипт для проявлення футера при прокручуванні -->
     <script>
         const footer = document.querySelector('.site-footer');
 

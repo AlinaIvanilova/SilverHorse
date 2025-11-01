@@ -1,0 +1,72 @@
+/* =========================
+   ⚓ Футер
+========================= */
+.site-footer {
+  position: fixed;
+  bottom: -100px;
+  left: 0;
+  width: 100%;
+  background: #111;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+  transition: bottom 0.5s ease;
+  padding: 10px 0;
+  text-align: center;
+  z-index: 900;
+}
+
+.site-footer.show-footer {
+  bottom: 0;
+}
+
+.footer-contacts {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-right: 50px;
+}
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-socials a img {
+  width: 25px;
+  height: 25px;
+  transition: transform 0.3s, filter 0.3s;
+}
+
+.footer-socials a img:hover {
+  transform: scale(1.2);
+  filter: brightness(1.5) contrast(1.2);
+}
+
+.footer-socials a:last-child {
+  margin-right: 50px;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-button {
+  background: #222;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+.footer-button:hover {
+  background: #444;
+  color: #ffd700;
+}

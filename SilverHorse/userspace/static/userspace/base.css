@@ -1,0 +1,25 @@
+/* =========================
+   Загальні налаштування
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  color: white;
+  min-height: 100vh;
+  background-image: url("../userspace/scene-beautiful-summer-day.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* =========================
+   📄 Основний контент
+========================= */
+.main-content {
+  padding-top: 115px;
+  min-height: 150vh;
+}
