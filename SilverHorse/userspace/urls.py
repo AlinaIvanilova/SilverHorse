@@ -16,4 +16,9 @@ urlpatterns = [
         views.mark_message_read,  # ім’я тепер збігається з функцією у views.py
         name='mark_message_read'
     ),
+
+    path('profile/', views.profile_page, name='profile_page'),
+    path('subscription/', views.subscription_page, name='subscription_page'),
+    path('account/', views.account_page, name='account_page'),
+    path('language/', views.language_page, name='language_page'),
 ]

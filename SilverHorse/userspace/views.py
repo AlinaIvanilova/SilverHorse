@@ -165,3 +165,19 @@ def unblock_user_view(request, user_id):
             blocked.delete()
             messages.success(request, "Користувача розблоковано.")
     return redirect('messages_page')
+
+# -------------------------
+# Сторінки Хедера
+# -------------------------
+
+def profile_page(request):
+    return render(request, 'userspace/profile.html')
+
+def subscription_page(request):
+    return render(request, 'userspace/subscription.html')
+
+def account_page(request):
+    return render(request, 'userspace/account.html')
+
+def language_page(request):
+    return render(request, 'userspace/language.html')

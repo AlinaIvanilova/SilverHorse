@@ -20,10 +20,10 @@
                 <img src="{% static 'userspace/avatar.png' %}" alt="Профіль">
             </label>
             <div class="dropdown">
-                <a href="#">👤 Профіль</a>
-                <a href="#">💎 Підписка</a>
-                <a href="#">⚙️ Обліковий запис</a>
-                <a href="#">🌍 Мова</a>
+                <a href="{% url 'profile_page' %}">👤 Профіль</a>
+                <a href="{% url 'subscription_page' %}">💎 Підписка</a>
+                <a href="{% url 'account_page' %}">⚙️ Обліковий запис</a>
+                <a href="{% url 'language_page' %}">🌍 Мова</a>
                 <a href="{% url 'logout' %}">🚪 Вийти</a>
             </div>
         </div>
