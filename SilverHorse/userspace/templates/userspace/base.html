@@ -5,49 +5,16 @@
     <meta charset="UTF-8">
     <title>{% block title %}Silver Horse{% endblock %}</title>
 
-    <!-- ✅ Підключаємо головний файл стилів, який імпортує всі інші -->
+    <!-- ✅ Підключаємо головний файл стилів -->
     <link rel="stylesheet" href="{% static 'userspace/main.css' %}">
 </head>
 <body>
 
-    <!-- 🌿 Фіксований верхній хедер -->
-    <header class="top-bar">
-        <div class="logo-with-icon">
-            <a href="{% url 'dashboard' %}">
-                <img src="{% static 'userspace/my-icon.png' %}" alt="Іконка" class="logo-icon">
-                Silver Horse
-            </a>
-        </div>
+    <!-- Підключаємо верхній хедер -->
+    {% include 'userspace/header.html' %}
 
-        <div class="top-buttons">
-            <a href="{% url 'messages_page' %}" class="message-btn">
-                <img src="{% static 'userspace/message-icon.png' %}" alt="Повідомлення" title="Повідомлення">
-            </a>
-
-            <div class="profile-menu">
-                <input type="checkbox" id="menu-toggle">
-                <label for="menu-toggle" class="profile-icon">
-                    <img src="{% static 'userspace/avatar.png' %}" alt="Профіль">
-                </label>
-                <div class="dropdown">
-                    <a href="#">👤 Профіль</a>
-                    <a href="#">💎 Підписка</a>
-                    <a href="#">⚙️ Обліковий запис</a>
-                    <a href="#">🌍 Мова</a>
-                    <a href="{% url 'logout' %}">🚪 Вийти</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- 🌾 Фіксований підхедер з навігацією -->
-    <nav class="sub-header">
-        <ul>
-            <li><a href="#">Конярство</a></li>
-            <li><a href="#">Кінноспортивний комплекс</a></li>
-            <li><a href="#">Торгівля</a></li>
-        </ul>
-    </nav>
+    <!-- Підключаємо підхедер -->
+    {% include 'userspace/sub-header.html' %}
 
     <!-- 🧩 Основний контент -->
     <main class="main-content">

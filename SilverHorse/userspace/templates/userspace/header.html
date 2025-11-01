@@ -1,0 +1,31 @@
+{% load static %}
+
+<!-- 🌿 Фіксований верхній хедер -->
+<header class="top-bar">
+    <div class="logo-with-icon">
+        <a href="{% url 'dashboard' %}">
+            <img src="{% static 'userspace/my-icon.png' %}" alt="Іконка" class="logo-icon">
+            Silver Horse
+        </a>
+    </div>
+
+    <div class="top-buttons">
+        <a href="{% url 'messages_page' %}" class="message-btn">
+            <img src="{% static 'userspace/message-icon.png' %}" alt="Повідомлення" title="Повідомлення">
+        </a>
+
+        <div class="profile-menu">
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="profile-icon">
+                <img src="{% static 'userspace/avatar.png' %}" alt="Профіль">
+            </label>
+            <div class="dropdown">
+                <a href="#">👤 Профіль</a>
+                <a href="#">💎 Підписка</a>
+                <a href="#">⚙️ Обліковий запис</a>
+                <a href="#">🌍 Мова</a>
+                <a href="{% url 'logout' %}">🚪 Вийти</a>
+            </div>
+        </div>
+    </div>
+</header>
