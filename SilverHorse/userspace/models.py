@@ -89,8 +89,8 @@ class SystemMessage(models.Model):
 # -------------------------
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    coins = models.IntegerField(default=0, verbose_name="Монети")
-    gems = models.IntegerField(default=0, verbose_name="Діаманти")
+    horseshoes = models.IntegerField(default=0, verbose_name="Срібні Підкови")
+    silver_wings = models.IntegerField(default=0, verbose_name="Срібні Крила")
 
     def __str__(self):
         return f"Профіль {self.user.username}"
