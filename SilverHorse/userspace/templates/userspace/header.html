@@ -9,6 +9,12 @@
         </a>
     </div>
 
+    {% if user.is_authenticated %}
+    <div class="currencies">
+        💰 {{ user_coins }} &nbsp; | &nbsp; 💎 {{ user_gems }}
+    </div>
+    {% endif %}
+
     <div class="top-buttons">
         <a href="{% url 'messages_page' %}" class="message-btn">
             <img src="{% static 'userspace/message-icon.png' %}" alt="Повідомлення" title="Повідомлення">

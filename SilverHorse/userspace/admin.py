@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from .models import SystemMessage, Message, Note, BlockedUser
+from .models import Profile
 
 # -------------------------
 # Повідомлення між користувачами
@@ -42,3 +43,5 @@ class SystemMessageAdmin(admin.ModelAdmin):
 admin.site.register(SystemMessage, SystemMessageAdmin)
 admin.site.register(Note)
 admin.site.register(BlockedUser)
+
+admin.site.register(Profile)
