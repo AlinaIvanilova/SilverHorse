@@ -44,4 +44,13 @@ admin.site.register(SystemMessage, SystemMessageAdmin)
 admin.site.register(Note)
 admin.site.register(BlockedUser)
 
-admin.site.register(Profile)
+
+
+
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'horseshoes', 'silver_wings')
+    list_editable = ('horseshoes', 'silver_wings')
+
+
