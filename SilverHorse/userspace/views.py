@@ -185,26 +185,40 @@ def language_page(request):
 
 
 
-# Приклад словника промокодів (можна пізніше винести у базу)
+# Приклад словника промокодів
+# Якщо промокод одноразовий — додаємо ключ 'once': True
 PROMO_CODES = {
     'WELCOME100': {'horseshoes': 100, 'silver_wings': 0},
-    'S': {'horseshoes': 0, 'silver_wings': 0},
+    'ONE': {'horseshoes': 1000, 'silver_wings': 0, 'once': True},
 }
+# Зберігаємо вже використані одноразові промокоди
+USED_PROMO_CODES = set()
+
 
 @login_required
 def subscription_page(request):
     user = request.user
     promo_message = None
+    promo_used = False  # додатково для шаблону
 
-    # Якщо користувач надсилає промокод
     if request.method == "POST" and 'promo_code' in request.POST:
         code = request.POST.get('promo_code', '').upper()
+
         if code in PROMO_CODES:
-            # Додаємо валюту користувачу
-            user.profile.horseshoes += PROMO_CODES[code]['horseshoes']
-            user.profile.silver_wings += PROMO_CODES[code]['silver_wings']
-            user.profile.save()
-            promo_message = f"Промокод {code} активовано! Ви отримали валюту."
+            if code in USED_PROMO_CODES:
+                promo_message = f"Промокод {code} вже використаний!"
+                promo_used = True
+            else:
+                # Додаємо валюту
+                user.profile.horseshoes += PROMO_CODES[code]['horseshoes']
+                user.profile.silver_wings += PROMO_CODES[code]['silver_wings']
+                user.profile.save()
+
+                promo_message = f"Промокод {code} активовано! Ви отримали валюту."
+
+                # Якщо код одноразовий — додаємо у список використаних
+                if PROMO_CODES[code].get('once', False):
+                    USED_PROMO_CODES.add(code)
         else:
             promo_message = "Невірний промокод."
 
@@ -212,5 +226,6 @@ def subscription_page(request):
         'user_horseshoes': user.profile.horseshoes,
         'user_silver_wings': user.profile.silver_wings,
         'promo_message': promo_message,
+        'promo_used': promo_used,  # передаємо в шаблон
     }
     return render(request, 'userspace/subscription.html', context)

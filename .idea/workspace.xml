@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="14 I renewed my subscription for some reason. But I'm too lazy to write what exactly I did...">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="14.2 Added an update to admin.py so that the admin can change the amount of currency for users.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/subscription.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/subscription.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="14.1-create-promo-code" />
+        <entry key="$PROJECT_DIR$" value="14.2-updade-admin-chage-amount-users" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -57,7 +59,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "14.2-",
+    "git-widget-placeholder": "14.3-",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/userspace",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -113,7 +115,7 @@
       <workItem from="1762425860139" duration="5000" />
       <workItem from="1762427347425" duration="434000" />
       <workItem from="1762428568019" duration="8303000" />
-      <workItem from="1762448318015" duration="638000" />
+      <workItem from="1762448318015" duration="1709000" />
     </task>
     <task id="LOCAL-00001" summary="Zero">
       <option name="closed" value="true" />
@@ -427,7 +429,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762435929836</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="14.2 Added an update to admin.py so that the admin can change the amount of currency for users.">
+      <option name="closed" value="true" />
+      <created>1762449096979</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1762449096979</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -445,7 +455,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="7.1 Updated the footer, added text, added icons." />
     <MESSAGE value="7.1 Updated" />
     <MESSAGE value="7.2 I tried for a very long time to make an active button and not break the footer, but I managed to do it." />
     <MESSAGE value="7.3 added some text to the sources used, but didn't put it into a nice design." />
@@ -470,6 +479,7 @@
     <MESSAGE value="13.2 Added a photo and css for the header" />
     <MESSAGE value="13.3 I made a call so that when the user clicked on the currency, they would be taken to the Subscriptions page." />
     <MESSAGE value="14 I renewed my subscription for some reason. But I'm too lazy to write what exactly I did..." />
-    <option name="LAST_COMMIT_MESSAGE" value="14 I renewed my subscription for some reason. But I'm too lazy to write what exactly I did..." />
+    <MESSAGE value="14.2 Added an update to admin.py so that the admin can change the amount of currency for users." />
+    <option name="LAST_COMMIT_MESSAGE" value="14.2 Added an update to admin.py so that the admin can change the amount of currency for users." />
   </component>
 </project>
