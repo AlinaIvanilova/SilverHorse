@@ -154,3 +154,127 @@
   color: rgba(255, 255, 255, 0.6);
   margin-top: 6px;
 }
+
+
+
+/* =========================
+   🔔 Сповіщення
+========================= */
+.notifications-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notifications-list li {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 5px solid #ffcc00;
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.notifications-list li:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.notifications-list li strong {
+  color: #ffd700;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.notifications-list li .timestamp {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+}
+
+.notifications-list li.empty {
+  text-align: center;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* =========================
+   Кнопки та взаємодії
+========================= */
+.mark-read-btn {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: #ffcc00;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #111;
+  transition: all 0.2s ease;
+}
+
+.mark-read-btn:hover {
+  background: #e6b800;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   Адаптивність вкладки
+========================= */
+@media screen and (max-width: 768px) {
+  .messages-page {
+    flex-direction: column;
+  }
+
+  .messages-sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+  }
+
+  .messages-sidebar .tab-button {
+    flex: 1 1 30%;
+    text-align: center;
+    font-size: 14px;
+    padding: 8px 0;
+  }
+
+  .notifications-list li .timestamp {
+    position: static;
+    display: block;
+    margin-top: 6px;
+    text-align: right;
+  }
+}
+
+.messages-content {
+  flex: 1;
+  background: rgba(20, 20, 20, 0.7); /* темний прозорий фон під стиль сайту */
+  padding: 25px;
+  border-radius: 15px;
+  min-height: 350px;
+  max-height: 1200px;       /* обмежує висоту */
+  overflow-y: auto;        /* вертикальна прокрутка для всіх вкладок */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* м’яка тінь для глибини */
+  backdrop-filter: blur(5px); /* легкий ефект розмиття фону */
+  scrollbar-width: thin;    /* тонка смуга прокрутки для Firefox */
+  scrollbar-color: #ffd700 rgba(255,255,255,0.1); /* колір смуги */
+}
+
+.messages-content::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+}
+
+.messages-content::-webkit-scrollbar-thumb {
+  background-color: #ffd700;
+  border-radius: 8px;
+  border: 2px solid rgba(0,0,0,0.2);
+}

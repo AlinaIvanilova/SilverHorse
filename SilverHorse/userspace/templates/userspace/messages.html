@@ -20,7 +20,16 @@
     <!-- Вкладка Сповіщення -->
     <div id="notifications" class="tab-content active">
       <h2>Сповіщення</h2>
-      <p>Тут будуть повідомлення від системи (наприклад, про покупки, події або зміни в акаунті).</p>
+      <ul class="notifications-list">
+        {% for msg in notifications %}
+          <li class="received">
+            <strong>Система:</strong> {{ msg.text }}
+            <span class="timestamp">{{ msg.created_at|date:"d.m.Y H:i" }}</span>
+          </li>
+        {% empty %}
+          <li>Поки що немає сповіщень.</li>
+        {% endfor %}
+      </ul>
     </div>
 
     <!-- Вкладка Повідомлення -->

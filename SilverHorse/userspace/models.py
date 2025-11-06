@@ -90,9 +90,19 @@ class SystemMessage(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     horseshoes = models.IntegerField(default=0, verbose_name="Срібні Підкови")
-    silver_wings = models.IntegerField(default=0, verbose_name="Срібні Крила")
+    silver_wings = models.IntegerField(default=0, verbose_name="Срібні Пір'я")
 
     def __str__(self):
         return f"Профіль {self.user.username}"
 
 
+
+
+class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Повідомлення для {self.user.username}: {self.text[:20]}"

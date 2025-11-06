@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from .models import Message, Note, BlockedUser, SystemMessage
 from .forms import MessageForm, NoteForm, BlockUserForm
+from .models import Notification
 
 
 # -------------------------
@@ -45,22 +46,18 @@ def messages_page(request):
         if message_form.is_valid():
             receiver_username = message_form.cleaned_data['receiver_username']
             text = message_form.cleaned_data['text']
-
             try:
                 receiver = User.objects.get(username=receiver_username)
-
                 # Перевірка чорного списку
                 if BlockedUser.objects.filter(blocker=request.user, blocked=receiver).exists():
                     messages.error(request, f"Ви заблокували {receiver_username} — повідомлення неможливо відправити.")
                     return redirect('messages_page')
-
                 if BlockedUser.objects.filter(blocker=receiver, blocked=request.user).exists():
                     messages.error(request, f"Ви не можете писати {receiver_username}, бо ви у нього в чорному списку.")
                     return redirect('messages_page')
 
                 Message.objects.create(sender=request.user, receiver=receiver, text=text)
                 messages.success(request, f"Повідомлення відправлено користувачу {receiver_username}.")
-
             except User.DoesNotExist:
                 messages.error(request, "Користувача з таким ім’ям не існує.")
             return redirect('messages_page')
@@ -93,21 +90,10 @@ def messages_page(request):
     messages_received = Message.objects.filter(receiver=request.user).order_by('-created_at')
     notes = Note.objects.filter(user=request.user).order_by('-created_at')
     blocked_users = BlockedUser.objects.filter(blocker=request.user).order_by('-created_at')
-
-    # Перше системне повідомлення
-    if not SystemMessage.objects.filter(user=request.user).exists():
-        SystemMessage.objects.create(
-            user=request.user,
-            title="Вітаємо на Silver Horse!",
-            content="Дякуємо за успішну реєстрацію 💫. "
-                    "Тепер ви можете надсилати повідомлення, вести нотатки, "
-                    "керувати чорним списком і отримувати новини від системи."
-        )
-
-    # Отримання системних повідомлень
     system_messages = SystemMessage.objects.filter(user=request.user).order_by('-created_at')
+    notifications = Notification.objects.filter(user=request.user).order_by('-created_at')  # ось сюди додано
 
-    return render(request, 'userspace/messages.html', {
+    context = {
         'form': message_form,
         'note_form': note_form,
         'block_form': block_form,
@@ -115,8 +101,11 @@ def messages_page(request):
         'notes': notes,
         'blocked_users': blocked_users,
         'system_messages': system_messages,
+        'notifications': notifications,  # обов’язково для вкладки Сповіщення
         'user': request.user,
-    })
+    }
+
+    return render(request, 'userspace/messages.html', context)
 
 
 # -------------------------
@@ -166,15 +155,12 @@ def unblock_user_view(request, user_id):
             messages.success(request, "Користувача розблоковано.")
     return redirect('messages_page')
 
+
 # -------------------------
 # Сторінки Хедера
 # -------------------------
-
 def profile_page(request):
     return render(request, 'userspace/profile.html')
-
-def subscription_page(request):
-    return render(request, 'userspace/subscription.html')
 
 def account_page(request):
     return render(request, 'userspace/account.html')
@@ -183,23 +169,23 @@ def language_page(request):
     return render(request, 'userspace/language.html')
 
 
-
-
-# Приклад словника промокодів
+# -------------------------
+# Промокоди
+# -------------------------
 # Якщо промокод одноразовий — додаємо ключ 'once': True
 PROMO_CODES = {
     'WELCOME100': {'horseshoes': 100, 'silver_wings': 0},
     'ONE': {'horseshoes': 1000, 'silver_wings': 0, 'once': True},
 }
+
 # Зберігаємо вже використані одноразові промокоди
 USED_PROMO_CODES = set()
-
 
 @login_required
 def subscription_page(request):
     user = request.user
     promo_message = None
-    promo_used = False  # додатково для шаблону
+    promo_used = False  # для шаблону
 
     if request.method == "POST" and 'promo_code' in request.POST:
         code = request.POST.get('promo_code', '').upper()
@@ -210,11 +196,20 @@ def subscription_page(request):
                 promo_used = True
             else:
                 # Додаємо валюту
-                user.profile.horseshoes += PROMO_CODES[code]['horseshoes']
-                user.profile.silver_wings += PROMO_CODES[code]['silver_wings']
+                horseshoes_added = PROMO_CODES[code]['horseshoes']
+                wings_added = PROMO_CODES[code]['silver_wings']
+                user.profile.horseshoes += horseshoes_added
+                user.profile.silver_wings += wings_added
                 user.profile.save()
 
                 promo_message = f"Промокод {code} активовано! Ви отримали валюту."
+
+                # Створюємо сповіщення у вкладці "Сповіщення"
+                Notification.objects.create(
+                    user=user,
+                    text=f"Ви активували промокод {code}! Вам зараховано "
+                         f"{horseshoes_added} Срібних Підков і {wings_added} Срібних Пір'їв."
+                )
 
                 # Якщо код одноразовий — додаємо у список використаних
                 if PROMO_CODES[code].get('once', False):
@@ -222,10 +217,14 @@ def subscription_page(request):
         else:
             promo_message = "Невірний промокод."
 
+    # Отримуємо сповіщення для вкладки
+    notifications = Notification.objects.filter(user=user).order_by('-created_at')
+
     context = {
         'user_horseshoes': user.profile.horseshoes,
         'user_silver_wings': user.profile.silver_wings,
         'promo_message': promo_message,
-        'promo_used': promo_used,  # передаємо в шаблон
+        'promo_used': promo_used,
+        'notifications': notifications,  # для вкладки Сповіщення
     }
     return render(request, 'userspace/subscription.html', context)
