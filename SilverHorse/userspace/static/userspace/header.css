@@ -258,3 +258,24 @@
 .divider {
   color: #aaa;
 }
+
+
+
+.currency-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none; /* прибирає підкреслення */
+  color: inherit;        /* колір тексту як у батьківського елемента */
+}
+
+.currency-item:hover .currency-icon {
+  transform: scale(1.1);
+}
+
+.currency-item:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}

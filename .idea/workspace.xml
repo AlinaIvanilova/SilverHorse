@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="Just update names">
-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/Silver_Horseshoe.png" afterDir="false" />
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="13.2 Added a photo and css for the header">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/header.css" afterDir="false" />
@@ -27,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="13.1-just-update" />
+        <entry key="$PROJECT_DIR$" value="13.2-add-photos" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -52,23 +51,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;13.2-&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/userspace&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "13.3",
+    "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/userspace",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\OMEN\PycharmProjects\SilverHorse\SilverHorse\userspace\static\userspace" />
@@ -114,7 +113,7 @@
       <workItem from="1762425762563" duration="30000" />
       <workItem from="1762425860139" duration="5000" />
       <workItem from="1762427347425" duration="434000" />
-      <workItem from="1762428568019" duration="1129000" />
+      <workItem from="1762428568019" duration="2514000" />
     </task>
     <task id="LOCAL-00001" summary="Zero">
       <option name="closed" value="true" />
@@ -404,7 +403,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762196885115</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="13.2 Added a photo and css for the header">
+      <option name="closed" value="true" />
+      <created>1762429983300</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1762429983300</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -422,7 +429,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="5.2 fix button exit" />
     <MESSAGE value="6 I rewrote all the code in html and css to make the code &quot;clean&quot;, also fixed the Silver Horse button, added icons." />
     <MESSAGE value="7 Added an additional header under the main one. Which have 3 (still not working) buttons. And also changed the page size to add a footer, used a java script." />
     <MESSAGE value="7.1 Updated the footer, added text, added icons." />
@@ -447,6 +453,7 @@
     <MESSAGE value="12.1 I added urls and view so that the buttons on the header work. And of course I added the necessary html." />
     <MESSAGE value="Started working on the currency. &#10;Added some code to TEMPLATES. Added a little code to header.html which was displayed on the header.&#10;Created two files: context_processors.py and signals.py &#10;Added code to apps.py and also added admin." />
     <MESSAGE value="Just update names" />
-    <option name="LAST_COMMIT_MESSAGE" value="Just update names" />
+    <MESSAGE value="13.2 Added a photo and css for the header" />
+    <option name="LAST_COMMIT_MESSAGE" value="13.2 Added a photo and css for the header" />
   </component>
 </project>
