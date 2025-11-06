@@ -154,3 +154,86 @@
   font-weight: 600;
   color: #ffd700;
 }
+
+
+
+
+
+/* =========================
+   🌟 Обгортка сторінки зліва-центр
+========================= */
+.subscription-wrapper {
+    position: relative; /* для позиціювання лівої колонки */
+    max-width: 700px;  /* ширина центрального блоку */
+    margin: 0 auto;    /* центр по екрану */
+    padding: 20px;
+}
+
+/* Ліва колонка */
+.left-sidebar {
+    position: absolute; /* фіксуємо ліворуч від центру */
+    left: -270px;       /* відступ від центрального блоку */
+    top: 0;
+    width: 250px;
+}
+
+.sidebar-text {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    color: #fff;
+    box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.05);
+}
+
+.sidebar-text h2 {
+    color: #ffd700;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.sidebar-text p {
+    color: #ccc;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+/* Центральний блок залишається строго по центру */
+.subscription-page {
+    background: #111;
+    color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 700px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.15), 0 0 60px rgba(255, 215, 0, 0.05);
+    text-align: center;
+}
+
+/* 💰 Блок валют */
+.currencies-balance {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+    background: #1a1a1a;
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.1);
+}
+
+/* Промокод окремо */
+.promo-code-section {
+    margin-top: 30px;
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.05);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+

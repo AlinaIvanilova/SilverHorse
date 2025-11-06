@@ -3,37 +3,60 @@
 {% block title %}Підписка{% endblock %}
 
 {% block content %}
-<div class="subscription-page">
-    <h1>Сторінка підписки</h1>
-    <p>Тут ти можеш перевірити свій баланс Срібних Підков і Пір'я, отримати нові ресурси, активувати чарівні промокоди та покращити свою підписку, щоб відкрити нові шляхи пригод.</p>
-
-    <div class="currencies-balance">
-        <div class="currency-item">
-            <img src="{% static 'userspace/Silver_Horseshoe.png' %}" alt="Срібні Підкови" class="currency-icon">
-            <span class="currency-label">Срібні Підкови:</span>
-            <span class="currency-value">{{ user_horseshoes }}</span>
+<div class="subscription-wrapper">
+    <!-- Ліва колонка з текстом -->
+    <div class="left-sidebar">
+        <!-- Блок про Срібні Підкови -->
+        <div class="sidebar-text">
+            <h2>Легенда Срібних Підков</h2>
+            <p>
+                Срібні Підкови вже століттями служать надійною валютою в світі конюшень. Виготовлені зі чистого срібла, вони не лише цінні матеріально, а й символізують добробут та відданість коням. Кожна підкова зберігає частинку магії догляду за тваринами та стає незамінним ресурсом для досвідчених вершників.
+            </p>
         </div>
 
-        <div class="currency-item">
-            <img src="{% static 'userspace/silver_feather.png' %}" alt="Срібні Пір'я" class="currency-icon">
-            <span class="currency-label">Срібні Пір'я:</span>
-            <span class="currency-value">{{ user_silver_wings }}</span>
+        <!-- Блок про Срібні Пір’я -->
+        <div class="sidebar-text" style="margin-top: 20px;">
+            <h2>Легенда Срібних Пір’їв</h2>
+            <p>
+                Срібні Пір’я — справжня рідкість. Вони добуваються лише від легендарних птахів, які з’являються раз на багато років, і кожне пір’я є символом високого статусу та величезної цінності в конюшні. Такі пір’я використовують для нагородження найкращих вершників та для особливих церемоній догляду за кіньми.
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Центральний блок -->
+    <div class="subscription-page">
+        <h1>Сторінка підписки</h1>
+        <p>Тут ти можеш перевірити свій баланс Срібних Підков і Пір'я, отримати нові ресурси та покращити свою підписку, щоб відкрити нові шляхи пригод.</p>
+
+        <div class="currencies-balance">
+            <div class="currency-item">
+                <img src="{% static 'userspace/Silver_Horseshoe.png' %}" alt="Срібні Підкови" class="currency-icon">
+                <span class="currency-label">Срібні Підкови:</span>
+                <span class="currency-value">{{ user_horseshoes }}</span>
+            </div>
+
+            <div class="currency-item">
+                <img src="{% static 'userspace/silver_feather.png' %}" alt="Срібні Пір'я" class="currency-icon">
+                <span class="currency-label">Срібні Пір'я:</span>
+                <span class="currency-value">{{ user_silver_wings }}</span>
+            </div>
         </div>
     </div>
 </div>
 
-    <!-- Промокод -->
-    <div class="promo-code-section">
-        <h2>Активувати промокод</h2>
-        <form method="post">
-            {% csrf_token %}
-            <input type="text" name="promo_code" placeholder="Введіть промокод" required class="promo-input">
-            <button type="submit" class="send-btn">Активувати</button>
-        </form>
-        {% if promo_message %}
-        <p class="promo-message">{{ promo_message }}</p>
-        {% endif %}
-    </div>
+<!-- Промокод окремо -->
+<div class="promo-code-section">
+    <h2>Активувати промокод</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="promo_code" placeholder="Введіть промокод" required class="promo-input">
+        <button type="submit" class="send-btn">Активувати</button>
+    </form>
+    {% if promo_message %}
+    <p class="promo-message">{{ promo_message }}</p>
+    {% endif %}
 </div>
-
 {% endblock %}
+
+
