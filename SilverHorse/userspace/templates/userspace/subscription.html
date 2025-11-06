@@ -21,4 +21,19 @@
         </div>
     </div>
 </div>
+
+    <!-- Промокод -->
+    <div class="promo-code-section">
+        <h2>Активувати промокод</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="promo_code" placeholder="Введіть промокод" required class="promo-input">
+            <button type="submit" class="send-btn">Активувати</button>
+        </form>
+        {% if promo_message %}
+        <p class="promo-message">{{ promo_message }}</p>
+        {% endif %}
+    </div>
+</div>
+
 {% endblock %}

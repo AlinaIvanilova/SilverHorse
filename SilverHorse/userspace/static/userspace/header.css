@@ -325,3 +325,16 @@ header .currency-item .currency-value {
   font-weight: 600;
   color: #fff6a9;
 }
+
+
+
+
+.currency-item-link {
+    text-decoration: none !important;
+}
+
+.currency-item-link:active {
+    text-decoration: underline !important;
+    text-decoration-color: #ffd700 !important;
+    text-underline-offset: 3px;
+}

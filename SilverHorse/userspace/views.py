@@ -181,3 +181,36 @@ def account_page(request):
 
 def language_page(request):
     return render(request, 'userspace/language.html')
+
+
+
+
+# Приклад словника промокодів (можна пізніше винести у базу)
+PROMO_CODES = {
+    'WELCOME100': {'horseshoes': 100, 'silver_wings': 0},
+    'S': {'horseshoes': 0, 'silver_wings': 0},
+}
+
+@login_required
+def subscription_page(request):
+    user = request.user
+    promo_message = None
+
+    # Якщо користувач надсилає промокод
+    if request.method == "POST" and 'promo_code' in request.POST:
+        code = request.POST.get('promo_code', '').upper()
+        if code in PROMO_CODES:
+            # Додаємо валюту користувачу
+            user.profile.horseshoes += PROMO_CODES[code]['horseshoes']
+            user.profile.silver_wings += PROMO_CODES[code]['silver_wings']
+            user.profile.save()
+            promo_message = f"Промокод {code} активовано! Ви отримали валюту."
+        else:
+            promo_message = "Невірний промокод."
+
+    context = {
+        'user_horseshoes': user.profile.horseshoes,
+        'user_silver_wings': user.profile.silver_wings,
+        'promo_message': promo_message,
+    }
+    return render(request, 'userspace/subscription.html', context)
