@@ -236,19 +236,27 @@
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  top: 130%; /* було bottom: 130%; тепер зверху вниз */
+  top: 130%;
   left: 50%;
   transform: translateX(-50%);
   background-color: rgba(0, 0, 0, 0.85);
-  color: #fff;
-  padding: 5px 9px;
-  border-radius: 6px;
-  font-size: 13px;
+  color: #ffd700; /* жовтий текст */
+  padding: 7px 12px; /* 🔸 збільшено відступи, щоб фон був більший */
+  border-radius: 8px; /* трохи більші заокруглення */
+  font-size: 14px; /* трохи більший текст */
   white-space: nowrap;
-  transition: opacity 0.2s ease;
-  pointer-events: none; /* щоб не мигало при наведенні */
+  transition: opacity 0.25s ease;
+  pointer-events: none;
   z-index: 10;
+  font-weight: 400;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); /* легке жовте сяйво */
+
+  display: flex;              /* 🟡 Додано */
+  align-items: center;        /* 🟡 Вирівнює текст вертикально по центру */
+  justify-content: center;    /* 🟡 Центр по горизонталі */
+  line-height: 1.2;           /* 🟡 Оптимальна висота рядка */
 }
+
 
 .currency-item:hover .tooltip-text {
   visibility: visible;
@@ -278,4 +286,42 @@
 .currency-item:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
+}
+
+
+
+
+
+/* =========================
+   🟡 Зменшений стиль валют у ХЕДЕРІ
+========================= */
+header .currency-item {
+  background: rgba(255, 215, 0, 0.08);
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.1);
+  gap: 4px;
+  transition: 0.3s;
+}
+
+header .currency-item:hover {
+  background: rgba(255, 215, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+header .currency-item .currency-icon {
+  width: 30px;
+  height: 30px;
+}
+
+header .currency-item .currency-label {
+  font-size: 13px;
+  color: #ffd700;
+}
+
+header .currency-item .currency-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff6a9;
 }

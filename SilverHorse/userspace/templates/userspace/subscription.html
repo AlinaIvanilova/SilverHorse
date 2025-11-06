@@ -1,7 +1,24 @@
 {% extends 'userspace/base.html' %}
-{% block title %}Профіль{% endblock %}
+{% load static %}
+{% block title %}Підписка{% endblock %}
 
 {% block content %}
-<h1>Сторінка підписки</h1>
-<p>Щось про підписку</p>
+<div class="subscription-page">
+    <h1>Сторінка підписки</h1>
+    <p>Тут ти можеш перевірити свій баланс Срібних Підков і Крил, отримати нові ресурси, активувати чарівні промокоди та покращити свою підписку, щоб відкрити нові шляхи пригод.</p>
+
+    <div class="currencies-balance">
+        <div class="currency-item">
+            <img src="{% static 'userspace/Silver_Horseshoe.png' %}" alt="Срібні Підкови" class="currency-icon">
+            <span class="currency-label">Срібні Підкови:</span>
+            <span class="currency-value">{{ user_horseshoes }}</span>
+        </div>
+
+        <div class="currency-item">
+            <img src="{% static 'userspace/silver_feather.png' %}" alt="Срібні Пір'я" class="currency-icon">
+            <span class="currency-label">Срібні Пір'я:</span>
+            <span class="currency-value">{{ user_silver_wings }}</span>
+        </div>
+    </div>
+</div>
 {% endblock %}
