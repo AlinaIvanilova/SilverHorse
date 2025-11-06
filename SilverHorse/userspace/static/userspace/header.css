@@ -136,3 +136,125 @@
   background: #444;
   color: #ffd700;
 }
+
+
+
+
+.currencies {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #e0e0e0;
+}
+
+.currency-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.currency-icon {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.2s ease;
+}
+
+.currency-item:hover .currency-icon {
+  transform: scale(1.1);
+}
+
+.currency-value {
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Текст-підказка при наведенні */
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.currency-item:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.divider {
+  color: #ccc;
+}
+
+.currencies {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 16px;
+  color: #e0e0e0;
+  white-space: nowrap;
+}
+
+.currency-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.currency-icon {
+  width: 30px;         /* фіксований розмір іконки */
+  height: 30px;
+  object-fit: contain; /* пропорційно стискає фото */
+  transition: transform 0.2s ease;
+}
+
+.currency-item:hover .currency-icon {
+  transform: scale(1.1);
+}
+
+.currency-value {
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Підказка при наведенні */
+/* Підказка при наведенні (тепер знизу) */
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 130%; /* було bottom: 130%; тепер зверху вниз */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 5px 9px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+  pointer-events: none; /* щоб не мигало при наведенні */
+  z-index: 10;
+}
+
+.currency-item:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.divider {
+  color: #aaa;
+}

@@ -11,9 +11,22 @@
 
     {% if user.is_authenticated %}
     <div class="currencies">
-        Срібні Підкови {{ user_horseshoes }} &nbsp; | &nbsp; Срібні крила {{ user_silver_wings }}
+        <div class="currency-item">
+            <img src="{% static 'userspace/Silver_Horseshoe.png ' %}" alt="Срібні Підкови" class="currency-icon">
+            <span class="tooltip-text">Срібні Підкови</span>
+            <span class="currency-value">{{ user_horseshoes }}</span>
+        </div>
+
+        <span class="divider">|</span>
+
+        <div class="currency-item">
+            <img src="{% static 'userspace/silver_feather.png' %}" alt="Срібні Пір'я" class="currency-icon">
+            <span class="tooltip-text">Срібні Пір'я</span>
+            <span class="currency-value">{{ user_silver_wings }}</span>
+        </div>
     </div>
     {% endif %}
+
 
     <div class="top-buttons">
         <a href="{% url 'messages_page' %}" class="message-btn">
