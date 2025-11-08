@@ -228,3 +228,16 @@ def subscription_page(request):
         'notifications': notifications,  # для вкладки Сповіщення
     }
     return render(request, 'userspace/subscription.html', context)
+
+
+
+from django.shortcuts import render
+
+def horses_page(request):
+    return render(request, 'userspace/horses.html')
+
+def equestrian_page(request):
+    return render(request, 'userspace/equestrian.html')
+
+def trade_page(request):
+    return render(request, 'userspace/trade.html')

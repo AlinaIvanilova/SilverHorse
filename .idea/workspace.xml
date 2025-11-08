@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="14.4 I created a notification in messages after activating the promo code.">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="14.5 added text to the page">
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/equestrian.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/trade.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/subscription.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/subscription.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/subscription.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/subscription.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="14.4-created-promo-code-notification" />
+        <entry key="$PROJECT_DIR$" value="14.5-added-text" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -58,7 +61,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "14.5-",
+    "git-widget-placeholder": "15-start-working-subHeader",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/userspace",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -114,7 +117,9 @@
       <workItem from="1762425860139" duration="5000" />
       <workItem from="1762427347425" duration="434000" />
       <workItem from="1762428568019" duration="8303000" />
-      <workItem from="1762448318015" duration="7167000" />
+      <workItem from="1762448318015" duration="7468000" />
+      <workItem from="1762605184745" duration="121000" />
+      <workItem from="1762611339885" duration="306000" />
     </task>
     <task id="LOCAL-00001" summary="Zero">
       <option name="closed" value="true" />
@@ -452,7 +457,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762453953293</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="14.5 added text to the page">
+      <option name="closed" value="true" />
+      <created>1762455936834</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1762455936834</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,7 +483,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="7.3 added some text to the sources used, but didn't put it into a nice design." />
     <MESSAGE value="8 Updated the message page, added buttons and design." />
     <MESSAGE value="8.1 I made a function where users can write to each other, I didn't make a beautiful design, but I made the main function through urls, views... And also added the ability for the Administrator to work with messages." />
     <MESSAGE value="8.2 Changed the function of sending messages so that the User writes to another User, instead of choosing. And also changed the time zone in settings.py." />
@@ -495,6 +507,7 @@
     <MESSAGE value="14.2 Added an update to admin.py so that the admin can change the amount of currency for users." />
     <MESSAGE value="14.3 Added the promo code feature, now there are permanent promo codes as well as one-time ones." />
     <MESSAGE value="14.4 I created a notification in messages after activating the promo code." />
-    <option name="LAST_COMMIT_MESSAGE" value="14.4 I created a notification in messages after activating the promo code." />
+    <MESSAGE value="14.5 added text to the page" />
+    <option name="LAST_COMMIT_MESSAGE" value="14.5 added text to the page" />
   </component>
 </project>

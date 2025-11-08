@@ -21,4 +21,8 @@ urlpatterns = [
     path('subscription/', views.subscription_page, name='subscription_page'),
     path('account/', views.account_page, name='account_page'),
     path('language/', views.language_page, name='language_page'),
+
+    path('horses/', views.horses_page, name='horses_page'),
+    path('equestrian/', views.equestrian_page, name='equestrian_page'),
+    path('trade/', views.trade_page, name='trade_page'),
 ]
