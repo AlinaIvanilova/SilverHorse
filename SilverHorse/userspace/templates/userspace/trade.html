@@ -1,4 +1,19 @@
 {% extends 'userspace/base.html' %}
 {% block content %}
 <h1>Сторінка Торгівлі</h1>
+
+
+
+<ul>
+  {% for horse in horses %}
+    <li>
+      <strong>{{ horse.name }}</strong> — {{ horse.breed }}, {{ horse.age }} років,
+      стать: {{ horse.gender }}, колір: {{ horse.coat_color }},
+      ціна: {{ horse.price }} ₴
+    </li>
+  {% empty %}
+    <li>На ринку поки що немає коней.</li>
+  {% endfor %}
+</ul>
+
 {% endblock %}

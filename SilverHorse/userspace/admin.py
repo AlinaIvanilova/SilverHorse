@@ -54,3 +54,5 @@ class ProfileAdmin(admin.ModelAdmin):
     list_editable = ('horseshoes', 'silver_wings')
 
 
+from .models import Horse
+admin.site.register(Horse)

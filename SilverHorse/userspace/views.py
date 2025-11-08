@@ -7,6 +7,7 @@ from django.urls import reverse
 from .models import Message, Note, BlockedUser, SystemMessage
 from .forms import MessageForm, NoteForm, BlockUserForm
 from .models import Notification
+from .models import Horse
 
 
 # -------------------------
@@ -231,7 +232,6 @@ def subscription_page(request):
 
 
 
-from django.shortcuts import render
 
 def horses_page(request):
     return render(request, 'userspace/horses.html')
@@ -239,5 +239,7 @@ def horses_page(request):
 def equestrian_page(request):
     return render(request, 'userspace/equestrian.html')
 
-def trade_page(request):
-    return render(request, 'userspace/trade.html')
+# Відповідає за ринок
+def market_view(request):
+    horses = Horse.objects.filter(status='market')  # всі коні на ринку
+    return render(request, 'userspace/trade.html', {'horses': horses})
