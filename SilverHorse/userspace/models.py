@@ -106,3 +106,44 @@ class Notification(models.Model):
 
     def __str__(self):
         return f"Повідомлення для {self.user.username}: {self.text[:20]}"
+
+
+# -------------------------
+# Модель "кінь" для зберігання інформації про кожного коня
+# -------------------------
+
+class Horse(models.Model):
+    # Основні атрибути коня
+    name = models.CharField(max_length=100)  # Ім'я коня
+    breed = models.CharField(max_length=50)  # Порода коня
+    age = models.IntegerField()  # Вік коня (в роках)
+
+    # Стать коня: M - Жеребець, F - Кобила
+    gender_choices = [('M', 'Жеребець'), ('F', 'Кобила')]
+    gender = models.CharField(max_length=1, choices=gender_choices)
+
+    coat_color = models.CharField(max_length=50)  # Колір шерсті коня
+
+    # Ігрові характеристики (для гри)
+    speed = models.IntegerField(default=50)  # Швидкість
+    endurance = models.IntegerField(default=50)  # Витривалість
+    strength = models.IntegerField(default=50)  # Сила
+    health = models.IntegerField(default=100)  # Здоров'я
+
+    # Власник та ринок
+    owner = models.ForeignKey(
+        User,  # Кожен кінь може мати власника
+        on_delete=models.SET_NULL,  # Якщо користувач видалений, власник стає NULL
+        null=True,  # Поле може бути порожнім (для коней на ринку)
+        blank=True  # Поле необов'язкове для форми
+    )
+    price = models.IntegerField(default=0)  # Ціна коня (для ринку)
+
+    # Статус коня: чи він на ринку, чи у користувача
+    status_choices = [('market', 'На ринку'), ('user', 'У користувача')]
+    status = models.CharField(max_length=10, choices=status_choices, default='market')
+
+    # Для зручного відображення в адмінці або в консолі
+    def __str__(self):
+        return f"{self.name} ({self.breed})"
+
