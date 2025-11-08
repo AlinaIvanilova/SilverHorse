@@ -8,6 +8,7 @@ from .models import Message, Note, BlockedUser, SystemMessage
 from .forms import MessageForm, NoteForm, BlockUserForm
 from .models import Notification
 from .models import Horse
+from django.shortcuts import render, get_object_or_404
 
 
 # -------------------------
@@ -243,3 +244,11 @@ def equestrian_page(request):
 def market_view(request):
     horses = Horse.objects.filter(status='market')  # всі коні на ринку
     return render(request, 'userspace/trade.html', {'horses': horses})
+
+
+
+
+
+def horse_detail(request, horse_id):
+    horse = get_object_or_404(Horse, id=horse_id)
+    return render(request, 'userspace/horse_detail.html', {'horse': horse})

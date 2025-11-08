@@ -1,0 +1,23 @@
+{% extends 'userspace/base.html' %}
+
+{% block content %}
+<h1>{{ horse.name }}</h1>
+
+{% if horse.photo %}
+    <img src="{{ horse.photo.url }}" alt="{{ horse.name }}" width="300">
+{% endif %}
+
+<ul>
+    <li>Порода: {{ horse.breed }}</li>
+    <li>Вік: {{ horse.age }} років</li>
+    <li>Стать: {{ horse.get_gender_display }}</li>
+    <li>Колір шерсті: {{ horse.coat_color }}</li>
+    <li>Швидкість: {{ horse.speed }}</li>
+    <li>Витривалість: {{ horse.endurance }}</li>
+    <li>Сила: {{ horse.strength }}</li>
+    <li>Здоров'я: {{ horse.health }}</li>
+    <li>Ціна: {{ horse.price }} ₴</li>
+</ul>
+
+<a href="{% url 'trade_page' %}">Назад до ринку</a>
+{% endblock %}

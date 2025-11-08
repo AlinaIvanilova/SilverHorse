@@ -26,4 +26,6 @@ urlpatterns = [
     path('equestrian/', views.equestrian_page, name='equestrian_page'),
     path('trade/', views.market_view, name='trade_page'),
 
+    path('horse/<int:horse_id>/', views.horse_detail, name='horse_detail'),
+
 ]

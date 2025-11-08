@@ -2,13 +2,13 @@
 {% block content %}
 <h1>Сторінка Торгівлі</h1>
 
-
-
 <ul>
   {% for horse in horses %}
     <li>
-      <strong>{{ horse.name }}</strong> — {{ horse.breed }}, {{ horse.age }} років,
-      стать: {{ horse.gender }}, колір: {{ horse.coat_color }},
+      <a href="{% url 'horse_detail' horse.id %}">
+        <strong>{{ horse.name }}</strong>
+      </a> — {{ horse.breed }}, {{ horse.age }} років,
+      стать: {{ horse.get_gender_display }}, колір: {{ horse.coat_color }},
       ціна: {{ horse.price }} ₴
     </li>
   {% empty %}
