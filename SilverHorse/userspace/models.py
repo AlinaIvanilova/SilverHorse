@@ -130,6 +130,9 @@ class Horse(models.Model):
     strength = models.IntegerField(default=50)  # Сила
     health = models.IntegerField(default=100)  # Здоров'я
 
+    # Фото коня
+    photo = models.ImageField(upload_to='horses/', null=True, blank=True)  # Фото коня
+
     # Власник та ринок
     owner = models.ForeignKey(
         User,  # Кожен кінь може мати власника
@@ -146,4 +149,21 @@ class Horse(models.Model):
     # Для зручного відображення в адмінці або в консолі
     def __str__(self):
         return f"{self.name} ({self.breed})"
+
+    # Метод для повного опису коня
+    def get_description(self):
+        return (
+            f"Ім'я: {self.name}\n"
+            f"Порода: {self.breed}\n"
+            f"Вік: {self.age} рік(років)\n"
+            f"Стать: {self.get_gender_display()}\n"
+            f"Колір шерсті: {self.coat_color}\n"
+            f"Швидкість: {self.speed}\n"
+            f"Витривалість: {self.endurance}\n"
+            f"Сила: {self.strength}\n"
+            f"Здоров'я: {self.health}\n"
+            f"Ціна: {self.price}\n"
+            f"Статус: {self.get_status_display()}\n"
+            f"Власник: {self.owner.username if self.owner else 'На ринку'}"
+        )
 
