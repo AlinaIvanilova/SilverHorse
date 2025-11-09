@@ -1,4 +1,38 @@
 {% extends 'userspace/base.html' %}
+{% load static %}
+
 {% block content %}
 <h1>Сторінка Конярства</h1>
+
+<!-- Тут можна додати будь-який основний контент сторінки -->
+
+<hr>
+<h2>🐴 Моя стайня</h2>
+
+{% if user_horses %}
+    <div class="user-horses">
+        {% for horse in user_horses %}
+            <div class="horse-card">
+                {% if horse.photo %}
+                    <img src="{{ horse.photo.url }}" alt="{{ horse.name }}" class="horse-photo">
+                {% else %}
+                    <img src="{% static 'img/default_horse.jpg' %}" alt="Без фото" class="horse-photo">
+                {% endif %}
+
+                <h3>{{ horse.name }}</h3>
+                <p>Порода: {{ horse.breed }}</p>
+                <p>Вік: {{ horse.age }} р.</p>
+                <p>Стать: {{ horse.get_gender_display }}</p>
+                <p>Колір шерсті: {{ horse.coat_color }}</p>
+                <p>Швидкість: {{ horse.speed }}</p>
+                <p>Витривалість: {{ horse.endurance }}</p>
+                <p>Сила: {{ horse.strength }}</p>
+                <p>Здоров’я: {{ horse.health }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>У вас поки немає коней 😢</p>
+{% endif %}
+
 {% endblock %}

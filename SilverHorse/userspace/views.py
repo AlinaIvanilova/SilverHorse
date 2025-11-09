@@ -252,3 +252,47 @@ def market_view(request):
 def horse_detail(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id)
     return render(request, 'userspace/horse_detail.html', {'horse': horse})
+
+
+
+
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .models import Horse, Profile
+
+@login_required
+def buy_horse(request, horse_id):
+    horse = get_object_or_404(Horse, id=horse_id)
+    buyer_profile = request.user.profile
+
+    # Перевіряємо, чи кінь на ринку
+    if horse.status != 'market':
+        messages.error(request, "Цей кінь уже не продається.")
+        return redirect('market_page')
+
+    # Перевіряємо, чи користувачу вистачає підков
+    if buyer_profile.horseshoes < horse.price:
+        messages.error(request, "У вас недостатньо Срібних Підков для покупки.")
+        return redirect('market_page')
+
+    # Знімаємо гроші
+    buyer_profile.horseshoes -= horse.price
+    buyer_profile.save()
+
+    # Передаємо власність користувачу
+    horse.owner = request.user
+    horse.status = 'user'
+    horse.save()
+
+    messages.success(request, f"Вітаємо! Ви купили коня {horse.name} 🐎")
+    return redirect('horses_page')  # сторінка з кіньми користувача
+
+
+@login_required
+def horses_page(request):
+    # Куплені коні користувача
+    user_horses = Horse.objects.filter(owner=request.user, status='user')
+
+    return render(request, 'userspace/horses.html', {'user_horses': user_horses})

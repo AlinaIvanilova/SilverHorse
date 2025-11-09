@@ -1,19 +1,57 @@
 {% extends 'userspace/base.html' %}
+{% load static %}
+
 {% block content %}
-<h1>Сторінка Торгівлі</h1>
+<div class="market-container">
 
-<ul>
-  {% for horse in horses %}
-    <li>
-      <a href="{% url 'horse_detail' horse.id %}">
-        <strong>{{ horse.name }}</strong>
-      </a> — {{ horse.breed }}, {{ horse.age }} років,
-      стать: {{ horse.get_gender_display }}, колір: {{ horse.coat_color }},
-      ціна: {{ horse.price }} ₴
-    </li>
-  {% empty %}
-    <li>На ринку поки що немає коней.</li>
-  {% endfor %}
-</ul>
+    <h1 class="market-title">🏇 Ринок Коней</h1>
 
+    <!-- Баланс користувача -->
+    <div class="user-balance">
+        <p>💰 Ваш баланс: <strong>{{ request.user.profile.horseshoes }}</strong> Срібних Підков</p>
+    </div>
+
+    <!-- Список коней -->
+    <div class="horse-list">
+        {% for horse in horses %}
+        <div class="horse-card">
+            <!-- Фото -->
+            {% if horse.photo %}
+                <img src="{{ horse.photo.url }}" alt="{{ horse.name }}" class="horse-photo">
+            {% else %}
+                <img src="{% static 'img/default_horse.jpg' %}" alt="Без фото" class="horse-photo">
+            {% endif %}
+
+            <!-- Інформація -->
+            <div class="horse-info">
+                <h2>{{ horse.name }}</h2>
+                <p>Порода: {{ horse.breed }}</p>
+                <p>Вік: {{ horse.age }} р.</p>
+                <p>Стать: {{ horse.get_gender_display }}</p>
+                <p>Колір: {{ horse.coat_color }}</p>
+                <p>Швидкість: {{ horse.speed }}</p>
+                <p>Витривалість: {{ horse.endurance }}</p>
+                <p>Сила: {{ horse.strength }}</p>
+                <p>Здоров’я: {{ horse.health }}</p>
+                <p class="price">💵 Ціна: <strong>{{ horse.price }}</strong> 🐴 Підков</p>
+            </div>
+
+            <!-- Кнопка покупки -->
+            <div class="buy-section">
+                {% if horse.status == 'market' %}
+                    <form action="{% url 'buy_horse' horse.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="buy-btn">Купити</button>
+                    </form>
+                {% else %}
+                    <p class="sold">❌ Продано</p>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+            <p>Наразі на ринку немає коней 🐎</p>
+        {% endfor %}
+    </div>
+
+</div>
 {% endblock %}

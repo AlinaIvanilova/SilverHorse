@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="15.3 update horse model and add directory media">
-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" afterDir="false" />
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="15.4 made sure each horse had its own personal page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/trade.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/trade.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views.py" afterDir="false" />
@@ -28,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="15.3-update" />
+        <entry key="$PROJECT_DIR$" value="15.4-update" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -60,7 +60,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "15.4-update",
+    "git-widget-placeholder": "15.5-buying-horses",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/userspace",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -119,7 +119,8 @@
       <workItem from="1762448318015" duration="7468000" />
       <workItem from="1762605184745" duration="121000" />
       <workItem from="1762611339885" duration="3091000" />
-      <workItem from="1762614516478" duration="2143000" />
+      <workItem from="1762614516478" duration="2579000" />
+      <workItem from="1762693777823" duration="1487000" />
     </task>
     <task id="LOCAL-00001" summary="Zero">
       <option name="closed" value="true" />
@@ -505,7 +506,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762615289397</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="15.4 made sure each horse had its own personal page">
+      <option name="closed" value="true" />
+      <created>1762616932220</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1762616932220</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -523,7 +532,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Dying while developing a blacklist (version 1)" />
     <MESSAGE value="8.5 Suddenly I realized what the error was in the list of blocked users and now everything works correctly." />
     <MESSAGE value="8.6 I've improved user blocking. Now messages simply don't arrive if the user is blocked." />
     <MESSAGE value="9 I've been working on system notifications for a while, like adding a greeting upon registration, but I'll finish it in future versions." />
@@ -548,6 +556,7 @@
     <MESSAGE value="15.1 add horses to trade" />
     <MESSAGE value="15.2 add horses to trade" />
     <MESSAGE value="15.3 update horse model and add directory media" />
-    <option name="LAST_COMMIT_MESSAGE" value="15.3 update horse model and add directory media" />
+    <MESSAGE value="15.4 made sure each horse had its own personal page" />
+    <option name="LAST_COMMIT_MESSAGE" value="15.4 made sure each horse had its own personal page" />
   </component>
 </project>
