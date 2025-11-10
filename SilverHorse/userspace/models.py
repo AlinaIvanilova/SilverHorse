@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # -------------------------
 # Повідомлення між користувачами
@@ -167,3 +169,14 @@ class Horse(models.Model):
             f"Власник: {self.owner.username if self.owner else 'На ринку'}"
         )
 
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+def currency_context(request):
+    profile = None
+    if request.user.is_authenticated:
+        # Підстрахуємося на випадок, якщо профіль не створений
+        profile, created = Profile.objects.get_or_create(user=request.user)
+    return {'profile': profile}

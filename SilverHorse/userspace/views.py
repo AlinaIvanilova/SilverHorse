@@ -9,6 +9,7 @@ from .forms import MessageForm, NoteForm, BlockUserForm
 from .models import Notification
 from .models import Horse
 from django.shortcuts import render, get_object_or_404
+from .models import Profile
 
 
 # -------------------------
@@ -61,7 +62,7 @@ def messages_page(request):
                 Message.objects.create(sender=request.user, receiver=receiver, text=text)
                 messages.success(request, f"Повідомлення відправлено користувачу {receiver_username}.")
             except User.DoesNotExist:
-                messages.error(request, "Користувача з таким ім’ям не існує.")
+                messages.error(request, "Користувача з таким ім'ям не існує.")
             return redirect('messages_page')
 
     # Створення нотатки
@@ -85,7 +86,7 @@ def messages_page(request):
                     BlockedUser.objects.get_or_create(blocker=request.user, blocked=user_to_block)
                     messages.success(request, f"Ви заблокували {username}.")
             except User.DoesNotExist:
-                messages.error(request, "Користувача з таким ім’ям не існує.")
+                messages.error(request, "Користувача з таким ім'ям не існує.")
             return redirect('messages_page')
 
     # Дані для відображення
@@ -93,7 +94,7 @@ def messages_page(request):
     notes = Note.objects.filter(user=request.user).order_by('-created_at')
     blocked_users = BlockedUser.objects.filter(blocker=request.user).order_by('-created_at')
     system_messages = SystemMessage.objects.filter(user=request.user).order_by('-created_at')
-    notifications = Notification.objects.filter(user=request.user).order_by('-created_at')  # ось сюди додано
+    notifications = Notification.objects.filter(user=request.user).order_by('-created_at')
 
     context = {
         'form': message_form,
@@ -103,7 +104,7 @@ def messages_page(request):
         'notes': notes,
         'blocked_users': blocked_users,
         'system_messages': system_messages,
-        'notifications': notifications,  # обов’язково для вкладки Сповіщення
+        'notifications': notifications,
         'user': request.user,
     }
 
@@ -141,7 +142,7 @@ def block_user_view(request):
                     BlockedUser.objects.get_or_create(blocker=request.user, blocked=user_to_block)
                     messages.success(request, f"Ви заблокували {username}.")
             except User.DoesNotExist:
-                messages.error(request, "Користувача з таким ім’ям не існує.")
+                messages.error(request, "Користувача з таким ім'ям не існує.")
     return redirect('messages_page')
 
 
@@ -161,12 +162,15 @@ def unblock_user_view(request, user_id):
 # -------------------------
 # Сторінки Хедера
 # -------------------------
+@login_required
 def profile_page(request):
     return render(request, 'userspace/profile.html')
 
+@login_required
 def account_page(request):
     return render(request, 'userspace/account.html')
 
+@login_required
 def language_page(request):
     return render(request, 'userspace/language.html')
 
@@ -174,20 +178,18 @@ def language_page(request):
 # -------------------------
 # Промокоди
 # -------------------------
-# Якщо промокод одноразовий — додаємо ключ 'once': True
 PROMO_CODES = {
     'WELCOME100': {'horseshoes': 100, 'silver_wings': 0},
     'ONE': {'horseshoes': 1000, 'silver_wings': 0, 'once': True},
 }
 
-# Зберігаємо вже використані одноразові промокоди
 USED_PROMO_CODES = set()
 
 @login_required
 def subscription_page(request):
     user = request.user
     promo_message = None
-    promo_used = False  # для шаблону
+    promo_used = False
 
     if request.method == "POST" and 'promo_code' in request.POST:
         code = request.POST.get('promo_code', '').upper()
@@ -206,14 +208,14 @@ def subscription_page(request):
 
                 promo_message = f"Промокод {code} активовано! Ви отримали валюту."
 
-                # Створюємо сповіщення у вкладці "Сповіщення"
+                # Створюємо сповіщення
                 Notification.objects.create(
                     user=user,
                     text=f"Ви активували промокод {code}! Вам зараховано "
                          f"{horseshoes_added} Срібних Підков і {wings_added} Срібних Пір'їв."
                 )
 
-                # Якщо код одноразовий — додаємо у список використаних
+                # Якщо код одноразовий
                 if PROMO_CODES[code].get('once', False):
                     USED_PROMO_CODES.add(code)
         else:
@@ -223,45 +225,42 @@ def subscription_page(request):
     notifications = Notification.objects.filter(user=user).order_by('-created_at')
 
     context = {
-        'user_horseshoes': user.profile.horseshoes,
-        'user_silver_wings': user.profile.silver_wings,
         'promo_message': promo_message,
         'promo_used': promo_used,
-        'notifications': notifications,  # для вкладки Сповіщення
+        'notifications': notifications,
     }
     return render(request, 'userspace/subscription.html', context)
 
 
-
-
+# -------------------------
+# Сторінки з кіньми
+# -------------------------
+@login_required
 def horses_page(request):
-    return render(request, 'userspace/horses.html')
+    # Куплені коні користувача
+    user_horses = Horse.objects.filter(owner=request.user, status='user')
+    return render(request, 'userspace/horses.html', {'user_horses': user_horses})
 
+@login_required
 def equestrian_page(request):
     return render(request, 'userspace/equestrian.html')
 
-# Відповідає за ринок
+# -------------------------
+# Ринок
+# -------------------------
+@login_required
 def market_view(request):
-    horses = Horse.objects.filter(status='market')  # всі коні на ринку
+    horses = Horse.objects.filter(status='market')
     return render(request, 'userspace/trade.html', {'horses': horses})
 
-
-
-
-
+@login_required
 def horse_detail(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id)
     return render(request, 'userspace/horse_detail.html', {'horse': horse})
 
-
-
-
-
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from .models import Horse, Profile
-
+# -------------------------
+# Покупка коня
+# -------------------------
 @login_required
 def buy_horse(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id)
@@ -269,7 +268,7 @@ def buy_horse(request, horse_id):
 
     # Перевіряємо, чи кінь на ринку
     if horse.status != 'market':
-        messages.error(request, "Цей кінь уже не продається.")
+        messages.error(request, "Цей кінь вже не продається.")
         return redirect('market_page')
 
     # Перевіряємо, чи користувачу вистачає підков
@@ -287,12 +286,4 @@ def buy_horse(request, horse_id):
     horse.save()
 
     messages.success(request, f"Вітаємо! Ви купили коня {horse.name} 🐎")
-    return redirect('horses_page')  # сторінка з кіньми користувача
-
-
-@login_required
-def horses_page(request):
-    # Куплені коні користувача
-    user_horses = Horse.objects.filter(owner=request.user, status='user')
-
-    return render(request, 'userspace/horses.html', {'user_horses': user_horses})
+    return redirect('horses_page')

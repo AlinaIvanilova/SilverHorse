@@ -16,7 +16,13 @@
             <div class="currency-item">
                 <img src="{% static 'userspace/Silver_Horseshoe.png' %}" alt="Срібні Підкови" class="currency-icon">
                 <span class="tooltip-text">Срібні Підкови</span>
-                <span class="currency-value">{{ user_horseshoes }}</span>
+                <span class="currency-value">
+                    {% if profile %}
+                        {{ profile.horseshoes }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </span>
             </div>
         </a>
 
@@ -27,7 +33,13 @@
             <div class="currency-item">
                 <img src="{% static 'userspace/silver_feather.png' %}" alt="Срібні Пір'я" class="currency-icon">
                 <span class="tooltip-text">Срібні Пір'я</span>
-                <span class="currency-value">{{ user_silver_wings }}</span>
+                <span class="currency-value">
+                    {% if profile %}
+                        {{ profile.silver_wings }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </span>
             </div>
         </a>
     </div>

@@ -1,6 +1,8 @@
 /* =========================
    Загальні налаштування
 ========================= */
+
+
 * {
   box-sizing: border-box;
 }
@@ -14,6 +16,10 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed; /* 🔹 важливо! */
+}
+html, body {
+  height: 100%; /* щоб фон покривав весь екран */
 }
 
 /* =========================
@@ -23,3 +29,4 @@ body {
   padding-top: 115px;
   min-height: 150vh;
 }
+
