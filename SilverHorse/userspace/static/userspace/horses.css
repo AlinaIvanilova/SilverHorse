@@ -2,6 +2,132 @@
    🐴 Сторінка "Моя стайня"
 ========================= */
 
+/* ДУЖЕ СПЕЦИФІЧНІ СТИЛІ ДЛЯ УСУНЕННЯ ПІДКРЕСЛЕНЬ */
+.horse-card a.horse-name-link,
+.horse-card a.horse-photo-link {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    outline: none !important;
+}
+
+.horse-card a.horse-name-link h2,
+.horse-card a.horse-name-link:hover h2,
+.horse-card a.horse-name-link:focus h2,
+.horse-card a.horse-name-link:visited h2 {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    color: #ffd700;
+    transition: color 0.3s ease;
+    margin: 0 0 10px 0;
+}
+
+.horse-card a.horse-name-link:hover h2 {
+    color: #ffed4e;
+    text-decoration: none !important;
+}
+
+/* Reset всіх можливих підкреслень у картці */
+.horse-card,
+.horse-card * {
+    text-decoration: none !important;
+}
+
+.horse-card a,
+.horse-card a:hover,
+.horse-card a:focus,
+.horse-card a:visited {
+    text-decoration: none !important;
+    border-bottom: none !important;
+}
+
+/* Забезпечимо, що решта тексту залишається білою */
+.horse-info {
+    color: #ffffff;
+}
+
+.horse-info p {
+    color: #ffffff;
+    margin: 5px 0;
+}
+
+.horse-info .price {
+    color: #4CAF50;
+    font-weight: bold;
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+/* Ефект при наведенні на всю картку */
+.horse-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 215, 0, 0.7);
+    cursor: pointer;
+}
+
+.horse-photo {
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    padding: 5px;
+}
+
+.horse-card:hover .horse-photo {
+    transform: scale(1.05);
+}
+
+/* Сітка для списку коней */
+.horse-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+/* Картка коня */
+.horse-card {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 580px;
+}
+
+.horse-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Контейнер ринку */
+.market-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    width: 100%;
+}
+
+.market-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Стилі для пустої стайні */
 .empty-stable {
     text-align: center;
     padding: 60px 20px;
@@ -34,56 +160,3 @@
     color: #000;
 }
 
-/* Секція дій для коня */
-.action-section {
-    padding: 15px;
-    border-top: 1px solid rgba(255, 215, 0, 0.2);
-    display: flex;
-    gap: 10px;
-    flex-shrink: 0;
-}
-
-.action-btn {
-    flex: 1;
-    padding: 10px;
-    background: linear-gradient(135deg, #4a90e2, #357abd);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.action-btn:hover {
-    background: linear-gradient(135deg, #357abd, #4a90e2);
-}
-
-.action-btn:active {
-    transform: scale(0.98);
-}
-
-/* Специфічні стилі для сторінки стайни */
-.market-container .horse-card {
-    min-height: 580px; /* Трохи менша висота ніж на ринку */
-}
-
-.market-container .horse-info p.price {
-    color: #4CAF50; /* Зелений колір для статусу власності */
-    font-weight: bold;
-    margin-top: auto;
-    padding-top: 10px;
-    border-top: 1px solid rgba(76, 175, 80, 0.3);
-}
-
-/* Адаптація для мобільних пристроїв */
-@media (max-width: 768px) {
-    .market-container .horse-list {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 15px;
-    }
-
-    .market-container .horse-card {
-        min-height: 550px;
-    }
-}

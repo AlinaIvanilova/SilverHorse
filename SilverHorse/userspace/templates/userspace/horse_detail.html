@@ -1,24 +1,104 @@
 {% extends 'userspace/base.html' %}
+{% load static %}
 
 {% block content %}
-<h1>{{ horse.name }}</h1>
+<div class="horse-detail-container">
+    <!-- Заголовок та основна інформація -->
+    <div class="horse-header">
+        <h1>{{ horse.name }}</h1>
+        <p class="horse-breed-color">{{ horse.breed }} • {{ horse.coat_color }}</p>
+    </div>
 
-<!-- Використовуємо автоматичне фото -->
-<img src="{{ horse.get_photo_url }}"
-     alt="{{ horse.get_photo_alt }}"
-     width="300">
+    <div class="horse-detail-content">
+        <!-- Фото коня -->
+        <div class="horse-detail-photo">
+            <img src="{{ horse.get_photo_url }}"
+                 alt="{{ horse.get_photo_alt }}"
+                 class="detail-photo">
+        </div>
 
-<ul>
-    <li>Порода: {{ horse.breed }}</li>
-    <li>Вік: {{ horse.age }} років</li>
-    <li>Стать: {{ horse.get_gender_display }}</li>
-    <li>Колір шерсті: {{ horse.coat_color }}</li>
-    <li>Швидкість: {{ horse.speed }}</li>
-    <li>Витривалість: {{ horse.endurance }}</li>
-    <li>Сила: {{ horse.strength }}</li>
-    <li>Здоров'я: {{ horse.health }}</li>
-    <li>Ціна: {{ horse.price }} ₴</li>
-</ul>
+        <!-- Інформація та характеристики -->
+        <div class="horse-detail-info">
+            <div class="horse-stats">
+                <h3>📊 Характеристики</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Швидкість:</span>
+                        <span class="stat-value">{{ horse.speed }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Витривалість:</span>
+                        <span class="stat-value">{{ horse.endurance }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Сила:</span>
+                        <span class="stat-value">{{ horse.strength }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Здоров'я:</span>
+                        <span class="stat-value health-stat">{{ horse.health }}</span>
+                    </div>
+                </div>
+            </div>
 
-<a href="{% url 'trade_page' %}">Назад до ринку</a>
+            <div class="horse-basic-info">
+                <h3>ℹ️ Основна інформація</h3>
+                <p><strong>Вік:</strong> {{ horse.age }} років</p>
+                <p><strong>Стать:</strong> {{ horse.get_gender_display }}</p>
+                <p><strong>Порода:</strong> {{ horse.breed }}</p>
+                <p><strong>Забарвлення:</strong> {{ horse.coat_color }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Дії з конем -->
+    <div class="horse-actions">
+        <h3>⚡ Дії з конем</h3>
+        <div class="action-buttons">
+            <button class="action-btn train-btn" onclick="trainHorse({{ horse.id }})">
+                🏋️ Тренувати
+            </button>
+            <button class="action-btn breed-btn" onclick="breedHorse({{ horse.id }})">
+                ❤️ Розмножувати
+            </button>
+            <button class="action-btn sell-btn" onclick="sellHorse({{ horse.id }})">
+                💰 Продати
+            </button>
+            <button class="action-btn care-btn" onclick="careHorse({{ horse.id }})">
+                💊 Доглядати
+            </button>
+        </div>
+    </div>
+
+    <!-- Кнопка назад -->
+    <div class="back-section">
+        <a href="{% url 'horses_page' %}" class="back-btn">← Назад до стайні</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function trainHorse(horseId) {
+    alert('Функція тренування коня ' + horseId + ' буде реалізована найближчим часом!');
+    // Тут буде AJAX запит для тренування
+}
+
+function breedHorse(horseId) {
+    alert('Функція розмноження для коня ' + horseId + ' буде реалізована найближчим часом!');
+    // Тут буде AJAX запит для розмноження
+}
+
+function sellHorse(horseId) {
+    if (confirm('Ви впевнені, що хочете продати цього коня?')) {
+        alert('Функція продажу коня ' + horseId + ' буде реалізована найближчим часом!');
+        // Тут буде AJAX запит для продажу
+    }
+}
+
+function careHorse(horseId) {
+    alert('Функція догляду за конем ' + horseId + ' буде реалізована найближчим часом!');
+    // Тут буде AJAX запит для догляду
+}
+</script>
 {% endblock %}
