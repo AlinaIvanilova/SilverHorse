@@ -3,26 +3,20 @@
 
 {% block content %}
 <div class="market-container">
-
     <h1 class="market-title">🏇 Ринок Коней</h1>
 
-    <!-- Баланс користувача -->
     <div class="user-balance">
         <p>💰 Ваш баланс: <strong>{{ request.user.profile.horseshoes }}</strong> Срібних Підков</p>
     </div>
 
-    <!-- Список коней -->
     <div class="horse-list">
         {% for horse in horses %}
         <div class="horse-card">
-            <!-- Фото -->
-            {% if horse.photo %}
-                <img src="{{ horse.photo.url }}" alt="{{ horse.name }}" class="horse-photo">
-            {% else %}
-                <img src="{% static 'img/default_horse.jpg' %}" alt="Без фото" class="horse-photo">
-            {% endif %}
+            <!-- Використовуємо автоматичне фото -->
+            <img src="{{ horse.get_photo_url }}"
+                 alt="{{ horse.get_photo_alt }}"
+                 class="horse-photo">
 
-            <!-- Інформація -->
             <div class="horse-info">
                 <h2>{{ horse.name }}</h2>
                 <p>Порода: {{ horse.breed }}</p>
@@ -32,11 +26,10 @@
                 <p>Швидкість: {{ horse.speed }}</p>
                 <p>Витривалість: {{ horse.endurance }}</p>
                 <p>Сила: {{ horse.strength }}</p>
-                <p>Здоров’я: {{ horse.health }}</p>
+                <p>Здоров'я: {{ horse.health }}</p>
                 <p class="price">💵 Ціна: <strong>{{ horse.price }}</strong> 🐴 Підков</p>
             </div>
 
-            <!-- Кнопка покупки -->
             <div class="buy-section">
                 {% if horse.status == 'market' %}
                     <form action="{% url 'buy_horse' horse.id %}" method="post">
@@ -52,6 +45,5 @@
             <p>Наразі на ринку немає коней 🐎</p>
         {% endfor %}
     </div>
-
 </div>
 {% endblock %}

@@ -3,9 +3,10 @@
 {% block content %}
 <h1>{{ horse.name }}</h1>
 
-{% if horse.photo %}
-    <img src="{{ horse.photo.url }}" alt="{{ horse.name }}" width="300">
-{% endif %}
+<!-- Використовуємо автоматичне фото -->
+<img src="{{ horse.get_photo_url }}"
+     alt="{{ horse.get_photo_alt }}"
+     width="300">
 
 <ul>
     <li>Порода: {{ horse.breed }}</li>

@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.staticfiles.storage import staticfiles_storage  # Додайте цей імпорт
+from .horse_images import get_horse_image
 
 # -------------------------
 # Повідомлення між користувачами
@@ -168,6 +170,34 @@ class Horse(models.Model):
             f"Статус: {self.get_status_display()}\n"
             f"Власник: {self.owner.username if self.owner else 'На ринку'}"
         )
+
+    # ЗАУВАЖТЕ: поле photo можна залишити, але воно буде використовуватись
+    # тільки для кастомних фото. Якщо photo не встановлено,
+    # буде використовуватись автоматичне фото
+
+    def get_photo_url(self):
+        """
+        Повертає URL фото коня.
+        Якщо є кастомне фото - використовує його,
+        інакше - генерує на основі породи та забарвлення
+        """
+        if self.photo:
+            return self.photo.url
+        else:
+            # Генеруємо фото на основі породи та забарвлення
+            image_path = get_horse_image(self.breed, self.coat_color)
+            try:
+                return staticfiles_storage.url(image_path)
+            except:
+                # Якщо щось пішло не так, повертаємо фото за замовчуванням
+                return staticfiles_storage.url('img/horses/default_horse.png')
+
+    def get_photo_alt(self):
+        """Генерує alt текст для фото"""
+        return f"{self.breed} {self.coat_color} - {self.name}"
+
+
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
