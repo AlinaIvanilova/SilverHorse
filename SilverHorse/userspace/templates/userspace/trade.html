@@ -13,9 +13,11 @@
         {% for horse in horses %}
         <div class="horse-card">
             <!-- Використовуємо автоматичне фото -->
-            <img src="{{ horse.get_photo_url }}"
-                 alt="{{ horse.get_photo_alt }}"
-                 class="horse-photo">
+            <div class="photo-container">
+                <img src="{{ horse.get_photo_url }}"
+                     alt="{{ horse.get_photo_alt }}"
+                     class="horse-photo">
+            </div>
 
             <div class="horse-info">
                 <h2>{{ horse.name }}</h2>

@@ -1,37 +1,52 @@
 {% extends 'userspace/base.html' %}
 {% load static %}
 
+
+<link rel="stylesheet" href="{% static 'userspace/horses.css' %}">
+}
+
 {% block content %}
-<h1>Сторінка Конярства</h1>
+<div class="market-container">
+    <h1 class="market-title">🐴 Моя стайня</h1>
 
-<!-- Тут можна додати будь-який основний контент сторінки -->
+    {% if user_horses %}
+        <div class="horse-list">
+            {% for horse in user_horses %}
+                <div class="horse-card">
+                    <!-- Використовуємо автоматичне фото -->
+                    <img src="{{ horse.get_photo_url }}"
+                         alt="{{ horse.get_photo_alt }}"
+                         class="horse-photo">
 
-<hr>
-<h2>🐴 Моя стайня</h2>
+                    <div class="horse-info">
+                        <h2>{{ horse.name }}</h2>
+                        <p>Порода: {{ horse.breed }}</p>
+                        <p>Вік: {{ horse.age }} р.</p>
+                        <p>Стать: {{ horse.get_gender_display }}</p>
+                        <p>Колір шерсті: {{ horse.coat_color }}</p>
+                        <p>Швидкість: {{ horse.speed }}</p>
+                        <p>Витривалість: {{ horse.endurance }}</p>
+                        <p>Сила: {{ horse.strength }}</p>
+                        <p>Здоров'я: {{ horse.health }}</p>
 
-{% if user_horses %}
-    <div class="user-horses">
-        {% for horse in user_horses %}
-            <div class="horse-card">
-                <!-- Використовуємо автоматичне фото -->
-                <img src="{{ horse.get_photo_url }}"
-                     alt="{{ horse.get_photo_alt }}"
-                     class="horse-photo">
+                        <!-- Додаємо інформацію про ціну (якщо потрібно) -->
+                        <p class="price">💎 У ваший власності</p>
+                    </div>
 
-                <h3>{{ horse.name }}</h3>
-                <p>Порода: {{ horse.breed }}</p>
-                <p>Вік: {{ horse.age }} р.</p>
-                <p>Стать: {{ horse.get_gender_display }}</p>
-                <p>Колір шерсті: {{ horse.coat_color }}</p>
-                <p>Швидкість: {{ horse.speed }}</p>
-                <p>Витривалість: {{ horse.endurance }}</p>
-                <p>Сила: {{ horse.strength }}</p>
-                <p>Здоров'я: {{ horse.health }}</p>
-            </div>
-        {% endfor %}
-    </div>
-{% else %}
-    <p>У вас поки немає коней 😢</p>
-{% endif %}
-
+                    <!-- Секція для майбутніх дій з конем -->
+                    <div class="action-section">
+                        <!-- Тут можна додати кнопки для тренування, продажу тощо -->
+                        <!-- <button class="action-btn">Тренувати</button> -->
+                        <!-- <button class="action-btn">Продати</button> -->
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-stable">
+            <p>У вас поки немає коней 😢</p>
+            <a href="{% url 'trade_page' %}" class="buy-btn">Перейти до ринку</a>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

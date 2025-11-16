@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="15.5 Now you can buy horses and see them on your page.">
-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/horse_images.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/img/horses/ahaltekin_fire_chestnut.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/img/horses/default_horse.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" afterDir="false" />
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="17 created so that the necessary photos for the horses could be substituted for the keys.">
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/horses.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/img/horses/default_horse.png" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/img/horses/default_horse.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/trade.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/trade.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/trade.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/trade.html" afterDir="false" />
     </list>
@@ -30,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="16-sql" />
+        <entry key="$PROJECT_DIR$" value="17-photo-for-horses" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,7 +60,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "17-photo-for-horses",
+    "git-widget-placeholder": "17-1-fix-photo-horses",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/img/horses",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -127,14 +125,6 @@
       <workItem from="1762693777823" duration="2510000" />
       <workItem from="1762763593366" duration="87000" />
       <workItem from="1762791514042" duration="6906000" />
-    </task>
-    <task id="LOCAL-00002" summary="install Django\startproject.">
-      <option name="closed" value="true" />
-      <created>1758469581395</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1758469581395</updated>
     </task>
     <task id="LOCAL-00003" summary="Add admin">
       <option name="closed" value="true" />
@@ -520,7 +510,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762695327114</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="17 created so that the necessary photos for the horses could be substituted for the keys.">
+      <option name="closed" value="true" />
+      <created>1763277997746</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1763277997746</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,7 +536,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="8.6 I've improved user blocking. Now messages simply don't arrive if the user is blocked." />
     <MESSAGE value="9 I've been working on system notifications for a while, like adding a greeting upon registration, but I'll finish it in future versions." />
     <MESSAGE value="9.1 added the ability for the administrator to write a system message to all users." />
     <MESSAGE value="10 updated the function to mark a message as read. And also played a little with the administrator panel. And fixed a bug that I found myself... Yes, I'm a genius." />
@@ -563,6 +560,7 @@
     <MESSAGE value="15.3 update horse model and add directory media" />
     <MESSAGE value="15.4 made sure each horse had its own personal page" />
     <MESSAGE value="15.5 Now you can buy horses and see them on your page." />
-    <option name="LAST_COMMIT_MESSAGE" value="15.5 Now you can buy horses and see them on your page." />
+    <MESSAGE value="17 created so that the necessary photos for the horses could be substituted for the keys." />
+    <option name="LAST_COMMIT_MESSAGE" value="17 created so that the necessary photos for the horses could be substituted for the keys." />
   </component>
 </project>

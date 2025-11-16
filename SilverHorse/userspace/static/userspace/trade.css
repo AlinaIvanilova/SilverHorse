@@ -52,8 +52,9 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  /* Set explicit height to prevent text expansion */
+  min-height: 600px; /* Мінімальна висота для консистентності */
 }
+
 
 .horse-card:hover {
   transform: translateY(-5px);
@@ -64,11 +65,13 @@
 /* Фото коня */
 .horse-photo {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: 250px; /* Збільшимо висоту для кращого відображення */
+  object-fit: contain; /* Змінюємо з cover на contain - це головна зміна! */
   display: block;
   flex-shrink: 0;
-  /* Prevent photo from shrinking */
+  background: rgba(255, 255, 255, 0.05); /* Додаємо легкий фон для контрасту */
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  padding: 5px; /* Додаємо невеликий відступ */
 }
 
 /* Інформація про коня */
@@ -78,8 +81,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  /* Prevent text overflow expanding container */
-  word-break: break-word;
+
 }
 
 .horse-info h2 {
@@ -104,6 +106,8 @@
   font-size: 1.1rem;
   color: #ffd700;
   font-weight: bold;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 /* Секція покупки */
