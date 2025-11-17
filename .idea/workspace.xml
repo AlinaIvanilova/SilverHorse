@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="17.2 made the horse's name and horse's photo active buttons. also made the horses have their own personal accounts">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="17.3 minimal design. I'm just tired">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/horse_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/horse_detail.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="17.2-add-personal-detail-for-horses" />
+        <entry key="$PROJECT_DIR$" value="17.3-update-personal-detail-for-horses" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -60,7 +58,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "17.3-update-personal-detail-for-horses",
+    "git-widget-placeholder": "17.4-make-arrows",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/img/horses",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -125,14 +123,8 @@
       <workItem from="1762693777823" duration="2510000" />
       <workItem from="1762763593366" duration="87000" />
       <workItem from="1762791514042" duration="6906000" />
-    </task>
-    <task id="LOCAL-00005" summary="2.1-do-Photo-main = I added background. Now I have there the beautiful photo in the back.">
-      <option name="closed" value="true" />
-      <created>1758978288945</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1758978288945</updated>
+      <workItem from="1763394611324" duration="782000" />
+      <workItem from="1763398444891" duration="747000" />
     </task>
     <task id="LOCAL-00006" summary="2.2. I added beautiful text on the main photo.">
       <option name="closed" value="true" />
@@ -518,7 +510,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763282349897</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="17.3 minimal design. I'm just tired">
+      <option name="closed" value="true" />
+      <created>1763291538465</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1763291538465</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,7 +536,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="10 updated the function to mark a message as read. And also played a little with the administrator panel. And fixed a bug that I found myself... Yes, I'm a genius." />
     <MESSAGE value="10.1 I finished the design in the messages." />
     <MESSAGE value="10.2 I finished the design in the sources(css and html)." />
     <MESSAGE value="11 split css file in userspace" />
@@ -561,6 +560,7 @@
     <MESSAGE value="17 created so that the necessary photos for the horses could be substituted for the keys." />
     <MESSAGE value="17.1 improved the design so that the photo is beautiful and doesn't look strange" />
     <MESSAGE value="17.2 made the horse's name and horse's photo active buttons. also made the horses have their own personal accounts" />
-    <option name="LAST_COMMIT_MESSAGE" value="17.2 made the horse's name and horse's photo active buttons. also made the horses have their own personal accounts" />
+    <MESSAGE value="17.3 minimal design. I'm just tired" />
+    <option name="LAST_COMMIT_MESSAGE" value="17.3 minimal design. I'm just tired" />
   </component>
 </project>

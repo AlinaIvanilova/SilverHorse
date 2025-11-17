@@ -255,9 +255,25 @@ def market_view(request):
 
 @login_required
 def horse_detail(request, horse_id):
-    horse = get_object_or_404(Horse, id=horse_id)
-    return render(request, 'userspace/horse_detail.html', {'horse': horse})
+    horse = get_object_or_404(Horse, id=horse_id, owner=request.user)
 
+    # Отримуємо ВСІХ коней користувача
+    user_horses = list(Horse.objects.filter(owner=request.user, status='user').order_by('id'))
+
+    # Знаходимо індекс поточного коня
+    current_index = user_horses.index(horse)
+
+    # Визначаємо попереднього коня
+    prev_horse = user_horses[current_index - 1] if current_index > 0 else None
+
+    # Визначаємо наступного коня
+    next_horse = user_horses[current_index + 1] if current_index < len(user_horses) - 1 else None
+
+    return render(request, 'userspace/horse_detail.html', {
+        'horse': horse,
+        'prev_horse': prev_horse,
+        'next_horse': next_horse,
+    })
 # -------------------------
 # Покупка коня
 # -------------------------

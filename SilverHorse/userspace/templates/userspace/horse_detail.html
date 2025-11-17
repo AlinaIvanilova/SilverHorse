@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+
 <div class="horse-header">
     <div class="subheader-container">
         <a href="{% url 'horses_page' %}" class="back-btn">← Назад до стайні</a>
@@ -9,6 +10,7 @@
 </div>
 
 <div class="horse-detail-photo-container">
+
     <!-- Фото коня -->
     <div class="horse-detail-photo">
         <img src="{{ horse.get_photo_url }}" alt="{{ horse.get_photo_alt }}" class="detail-photo">
@@ -16,18 +18,27 @@
 
     <!-- Ім’я коня + кнопки навігації -->
     <div class="horse-name-nav-container">
-        <a href="{{ prev_horse_url }}" class="nav-btn left-btn">←</a>
+
+        {% if prev_horse %}
+        <a href="{% url 'horse_detail' prev_horse.id %}" class="nav-btn left-btn">←</a>
+        {% endif %}
+
         <div class="horse-name-box">
             {{ horse.name }}
         </div>
-        <a href="{{ next_horse_url }}" class="nav-btn right-btn">→</a>
+
+        {% if next_horse %}
+        <a href="{% url 'horse_detail' next_horse.id %}" class="nav-btn right-btn">→</a>
+        {% endif %}
     </div>
 </div>
 
 <!-- Контейнер з характеристиками та основною інформацією -->
 <div class="horse-info-container">
+
     <div class="horse-stats">
         <h3>📊 Характеристики</h3>
+
         <div class="stats-grid">
             <div class="stat-item">
                 <span class="stat-label">Швидкість:</span>
@@ -56,17 +67,27 @@
         <p><strong>Забарвлення:</strong> {{ horse.coat_color }}</p>
     </div>
 </div>
+
 {% endblock %}
 
 {% block extra_js %}
 <script>
-function trainHorse(horseId) { alert('Функція тренування коня ' + horseId + ' буде реалізована найближчим часом!'); }
-function breedHorse(horseId) { alert('Функція розмноження для коня ' + horseId + ' буде реалізована найближчим часом!'); }
+function trainHorse(horseId) {
+    alert('Функція тренування коня ' + horseId + ' буде реалізована найближчим часом!');
+}
+
+function breedHorse(horseId) {
+    alert('Функція розмноження для коня ' + horseId + ' буде реалізована найближчим часом!');
+}
+
 function sellHorse(horseId) {
     if (confirm('Ви впевнені, що хочете продати цього коня?')) {
         alert('Функція продажу коня ' + horseId + ' буде реалізована найближчим часом!');
     }
 }
-function careHorse(horseId) { alert('Функція догляду за конем ' + horseId + ' буде реалізована найближчим часом!'); }
+
+function careHorse(horseId) {
+    alert('Функція догляду за конем ' + horseId + ' буде реалізована найближчим часом!');
+}
 </script>
 {% endblock %}
