@@ -2,6 +2,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Message, Note, BlockedUser
+from .models import EquestrianComplex
+
 
 class MessageForm(forms.ModelForm):
     receiver_username = forms.CharField(
@@ -54,3 +56,15 @@ class BlockUserForm(forms.Form):
         except User.DoesNotExist:
             raise forms.ValidationError("Користувача з таким іменем не знайдено.")
         return user
+
+
+
+
+class EquestrianComplexForm(forms.ModelForm):
+    class Meta:
+        model = EquestrianComplex
+        fields = ['location', 'prestige']
+        widgets = {
+            'location': forms.Select(attrs={'class': 'form-select'}),
+            'prestige': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
+        }

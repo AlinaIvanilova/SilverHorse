@@ -10,6 +10,9 @@ from .models import Notification
 from .models import Horse
 from django.shortcuts import render, get_object_or_404
 from .models import Profile
+from .models import EquestrianComplex
+from .forms import EquestrianComplexForm
+
 
 
 # -------------------------
@@ -303,3 +306,20 @@ def buy_horse(request, horse_id):
 
     messages.success(request, f"Вітаємо! Ви купили коня {horse.name} 🐎")
     return redirect('horses_page')
+
+
+
+
+@login_required
+def manage_complex(request):
+    complex_obj, created = EquestrianComplex.objects.get_or_create(owner=request.user)
+
+    if request.method == 'POST':
+        form = EquestrianComplexForm(request.POST, instance=complex_obj)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_complex')
+    else:
+        form = EquestrianComplexForm(instance=complex_obj)
+
+    return render(request, 'userspace/manage_complex.html', {'form': form, 'complex': complex_obj})

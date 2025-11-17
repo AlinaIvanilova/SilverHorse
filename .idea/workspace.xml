@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="17.3 minimal design. I'm just tired">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="17.4 I make arrows to switch between horses.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/equestrian.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/equestrian.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="17.3-update-personal-detail-for-horses" />
+        <entry key="$PROJECT_DIR$" value="17.4-make-arrows" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -58,7 +60,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "17.4-make-arrows",
+    "git-widget-placeholder": "18-Equestrian-Complex-start-working",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/img/horses",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -124,15 +126,7 @@
       <workItem from="1762763593366" duration="87000" />
       <workItem from="1762791514042" duration="6906000" />
       <workItem from="1763394611324" duration="782000" />
-      <workItem from="1763398444891" duration="747000" />
-    </task>
-    <task id="LOCAL-00006" summary="2.2. I added beautiful text on the main photo.">
-      <option name="closed" value="true" />
-      <created>1759078521594</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1759078521594</updated>
+      <workItem from="1763398444891" duration="1357000" />
     </task>
     <task id="LOCAL-00007" summary="2.3 I updated text to saw beautiful animated. I did: updated only style.css">
       <option name="closed" value="true" />
@@ -518,7 +512,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763291538465</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="17.4 I make arrows to switch between horses.">
+      <option name="closed" value="true" />
+      <created>1763399216005</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1763399216006</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="10.1 I finished the design in the messages." />
     <MESSAGE value="10.2 I finished the design in the sources(css and html)." />
     <MESSAGE value="11 split css file in userspace" />
     <MESSAGE value="12 divided the base.html file into header and sub-header" />
@@ -561,6 +562,7 @@
     <MESSAGE value="17.1 improved the design so that the photo is beautiful and doesn't look strange" />
     <MESSAGE value="17.2 made the horse's name and horse's photo active buttons. also made the horses have their own personal accounts" />
     <MESSAGE value="17.3 minimal design. I'm just tired" />
-    <option name="LAST_COMMIT_MESSAGE" value="17.3 minimal design. I'm just tired" />
+    <MESSAGE value="17.4 I make arrows to switch between horses." />
+    <option name="LAST_COMMIT_MESSAGE" value="17.4 I make arrows to switch between horses." />
   </component>
 </project>

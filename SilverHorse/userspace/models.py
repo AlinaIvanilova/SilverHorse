@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from django.contrib.staticfiles.storage import staticfiles_storage  # Додайте цей імпорт
 from .horse_images import get_horse_image
 
+
 # -------------------------
 # Повідомлення між користувачами
 # -------------------------
@@ -210,3 +211,19 @@ def currency_context(request):
         # Підстрахуємося на випадок, якщо профіль не створений
         profile, created = Profile.objects.get_or_create(user=request.user)
     return {'profile': profile}
+
+
+
+
+class EquestrianComplex(models.Model):
+    LOCATION_CHOICES = [
+        ('forest', 'Ліс'),
+        ('mountains', 'Гори'),
+    ]
+
+    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    location = models.CharField(max_length=20, choices=LOCATION_CHOICES, default='forest')
+    prestige = models.IntegerField(default=0)  # рівень престижу від 0 і далі
+
+    def __str__(self):
+        return f"{self.owner.username} - {self.get_location_display()}"
