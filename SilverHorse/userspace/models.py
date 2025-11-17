@@ -222,8 +222,18 @@ class EquestrianComplex(models.Model):
     ]
 
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, default="Мій комплекс")  # нове поле — назва комплексу
     location = models.CharField(max_length=20, choices=LOCATION_CHOICES, default='forest')
-    prestige = models.IntegerField(default=0)  # рівень престижу від 0 і далі
+    prestige = models.IntegerField(default=0)  # показуємо, але не редагуємо користувачем
 
     def __str__(self):
-        return f"{self.owner.username} - {self.get_location_display()}"
+        return f"{self.name} ({self.owner.username})"
+
+
+class ComplexRating(models.Model):
+    complex = models.ForeignKey(EquestrianComplex, on_delete=models.CASCADE, related_name='ratings')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.IntegerField(default=0)  # від 1 до 5
+
+    class Meta:
+        unique_together = ('complex', 'user')  # один користувач — одна оцінка

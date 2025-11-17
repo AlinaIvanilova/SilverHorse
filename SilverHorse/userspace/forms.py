@@ -2,8 +2,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Message, Note, BlockedUser
-from .models import EquestrianComplex
-
+from .models import EquestrianComplex, ComplexRating
 
 class MessageForm(forms.ModelForm):
     receiver_username = forms.CharField(
@@ -60,11 +59,22 @@ class BlockUserForm(forms.Form):
 
 
 
+
+# Форма для редагування комплексу користувачем
 class EquestrianComplexForm(forms.ModelForm):
     class Meta:
         model = EquestrianComplex
-        fields = ['location', 'prestige']
+        fields = ['name', 'location']  # користувач змінює тільки назву та локацію
         widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
             'location': forms.Select(attrs={'class': 'form-select'}),
-            'prestige': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
+        }
+
+# Форма для оцінки комплексу (1-5 зірок)
+class RatingForm(forms.ModelForm):
+    class Meta:
+        model = ComplexRating
+        fields = ['rating']
+        widgets = {
+            'rating': forms.NumberInput(attrs={'class': 'form-control', 'min': 1, 'max': 5}),
         }

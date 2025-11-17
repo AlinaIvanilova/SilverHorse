@@ -5,24 +5,42 @@
 {% block content %}
 <h1>Сторінка Кінноспортивного комплексу</h1>
 
-{% comment %} Інформація про комплекс {% endcomment %}
-<div class="complex-info" style="border:1px solid #ccc; padding:15px; width:400px; margin-bottom:20px;">
-    <p><strong>Власник:</strong> {{ complex.owner.username }}</p>
-    <p><strong>Розташування:</strong> {{ complex.get_location_display }}</p>
-    <p><strong>Престиж:</strong> {{ complex.prestige }}</p>
-</div>
+{% if has_complex %}
+    <div class="complex-info" style="border:1px solid #ccc; padding:15px; width:400px; margin-bottom:20px;">
+        <p><strong>Назва комплексу:</strong> {{ complex_obj.name }}</p>
+        <p><strong>Власник:</strong> {{ complex_obj.owner.username }}</p>
+        <p><strong>Розташування:</strong> {{ complex_obj.get_location_display }}</p>
+        <p><strong>Престиж:</strong> {{ complex_obj.prestige }}</p>
+        {% if average_rating %}
+            <p><strong>Середня оцінка:</strong> {{ average_rating }} ⭐</p>
+        {% else %}
+            <p>Поки що немає оцінок</p>
+        {% endif %}
+    </div>
 
-{% comment %} Форма редагування {% endcomment %}
-<h2>Управління комплексом</h2>
-<form method="post" style="border:1px solid #ccc; padding:15px; width:400px;">
-    {% csrf_token %}
-    <label for="id_location"><strong>Розташування:</strong></label><br>
-    {{ form.location }}<br><br>
+    <h2>Управління комплексом</h2>
+    <form method="post" style="border:1px solid #ccc; padding:15px; width:400px;">
+        {% csrf_token %}
+        {{ complex_form.as_p }}
+        <button type="submit" name="create_complex" class="btn btn-primary">Зберегти зміни</button>
+    </form>
 
-    <label for="id_prestige"><strong>Престиж:</strong></label><br>
-    {{ form.prestige }}<br><br>
+    {% if complex_obj.owner != user %}
+        <h2>Оцінити комплекс</h2>
+        <form method="post" style="border:1px solid #ccc; padding:15px; width:400px;">
+            {% csrf_token %}
+            {{ rating_form.rating.label_tag }}<br>
+            {{ rating_form.rating }}<br><br>
+            <button type="submit" name="rating_submit" class="btn btn-warning">Встановити оцінку</button>
+        </form>
+    {% endif %}
 
-    <button type="submit" class="btn btn-primary">Зберегти зміни</button>
-</form>
+{% else %}
+    <p>У вас поки немає власного комплексу.</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="create_complex" class="btn btn-success">Створити комплекс</button>
+    </form>
+{% endif %}
 
 {% endblock %}

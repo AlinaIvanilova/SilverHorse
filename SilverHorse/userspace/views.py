@@ -1,17 +1,22 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.urls import reverse
-from .models import Message, Note, BlockedUser, SystemMessage
-from .forms import MessageForm, NoteForm, BlockUserForm
-from .models import Notification
-from .models import Horse
-from django.shortcuts import render, get_object_or_404
-from .models import Profile
-from .models import EquestrianComplex
-from .forms import EquestrianComplexForm
+from django.db import models  # <- для aggregate (Avg, Sum тощо)
+
+# Імпорти моделей
+from .models import (
+    Message, Note, BlockedUser, SystemMessage, Notification, Horse,
+    Profile, EquestrianComplex, ComplexRating
+)
+
+# Імпорти форм
+from .forms import (
+    MessageForm, NoteForm, BlockUserForm,
+    EquestrianComplexForm, RatingForm
+)
 
 
 
@@ -322,4 +327,69 @@ def manage_complex(request):
     else:
         form = EquestrianComplexForm(instance=complex_obj)
 
-    return render(request, 'userspace/manage_complex.html', {'form': form, 'complex': complex_obj})
+    return render(request, 'userspace/equestrian.html', {'form': form, 'complex': complex_obj})
+
+
+
+
+
+@login_required
+def equestrian_page(request):
+    user = request.user
+
+    # Отримуємо комплекс користувача
+    try:
+        complex_obj = EquestrianComplex.objects.get(owner=user)
+        has_complex = True
+    except EquestrianComplex.DoesNotExist:
+        complex_obj = None
+        has_complex = False
+
+    # Форми завжди створюємо
+    complex_form = EquestrianComplexForm(instance=complex_obj)
+    rating_form = RatingForm()
+
+    if request.method == 'POST':
+        if 'create_complex' in request.POST:
+            # Створення / редагування комплексу
+            complex_form = EquestrianComplexForm(request.POST, instance=complex_obj)
+            if complex_form.is_valid():
+                complex_obj = complex_form.save(commit=False)
+                complex_obj.owner = user
+                complex_obj.save()
+                messages.success(request, "Комплекс створено / оновлено!")
+                return redirect('equestrian_page')
+
+        elif 'rating_submit' in request.POST and complex_obj:
+            # Форма рейтингу
+            rating_form = RatingForm(request.POST)
+            if rating_form.is_valid():
+                rating_value = rating_form.cleaned_data['rating']
+                # Власник не може оцінювати свій комплекс
+                if complex_obj.owner != user:
+                    ComplexRating.objects.update_or_create(
+                        complex=complex_obj,
+                        user=user,
+                        defaults={'rating': rating_value}
+                    )
+                    messages.success(request, "Ваша оцінка збережена!")
+                else:
+                    messages.error(request, "Власник не може оцінювати свій комплекс.")
+                return redirect('equestrian_page')
+
+    # Середній рейтинг комплексу
+    average_rating = None
+    if has_complex and complex_obj.ratings.exists():
+        average_rating = round(
+            complex_obj.ratings.aggregate(models.Avg('rating'))['rating__avg'], 2
+        )
+
+    context = {
+        'complex_obj': complex_obj,
+        'has_complex': has_complex,
+        'complex_form': complex_form,
+        'rating_form': rating_form,
+        'average_rating': average_rating,
+    }
+    return render(request, 'userspace/equestrian.html', context)
+
