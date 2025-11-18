@@ -2,45 +2,107 @@
 
 <!--Сторінка Кінноспортивного комплексу -->
 {% extends 'userspace/base.html' %}
+
 {% block content %}
 <h1>Сторінка Кінноспортивного комплексу</h1>
 
+<!-- Власний комплекс -->
 {% if has_complex %}
-    <div class="complex-info" style="border:1px solid #ccc; padding:15px; width:400px; margin-bottom:20px;">
-        <p><strong>Назва комплексу:</strong> {{ complex_obj.name }}</p>
-        <p><strong>Власник:</strong> {{ complex_obj.owner.username }}</p>
-        <p><strong>Розташування:</strong> {{ complex_obj.get_location_display }}</p>
-        <p><strong>Престиж:</strong> {{ complex_obj.prestige }}</p>
-        {% if average_rating %}
-            <p><strong>Середня оцінка:</strong> {{ average_rating }} ⭐</p>
-        {% else %}
-            <p>Поки що немає оцінок</p>
-        {% endif %}
-    </div>
-
-    <h2>Управління комплексом</h2>
-    <form method="post" style="border:1px solid #ccc; padding:15px; width:400px;">
-        {% csrf_token %}
-        {{ complex_form.as_p }}
-        <button type="submit" name="create_complex" class="btn btn-primary">Зберегти зміни</button>
-    </form>
-
-    {% if complex_obj.owner != user %}
-        <h2>Оцінити комплекс</h2>
-        <form method="post" style="border:1px solid #ccc; padding:15px; width:400px;">
-            {% csrf_token %}
-            {{ rating_form.rating.label_tag }}<br>
-            {{ rating_form.rating }}<br><br>
-            <button type="submit" name="rating_submit" class="btn btn-warning">Встановити оцінку</button>
-        </form>
+<div class="complex-info" style="border:1px solid #ccc; padding:15px; width:400px; margin-bottom:20px;">
+    <p><strong>Назва комплексу:</strong> {{ complex_obj.name }}</p>
+    <p><strong>Власник:</strong> {{ complex_obj.owner.username }}</p>
+    <p><strong>Розташування:</strong> {{ complex_obj.get_location_display }}</p>
+    <p><strong>Престиж:</strong> {{ complex_obj.prestige }}</p>
+    {% if average_rating %}
+        <p><strong>Середня оцінка:</strong> {{ average_rating }} ⭐</p>
+    {% else %}
+        <p>Поки що немає оцінок</p>
     {% endif %}
+</div>
 
+<h2>Управління власним комплексом</h2>
+<form method="post" style="border:1px solid #ccc; padding:15px; width:400px;">
+    {% csrf_token %}
+    {{ complex_form.as_p }}
+    <button type="submit" name="create_complex" class="btn btn-primary">Зберегти зміни</button>
+</form>
 {% else %}
-    <p>У вас поки немає власного комплексу.</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" name="create_complex" class="btn btn-success">Створити комплекс</button>
-    </form>
+<p>У вас поки немає власного комплексу.</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="create_complex" class="btn btn-success">Створити комплекс</button>
+</form>
+{% endif %}
+
+<hr>
+
+<!-- Пошук комплексів -->
+<h2>Пошук комплексів</h2>
+<form method="get" style="margin-bottom:15px; width:400px;">
+    <input type="text" name="search" placeholder="Пошук комплексу" value="{{ search_query }}" style="width:70%;">
+    <button type="submit" class="btn btn-info">Пошук</button>
+</form>
+
+{% if other_complexes %}
+    {% for c in other_complexes %}
+        <div class="complex-info" style="border:1px solid #ccc; padding:15px; width:400px; margin-bottom:20px;">
+            <p><strong>Назва комплексу:</strong> {{ c.name }}</p>
+            <p><strong>Власник:</strong> {{ c.owner.username }}</p>
+            <p><strong>Розташування:</strong> {{ c.get_location_display }}</p>
+            <p><strong>Престиж:</strong> {{ c.prestige }}</p>
+            {% if c.avg_rating %}
+                <p><strong>Середня оцінка:</strong> {{ c.avg_rating }} ⭐</p>
+            {% else %}
+                <p>Поки що немає оцінок</p>
+            {% endif %}
+
+            {% if c.owner != user %}
+            <h3>Оцінити комплекс</h3>
+            <form method="post" style="margin-top:10px;">
+                {% csrf_token %}
+                {{ rating_form.rating.label_tag }}<br>
+                {{ rating_form.rating }}
+                <input type="hidden" name="complex_id" value="{{ c.id }}"><br><br>
+                <button type="submit" name="rating_submit" class="btn btn-warning">Встановити оцінку</button>
+            </form>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Комплексів не знайдено за пошуковим запитом.</p>
+{% endif %}
+
+<hr>
+
+<!-- Список усіх комплексів -->
+<h2>Всі комплекси</h2>
+{% if all_complexes %}
+    {% for c in all_complexes %}
+        <div class="complex-info" style="border:1px solid #ccc; padding:15px; width:400px; margin-bottom:20px;">
+            <p><strong>Назва комплексу:</strong> {{ c.name }}</p>
+            <p><strong>Власник:</strong> {{ c.owner.username }}</p>
+            <p><strong>Розташування:</strong> {{ c.get_location_display }}</p>
+            <p><strong>Престиж:</strong> {{ c.prestige }}</p>
+            {% if c.avg_rating %}
+                <p><strong>Середня оцінка:</strong> {{ c.avg_rating }} ⭐</p>
+            {% else %}
+                <p>Поки що немає оцінок</p>
+            {% endif %}
+
+            {% if c.owner != user %}
+            <h3>Оцінити комплекс</h3>
+            <form method="post" style="margin-top:10px;">
+                {% csrf_token %}
+                {{ rating_form.rating.label_tag }}<br>
+                {{ rating_form.rating }}
+                <input type="hidden" name="complex_id" value="{{ c.id }}"><br><br>
+                <button type="submit" name="rating_submit" class="btn btn-warning">Встановити оцінку</button>
+            </form>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Комплексів поки що немає.</p>
 {% endif %}
 
 {% endblock %}

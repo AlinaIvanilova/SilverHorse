@@ -13,7 +13,7 @@ urlpatterns = [
     # ⚡ Позначити системне повідомлення як прочитане
     path(
         'system_message/<int:message_id>/read/',
-        views.mark_message_read,  # ім’я тепер збігається з функцією у views.py
+        views.mark_message_read,
         name='mark_message_read'
     ),
 
@@ -23,12 +23,12 @@ urlpatterns = [
     path('language/', views.language_page, name='language_page'),
 
     path('horses/', views.horses_page, name='horses_page'),
-    path('equestrian/', views.equestrian_page, name='equestrian_page'),
+    path('equestrian/', views.equestrian_page, name='equestrian_page'),  # тут все відображається
     path('trade/', views.market_view, name='trade_page'),
 
     path('horse/<int:horse_id>/', views.horse_detail, name='horse_detail'),
-
     path('buy/<int:horse_id>/', views.buy_horse, name='buy_horse'),
-
-
 ]
+
+
+
