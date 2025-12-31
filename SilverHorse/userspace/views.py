@@ -333,10 +333,10 @@ def manage_complex(request):
 
 
 
-
 @login_required
 def equestrian_page(request):
     user = request.user
+    search_query = request.GET.get('search', '')
 
     # Отримати власний комплекс або None
     complex_obj = EquestrianComplex.objects.filter(owner=user).first()
@@ -345,28 +345,27 @@ def equestrian_page(request):
     # Форми
     complex_form = EquestrianComplexForm(instance=complex_obj)
     rating_form = RatingForm()
-    search_query = request.GET.get('search', '')
 
-    # Усі інші комплекси (без власного)
-    other_complexes = EquestrianComplex.objects.exclude(owner=user)
+    # Отримати ВСІ комплекси для відображення в останньому розділі
+    all_complexes = EquestrianComplex.objects.all()
 
-    # Пошук по назві комплексу або власнику
+    # Пошук по всіх комплексах (не тільки інших)
     if search_query:
-        other_complexes = other_complexes.filter(
+        all_complexes = all_complexes.filter(
             Q(name__icontains=search_query) |
             Q(owner__username__icontains=search_query)
         )
 
     # POST обробка
     if request.method == 'POST':
-        # 🎯 СТВОРЕННЯ КОМПЛЕКСУ - головне виправлення!
+        # 🎯 СТВОРЕННЯ КОМПЛЕКСУ
         if 'create_complex' in request.POST and not has_complex:
             try:
                 # Створюємо комплекс з default значеннями
                 EquestrianComplex.objects.create(
                     owner=user,
                     name=f"Комплекс {user.username}",
-                    location='forest',  # default location
+                    location='forest',
                     prestige=0
                 )
                 messages.success(request, "Комплекс успішно створено!")
@@ -376,7 +375,7 @@ def equestrian_page(request):
                 return redirect('equestrian_page')
 
         # 📝 РЕДАГУВАННЯ існуючого комплексу
-        elif 'update_complex' in request.POST and has_complex:
+        elif 'create_complex' in request.POST and has_complex:
             complex_form = EquestrianComplexForm(request.POST, instance=complex_obj)
             if complex_form.is_valid():
                 complex_form.save()
@@ -407,9 +406,15 @@ def equestrian_page(request):
     if has_complex and complex_obj.ratings.exists():
         average_rating = round(complex_obj.ratings.aggregate(Avg('rating'))['rating__avg'], 2)
 
-    # Середній рейтинг для інших комплексів
-    for c in other_complexes:
-        c.avg_rating = round(c.ratings.aggregate(Avg('rating'))['rating__avg'] or 0, 2)
+    # Обчислити середній рейтинг для всіх комплексів
+    for c in all_complexes:
+        if c.ratings.exists():
+            c.avg_rating = round(c.ratings.aggregate(Avg('rating'))['rating__avg'], 2)
+        else:
+            c.avg_rating = None
+
+    # Отримати інші комплекси для пошукового розділу
+    other_complexes = all_complexes.exclude(owner=user) if search_query else []
 
     context = {
         'complex_obj': complex_obj,
@@ -417,7 +422,8 @@ def equestrian_page(request):
         'complex_form': complex_form,
         'rating_form': rating_form,
         'average_rating': average_rating,
-        'other_complexes': other_complexes,
+        'all_complexes': all_complexes,  # Всі комплекси для останнього розділу
+        'other_complexes': other_complexes,  # Результати пошуку
         'search_query': search_query,
         'user': user,
     }

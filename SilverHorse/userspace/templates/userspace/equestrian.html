@@ -1,6 +1,4 @@
 <!-- equestrian.html -->
-
-<!--Сторінка Кінноспортивного комплексу -->
 {% extends 'userspace/base.html' %}
 
 {% block content %}
@@ -39,46 +37,56 @@
 <!-- Пошук комплексів -->
 <h2>Пошук комплексів</h2>
 <form method="get" style="margin-bottom:15px; width:400px;">
-    <input type="text" name="search" placeholder="Пошук комплексу" value="{{ search_query }}" style="width:70%;">
+    <input type="text" name="search" placeholder="Введіть назву або власника" value="{{ search_query }}" style="width:70%;">
     <button type="submit" class="btn btn-info">Пошук</button>
+    {% if search_query %}
+        <a href="{% url 'equestrian_page' %}" class="btn btn-secondary">Скинути пошук</a>
+    {% endif %}
 </form>
 
-{% if other_complexes %}
-    {% for c in other_complexes %}
-        <div class="complex-info" style="border:1px solid #ccc; padding:15px; width:400px; margin-bottom:20px;">
-            <p><strong>Назва комплексу:</strong> {{ c.name }}</p>
-            <p><strong>Власник:</strong> {{ c.owner.username }}</p>
-            <p><strong>Розташування:</strong> {{ c.get_location_display }}</p>
-            <p><strong>Престиж:</strong> {{ c.prestige }}</p>
-            {% if c.avg_rating %}
-                <p><strong>Середня оцінка:</strong> {{ c.avg_rating }} ⭐</p>
-            {% else %}
-                <p>Поки що немає оцінок</p>
-            {% endif %}
+{% if search_query %}
+    <h3>Результати пошуку "{{ search_query }}":</h3>
+    {% if other_complexes %}
+        {% for c in other_complexes %}
+            <div class="complex-info" style="border:1px solid #ccc; padding:15px; width:400px; margin-bottom:20px;">
+                <p><strong>Назва комплексу:</strong> {{ c.name }}</p>
+                <p><strong>Власник:</strong> {{ c.owner.username }}</p>
+                <p><strong>Розташування:</strong> {{ c.get_location_display }}</p>
+                <p><strong>Престиж:</strong> {{ c.prestige }}</p>
+                {% if c.avg_rating %}
+                    <p><strong>Середня оцінка:</strong> {{ c.avg_rating }} ⭐</p>
+                {% else %}
+                    <p>Поки що немає оцінок</p>
+                {% endif %}
 
-            {% if c.owner != user %}
-            <h3>Оцінити комплекс</h3>
-            <form method="post" style="margin-top:10px;">
-                {% csrf_token %}
-                {{ rating_form.rating.label_tag }}<br>
-                {{ rating_form.rating }}
-                <input type="hidden" name="complex_id" value="{{ c.id }}"><br><br>
-                <button type="submit" name="rating_submit" class="btn btn-warning">Встановити оцінку</button>
-            </form>
-            {% endif %}
-        </div>
-    {% endfor %}
-{% else %}
-    <p>Комплексів не знайдено за пошуковим запитом.</p>
+                {% if c.owner != user %}
+                <h4>Оцінити комплекс</h4>
+                <form method="post" style="margin-top:10px;">
+                    {% csrf_token %}
+                    {{ rating_form.rating.label_tag }}<br>
+                    {{ rating_form.rating }}
+                    <input type="hidden" name="complex_id" value="{{ c.id }}"><br><br>
+                    <button type="submit" name="rating_submit" class="btn btn-warning">Встановити оцінку</button>
+                </form>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>За вашим запитом не знайдено жодного комплексу.</p>
+    {% endif %}
+    <hr>
 {% endif %}
 
-<hr>
-
 <!-- Список усіх комплексів -->
-<h2>Всі комплекси</h2>
+<h2>Всі існуючі комплекси ({{ all_complexes.count }})</h2>
 {% if all_complexes %}
     {% for c in all_complexes %}
         <div class="complex-info" style="border:1px solid #ccc; padding:15px; width:400px; margin-bottom:20px;">
+            {% if c.owner == user %}
+                <div style="background-color:#e8f5e8; padding:5px; margin-bottom:10px;">
+                    <strong>👑 Ваш комплекс</strong>
+                </div>
+            {% endif %}
             <p><strong>Назва комплексу:</strong> {{ c.name }}</p>
             <p><strong>Власник:</strong> {{ c.owner.username }}</p>
             <p><strong>Розташування:</strong> {{ c.get_location_display }}</p>
@@ -90,7 +98,7 @@
             {% endif %}
 
             {% if c.owner != user %}
-            <h3>Оцінити комплекс</h3>
+            <h4>Оцінити комплекс</h4>
             <form method="post" style="margin-top:10px;">
                 {% csrf_token %}
                 {{ rating_form.rating.label_tag }}<br>
@@ -102,7 +110,7 @@
         </div>
     {% endfor %}
 {% else %}
-    <p>Комплексів поки що немає.</p>
+    <p>Комплексів поки що немає. Будьте першим!</p>
 {% endif %}
 
 {% endblock %}
