@@ -1,0 +1,488 @@
+/* =========================
+   🏇 Кінноспортивні комплекси
+========================= */
+
+.equestrian-container {
+    max-width: 1200px;
+    margin: 28px auto 50px;
+    padding: 20px;
+    color: #fff;
+}
+
+/* Заголовки */
+.equestrian-container h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+    padding-bottom: 15px;
+}
+
+.equestrian-container h2 {
+    font-size: 1.8rem;
+    margin: 30px 0 20px;
+    color: #ffd700;
+    border-left: 4px solid #ffd700;
+    padding-left: 15px;
+}
+
+/* =========================
+   👑 Секція власного комплексу
+========================= */
+
+.my-complex {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 40px;
+    border: 2px solid rgba(255, 215, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.1);
+}
+
+/* Повідомлення про відсутність комплексу */
+.empty-complex {
+    text-align: center;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    border: 2px dashed rgba(255, 215, 0, 0.3);
+    margin: 30px 0;
+}
+
+.empty-complex p {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    color: #ffd700;
+}
+
+/* =========================
+   🔍 Пошукова секція
+========================= */
+
+.search-section {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px 0;
+}
+
+.search-form {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.search-form input[type="text"] {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 18px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-form input[type="text"]:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+.search-form input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* =========================
+   🃏 Картка комплексу
+========================= */
+
+.complex-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    margin: 20px 0 40px;
+}
+
+.complex-card {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+}
+
+.complex-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 215, 0, 0.7);
+}
+
+/* Бейдж власника */
+.owner-badge {
+    position: absolute;
+    top: -12px;
+    right: 15px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #000;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+/* Текст в картці */
+.complex-card p {
+    margin: 8px 0;
+    color: #fff;
+    line-height: 1.5;
+}
+
+.complex-card strong {
+    color: #ffd700;
+    margin-right: 5px;
+}
+
+/* Рейтинг */
+.rating {
+    color: #ffd700 !important;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 15px !important;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.no-rating {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-style: italic;
+    margin-top: 15px !important;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* =========================
+   📝 Форми
+========================= */
+
+.complex-form {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 25px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.complex-form p {
+    margin-bottom: 20px;
+}
+
+.complex-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.complex-form input,
+.complex-form select,
+.complex-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.complex-form input:focus,
+.complex-form select:focus,
+.complex-form textarea:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+/* Форма оцінки */
+.rating-form {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.rating-form select {
+    flex: 1;
+    min-width: 120px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 6px;
+    color: #fff;
+}
+
+/* =========================
+   🎯 Кнопки
+========================= */
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #000;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #ffed4e, #ffd700);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #45a049, #4CAF50);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #2196F3, #0b7dda);
+    color: white;
+}
+
+.btn-info:hover {
+    background: linear-gradient(135deg, #0b7dda, #2196F3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #6c757d, #5a6268);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #5a6268, #6c757d);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #ff9800, #e68a00);
+    color: white;
+}
+
+.btn-warning:hover {
+    background: linear-gradient(135deg, #e68a00, #ff9800);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+}
+
+/* =========================
+   📊 Результати пошуку та пусті стани
+========================= */
+
+.empty-text {
+    text-align: center;
+    padding: 40px;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border: 2px dashed rgba(255, 215, 0, 0.2);
+}
+
+/* Лічильник комплексів */
+.equestrian-container section h2:contains("(") {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.equestrian-container section h2:contains("(")::after {
+    content: attr(data-count);
+    font-size: 1rem;
+    background: rgba(255, 215, 0, 0.2);
+    padding: 5px 12px;
+    border-radius: 20px;
+    color: #ffd700;
+}
+
+/* =========================
+   📱 Адаптивність
+========================= */
+
+@media screen and (max-width: 768px) {
+    .equestrian-container {
+        margin-top: 80px;
+        padding: 15px;
+    }
+
+    .equestrian-container h1 {
+        font-size: 2rem;
+    }
+
+    .equestrian-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .complex-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .search-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-form input[type="text"] {
+        min-width: 100%;
+    }
+
+    .rating-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .rating-form select {
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .my-complex,
+    .search-section,
+    .complex-card {
+        padding: 15px;
+    }
+
+    .owner-badge {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-bottom: 15px;
+        align-self: flex-start;
+    }
+}
+
+/* =========================
+   ✨ Анімації
+========================= */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.equestrian-container {
+    animation: fadeInUp 0.5s ease;
+}
+
+.complex-card {
+    animation: fadeInUp 0.4s ease;
+}
+
+/* Ефект завантаження для сітки */
+.complex-grid > * {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+}
+
+.complex-grid > *:nth-child(1) { animation-delay: 0.1s; }
+.complex-grid > *:nth-child(2) { animation-delay: 0.2s; }
+.complex-grid > *:nth-child(3) { animation-delay: 0.3s; }
+.complex-grid > *:nth-child(4) { animation-delay: 0.4s; }
+.complex-grid > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* =========================
+   🎨 Додаткові декоративні елементи
+========================= */
+
+.complex-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #ffd700, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.complex-card:hover::before {
+    opacity: 1;
+}
+
+/* Підсвітка власного комплексу */
+.my-complex .complex-card {
+    border-color: rgba(255, 215, 0, 0.7);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+/* Стилі для форми пошуку при фокусі */
+.search-form:focus-within {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+    border-radius: 12px;
+}
+
+/* Стилі для вибраного option в select */
+.complex-form select option {
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 10px;
+}
+
+/* Ховер для всіх посилань у картках (якщо з'являться) */
+.complex-card a {
+    color: #ffd700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.complex-card a:hover {
+    color: #ffed4e;
+    text-decoration: underline;
+}

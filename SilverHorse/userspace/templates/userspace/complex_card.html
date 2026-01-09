@@ -1,0 +1,28 @@
+<div class="complex-card">
+
+    {% if c.owner == user %}
+        <div class="owner-badge">👑 Ваш комплекс</div>
+    {% endif %}
+
+    <p><strong>Назва:</strong> {{ c.name }}</p>
+    <p><strong>Власник:</strong> {{ c.owner.username }}</p>
+    <p><strong>Розташування:</strong> {{ c.get_location_display }}</p>
+    <p><strong>Престиж:</strong> {{ c.prestige }}</p>
+
+    {% if c.avg_rating %}
+        <p class="rating">⭐ {{ c.avg_rating }}</p>
+    {% else %}
+        <p class="no-rating">Поки що немає оцінок</p>
+    {% endif %}
+
+    {% if c.owner != user %}
+        <form method="post" class="rating-form">
+            {% csrf_token %}
+            {{ rating_form.rating }}
+            <input type="hidden" name="complex_id" value="{{ c.id }}">
+            <button type="submit" name="rating_submit" class="btn btn-warning">
+                Оцінити
+            </button>
+        </form>
+    {% endif %}
+</div>
