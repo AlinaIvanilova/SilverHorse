@@ -1,11 +1,41 @@
-<!--Сторінка Профілю користувача -->
 {% extends "userspace/base.html" %}
-{% block title %}Профіль — Silver Horse{% endblock %}
 
 {% block content %}
-<div class="profile-container">
-    <h1>Вітаємо, {{ user.username }}!</h1>
-    <p>Ви успішно увійшли в свій профіль.</p>
-    <p>Це твоя панель користувача 🐎</p>
+
+{% if is_new_user %}
+<div class="welcome-box">
+    <h2>🎉 Вітаємо з реєстрацією, {{ user.username }}!</h2>
+    <p>Хочете пройти короткий туторіал?</p>
+
+    <a href="{% url 'start_tutorial' %}" class="btn btn-primary">Почати</a>
+    <a href="{% url 'skip_tutorial' %}" class="btn btn-secondary">Пропустити</a>
 </div>
+{% endif %}
+
+<h1>Вітаємо, {{ user.username }} 🐎</h1>
+
+{% if has_complex %}
+    <h2>Ваш комплекс: {{ complex.name }}</h2>
+{% else %}
+    <p>У вас ще немає комплексу.</p>
+    <a href="{% url 'equestrian_page' %}" class="btn btn-primary">Створити комплекс</a>
+{% endif %}
+
+<div class="stats">
+    <div>🐴 Коней: {{ horses_count }}</div>
+    <div>🏆 Перемог: {{ wins_count }}</div>
+</div>
+
+{% if horse_of_the_day %}
+<div class="horse-of-day">
+    <h3>Кінь дня</h3>
+    <p>Ім'я: {{ horse_of_the_day.name }}</p>
+    <p>Вік: {{ horse_of_the_day.age }} років</p>
+    <p>Порода: {{ horse_of_the_day.breed }}</p>
+    <a href="{% url 'horse_detail' horse_of_the_day.id %}" class="btn btn-info">Перейти</a>
+</div>
+{% else %}
+<p>У вас ще немає коней для Кінь дня 😢</p>
+{% endif %}
+
 {% endblock %}

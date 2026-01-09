@@ -3,9 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.urls import reverse
-from django.db import models  # <- для aggregate (Avg, Sum тощо)
+from django.db import models
 from django.db.models import Avg, Q
+from datetime import date
+
 
 # Імпорти моделей
 from .models import (
@@ -24,9 +25,43 @@ from .forms import (
 # -------------------------
 # Дашборд
 # -------------------------
+
 @login_required
 def dashboard_view(request):
-    return render(request, 'userspace/dashboard.html')
+    user = request.user
+    profile = user.profile
+
+    # --- Комплекс ---
+    complex_obj = EquestrianComplex.objects.filter(owner=user).first()
+    has_complex = complex_obj is not None
+
+    # --- Коні ---
+    user_horses = Horse.objects.filter(owner=user, status='user')
+    horses_count = user_horses.count()
+
+    # --- Кінь дня: стабільний раз на день ---
+    horse_of_the_day = None
+    if horses_count > 0:
+        # беремо індекс на основі поточної дати
+        index = date.today().toordinal() % horses_count
+        horse_of_the_day = user_horses[index]  # вибір конкретного коня
+
+    # --- Статистика ---
+    wins_count = user_horses.aggregate(
+        total=models.Sum('wins')
+    )['total'] or 0
+
+    context = {
+        'has_complex': has_complex,
+        'complex': complex_obj,
+        'horses_count': horses_count,
+        'horse_of_the_day': horse_of_the_day,  # кінь дня
+        'wins_count': wins_count,
+        'is_new_user': profile.is_new_user,
+    }
+
+    return render(request, 'userspace/dashboard.html', context)
+
 
 
 # -------------------------
@@ -429,3 +464,18 @@ def equestrian_page(request):
     }
 
     return render(request, 'userspace/equestrian.html', context)
+
+
+@login_required
+def skip_tutorial(request):
+    request.user.profile.is_new_user = False
+    request.user.profile.save()
+    return redirect('dashboard')
+
+
+@login_required
+def start_tutorial(request):
+    # Можеш тут просто перенаправити на дашборд після "туторіалу"
+    request.user.profile.is_new_user = False
+    request.user.profile.save()
+    return redirect('dashboard')

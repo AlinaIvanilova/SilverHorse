@@ -89,29 +89,63 @@ class SystemMessage(models.Model):
     def __str__(self):
         return f"{self.title} для {self.user.username if self.user else 'всіх'}"
 
+
 # -------------------------
-# Профіль користувача (валюта, інше)
+# Профіль користувача
 # -------------------------
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    horseshoes = models.IntegerField(default=0, verbose_name="Срібні Підкови")
-    silver_wings = models.IntegerField(default=0, verbose_name="Срібні Пір'я")
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='profile'
+    )
+
+    #  Валюта
+    horseshoes = models.PositiveIntegerField(
+        default=0,
+        verbose_name="Срібні Підкови"
+    )
+    silver_wings = models.PositiveIntegerField(
+        default=0,
+        verbose_name="Срібні Пір'я"
+    )
+
+    #  Онбординг
+    is_new_user = models.BooleanField(
+        default=True,
+        verbose_name="Новий користувач"
+    )
+
+    # Метадані
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Дата створення профілю"
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        verbose_name="Останнє оновлення"
+    )
 
     def __str__(self):
         return f"Профіль {self.user.username}"
 
 
 
-
 class Notification(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
-    text = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='notifications'
+    )
+    text = models.TextField(verbose_name="Текст повідомлення")
     is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Дата створення"
+    )
 
     def __str__(self):
-        return f"Повідомлення для {self.user.username}: {self.text[:20]}"
-
+        return f"Повідомлення для {self.user.username}"
 
 # -------------------------
 # Модель "кінь" для зберігання інформації про кожного коня
@@ -151,9 +185,11 @@ class Horse(models.Model):
     status_choices = [('market', 'На ринку'), ('user', 'У користувача')]
     status = models.CharField(max_length=10, choices=status_choices, default='market')
 
+    wins = models.PositiveIntegerField(default=0, verbose_name="Перемоги")  # нове поле
+
     # Для зручного відображення в адмінці або в консолі
     def __str__(self):
-        return f"{self.name} ({self.breed})"
+        return f"{self.name} ({self.breed}) - {self.wins} 🏆"
 
     # Метод для повного опису коня
     def get_description(self):

@@ -28,6 +28,9 @@ urlpatterns = [
 
     path('horse/<int:horse_id>/', views.horse_detail, name='horse_detail'),
     path('buy/<int:horse_id>/', views.buy_horse, name='buy_horse'),
+
+    path('skip-tutorial/', views.skip_tutorial, name='skip_tutorial'),
+    path('start-tutorial/', views.start_tutorial, name='start_tutorial'),
 ]
 
 
