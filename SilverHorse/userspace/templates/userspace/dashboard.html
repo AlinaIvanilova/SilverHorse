@@ -2,40 +2,85 @@
 
 {% block content %}
 
+<!-- Вітання та туторіал -->
 {% if is_new_user %}
-<div class="welcome-box">
+<div>
     <h2>🎉 Вітаємо з реєстрацією, {{ user.username }}!</h2>
     <p>Хочете пройти короткий туторіал?</p>
-
-    <a href="{% url 'start_tutorial' %}" class="btn btn-primary">Почати</a>
-    <a href="{% url 'skip_tutorial' %}" class="btn btn-secondary">Пропустити</a>
+    <a href="{% url 'start_tutorial' %}">Почати</a>
+    <a href="{% url 'skip_tutorial' %}">Пропустити</a>
 </div>
 {% endif %}
 
 <h1>Вітаємо, {{ user.username }} 🐎</h1>
 
+<!-- Комплекс -->
 {% if has_complex %}
     <h2>Ваш комплекс: {{ complex.name }}</h2>
 {% else %}
     <p>У вас ще немає комплексу.</p>
-    <a href="{% url 'equestrian_page' %}" class="btn btn-primary">Створити комплекс</a>
+    <a href="{% url 'equestrian_page' %}">Створити комплекс</a>
 {% endif %}
 
-<div class="stats">
-    <div>🐴 Коней: {{ horses_count }}</div>
-    <div>🏆 Перемог: {{ wins_count }}</div>
+<!-- Статистика користувача -->
+<div>
+    <h3>Статистика:</h3>
+    <p>🐴 Коней: {{ horses_count }}</p>
+    <p>🏆 Перемог: {{ wins_count }}</p>
+    <p>📝 Змагань всього: {{ total_competitions }}</p>
+    <p>💰 Зароблено на змаганнях: {{ total_earnings }}</p>
+    <p>🥇 Рейтинг: #{{ overall_rank }}</p>
 </div>
 
-{% if horse_of_the_day %}
-<div class="horse-of-day">
-    <h3>Кінь дня</h3>
-    <p>Ім'я: {{ horse_of_the_day.name }}</p>
-    <p>Вік: {{ horse_of_the_day.age }} років</p>
-    <p>Порода: {{ horse_of_the_day.breed }}</p>
-    <a href="{% url 'horse_detail' horse_of_the_day.id %}" class="btn btn-info">Перейти</a>
+<!-- Нові повідомлення / сповіщення -->
+{% if new_messages_count > 0 %}
+<div>
+    <p>📬 У вас {{ new_messages_count }} нових повідомлень/сповіщень!</p>
+    <a href="{% url 'messages_page' %}">Перейти до повідомлень</a>
 </div>
-{% else %}
-<p>У вас ще немає коней для Кінь дня 😢</p>
+{% endif %}
+
+<!-- Кінь дня -->
+{% if horse_of_the_day %}
+<div>
+    <h3>Кінь дня</h3>
+    <p>{{ horse_of_the_day.name }}</p>
+    <a href="{% url 'horse_detail' horse_of_the_day.id %}">Перейти</a>
+</div>
+{% endif %}
+
+<!-- Рекомендований кінь / пропозиції -->
+{% if recommended_horse %}
+<div>
+    <h3>Рекомендований кінь на продаж</h3>
+    <p>{{ recommended_horse.name }} — ціна: {{ recommended_horse.price }} Срібних Підков</p>
+    <a href="{% url 'horse_detail' recommended_horse.id %}">Перейти</a>
+</div>
+{% endif %}
+
+<!-- Пропозиції / реклама -->
+{% if promo_offers %}
+<div>
+    <h3>Пропозиції цього тижня</h3>
+    <ul>
+        {% for offer in promo_offers %}
+        <li>
+            {{ offer.title }}
+            {% if offer.link %}
+            <a href="{{ offer.link }}">Детальніше</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<!-- Непрочитані повідомлення -->
+{% if unread_messages_count > 0 %}
+<div>
+    <p>⚠️ У вас {{ unread_messages_count }} непрочитане повідомлення{% if unread_messages_count > 1 %}я{% endif %}!</p>
+    <a href="{% url 'messages_page' %}">Перейти до повідомлень</a>
+</div>
 {% endif %}
 
 {% endblock %}

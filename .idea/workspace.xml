@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="I made a design for the complex's page">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="I started making the main dashboard page.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +18,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="18.3-design" />
+        <entry key="$PROJECT_DIR$" value="19-v1-start-working-on-dashboard" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,7 +49,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "19-",
+    "git-widget-placeholder": "19-v2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -81,7 +81,8 @@
       <workItem from="1767448881739" duration="17000" />
       <workItem from="1767449715944" duration="86000" />
       <workItem from="1767528387082" duration="4000" />
-      <workItem from="1767961490226" duration="4437000" />
+      <workItem from="1767961490226" duration="4527000" />
+      <workItem from="1768834090689" duration="2751000" />
     </task>
     <task id="LOCAL-00001" summary="?">
       <option name="closed" value="true" />
@@ -99,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767961655825</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="I started making the main dashboard page.">
+      <option name="closed" value="true" />
+      <created>1767966038535</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1767966038535</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,7 +128,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="?" />
     <MESSAGE value="I made a design for the complex's page" />
-    <option name="LAST_COMMIT_MESSAGE" value="I made a design for the complex's page" />
+    <MESSAGE value="I started making the main dashboard page." />
+    <option name="LAST_COMMIT_MESSAGE" value="I started making the main dashboard page." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -131,6 +141,11 @@
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/SilverHorse/userspace/signals.py</url>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SilverHorse/userspace/models.py</url>
+          <line>186</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
