@@ -7,7 +7,9 @@ from django.db import models
 from django.db.models import Avg, Q
 from datetime import date
 from django.db.models import Sum
-
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Імпорти моделей
 from .models import (
@@ -498,3 +500,23 @@ def start_tutorial(request):
     request.user.profile.is_new_user = False
     request.user.profile.save()
     return redirect('dashboard')
+
+
+
+
+@login_required
+@csrf_exempt
+def update_horse_stat(request, horse_id):
+    horse = get_object_or_404(Horse, id=horse_id, owner=request.user)
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        stat = data.get('stat')
+        delta = data.get('delta', 0)
+        try:
+            delta = int(delta)
+        except:
+            delta = 0
+
+        horse.adjust_stat(stat, delta)
+        return JsonResponse({'success': True, 'new_value': getattr(horse, stat)})
+    return JsonResponse({'success': False})

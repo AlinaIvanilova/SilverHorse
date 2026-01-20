@@ -168,7 +168,11 @@ class Horse(models.Model):
     speed = models.IntegerField(default=50)  # Швидкість
     endurance = models.IntegerField(default=50)  # Витривалість
     strength = models.IntegerField(default=50)  # Сила
+
+    # Ігрові атрибути коня
     health = models.IntegerField(default=100)  # Здоров'я
+    energy = models.IntegerField(default=100)  # Енергія
+    mood = models.IntegerField(default=100)    # Настрій (0–100)
 
     # Фото коня
     photo = models.ImageField(upload_to='horses/', null=True, blank=True)  # Фото коня
@@ -188,9 +192,25 @@ class Horse(models.Model):
 
     wins = models.PositiveIntegerField(default=0, verbose_name="Перемоги")  # нове поле
 
+
+    def adjust_stat(self, stat_name, delta):
+        """
+        Змінює характеристику коня на delta і обмежує від 0 до 100.
+        stat_name: 'health', 'energy', 'mood'
+        delta: число (може бути негативне)
+        """
+        if not hasattr(self, stat_name):
+            return  # неправильна характеристика
+
+        current_value = getattr(self, stat_name)
+        new_value = max(0, min(100, current_value + delta))
+        setattr(self, stat_name, new_value)
+        self.save()
+
+
     # Для зручного відображення в адмінці або в консолі
     def __str__(self):
-        return f"{self.name} ({self.breed}) - {self.wins} 🏆"
+        return f"{self.name} ({self.breed}) - {self.wins}"
 
     # Метод для повного опису коня
     def get_description(self):
@@ -208,10 +228,6 @@ class Horse(models.Model):
             f"Статус: {self.get_status_display()}\n"
             f"Власник: {self.owner.username if self.owner else 'На ринку'}"
         )
-
-    # ЗАУВАЖТЕ: поле photo можна залишити, але воно буде використовуватись
-    # тільки для кастомних фото. Якщо photo не встановлено,
-    # буде використовуватись автоматичне фото
 
     def get_photo_url(self):
         """
