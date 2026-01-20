@@ -36,9 +36,38 @@
 <!-- Контейнер з характеристиками та основною інформацією -->
 <div class="horse-info-container">
 
-    <div class="horse-stats">
-        <h3>📊 Характеристики</h3>
+    <!-- Ігрові характеристики -->
+    <div class="horse-game-stats">
+        <h3>Ігрові характеристики</h3>
 
+        <div class="stat-bar">
+            <span class="stat-label">Здоров'я:</span>
+            <div class="bar-container">
+                <div class="bar-fill" style="width: {{ horse.health }}%;"></div>
+            </div>
+            <span class="stat-value">{{ horse.health }}%</span>
+        </div>
+
+        <div class="stat-bar">
+            <span class="stat-label">Енергія:</span>
+            <div class="bar-container">
+                <div class="bar-fill" style="width: {{ horse.energy }}%;"></div>
+            </div>
+            <span class="stat-value">{{ horse.energy }}%</span>
+        </div>
+
+        <div class="stat-bar">
+            <span class="stat-label">Настрій:</span>
+            <div class="bar-container">
+                <div class="bar-fill" style="width: {{ horse.mood }}%;"></div>
+            </div>
+            <span class="stat-value">{{ horse.mood }}%</span>
+        </div>
+    </div>
+
+    <!-- Навички -->
+    <div class="horse-skills">
+        <h3>Навички</h3>
         <div class="stats-grid">
             <div class="stat-item">
                 <span class="stat-label">Швидкість:</span>
@@ -52,23 +81,12 @@
                 <span class="stat-label">Сила:</span>
                 <span class="stat-value">{{ horse.strength }}</span>
             </div>
-            <div class="stat-item">
-                <span class="stat-label">Здоров'я:</span>
-                <span class="stat-value health-stat">{{ horse.health }}</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Енергія:</span>
-                <span class="stat-value energy-stat">{{ horse.energy }}</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Настрій:</span>
-                <span class="stat-value mood-stat">{{ horse.mood }}</span>
-            </div>
         </div>
     </div>
 
+    <!-- Основна інформація -->
     <div class="horse-basic-info">
-        <h3>ℹ️ Основна інформація</h3>
+        <h3>Основна інформація</h3>
         <p><strong>Вік:</strong> {{ horse.age }} років</p>
         <p><strong>Стать:</strong> {{ horse.get_gender_display }}</p>
         <p><strong>Порода:</strong> {{ horse.breed }}</p>
@@ -112,6 +130,7 @@ function changeHorseStat(horseId, stat, delta) {
     .then(data => {
         if (data.success) {
             document.querySelector(`.${stat}-stat`).textContent = data.new_value;
+            document.querySelector(`.${stat}-stat-bar .bar-fill`).style.width = data.new_value + '%';
         } else {
             alert('Помилка при оновленні характеристики.');
         }

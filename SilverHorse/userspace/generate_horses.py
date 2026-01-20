@@ -24,23 +24,23 @@ from userspace.models import Horse
 # =========================
 # 🌟 Дані для генерації коней
 # =========================
-breeds = ['Арабська', 'Фризька', 'Англійська скакова', 'Шетландська']
-colors = ['Чорний', 'Білий', 'Гнідий', 'Рудий']
+breeds = ['Ахелтекинець']
+colors = ['світло-сірий']
 
 # =========================
 # 🌟 Генерація коней
 # =========================
-for i in range(10):
+for i in range(2):
     horse = Horse.objects.create(
         name=f"Кінь{i}",
-        brege=random.randint(1, 15),
+        breed=random.choice(breeds),
         gender=random.choice(['M', 'F']),
         coat_color=random.choice(colors),
+        age=random.randint(2, 15),  # <- додано
         speed=random.randint(40, 100),
         endurance=random.randint(40, 100),
         strength=random.randint(40, 100),
         owner=None,
-        status='market',ed=random.choice(breeds),
+        status='market',
         price=random.randint(100, 1000)
     )
-    print(f"Створено коня: {horse.name}, порода: {horse.breed}, ціна: {horse.price}")

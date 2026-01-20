@@ -2,7 +2,12 @@
 
 HORSE_IMAGES = {
     # Формат: (порода, забарвлення): 'шлях/до/фото.png'
-    ('ахалтекінець', 'вогняно-гнідий'): 'img/horses/ahaltekin_fire_chestnut.png',
+    ('ахелтекинець', 'вогняно-гнідий'): 'img/horses/ahaltekin_fire_chestnut.png',
+    ('ахелтекинець', 'чорний'): 'img/horses/ahaltekin_black.png',
+    ('ахелтекинець', 'світло-сірий'): 'img/horses/default_horse.png',
+
+
+
 
     # Тут ви зможете додавати нові фото в майбутньому
     # ('арабська', 'сірий'): 'img/horses/arabian_gray.png',
