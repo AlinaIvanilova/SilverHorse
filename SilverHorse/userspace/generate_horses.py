@@ -33,15 +33,14 @@ colors = ['Чорний', 'Білий', 'Гнідий', 'Рудий']
 for i in range(10):
     horse = Horse.objects.create(
         name=f"Кінь{i}",
-        breed=random.choice(breeds),
-        age=random.randint(1, 15),
+        brege=random.randint(1, 15),
         gender=random.choice(['M', 'F']),
         coat_color=random.choice(colors),
         speed=random.randint(40, 100),
         endurance=random.randint(40, 100),
         strength=random.randint(40, 100),
         owner=None,
-        status='market',
+        status='market',ed=random.choice(breeds),
         price=random.randint(100, 1000)
     )
     print(f"Створено коня: {horse.name}, порода: {horse.breed}, ціна: {horse.price}")
