@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="19-v2">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="20 Added: energy, mood, health for horses and now I can do tricks with this">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/horse_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/horse_detail.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +17,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="19-v2" />
+        <entry key="$PROJECT_DIR$" value="20-detail-horse-start-working" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,7 +48,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "20-detail-horse-start-working",
+    "git-widget-placeholder": "20.1-main-characteristics-horses-update",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -84,7 +84,7 @@
       <workItem from="1768834090689" duration="3029000" />
       <workItem from="1768843597577" duration="813000" />
       <workItem from="1768844432949" duration="853000" />
-      <workItem from="1768915644907" duration="1244000" />
+      <workItem from="1768915644907" duration="2799000" />
     </task>
     <task id="LOCAL-00001" summary="?">
       <option name="closed" value="true" />
@@ -126,7 +126,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768916446875</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="20 Added: energy, mood, health for horses and now I can do tricks with this">
+      <option name="closed" value="true" />
+      <created>1768917224181</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1768917224181</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,7 +156,8 @@
     <MESSAGE value="I made a design for the complex's page" />
     <MESSAGE value="I started making the main dashboard page." />
     <MESSAGE value="19-v2" />
-    <option name="LAST_COMMIT_MESSAGE" value="19-v2" />
+    <MESSAGE value="20 Added: energy, mood, health for horses and now I can do tricks with this" />
+    <option name="LAST_COMMIT_MESSAGE" value="20 Added: energy, mood, health for horses and now I can do tricks with this" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -28,11 +28,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40px; /* відстань між кнопками та ім’ям */
+    gap: 40px;
     margin-top: 15px;
 }
 
-/* Ім’я коня */
+/* Ім'я коня */
 .horse-name-box {
     font-size: 1.8rem;
     font-weight: bold;
@@ -63,65 +63,273 @@
 
 /* Контейнер характеристик та інформації */
 .horse-info-container {
-    margin: 20px auto;               /* по центру сторінки */
-    background: rgba(0,0,0,0.5);
-    padding: 15px;
+    margin: 20px auto;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 25px;
     border-radius: 16px;
-    border: 2px solid rgba(255, 215, 0, 0.3);
+    border: 3px solid rgba(255, 215, 0, 0.7);
     max-width: 500px;
     width: 100%;
     text-align: left;
     display: flex;
     flex-direction: column;
-    align-items: center;            /* вирівнювання по центру */
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* Сітка характеристик */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+/* Заголовки секцій */
+.horse-info-container h3 {
+    color: #ffd700;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.5);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+/* Секції */
+.horse-game-stats,
+.horse-skills,
+.horse-basic-info {
+    margin-bottom: 30px;
     width: 100%;
 }
 
-/* Кожна характеристика */
+/* Прогрес-бари ігрових характеристик з градієнтом енергії */
+.horse-game-stats .stat-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+}
+
+.stat-bar .stat-label {
+    width: 120px;
+    font-weight: bold;
+    color: #ffd700;
+    font-size: 1.1rem;
+}
+
+/* Контейнер для бару */
+.bar-container {
+    flex: 1;
+    height: 35px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 0 15px;
+    position: relative;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Заповнення бару з градієнтом енергії */
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        #ff0000 0%,        /* Червоний для 0% */
+        #ff3300 10%,
+        #ff6600 20%,
+        #ff9900 30%,
+        #ffcc00 40%,       /* Оранжево-жовтий */
+        #ffff00 50%,       /* Яскраво-жовтий для 50% */
+        #ccff00 60%,
+        #99ff00 70%,
+        #66ff00 80%,
+        #33ff00 90%,
+        #00ff00 100%       /* Яскраво-зелений для 100% */
+    );
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+    transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Вертикальні смуги на заповненні */
+.bar-fill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 6px,
+        rgba(255, 255, 255, 0.15) 6px,
+        rgba(255, 255, 255, 0.15) 8px
+    );
+}
+
+/* Ефект світіння для високих значень (>70%) */
+.bar-fill[style*="width: 7"]::before,
+.bar-fill[style*="width: 8"]::before,
+.bar-fill[style*="width: 9"]::before,
+.bar-fill[style*="width: 10"]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        transparent 100%);
+    animation: shine 2s infinite;
+}
+
+/* Ефект пульсації для критично низьких значень (<20%) */
+.bar-fill[style*="width: 1"]::before,
+.bar-fill[style*="width: 2"]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 0, 0, 0.3);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+    100% { opacity: 0.3; }
+}
+
+/* Додатковий ефект для середніх значень (20-50%) */
+.bar-fill[style*="width: 2"]::after,
+.bar-fill[style*="width: 3"]::after,
+.bar-fill[style*="width: 4"]::after {
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 6px,
+        rgba(255, 165, 0, 0.2) 6px,
+        rgba(255, 165, 0, 0.2) 8px
+    );
+}
+
+/* Відсоткове значення */
+.stat-bar .stat-value {
+    width: 70px;
+    text-align: right;
+    font-weight: bold;
+    color: #ffd700;
+    font-size: 1.3rem;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+/* Навички */
+.horse-skills .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin-top: 15px;
+}
+
 .stat-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.stat-item .stat-label {
     color: #ffd700;
     font-weight: bold;
-    width: 100%;
+    font-size: 1rem;
+}
+
+.stat-item .stat-value {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px 12px;
+    border-radius: 6px;
+    min-width: 40px;
+    text-align: center;
 }
 
 /* Основна інформація */
 .horse-basic-info {
     width: 100%;
+    margin-top: 20px;
 }
 
 .horse-basic-info p {
     color: #fff;
-    margin: 5px 0;
+    margin: 12px 0;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid rgba(255, 215, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
 }
 
-.horse-basic-info h3 {
-    margin-bottom: 10px;
+.horse-basic-info p strong {
     color: #ffd700;
+    font-weight: bold;
+}
+
+.horse-basic-info p span {
+    color: #fff;
+    font-weight: normal;
 }
 
 /* Кнопка "Назад" */
 .back-btn {
     display: inline-block;
-    padding: 10px 20px;
-    background: rgba(0, 0, 0, 0.6);
+    padding: 12px 25px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(50, 50, 50, 0.8) 100%);
     color: #ffd700;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: bold;
-    border: 2px solid rgba(255, 215, 0, 0.3);
-    transition: background 0.3s ease, color 0.3s ease;
+    border: 2px solid rgba(255, 215, 0, 0.5);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
 }
 
 .back-btn:hover {
-    background: rgba(255, 215, 0, 0.2);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.3) 100%);
     color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 215, 0, 0.2);
+}
+
+/* Спеціальні класи для різних станів енергії (опціонально) */
+.energy-low .bar-fill {
+    background: linear-gradient(90deg, #ff0000, #ff5500, #ff9900);
+}
+
+.energy-medium .bar-fill {
+    background: linear-gradient(90deg, #ff9900, #ffcc00, #ffff00);
+}
+
+.energy-high .bar-fill {
+    background: linear-gradient(90deg, #ffff00, #99ff00, #00ff00);
 }
