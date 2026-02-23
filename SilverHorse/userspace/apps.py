@@ -6,4 +6,4 @@ class UserspaceConfig(AppConfig):
     name = 'userspace'
 
 def ready(self):
-    import userspace.signals
+    import userspace.models.signals
