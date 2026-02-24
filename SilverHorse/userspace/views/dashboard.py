@@ -1,8 +1,8 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from datetime import date
-from ..models import Horse, Message
+from ..models import Horse, Message, EquestrianComplex
 
 @login_required
 def dashboard_view(request):

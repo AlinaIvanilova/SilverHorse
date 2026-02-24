@@ -17,19 +17,26 @@ def horses_page(request):
 
 @login_required
 def horse_detail(request, horse_id):
-    horse = get_object_or_404(Horse, id=horse_id, owner=request.user)
+    horse = get_object_or_404(Horse, id=horse_id)
 
-    # Отримуємо ВСІХ коней користувача
-    user_horses = list(Horse.objects.filter(owner=request.user, status='user').order_by('id'))
+    prev_horse = None
+    next_horse = None
 
-    # Знаходимо індекс поточного коня
-    current_index = user_horses.index(horse)
+    # Навігація тільки для своїх коней
+    if horse.owner == request.user and horse.status == 'user':
+        user_horses = list(
+            Horse.objects.filter(owner=request.user, status='user').order_by('id')
+        )
 
-    # Визначаємо попереднього коня
-    prev_horse = user_horses[current_index - 1] if current_index > 0 else None
+        if horse in user_horses:
+            current_index = user_horses.index(horse)
 
-    # Визначаємо наступного коня
-    next_horse = user_horses[current_index + 1] if current_index < len(user_horses) - 1 else None
+            prev_horse = user_horses[current_index - 1] if current_index > 0 else None
+            next_horse = (
+                user_horses[current_index + 1]
+                if current_index < len(user_horses) - 1
+                else None
+            )
 
     return render(request, 'userspace/horse_detail.html', {
         'horse': horse,

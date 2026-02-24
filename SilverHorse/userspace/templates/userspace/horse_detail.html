@@ -91,10 +91,40 @@
         <p><strong>Стать:</strong> {{ horse.get_gender_display }}</p>
         <p><strong>Порода:</strong> {{ horse.breed }}</p>
         <p><strong>Забарвлення:</strong> {{ horse.coat_color }}</p>
+        <p><strong>Статус:</strong> {{ horse.status }}</p>
     </div>
+
+</div>
+
+<!-- КНОПКИ ДІЇ -->
+<div class="horse-action-section">
+
+    {% if horse.owner == request.user and horse.status == 'user' %}
+        <p class="your-horse-label">🐴 Це ваш кінь</p>
+
+        <div class="action-buttons">
+            <button onclick="trainHorse({{ horse.id }})">Тренувати</button>
+            <button onclick="careHorse({{ horse.id }})">Догляд</button>
+            <button onclick="breedHorse({{ horse.id }})">Розмноження</button>
+            <button onclick="sellHorse({{ horse.id }})">Продати</button>
+        </div>
+
+    {% elif horse.status == 'market' %}
+        <div class="market-section">
+            <p>💰 Ціна: {{ horse.price }} Срібних Підков</p>
+            <a href="{% url 'buy_horse' horse.id %}" class="buy-btn">
+                🐎 Купити
+            </a>
+        </div>
+
+    {% else %}
+        <p>👀 Ви переглядаєте чужого коня</p>
+    {% endif %}
+
 </div>
 
 {% endblock %}
+
 
 {% block extra_js %}
 <script>
@@ -116,7 +146,6 @@ function careHorse(horseId) {
     alert('Функція догляду за конем ' + horseId + ' буде реалізована найближчим часом!');
 }
 
-// Оновлення характеристик через AJAX
 function changeHorseStat(horseId, stat, delta) {
     fetch(`/horses/update_stat/${horseId}/`, {
         method: 'POST',
@@ -129,8 +158,7 @@ function changeHorseStat(horseId, stat, delta) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            document.querySelector(`.${stat}-stat`).textContent = data.new_value;
-            document.querySelector(`.${stat}-stat-bar .bar-fill`).style.width = data.new_value + '%';
+            location.reload();
         } else {
             alert('Помилка при оновленні характеристики.');
         }
