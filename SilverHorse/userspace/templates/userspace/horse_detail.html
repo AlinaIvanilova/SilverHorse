@@ -96,7 +96,18 @@
 
 </div>
 
-<!-- КНОПКИ ДІЇ -->
+<!-- ➕ КНОПКА ВІДПРАВКИ ДО ПРИТУЛКУ (тільки для своїх коней) -->
+{% if horse.owner == request.user and horse.status == 'user' %}
+<div class="shelter-action-container" style="margin: 20px 0; text-align: center;">
+    <button class="btn-shelter"
+            onclick="if(confirm('Ви впевнені? Ви отримаєте 500 підков, і кінь потрапить до притулку.'))
+                     location.href='{% url 'send_to_shelter' horse.id %}'">
+        <i class="fas fa-home"></i> Відправити до притулку (500 підков)
+    </button>
+</div>
+{% endif %}
+
+<!-- КНОПКИ ДІЇ (Тренувати, Догляд, тощо) -->
 <div class="horse-action-section">
 
     {% if horse.owner == request.user and horse.status == 'user' %}

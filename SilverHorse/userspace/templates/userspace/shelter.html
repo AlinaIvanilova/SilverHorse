@@ -4,9 +4,35 @@
 {% block content %}
 <div class="shelter-container">
     <h1>Притулок для коней</h1>
-    <p>Тут буде інформація про коней, які потребують притулку.</p>
-    <a href="{% url 'trade_page' %}" class="back-to-market-btn">
-        <i class="fas fa-arrow-left"></i> Назад на ринок
-    </a>
+
+    <div class="shelter-nav">
+        <a href="{% url 'trade_page' %}" class="back-to-market-btn">
+            <i class="fas fa-arrow-left"></i> Назад на ринок
+        </a>
+    </div>
+
+    <div class="horse-list">
+        {% for horse in horses %}
+        <div class="horse-card">
+            <div class="photo-container">
+                <img src="{{ horse.get_photo_url }}" alt="{{ horse.get_photo_alt }}" class="horse-photo">
+            </div>
+            <div class="horse-info">
+                <h2>{{ horse.name }}</h2>
+                <p>Порода: {{ horse.breed }}</p>
+                <p>Вік: {{ horse.age }} р.</p>
+                <p>Стать: {{ horse.get_gender_display }}</p>
+                <p>Колір: {{ horse.coat_color }}</p>
+                <p>Швидкість: {{ horse.speed }}</p>
+                <p>Витривалість: {{ horse.endurance }}</p>
+                <p>Сила: {{ horse.strength }}</p>
+                <p>Здоров'я: {{ horse.health }}</p>
+            </div>
+            <!-- In the future, you can add an "Adopt" button here -->
+        </div>
+        {% empty %}
+        <p>У притулку поки що немає коней.</p>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
