@@ -175,6 +175,12 @@
   max-width: fit-content;
 }
 
+/* Контейнер для кнопки "Магазин" + меню */
+.shop-main-container {
+  position: relative;
+  display: inline-block;
+}
+
 .shop-main-btn {
   background: linear-gradient(135deg, #ffd700, #ffed4e);
   color: #000;
@@ -233,13 +239,19 @@
   background: rgba(255, 152, 0, 0.1);
 }
 
+.shop-secondary-btn:nth-child(5):hover {
+  border-color: #00bcd4;
+  color: #00bcd4;
+  background: rgba(0, 188, 212, 0.1);
+}
+
 /* Випадаюче меню для Магазину */
 .shop-dropdown {
-  display: none;
   position: absolute;
-  top: calc(100% - 10px);
-  left: 50%;
-  transform: translateX(-50%);
+  top: 100%;            /* одразу під кнопкою */
+  left: 0;               /* лівий край дорівнює лівому краю кнопки */
+  margin-top: 5px;
+  display: none;         /* приховано за замовчуванням */
   background: rgba(20, 20, 20, 0.98);
   min-width: 220px;
   border-radius: 8px;
@@ -247,6 +259,11 @@
   border: 2px solid #ffd700;
   z-index: 1000;
   backdrop-filter: blur(5px);
+}
+
+.shop-dropdown.visible {
+  display: block;
+  animation: fadeIn 0.3s ease;
 }
 
 .shop-dropdown a {
@@ -270,19 +287,15 @@
   padding-left: 25px;
 }
 
-.market-shop-nav:hover .shop-dropdown {
-  display: block;
-  animation: fadeIn 0.3s ease;
-}
-
+/* Анімація появи (тільки вертикальний рух) */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translate(-50%, -10px);
+    transform: translateY(-10px);
   }
   to {
     opacity: 1;
-    transform: translate(-50%, 0);
+    transform: translateY(0);
   }
 }
 
@@ -295,22 +308,21 @@
     max-width: 100%;
   }
 
-  .shop-main-btn, .shop-secondary-btn {
+  .shop-main-btn,
+  .shop-secondary-btn {
     width: 100%;
     max-width: 300px;
     min-width: auto;
   }
 
+  /* На малих екранах меню тепер прилягає до лівого краю кнопки */
   .shop-dropdown {
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 300px;
+    left: 0;
   }
 }
 
 /* =========================
-   🔍 Секція пошуку та фільтрів (повне центрування)
+   🔍 Секція пошуку та фільтрів
 ========================= */
 .search-section {
   margin: 20px auto 30px auto;
@@ -517,4 +529,3 @@
   background: linear-gradient(135deg, #d32f2f, #b71c1c);
   transform: translateY(-2px);
 }
-
