@@ -3,44 +3,52 @@
 import sys
 import os
 import random
+from datetime import datetime
 
-# =========================
-# 🌟 Підключення Django
-# =========================
-
-# Додаємо корінь проекту в sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-# Вказуємо налаштування Django і запускаємо
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SilverHorse.settings")
 import django
 django.setup()
 
-# =========================
-# 🌟 Імпорт моделей
-# =========================
-from userspace.models import Horse
+from django.db import connection
+from userspace.models import Horse  # імпортуємо для отримання назви таблиці
 
-# =========================
-# 🌟 Дані для генерації коней
-# =========================
-breeds = ['Арабська', 'Фризька', 'Англійська скакова', 'Шетландська']
-colors = ['Чорний', 'Білий', 'Гнідий', 'Рудий']
+# Дані для генерації
+breeds = ['Ахалтекінець', 'Фризька']
+colors = ['Чорний']
 
-# =========================
-# 🌟 Генерація коней
-# =========================
-for i in range(10):
-    horse = Horse.objects.create(
-        name=f"Кінь{i}",
-        brege=random.randint(1, 15),
-        gender=random.choice(['M', 'F']),
-        coat_color=random.choice(colors),
-        speed=random.randint(40, 100),
-        endurance=random.randint(40, 100),
-        strength=random.randint(40, 100),
-        owner=None,
-        status='market',ed=random.choice(breeds),
-        price=random.randint(100, 1000)
-    )
-    print(f"Створено коня: {horse.name}, порода: {horse.breed}, ціна: {horse.price}")
+# Назва таблиці (зазвичай userspace_horse)
+table_name = Horse._meta.db_table
+
+# Генерація 5 коней
+for i in range(5):
+    # Генеруємо випадкові значення для всіх полів
+    name = f"Молодий_кінь_{i+1}"
+    breed = random.choice(breeds)
+    age = random.randint(0, 1)
+    gender = random.choice(['M', 'F'])
+    coat_color = random.choice(colors)
+    speed = random.randint(40, 100)
+    endurance = random.randint(40, 100)
+    strength = random.randint(40, 100)
+    health = random.randint(50, 100)
+    energy = random.randint(50, 100)
+    mood = random.randint(50, 100)
+    photo = ''  # або None, якщо поле допускає NULL
+    owner_id = None  # зовнішній ключ може бути NULL
+    price = random.randint(100, 1000)
+    status = 'market'
+    wins = 0
+    for_sale = 1  # 1 = True, 0 = False (для MySQL)
+
+    # SQL-запит
+    with connection.cursor() as cursor:
+        cursor.execute(f"""
+            INSERT INTO {table_name} 
+            (name, breed, age, gender, coat_color, speed, endurance, strength, health, energy, mood, photo, owner_id, price, status, wins, for_sale)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, [name, breed, age, gender, coat_color, speed, endurance, strength, health, energy, mood, photo, owner_id, price, status, wins, for_sale])
+
+    print(f"Створено коня: {name}, порода: {breed}, вік: {age}")
+
+print("Генерацію завершено.")
