@@ -7,7 +7,6 @@
   margin: 0 auto;
   padding: 30px 20px;
   width: 100%;
-  /* Added width constraint to prevent background expansion */
 }
 
 .market-title {
@@ -22,9 +21,10 @@
   background: rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   padding: 15px 20px;
-  margin-bottom: 30px;
+  margin: 0 auto 30px auto;
   text-align: center;
   border: 2px solid rgba(255, 215, 0, 0.5);
+  max-width: 600px;
 }
 
 .user-balance p {
@@ -38,7 +38,6 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
   margin-bottom: 30px;
-  /* Ensure grid doesn't overflow container */
   width: 100%;
 }
 
@@ -52,9 +51,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 600px; /* Мінімальна висота для консистентності */
+  min-height: 600px;
 }
-
 
 .horse-card:hover {
   transform: translateY(-5px);
@@ -65,13 +63,13 @@
 /* Фото коня */
 .horse-photo {
   width: 100%;
-  height: 250px; /* Збільшимо висоту для кращого відображення */
-  object-fit: contain; /* Змінюємо з cover на contain - це головна зміна! */
+  height: 250px;
+  object-fit: contain;
   display: block;
   flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.05); /* Додаємо легкий фон для контрасту */
+  background: rgba(255, 255, 255, 0.05);
   border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-  padding: 5px; /* Додаємо невеликий відступ */
+  padding: 5px;
 }
 
 /* Інформація про коня */
@@ -81,7 +79,6 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-
 }
 
 .horse-info h2 {
@@ -98,7 +95,6 @@
   line-height: 1.4;
   white-space: normal;
   overflow-wrap: break-word;
-  /* Ensure text wraps properly */
 }
 
 .horse-info p.price {
@@ -115,7 +111,6 @@
   padding: 15px;
   border-top: 1px solid rgba(255, 215, 0, 0.2);
   flex-shrink: 0;
-  /* Prevent button section from shrinking */
 }
 
 .buy-section form {
@@ -155,7 +150,371 @@
   text-align: center;
   font-size: 1.2rem;
   padding: 40px 20px;
-  /* Fixed selector to target empty state message */
 }
 
+/* =========================
+   🛒 Магазин навігація (кнопки по центру)
+========================= */
+.market-shop-nav {
+  position: relative;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.shop-buttons-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  margin: 0 auto;
+  max-width: fit-content;
+}
+
+.shop-main-btn {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #000;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  min-width: 140px;
+}
+
+.shop-main-btn:hover {
+  background: linear-gradient(135deg, #ffed4e, #ffd700);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.shop-secondary-btn {
+  background: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid #ffd700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 140px;
+}
+
+.shop-secondary-btn:hover {
+  background: rgba(255, 215, 0, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+}
+
+/* Спеціальні стилі для різних кнопок */
+.shop-secondary-btn:nth-child(2):hover {
+  border-color: #4CAF50;
+  color: #4CAF50;
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.shop-secondary-btn:nth-child(3):hover {
+  border-color: #9C27B0;
+  color: #9C27B0;
+  background: rgba(156, 39, 176, 0.1);
+}
+
+.shop-secondary-btn:nth-child(4):hover {
+  border-color: #FF9800;
+  color: #FF9800;
+  background: rgba(255, 152, 0, 0.1);
+}
+
+/* Випадаюче меню для Магазину */
+.shop-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% - 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 20, 0.98);
+  min-width: 220px;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  border: 2px solid #ffd700;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.shop-dropdown a {
+  color: #ffd700;
+  padding: 14px 18px;
+  text-decoration: none;
+  display: block;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.shop-dropdown a:last-child {
+  border-bottom: none;
+}
+
+.shop-dropdown a:hover {
+  background: rgba(255, 215, 0, 0.2);
+  color: #fff;
+  padding-left: 25px;
+}
+
+.market-shop-nav:hover .shop-dropdown {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Адаптивність для навігації магазину */
+@media (max-width: 768px) {
+  .shop-buttons-row {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .shop-main-btn, .shop-secondary-btn {
+    width: 100%;
+    max-width: 300px;
+    min-width: auto;
+  }
+
+  .shop-dropdown {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 300px;
+  }
+}
+
+/* =========================
+   🔍 Секція пошуку та фільтрів (повне центрування)
+========================= */
+.search-section {
+  margin: 20px auto 30px auto;
+  max-width: 1200px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Кнопка розширеного пошуку */
+.search-toggle-btn {
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+  color: white;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  margin: 0 auto 15px auto;
+  display: block;
+  width: fit-content;
+  border: 2px solid transparent;
+}
+
+.search-toggle-btn:hover {
+  background: linear-gradient(135deg, #357abd, #2a5f8a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  border-color: #ffd700;
+}
+
+/* Контейнер фільтрів */
+.search-filters {
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Сітка фільтрів */
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+  justify-items: center;
+  margin-bottom: 20px;
+}
+
+/* Група фільтрів */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.filter-label {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 100%;
+}
+
+/* Поля вводу */
+.filter-select,
+.filter-number {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 2px solid #ffd700;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 0.95rem;
+}
+
+.filter-select {
+  cursor: pointer;
+}
+
+.filter-select option {
+  background: #333;
+  color: white;
+}
+
+/* Числові поля з кнопками */
+.number-input {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+}
+
+.number-input button {
+  background: #ffd700;
+  color: #000;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.number-input button:hover {
+  background: #ffed4e;
+  transform: scale(1.05);
+}
+
+.filter-number {
+  width: 80px;
+  text-align: center;
+}
+
+.filter-number::-webkit-inner-spin-button,
+.filter-number::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.filter-number[type=number] {
+  -moz-appearance: textfield;
+}
+
+.filter-separator {
+  color: #ffd700;
+  font-weight: bold;
+  margin: 0 5px;
+}
+
+/* Опції статі */
+.gender-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.gender-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.gender-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #ffd700;
+}
+
+/* Кнопки дій */
+.filter-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.apply-filters-btn,
+.reset-filters-btn {
+  padding: 10px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.apply-filters-btn {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+}
+
+.apply-filters-btn:hover {
+  background: linear-gradient(135deg, #45a049, #3d8b40);
+  transform: translateY(-2px);
+}
+
+.reset-filters-btn {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+  color: white;
+}
+
+.reset-filters-btn:hover {
+  background: linear-gradient(135deg, #d32f2f, #b71c1c);
+  transform: translateY(-2px);
+}
 
