@@ -7,8 +7,7 @@ from .subscription import subscription_page
 from .horses import horses_page, horse_detail, buy_horse, update_horse_stat
 from .equestrian import equestrian_page, manage_complex
 from .market import market_view
-from .shelter import shelter_view
-
+from .shelter import shelter_view, send_to_shelter
 """
 dashboard.py — відображення дашборду.
 

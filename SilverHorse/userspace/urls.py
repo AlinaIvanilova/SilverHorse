@@ -35,7 +35,5 @@ urlpatterns = [
     path('horses/update_stat/<int:horse_id>/', views.update_horse_stat, name='update_horse_stat'),
 
     path('shelter/', views.shelter_view, name='shelter_page'),
+    path('shelter/send/<int:horse_id>/', views.send_to_shelter, name='send_to_shelter'),
 ]
-
-
-
