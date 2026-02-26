@@ -46,7 +46,7 @@ class Horse(models.Model):
     def get_photo_url(self):
         if self.photo:
             return self.photo.url
-        image_path = get_horse_image(self.breed, self.coat_color)
+        image_path = get_horse_image(self.breed, self.coat_color, self.age)
         try:
             return staticfiles_storage.url(image_path)
         except:

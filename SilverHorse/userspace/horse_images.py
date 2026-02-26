@@ -12,12 +12,18 @@ HORSE_IMAGES = {
 }
 
 
-def get_horse_image(breed, coat_color):
-    """
-    Повертає шлях до фото коня на основі породи та забарвлення
-    Якщо комбінація не знайдена, повертає фото за замовчуванням
-    """
+def get_horse_image(breed, coat_color, age=None):
+    # Перевіряємо вік (дозволяємо рядки, булі, тощо)
+    if age is not None:
+        try:
+            # Конвертуємо в число (float підтримує як цілі, так і дробові роки)
+            age_val = float(age)
+            if age_val <= 2:
+                return 'img/horses/default_little_horse.png'
+        except (ValueError, TypeError):
+            # Якщо не вдалося перетворити на число — просто ігноруємо вік
+            pass
+
+    # Інакше шукаємо за породою та забарвленням
     key = (breed.lower().strip(), coat_color.lower().strip())
     return HORSE_IMAGES.get(key, 'img/horses/default_horse.png')
-
-
