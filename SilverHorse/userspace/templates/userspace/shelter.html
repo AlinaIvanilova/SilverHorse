@@ -1,0 +1,12 @@
+{% extends 'userspace/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="shelter-container">
+    <h1>Притулок для коней</h1>
+    <p>Тут буде інформація про коней, які потребують притулку.</p>
+    <a href="{% url 'trade_page' %}" class="back-to-market-btn">
+        <i class="fas fa-arrow-left"></i> Назад на ринок
+    </a>
+</div>
+{% endblock %}

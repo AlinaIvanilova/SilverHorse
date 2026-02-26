@@ -32,7 +32,7 @@
   font-size: 1.2rem;
 }
 
-/* Список коней - сітка */
+/* Список коней – сітка */
 .horse-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -145,7 +145,7 @@
   margin: 0;
 }
 
-/* Пусто повідомлення */
+/* Пусте повідомлення */
 .market-container > p {
   text-align: center;
   font-size: 1.2rem;
@@ -153,7 +153,7 @@
 }
 
 /* =========================
-   🛒 Магазин навігація (кнопки по центру)
+   🛒 Магазин навігація
 ========================= */
 .market-shop-nav {
   position: relative;
@@ -220,7 +220,7 @@
   box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
 }
 
-/* Спеціальні стилі для різних кнопок */
+/* Спеціальні кольори для других кнопок */
 .shop-secondary-btn:nth-child(2):hover {
   border-color: #4CAF50;
   color: #4CAF50;
@@ -245,13 +245,13 @@
   background: rgba(0, 188, 212, 0.1);
 }
 
-/* Випадаюче меню для Магазину */
+/* Випадаюче меню Магазину */
 .shop-dropdown {
   position: absolute;
-  top: 100%;            /* одразу під кнопкою */
-  left: 0;               /* лівий край дорівнює лівому краю кнопки */
+  top: 100%;
+  left: -10px;            /* зсув вліво відносно кнопки */
   margin-top: 5px;
-  display: none;         /* приховано за замовчуванням */
+  display: none;
   background: rgba(20, 20, 20, 0.98);
   min-width: 220px;
   border-radius: 8px;
@@ -264,6 +264,17 @@
 .shop-dropdown.visible {
   display: block;
   animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .shop-dropdown a {
@@ -287,19 +298,7 @@
   padding-left: 25px;
 }
 
-/* Анімація появи (тільки вертикальний рух) */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Адаптивність для навігації магазину */
+/* Адаптація навігації для мобільних */
 @media (max-width: 768px) {
   .shop-buttons-row {
     flex-direction: column;
@@ -315,9 +314,8 @@
     min-width: auto;
   }
 
-  /* На малих екранах меню тепер прилягає до лівого краю кнопки */
   .shop-dropdown {
-    left: 0;
+    left: 0;  /* на малих екранах меню прилягає до лівого краю кнопки */
   }
 }
 
@@ -384,7 +382,6 @@
   margin-bottom: 20px;
 }
 
-/* Група фільтрів */
 .filter-group {
   display: flex;
   flex-direction: column;
@@ -400,7 +397,6 @@
   width: 100%;
 }
 
-/* Поля вводу */
 .filter-select,
 .filter-number {
   background: rgba(255, 255, 255, 0.1);
@@ -449,16 +445,13 @@
 .filter-number {
   width: 80px;
   text-align: center;
+  -moz-appearance: textfield;
 }
 
 .filter-number::-webkit-inner-spin-button,
 .filter-number::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-.filter-number[type=number] {
-  -moz-appearance: textfield;
 }
 
 .filter-separator {

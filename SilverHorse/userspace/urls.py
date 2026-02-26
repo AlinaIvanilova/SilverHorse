@@ -32,7 +32,9 @@ urlpatterns = [
     path('skip-tutorial/', views.skip_tutorial, name='skip_tutorial'),
     path('start-tutorial/', views.start_tutorial, name='start_tutorial'),
 
-    path('horses/update_stat/<int:horse_id>/', views.update_horse_stat, name='update_horse_stat')
+    path('horses/update_stat/<int:horse_id>/', views.update_horse_stat, name='update_horse_stat'),
+
+    path('shelter/', views.shelter_view, name='shelter_page'),
 ]
 
 

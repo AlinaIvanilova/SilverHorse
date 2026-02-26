@@ -2,87 +2,16 @@
 {% load static %}
 
 {% block content %}
-<!-- Якщо хочете додати стилі прямо тут (для тесту) -->
-<style>
-/* ========== НОВІ СТИЛІ ДЛЯ МЕНЮ МАГАЗИН ========== */
-.shop-main-container {
-    position: relative;
-    display: inline-block;
-}
-
-.shop-dropdown {
-    position: absolute;
-    top: 100%;           /* одразу під кнопкою */
-    left: -10px;          /* зміщення ліворуч на 10px */
-    margin-top: 5px;
-    display: none;        /* приховано за замовчуванням */
-    background: rgba(20, 20, 20, 0.98);
-    min-width: 220px;
-    border-radius: 8px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-    border: 2px solid #ffd700;
-    z-index: 1000;
-    backdrop-filter: blur(5px);
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.shop-dropdown.visible {
-    display: block;
-    animation: fadeIn 0.3s ease;
-}
-
-.shop-dropdown a {
-    color: #ffd700;
-    padding: 14px 18px;
-    text-decoration: none;
-    display: block;
-    font-size: 1rem;
-    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-    transition: all 0.2s ease;
-    text-align: center;
-}
-
-.shop-dropdown a:last-child {
-    border-bottom: none;
-}
-
-.shop-dropdown a:hover {
-    background: rgba(255, 215, 0, 0.2);
-    color: #fff;
-    padding-left: 25px;
-}
-
-/* Адаптація для мобільних */
-@media (max-width: 768px) {
-    .shop-dropdown {
-        left: 0; /* на малих екранах краще без зміщення */
-    }
-}
-/* ========== КІНЕЦЬ НОВИХ СТИЛІВ ========== */
-</style>
-
 <div class="market-container">
     <h1 class="market-title">Ринок Коней</h1>
 
     <!-- 🛒 Магазин навігація з кнопками по центру -->
     <div class="market-shop-nav">
         <div class="shop-buttons-row">
-            <!-- Контейнер для кнопки "Магазин" + випадаюче меню -->
             <div class="shop-main-container">
                 <button class="shop-main-btn" id="shopMainBtn">
                     <i class="fas fa-store"></i> Магазин
                 </button>
-                <!-- Випадаюче меню для Магазину -->
                 <div class="shop-dropdown" id="shopDropdown">
                     <a href="#" class="shop-item"><i class="fas fa-apple-alt"></i> Харчування</a>
                     <a href="#" class="shop-item"><i class="fas fa-tools"></i> Спорядження</a>
@@ -101,8 +30,8 @@
             <button class="shop-secondary-btn">
                 <i class="fas fa-gavel"></i> Аукціон
             </button>
-            <button class="shop-secondary-btn">
-                <i class="fas fa-home"></i> Приют
+            <button class="shop-secondary-btn" onclick="window.location.href='{% url 'shelter_page' %}'">
+                <i class="fas fa-home"></i> Притулок
             </button>
         </div>
     </div>
@@ -285,7 +214,7 @@ function resetFilters() {
     document.querySelectorAll('.horse-card').forEach(horse => horse.style.display = 'flex');
 }
 
-// ========== Випадаюче меню "Магазин" (hover, зліва під кнопкою) ==========
+// Випадаюче меню "Магазин" (hover)
 document.addEventListener('DOMContentLoaded', function() {
     const shopContainer = document.querySelector('.shop-main-container');
     const dropdown = document.getElementById('shopDropdown');
@@ -299,17 +228,15 @@ document.addEventListener('DOMContentLoaded', function() {
     function hideDropdown() {
         hideTimeout = setTimeout(() => {
             dropdown.classList.remove('visible');
-        }, 200); // затримка 200 мс, щоб зручно перевести курсор на меню
+        }, 200);
     }
 
-    // Події на контейнер (включає кнопку + меню)
     shopContainer.addEventListener('mouseenter', showDropdown);
     shopContainer.addEventListener('mouseleave', hideDropdown);
 
-    // Якщо клікнули на кнопку – не закриваємо (можна залишити як є)
     document.getElementById('shopMainBtn').addEventListener('click', (e) => {
         e.preventDefault();
-        // тут можна додати перехід на сторінку магазину, якщо потрібно
+        // тут можна додати перехід на сторінку магазину
     });
 });
 </script>
