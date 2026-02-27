@@ -5,6 +5,7 @@ HORSE_IMAGES = {
     ('ахалтекінець', 'вогняно-гнідий'): 'img/horses/ahaltekin_fire_chestnut.png',
     ('ахалтекінець', 'вороний'): 'img/horses/ahaltekin_full_black.png',
     ('ахалтекінець', 'мишасто-сірий'): 'img/horses/ahaltekin_light_gray.png',
+    ('Шетландський поні', 'рудий'): 'img/horses/pony_red.png',
 
     # Тут ви зможете додавати нові фото в майбутньому
     # ('арабська', 'сірий'): 'img/horses/arabian_gray.png',

@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="-">
-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/img/horses/default_pony_adult.png" afterDir="false" />
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="Added horse types (Riding Horse, Pony, Unicorn, Pegasus).&#10;Updated models.&#10;Implemented default base image logic for Pony.">
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/img/horses/pony_red.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/generate_horses.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/generate_horses.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/horse_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/horse_images.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/trade.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/trade.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/породи" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/породи" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="23.5-Shelter-v2" />
+        <entry key="$PROJECT_DIR$" value="24-pony" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,7 +56,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "24-pony",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "git-widget-placeholder": "24.1-pony",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/img/horses",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -143,7 +138,7 @@
       <workItem from="1772134816196" duration="130000" />
       <workItem from="1772134958931" duration="664000" />
       <workItem from="1772135652404" duration="194000" />
-      <workItem from="1772186146079" duration="3059000" />
+      <workItem from="1772186146079" duration="4090000" />
     </task>
     <task id="LOCAL-00001" summary="?">
       <option name="closed" value="true" />
@@ -281,7 +276,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772132411804</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Added horse types (Riding Horse, Pony, Unicorn, Pegasus).&#10;Updated models.&#10;Implemented default base image logic for Pony.">
+      <option name="closed" value="true" />
+      <created>1772189490536</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1772189490536</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,7 +317,8 @@
     <MESSAGE value="added shelter page" />
     <MESSAGE value="ааааааа" />
     <MESSAGE value="-" />
-    <option name="LAST_COMMIT_MESSAGE" value="-" />
+    <MESSAGE value="Added horse types (Riding Horse, Pony, Unicorn, Pegasus).&#10;Updated models.&#10;Implemented default base image logic for Pony." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added horse types (Riding Horse, Pony, Unicorn, Pegasus).&#10;Updated models.&#10;Implemented default base image logic for Pony." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
