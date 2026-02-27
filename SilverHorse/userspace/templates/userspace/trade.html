@@ -59,6 +59,17 @@
                     </select>
                 </div>
 
+                <!-- Фільтр за типом коня -->
+                <div class="filter-group">
+                    <label class="filter-label">Тип:</label>
+                    <select class="filter-select" id="typeFilter">
+                        <option value="">Всі типи</option>
+                        {% for type_value, type_display in horse_types %}
+                            <option value="{{ type_value }}">{{ type_display }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
                 <!-- Фільтр за віком -->
                 <div class="filter-group">
                     <label class="filter-label">Вік (роки):</label>
@@ -75,7 +86,7 @@
                     </div>
                 </div>
 
-                <!-- Фільтр за ціною -->
+                <!-- Фільтр за ціною (з валютою) -->
                 <div class="filter-group">
                     <label class="filter-label">Ціна:</label>
                     <div class="currency-selector">
@@ -102,13 +113,10 @@
                     <label class="filter-label">Стать:</label>
                     <div class="gender-options">
                         <label class="gender-checkbox">
-                            <input type="checkbox" name="gender" value="male"> Жеребець
+                            <input type="checkbox" name="gender" value="M"> Жеребець
                         </label>
                         <label class="gender-checkbox">
-                            <input type="checkbox" name="gender" value="female"> Кобила
-                        </label>
-                        <label class="gender-checkbox">
-                            <input type="checkbox" name="gender" value="gelding"> Мерин
+                            <input type="checkbox" name="gender" value="F"> Кобила
                         </label>
                     </div>
                 </div>
@@ -124,9 +132,11 @@
     <div class="horse-list">
         {% for horse in horses %}
         <div class="horse-card" data-breed="{{ horse.breed }}"
+                                 data-type="{{ horse.horse_type }}"
                                  data-age="{{ horse.age }}"
                                  data-price="{{ horse.price }}"
-                                 data-gender="{{ horse.gender }}">
+                                 data-gender="{{ horse.gender }}"
+                                 data-currency="horseshoes">   <!-- всі коні поки що в підковах -->
             <div class="photo-container">
                 <img src="{{ horse.get_photo_url }}"
                      alt="{{ horse.get_photo_alt }}"
@@ -184,28 +194,44 @@ function decrementValue(id) {
 
 function applyFilters() {
     const breed = document.getElementById('breedFilter').value;
+    const type = document.getElementById('typeFilter').value;
     const ageFrom = parseInt(document.getElementById('ageFrom').value);
     const ageTo = parseInt(document.getElementById('ageTo').value);
     const priceFrom = parseInt(document.getElementById('priceFrom').value);
     const priceTo = parseInt(document.getElementById('priceTo').value);
+    const currency = document.getElementById('currencyFilter').value;
 
     const selectedGenders = [];
     document.querySelectorAll('input[name="gender"]:checked').forEach(cb => selectedGenders.push(cb.value));
 
     document.querySelectorAll('.horse-card').forEach(horse => {
         let show = true;
+        const horseBreed = horse.dataset.breed;
+        const horseType = horse.dataset.type;
         const age = parseInt(horse.dataset.age);
         const price = parseInt(horse.dataset.price);
-        if (breed && horse.dataset.breed !== breed) show = false;
+        const gender = horse.dataset.gender;
+        const horseCurrency = horse.dataset.currency;
+
+        // Фільтр за породою
+        if (breed && horseBreed !== breed) show = false;
+        // Фільтр за типом
+        if (type && horseType !== type) show = false;
+        // Фільтр за віком
         if (age < ageFrom || age > ageTo) show = false;
+        // Фільтр за статтю
+        if (selectedGenders.length && !selectedGenders.includes(gender)) show = false;
+        // Фільтр за валютою та ціною
+        if (currency && horseCurrency !== currency) show = false;
         if (price < priceFrom || price > priceTo) show = false;
-        if (selectedGenders.length && !selectedGenders.includes(horse.dataset.gender)) show = false;
+
         horse.style.display = show ? 'flex' : 'none';
     });
 }
 
 function resetFilters() {
     document.getElementById('breedFilter').value = '';
+    document.getElementById('typeFilter').value = '';
     document.getElementById('ageFrom').value = 0;
     document.getElementById('ageTo').value = 30;
     document.getElementById('priceFrom').value = 0;
