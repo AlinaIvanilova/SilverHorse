@@ -5,28 +5,26 @@ import os
 import random
 from datetime import datetime
 
+# Налаштування Django
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SilverHorse.settings")
 import django
 django.setup()
 
-from django.db import connection
-from userspace.models import Horse  # імпортуємо для отримання назви таблиці
+from userspace.models import Horse
 
 # Дані для генерації
-breeds = ['Ахалтекінець', 'Фризька']
-colors = ['Чорний']
-
-# Назва таблиці (зазвичай userspace_horse)
-table_name = Horse._meta.db_table
+breeds = ['Ахалтекінець', 'Фризька', 'Шетландський поні']  # додано породу поні
+colors = ['Чорний', 'Гнідий', 'Рудий', 'Сірий', 'Білий']
+genders = ['M', 'F']
 
 # Генерація 5 коней
 for i in range(5):
-    # Генеруємо випадкові значення для всіх полів
+    # Генеруємо випадкові значення
     name = f"Молодий_кінь_{i+1}"
     breed = random.choice(breeds)
-    age = random.randint(0, 1)
-    gender = random.choice(['M', 'F'])
+    age = random.randint(0, 5)
+    gender = random.choice(genders)
     coat_color = random.choice(colors)
     speed = random.randint(40, 100)
     endurance = random.randint(40, 100)
@@ -34,21 +32,31 @@ for i in range(5):
     health = random.randint(50, 100)
     energy = random.randint(50, 100)
     mood = random.randint(50, 100)
-    photo = ''  # або None, якщо поле допускає NULL
-    owner_id = None  # зовнішній ключ може бути NULL
     price = random.randint(100, 1000)
-    status = 'market'
+    status = 'market'  # усі нові коні з'являються на ринку
     wins = 0
-    for_sale = 1  # 1 = True, 0 = False (для MySQL)
 
-    # SQL-запит
-    with connection.cursor() as cursor:
-        cursor.execute(f"""
-            INSERT INTO {table_name} 
-            (name, breed, age, gender, coat_color, speed, endurance, strength, health, energy, mood, photo, owner_id, price, status, wins, for_sale)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, [name, breed, age, gender, coat_color, speed, endurance, strength, health, energy, mood, photo, owner_id, price, status, wins, for_sale])
+    # Створюємо об'єкт Horse — метод save() автоматично встановить horse_type
+    # на основі породи (для "Шетландський поні" буде 'pony')
+    horse = Horse(
+        name=name,
+        breed=breed,
+        age=age,
+        gender=gender,
+        coat_color=coat_color,
+        speed=speed,
+        endurance=endurance,
+        strength=strength,
+        health=health,
+        energy=energy,
+        mood=mood,
+        price=price,
+        status=status,
+        wins=wins,
+        # owner і photo залишаємо None (за замовчуванням)
+    )
+    horse.save()
 
-    print(f"Створено коня: {name}, порода: {breed}, вік: {age}")
+    print(f"Створено коня: {horse.name}, порода: {horse.breed}, тип: {horse.get_horse_type_display()}")
 
 print("Генерацію завершено.")
