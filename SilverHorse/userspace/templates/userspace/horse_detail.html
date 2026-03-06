@@ -134,6 +134,16 @@
     {% endif %}
 
 </div>
+{% if horse.status == 'shelter' %}
+    <div class="pet-section">
+        <form action="{% url 'pet_horse' horse.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="pet-btn">
+                <i class="fas fa-hand-sparkles"></i> Погладити коня (+10 підков)
+            </button>
+        </form>
+    </div>
+{% endif %}
 
 {% endblock %}
 

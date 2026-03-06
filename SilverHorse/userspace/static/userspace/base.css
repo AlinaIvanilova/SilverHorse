@@ -1,32 +1,129 @@
 /* =========================
-   Загальні налаштування
+   🌍 Глобальні змінні
 ========================= */
 
+:root {
+  /* 🎨 Кольори */
+  --color-bg-overlay: rgba(0, 0, 0, 0.5);
+  --color-text: #ffffff;
+  --color-primary: #3b82f6;
+  --color-accent: #facc15;
+  --color-error: #ef4444;
+  --color-success: #22c55e;
+
+  /* ✍ Шрифти */
+  --font-main: "Roboto", sans-serif;
+
+  /* 📏 Відступи */
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+
+  /* 📐 Інше */
+  --border-radius: 8px;
+  --transition-fast: 0.2s ease-in-out;
+}
+
+
+/* =========================
+   🔧 Базові налаштування
+========================= */
 
 * {
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
-  color: white;
+  font-family: var(--font-main);
+  color: var(--color-text);
   min-height: 100vh;
+
   background-image: url("../userspace/scene-beautiful-summer-day.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* 🔹 важливо! */
+  background-attachment: fixed;
 }
-html, body {
-  height: 100%; /* щоб фон покривав весь екран */
-}
+
 
 /* =========================
    📄 Основний контент
 ========================= */
+
 .main-content {
   padding-top: 115px;
-  min-height: 150vh;
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+  min-height: 100vh;
 }
 
+
+/* =========================
+   🔘 Кнопки
+========================= */
+
+button {
+  background-color: var(--color-primary);
+  color: white;
+  padding: var(--spacing-md);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* ♿ Видимий focus для клавіатури */
+button:focus,
+a:focus,
+input:focus {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+
+/* =========================
+   📝 Форми (валідація)
+========================= */
+
+input, textarea {
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  border: 2px solid transparent;
+  transition: var(--transition-fast);
+}
+
+/* ❌ Помилка */
+input:invalid {
+  border-color: var(--color-error);
+}
+
+/* ✅ Успіх */
+input:valid {
+  border-color: var(--color-success);
+}
+
+
+/* =========================
+   🦶 Footer
+========================= */
+
+.site-footer {
+  padding: var(--spacing-lg);
+  background-color: var(--color-bg-overlay);
+  text-align: center;
+  opacity: 0;
+  transition: var(--transition-fast);
+}
+
+.site-footer.show-footer {
+  opacity: 1;
+}

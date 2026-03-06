@@ -1,38 +1,183 @@
 {% extends 'userspace/base.html' %}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'userspace/css/shelter.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="shelter-container">
-    <h1>Притулок для коней</h1>
+    <h1><i class="fas fa-home"></i> Притулок для коней</h1>
 
+    <!-- Опис притулку -->
+    <div class="shelter-description">
+        <p>Тут знаходяться коні, які шукають новий дім. Ви можете доглядати за ними, але вони поки що не належать вам.</p>
+    </div>
+
+    <!-- Статистика притулку -->
+    <div class="shelter-stats">
+        <p><i class="fas fa-horse"></i> Всього коней у притулку: <strong>{{ horses.count }}</strong></p>
+    </div>
+
+    <!-- Навігація та пошук (як на ринку) -->
     <div class="shelter-nav">
         <a href="{% url 'trade_page' %}" class="back-to-market-btn">
             <i class="fas fa-arrow-left"></i> Назад на ринок
         </a>
     </div>
 
+    <!-- Фільтри -->
+    <div class="search-section">
+        <button class="search-toggle-btn" onclick="toggleSearchFilters()">
+            <i class="fas fa-search"></i> Пошук у притулку
+        </button>
+
+        <div class="search-filters" id="searchFilters" style="display: none;">
+            <div class="filters-grid">
+                <!-- Фільтр за породою -->
+                <div class="filter-group">
+                    <label class="filter-label">Порода:</label>
+                    <select class="filter-select" id="breedFilter">
+                        <option value="">Всі породи</option>
+                        {% for breed in breeds %}
+                            <option value="{{ breed }}">{{ breed }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Фільтр за типом коня -->
+                <div class="filter-group">
+                    <label class="filter-label">Тип:</label>
+                    <select class="filter-select" id="typeFilter">
+                        <option value="">Всі типи</option>
+                        {% for type_value, type_display in horse_types %}
+                            <option value="{{ type_value }}">{{ type_display }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Фільтр за віком -->
+                <div class="filter-group">
+                    <label class="filter-label">Вік (роки):</label>
+                    <div class="number-input">
+                        <button type="button" onclick="decrementValue('ageFrom')">−</button>
+                        <input type="number" id="ageFrom" class="filter-number" value="0" min="0" max="30">
+                        <button type="button" onclick="incrementValue('ageFrom')">+</button>
+                    </div>
+                    <span class="filter-separator">до</span>
+                    <div class="number-input">
+                        <button type="button" onclick="decrementValue('ageTo')">−</button>
+                        <input type="number" id="ageTo" class="filter-number" value="30" min="0" max="30">
+                        <button type="button" onclick="incrementValue('ageTo')">+</button>
+                    </div>
+                </div>
+
+                <!-- Фільтр за статтю -->
+                <div class="filter-group">
+                    <label class="filter-label">Стать:</label>
+                    <div class="gender-options">
+                        <label class="gender-checkbox">
+                            <input type="checkbox" name="gender" value="M"> Жеребець
+                        </label>
+                        <label class="gender-checkbox">
+                            <input type="checkbox" name="gender" value="F"> Кобила
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button class="apply-filters-btn" onclick="applyFilters()"><i class="fas fa-check"></i> Застосувати</button>
+                <button class="reset-filters-btn" onclick="resetFilters()"><i class="fas fa-undo-alt"></i> Скинути</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Список коней -->
     <div class="horse-list">
         {% for horse in horses %}
-        <div class="horse-card">
+        <div class="horse-card" data-breed="{{ horse.breed }}"
+                                 data-type="{{ horse.horse_type }}"
+                                 data-age="{{ horse.age }}"
+                                 data-gender="{{ horse.gender }}">
             <div class="photo-container">
                 <img src="{{ horse.get_photo_url }}" alt="{{ horse.get_photo_alt }}" class="horse-photo">
             </div>
             <div class="horse-info">
                 <h2>{{ horse.name }}</h2>
-                <p>Порода: {{ horse.breed }}</p>
-                <p>Вік: {{ horse.age }} р.</p>
-                <p>Стать: {{ horse.get_gender_display }}</p>
-                <p>Колір: {{ horse.coat_color }}</p>
-                <p>Швидкість: {{ horse.speed }}</p>
-                <p>Витривалість: {{ horse.endurance }}</p>
-                <p>Сила: {{ horse.strength }}</p>
-                <p>Здоров'я: {{ horse.health }}</p>
+                <p><i class="fas fa-tag"></i> Порода: {{ horse.breed }}</p>
+                <p><i class="fas fa-paw"></i> Тип: {{ horse.get_horse_type_display }}</p>
+                <p><i class="fas fa-calendar-alt"></i> Вік: {{ horse.age }} р.</p>
+                <p><i class="fas fa-venus-mars"></i> Стать: {{ horse.get_gender_display }}</p>
+                <p><i class="fas fa-palette"></i> Колір: {{ horse.coat_color }}</p>
+                <p><i class="fas fa-tachometer-alt"></i> Швидкість: {{ horse.speed }}</p>
+                <p><i class="fas fa-heartbeat"></i> Витривалість: {{ horse.endurance }}</p>
+                <p><i class="fas fa-dumbbell"></i> Сила: {{ horse.strength }}</p>
+                <p><i class="fas fa-heart"></i> Здоров'я: {{ horse.health }}</p>
             </div>
-            <!-- In the future, you can add an "Adopt" button here -->
+            <!-- Кнопка "Догляд" - веде на сторінку коня -->
+            <div class="care-section">
+                <a href="{% url 'horse_detail' horse.id %}" class="care-btn">
+                    <i class="fas fa-hand-holding-heart"></i> Догляд
+                </a>
+            </div>
         </div>
         {% empty %}
-        <p>У притулку поки що немає коней.</p>
+        <p class="empty-message"><i class="fas fa-frown"></i> У притулку поки що немає коней.</p>
         {% endfor %}
     </div>
 </div>
+
+<script>
+// Функції для фільтрів
+function toggleSearchFilters() {
+    const filters = document.getElementById('searchFilters');
+    filters.style.display = (filters.style.display === 'none' || filters.style.display === '') ? 'block' : 'none';
+}
+
+function incrementValue(id) {
+    const input = document.getElementById(id);
+    input.value = parseInt(input.value) + 1;
+}
+
+function decrementValue(id) {
+    const input = document.getElementById(id);
+    const currentValue = parseInt(input.value);
+    if (currentValue > 0) input.value = currentValue - 1;
+}
+
+function applyFilters() {
+    const breed = document.getElementById('breedFilter').value;
+    const type = document.getElementById('typeFilter').value;
+    const ageFrom = parseInt(document.getElementById('ageFrom').value);
+    const ageTo = parseInt(document.getElementById('ageTo').value);
+
+    const selectedGenders = [];
+    document.querySelectorAll('input[name="gender"]:checked').forEach(cb => selectedGenders.push(cb.value));
+
+    document.querySelectorAll('.horse-card').forEach(horse => {
+        let show = true;
+        const horseBreed = horse.dataset.breed;
+        const horseType = horse.dataset.type;
+        const age = parseInt(horse.dataset.age);
+        const gender = horse.dataset.gender;
+
+        if (breed && horseBreed !== breed) show = false;
+        if (type && horseType !== type) show = false;
+        if (age < ageFrom || age > ageTo) show = false;
+        if (selectedGenders.length && !selectedGenders.includes(gender)) show = false;
+
+        horse.style.display = show ? 'flex' : 'none';
+    });
+}
+
+function resetFilters() {
+    document.getElementById('breedFilter').value = '';
+    document.getElementById('typeFilter').value = '';
+    document.getElementById('ageFrom').value = 0;
+    document.getElementById('ageTo').value = 30;
+    document.querySelectorAll('input[name="gender"]').forEach(cb => cb.checked = false);
+    document.querySelectorAll('.horse-card').forEach(horse => horse.style.display = 'flex');
+}
+</script>
 {% endblock %}

@@ -333,3 +333,8 @@
 .energy-high .bar-fill {
     background: linear-gradient(90deg, #ffff00, #99ff00, #00ff00);
 }
+
+.horse-action-section,
+.pet-section {
+    margin-bottom: 8000px;
+}
