@@ -115,11 +115,25 @@
                 <p><i class="fas fa-dumbbell"></i> Сила: {{ horse.strength }}</p>
                 <p><i class="fas fa-heart"></i> Здоров'я: {{ horse.health }}</p>
             </div>
-            <!-- Кнопка "Догляд" - веде на сторінку коня -->
-            <div class="care-section">
+            <!-- Блок з кнопками дій -->
+            <div class="action-section">
+                <!-- Посилання на детальну сторінку -->
                 <a href="{% url 'horse_detail' horse.id %}" class="care-btn">
                     <i class="fas fa-hand-holding-heart"></i> Догляд
                 </a>
+                <!-- Форма для погладжування (тільки для коней у притулку) -->
+                <form action="{% url 'pet_horse' horse.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button type="submit" class="pet-btn" {% if horse.user_petted %}disabled{% endif %}>
+                        <i class="fas fa-hand-sparkles"></i>
+                        {% if horse.user_petted %}
+                            Вже гладили
+                        {% else %}
+                            Погладити (+10)
+                        {% endif %}
+                    </button>
+                </form>
             </div>
         </div>
         {% empty %}

@@ -230,45 +230,40 @@ figure {
 
 
 /* =========================
-   🔘 CARE BUTTON
+   🔘 ACTION BUTTONS (Догляд / Погладити)
 ========================= */
-.care-section {
-  padding: 15px;
+.action-section {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    padding: 0 15px 15px;  /* додаткові відступи, якщо потрібно */
+}
+
+.pet-btn,
+.care-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: var(--transition); /* використовуємо змінну з :root */
 }
 
 .care-btn {
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 10px;
-  background: var(--color-primary);
-  color: black;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: var(--transition);
+    background-color: #4CAF50;  /* зелений */
+    color: white;
 }
 
-.care-btn:hover {
-  background: var(--color-primary-hover);
+.pet-btn {
+    background-color: #FFC107;  /* жовтий */
+    color: black;
 }
 
-
-/* =========================
-   ❌ EMPTY
-========================= */
-.empty-message {
-  text-align: center;
-  padding: 40px;
-  background: var(--color-bg-block);
-  border-radius: var(--radius);
-}
-
-
-/* =========================
-   ♿ SCREEN READER
-========================= */
-.visually-hidden {
-  position: absolute;
-  left: -9999px;
+.pet-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }

@@ -36,5 +36,5 @@ urlpatterns = [
 
     path('shelter/', views.shelter_view, name='shelter_page'),
     path('shelter/send/<int:horse_id>/', views.send_to_shelter, name='send_to_shelter'),
-    path('pet/<int:horse_id>/', views.pet_horse, name='pet_horse'),
+    path('shelter/pet/<int:horse_id>/', views.pet_horse, name='pet_horse'),
 ]

@@ -76,13 +76,12 @@ class Horse(models.Model):
         return f"{self.breed} {self.coat_color} - {self.name}"
 
 
-
 class HorsePet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='horse_pets')
     horse = models.ForeignKey('Horse', on_delete=models.CASCADE, related_name='pets')
     timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('user', 'horse')  # один користувач може погладити коня лише один раз
+        # ❌ Видалено unique_together – тепер дозволено багато записів
         verbose_name = "Погладжування коня"
         verbose_name_plural = "Погладжування коней"
