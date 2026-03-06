@@ -4,24 +4,31 @@
 :root {
   --color-primary: #ffd700;
   --color-primary-hover: #ffea70;
+  --color-primary-glow: rgba(255, 215, 0, 0.3);
 
-  --color-bg-card: rgba(0, 0, 0, 0.4);
-  --color-bg-block: rgba(0, 0, 0, 0.3);
+  --color-bg-card: rgba(0, 0, 0, 0.6);
+  --color-bg-block: rgba(20, 20, 20, 0.7);
+  --color-bg-glass: rgba(0, 0, 0, 0.4);
 
   --color-border: rgba(255, 215, 0, 0.3);
-  --color-border-hover: rgba(255, 215, 0, 0.7);
+  --color-border-hover: rgba(255, 215, 0, 0.8);
 
   --color-text: #ffffff;
+  --color-text-secondary: #cccccc;
   --color-error: #ef4444;
   --color-success: #22c55e;
 
-  --radius: 10px;
+  --radius: 12px;
+  --radius-sm: 8px;
   --transition: 0.3s ease;
+
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  --shadow-hover: 0 8px 25px rgba(255, 215, 0, 0.2);
+  --glass-effect: blur(10px);
 }
 
-
 /* =========================
-   🌍 БАЗОВІ
+   🌍 БАЗОВІ СТИЛІ
 ========================= */
 * {
   box-sizing: border-box;
@@ -30,45 +37,82 @@
 .shelter-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 30px 20px;
+  padding: 30px 20px 50px;
   width: 100%;
 }
 
-
 /* =========================
-   🏠 HEADER
+   🏠 ЗАГОЛОВОК ТА ОПИС
 ========================= */
-.shelter-header {
+.shelter-container h1 {
+  font-size: 2.8rem;
+  color: var(--color-primary);
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
+  text-shadow: 0 0 15px var(--color-primary-glow);
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
 
-.shelter-header h1 {
-  font-size: 2.5rem;
+.shelter-container h1 i {
+  margin-right: 15px;
   color: var(--color-primary);
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+  filter: drop-shadow(0 0 8px var(--color-primary));
 }
 
 .shelter-description {
-  max-width: 600px;
-  margin: 10px auto 0;
-  font-size: 1.1rem;
-}
-
-
-/* =========================
-   📊 СТАТИСТИКА
-========================= */
-.shelter-stats {
-  background: var(--color-bg-block);
-  border-radius: var(--radius);
-  padding: 15px 20px;
+  max-width: 700px;
   margin: 0 auto 30px;
   text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-glass);
+  backdrop-filter: var(--glass-effect);
+  padding: 20px 30px;
+  border-radius: var(--radius);
   border: 2px solid var(--color-border);
-  max-width: 600px;
+  box-shadow: var(--shadow);
 }
 
+/* =========================
+   📊 СТАТИСТИКА ПРИТУЛКУ
+========================= */
+.shelter-stats {
+  background: linear-gradient(135deg, var(--color-bg-block), var(--color-bg-card));
+  backdrop-filter: var(--glass-effect);
+  border-radius: 50px;
+  padding: 15px 35px;
+  margin: 0 auto 40px;
+  text-align: center;
+  border: 2px solid var(--color-border);
+  max-width: 400px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.shelter-stats:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.shelter-stats p {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--color-text);
+}
+
+.shelter-stats strong {
+  color: var(--color-primary);
+  font-size: 1.8rem;
+  margin-left: 10px;
+  text-shadow: 0 0 10px var(--color-primary);
+}
 
 /* =========================
    🧭 НАВІГАЦІЯ
@@ -76,194 +120,402 @@
 .shelter-nav {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .back-to-market-btn {
   background: transparent;
   color: var(--color-primary);
-  padding: 12px 30px;
+  padding: 14px 35px;
   font-weight: bold;
+  font-size: 1.1rem;
   border: 2px solid var(--color-primary);
-  border-radius: 8px;
+  border-radius: 50px;
   text-decoration: none;
   transition: var(--transition);
+  box-shadow: 0 0 15px transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.back-to-market-btn i {
+  font-size: 1.2rem;
 }
 
 .back-to-market-btn:hover {
-  background: rgba(255, 215, 0, 0.15);
+  background: var(--color-primary);
+  color: black;
+  box-shadow: 0 0 25px var(--color-primary);
+  transform: translateY(-3px);
 }
 
-
 /* =========================
-   🔎 ПОШУК
+   🔎 ПОШУК (ФІЛЬТРИ)
 ========================= */
 .search-section {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .search-toggle-btn {
-  padding: 12px 25px;
-  border-radius: 8px;
+  padding: 14px 30px;
+  border-radius: 50px;
   border: none;
-  background: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), #ffaa00);
   color: black;
   font-weight: bold;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: var(--transition);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
 }
 
 .search-toggle-btn:hover {
-  background: var(--color-primary-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
 }
 
-
-/* =========================
-   📝 ФОРМА
-========================= */
 .search-filters {
-  margin-top: 20px;
-  padding: 20px;
-  background: var(--color-bg-block);
+  margin-top: 25px;
+  padding: 25px;
+  background: var(--color-bg-glass);
+  backdrop-filter: var(--glass-effect);
   border-radius: var(--radius);
   border: 2px solid var(--color-border);
+  box-shadow: var(--shadow);
 }
 
-fieldset {
-  border: 1px solid var(--color-border);
-  margin-bottom: 15px;
-  padding: 10px;
-}
-
-legend {
-  color: var(--color-primary);
-}
-
-label {
-  display: block;
-  margin-top: 10px;
-}
-
-select,
-input {
-  width: 100%;
-  padding: 8px;
-  border-radius: 6px;
-  border: 2px solid transparent;
-  margin-top: 5px;
-}
-
-
-/* ♿ Focus */
-select:focus,
-input:focus,
-button:focus {
-  outline: 3px solid var(--color-primary);
-}
-
-
-/* ✅ Validation */
-input:invalid {
-  border-color: var(--color-error);
-}
-
-input:valid {
-  border-color: var(--color-success);
-}
-
-
-/* =========================
-   🐎 GRID
-========================= */
-.horse-list {
+.filters-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-label {
+  color: var(--color-primary);
+  font-weight: bold;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filter-select,
+.filter-number {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-border);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.filter-select:hover,
+.filter-number:hover {
+  border-color: var(--color-primary-hover);
+}
+
+.filter-select:focus,
+.filter-number:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 10px var(--color-primary-glow);
+}
+
+.number-input {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.number-input button {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.number-input button:hover {
+  background: var(--color-primary);
+  color: black;
+}
+
+.filter-separator {
+  color: var(--color-text);
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+.gender-options {
+  display: flex;
   gap: 20px;
 }
 
+.gender-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.gender-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+}
+
+.filter-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.apply-filters-btn,
+.reset-filters-btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.apply-filters-btn {
+  background: linear-gradient(135deg, var(--color-primary), #ffaa00);
+  color: black;
+}
+
+.reset-filters-btn {
+  background: transparent;
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
+}
+
+.apply-filters-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+}
+
+.reset-filters-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
 
 /* =========================
-   🐎 CARD
+   🐎 СІТКА КАРТОК
+========================= */
+.horse-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+/* =========================
+   🐎 КАРТКА КОНЯ
 ========================= */
 .horse-card {
-  background: var(--color-bg-card);
+  background: var(--color-bg-glass);
+  backdrop-filter: var(--glass-effect);
   border-radius: var(--radius);
   overflow: hidden;
   border: 2px solid var(--color-border);
   transition: var(--transition);
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow);
 }
 
 .horse-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
   border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-hover);
 }
 
-
-/* =========================
-   📷 IMAGE
-========================= */
-figure {
-  margin: 0;
+/* Фото */
+.photo-container {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid var(--color-border);
 }
 
 .horse-photo {
   width: 100%;
-  height: 230px;
+  height: 100%;
   object-fit: contain;
-  background: rgba(255,255,255,0.05);
+  transition: transform 0.5s ease;
 }
 
+.horse-card:hover .horse-photo {
+  transform: scale(1.05);
+}
 
-/* =========================
-   ℹ INFO
-========================= */
+/* Інформація */
 .horse-info {
-  padding: 15px;
+  padding: 20px;
   flex-grow: 1;
 }
 
-.horse-info p {
-  margin: 4px 0;
+.horse-info h2 {
+  color: var(--color-primary);
+  font-size: 1.8rem;
+  margin: 0 0 15px;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 10px;
 }
 
+.horse-info p {
+  margin: 8px 0;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.horse-info p i {
+  width: 25px;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
 
 /* =========================
-   🔘 ACTION BUTTONS (Догляд / Погладити)
+   🔘 СЕКЦІЯ КНОПОК
 ========================= */
 .action-section {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-    padding: 0 15px 15px;  /* додаткові відступи, якщо потрібно */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 20px 20px;
 }
 
-.pet-btn,
-.care-btn {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    transition: var(--transition); /* використовуємо змінну з :root */
+.care-btn,
+.pet-btn {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
 }
 
 .care-btn {
-    background-color: #4CAF50;  /* зелений */
-    color: white;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.care-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5);
 }
 
 .pet-btn {
-    background-color: #FFC107;  /* жовтий */
-    color: black;
+  background: linear-gradient(135deg, #FFC107, #ffb300);
+  color: black;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.pet-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 193, 7, 0.5);
 }
 
 .pet-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  background: linear-gradient(135deg, #666, #555);
+  color: #aaa;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
+
+/* =========================
+   ❌ ПУСТИЙ СПИСОК
+========================= */
+.empty-message {
+  text-align: center;
+  padding: 60px 40px;
+  background: var(--color-bg-glass);
+  backdrop-filter: var(--glass-effect);
+  border-radius: var(--radius);
+  border: 2px solid var(--color-border);
+  font-size: 1.3rem;
+  color: var(--color-text-secondary);
+  grid-column: 1 / -1;
+}
+
+.empty-message i {
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* =========================
+   ♿ ACCESSIBILITY
+========================= */
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .shelter-container h1 {
+    font-size: 2rem;
+    white-space: normal;
+  }
+
+  .filters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-section {
+    grid-template-columns: 1fr;
+  }
+
+  .horse-list {
+    grid-template-columns: 1fr;
+  }
+}
+
