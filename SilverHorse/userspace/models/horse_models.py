@@ -74,3 +74,15 @@ class Horse(models.Model):
 
     def get_photo_alt(self):
         return f"{self.breed} {self.coat_color} - {self.name}"
+
+
+
+class HorsePet(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='horse_pets')
+    horse = models.ForeignKey('Horse', on_delete=models.CASCADE, related_name='pets')
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'horse')  # один користувач може погладити коня лише один раз
+        verbose_name = "Погладжування коня"
+        verbose_name_plural = "Погладжування коней"
