@@ -4,7 +4,7 @@ from ..models import Notification
 
 
 PROMO_CODES = {
-    'WELCOME100': {'horseshoes': 100, 'silver_wings': 0},
+    'WELCOME100': {'horseshoes': 10000, 'silver_wings': 0},
     'ONE': {'horseshoes': 1000, 'silver_wings': 0, 'once': True},
 }
 

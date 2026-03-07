@@ -1,0 +1,24 @@
+{% extends 'userspace/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="auction-container">
+    <h1>Аукціон</h1>
+    <a href="{% url 'create_auction' %}" class="btn-create-auction">+ Виставити коня</a>
+
+    <div class="auction-grid">
+        {% for auction in auctions %}
+            <div class="auction-card">
+                <img src="{{ auction.horse.get_photo_url }}" alt="{{ auction.horse.name }}">
+                <h3>{{ auction.horse.name }}</h3>
+                <p>Порода: {{ auction.horse.breed }}</p>
+                <p>Поточна ставка: <strong>{{ auction.current_bid }}</strong> 🐎</p>
+                <p>Залишилось: {{ auction.time_left }}</p>
+                <a href="{% url 'auction_detail' auction.id %}" class="btn-view">Зробити ставку</a>
+            </div>
+        {% empty %}
+            <p>Наразі активних аукціонів немає.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

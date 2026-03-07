@@ -1,0 +1,51 @@
+{% extends 'userspace/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="auction-detail">
+    <h1>{{ auction.horse.name }}</h1>
+    <div class="horse-info">
+        <img src="{{ auction.horse.get_photo_url }}" alt="">
+        <p>Порода: {{ auction.horse.breed }}</p>
+        <p>Тип: {{ auction.horse.get_horse_type_display }}</p>
+        <p>Вік: {{ auction.horse.age }}</p>
+        <p>Стать: {{ auction.horse.get_gender_display }}</p>
+        <p>Колір: {{ auction.horse.coat_color }}</p>
+        <p>Швидкість: {{ auction.horse.speed }}</p>
+        <p>Витривалість: {{ auction.horse.endurance }}</p>
+        <p>Сила: {{ auction.horse.strength }}</p>
+        <p>Здоров'я: {{ auction.horse.health }}</p>
+    </div>
+
+    <div class="auction-status">
+        <p>Стартова ціна: {{ auction.starting_price }} 🐎</p>
+        <p>Поточна ставка: <strong>{{ auction.current_bid }}</strong> 🐎</p>
+        <p>Лідер: {{ auction.current_bidder.username|default:"—" }}</p>
+        <p>Час до завершення: <span id="timer">{{ auction.time_left }}</span></p>
+
+        {% if auction.is_active %}
+            <form method="post" action="{% url 'place_bid' auction.id %}">
+                {% csrf_token %}
+                <label for="bid_amount">Ваша ставка:</label>
+                <input type="number" name="bid_amount" min="{{ auction.current_bid|add:1 }}" required>
+                <button type="submit">Зробити ставку</button>
+            </form>
+            <p>Ваш доступний баланс: {{ request.user.profile.horseshoes|add:"-request.user.profile.reserved_horseshoes" }} 🐎</p>
+        {% else %}
+            <p>Аукціон завершено.</p>
+            {% if auction.current_bidder == request.user %}
+                <p class="winner">Вітаємо! Ви виграли цього коня!</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+<script>
+// Простий таймер зворотного відліку (можна використати бібліотеку або написати вручну)
+// Для прикладу – оновлення кожну секунду
+function updateTimer() {
+    // Тут можна отримати час закінчення з атрибута data-end-time і рахувати різницю
+}
+setInterval(updateTimer, 1000);
+</script>
+{% endblock %}

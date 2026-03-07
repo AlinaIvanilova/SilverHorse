@@ -5,6 +5,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     horseshoes = models.PositiveIntegerField(default=0, verbose_name="Срібні Підкови")
     silver_wings = models.PositiveIntegerField(default=0, verbose_name="Срібні Пір'я")
+    reserved_horseshoes = models.PositiveIntegerField(default=0, verbose_name="Зарезервовано на аукціоні")  # нове поле
     is_new_user = models.BooleanField(default=True, verbose_name="Новий користувач")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата створення профілю")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Останнє оновлення")

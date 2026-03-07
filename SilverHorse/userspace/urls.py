@@ -1,6 +1,7 @@
 # userspace/urls.py
 from django.urls import path
 from . import views
+from .views import auction
 
 urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
@@ -37,4 +38,10 @@ urlpatterns = [
     path('shelter/', views.shelter_view, name='shelter_page'),
     path('shelter/send/<int:horse_id>/', views.send_to_shelter, name='send_to_shelter'),
     path('shelter/pet/<int:horse_id>/', views.pet_horse, name='pet_horse'),
+
+    # Маршрути аукціону
+    path('auction/', auction.auction_list, name='auction_list'),
+    path('auction/<int:auction_id>/', auction.auction_detail, name='auction_detail'),
+    path('auction/create/', auction.create_auction, name='create_auction'),
+    path('auction/<int:auction_id>/bid/', auction.place_bid, name='place_bid'),
 ]

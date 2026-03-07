@@ -4,10 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="-">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="css">
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/auction_models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/auction_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/auction_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/create_auction.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/auction.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/shelter.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/shelter.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/trade.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/trade.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models/user_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/user_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/trade.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/trade.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/old_view.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/subscription.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/subscription.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +29,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -51,6 +63,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "JavaScript Debug.base.html.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.generate_horses.executor": "Run",
@@ -151,7 +164,7 @@
       <workItem from="1772363675824" duration="18000" />
       <workItem from="1772369816782" duration="603000" />
       <workItem from="1772445910626" duration="3388000" />
-      <workItem from="1772879766511" duration="727000" />
+      <workItem from="1772879766511" duration="2711000" />
     </task>
     <task id="LOCAL-00001" summary="?">
       <option name="closed" value="true" />
@@ -329,7 +342,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772816133513</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="css">
+      <option name="closed" value="true" />
+      <created>1772880505819</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1772880505819</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,7 +387,8 @@
     <MESSAGE value="master - 06.03.26" />
     <MESSAGE value="main function done" />
     <MESSAGE value="-" />
-    <option name="LAST_COMMIT_MESSAGE" value="-" />
+    <MESSAGE value="css" />
+    <option name="LAST_COMMIT_MESSAGE" value="css" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -378,21 +400,6 @@
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/SilverHorse/userspace/signals.py</url>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SilverHorse/userspace/views/old_view.py</url>
-          <line>508</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SilverHorse/userspace/views/old_view.py</url>
-          <line>234</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SilverHorse/userspace/views/old_view.py</url>
-          <line>238</line>
-          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

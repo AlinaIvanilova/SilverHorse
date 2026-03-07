@@ -3,6 +3,7 @@ from .messaging_models import Message, BlockedUser, SystemMessage
 from .note_models import Note
 from .user_models import Profile, Notification, EquestrianComplex, ComplexRating
 from .horse_models import Horse, HorsePet
+from .auction_models import Auction
 
 # Якщо ви залишили сигнал створення профілю в цьому файлі – він теж має бути тут
 from django.db.models.signals import post_save

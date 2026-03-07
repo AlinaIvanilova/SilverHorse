@@ -5,7 +5,7 @@ from ..horse_images import get_horse_image   # переконайтеся, що 
 
 class Horse(models.Model):
     gender_choices = [('M', 'Жеребець'), ('F', 'Кобила')]
-    status_choices = [('market', 'На ринку'), ('user', 'У користувача'), ('shelter', 'У притулку')]
+    status_choices = [('market', 'На ринку'), ('user', 'У користувача'), ('shelter', 'У притулку'), ('auction', 'На аукціоні')]
 
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=50)
