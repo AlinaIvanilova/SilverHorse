@@ -44,4 +44,5 @@ urlpatterns = [
     path('auction/<int:auction_id>/', auction.auction_detail, name='auction_detail'),
     path('auction/create/', auction.create_auction, name='create_auction'),
     path('auction/<int:auction_id>/bid/', auction.place_bid, name='place_bid'),
+    path('auction/<int:auction_id>/cancel/', auction.cancel_auction, name='cancel_auction'),
 ]

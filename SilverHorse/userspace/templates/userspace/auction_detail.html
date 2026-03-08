@@ -4,6 +4,16 @@
 {% block content %}
 <div class="auction-detail">
     <h1>{{ auction.horse.name }}</h1>
+
+    {% if request.user == auction.seller and auction.is_active %}
+        <form method="post" action="{% url 'cancel_auction' auction.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-cancel" onclick="return confirm('Скасувати аукціон? Кінь повернеться до вашої стайні.')">
+                Скасувати аукціон
+            </button>
+        </form>
+    {% endif %}
+
     <div class="horse-info">
         <img src="{{ auction.horse.get_photo_url }}" alt="">
         <p>Порода: {{ auction.horse.breed }}</p>
@@ -18,8 +28,9 @@
     </div>
 
     <div class="auction-status">
-        <p>Стартова ціна: {{ auction.starting_price }} 🐎</p>
-        <p>Поточна ставка: <strong>{{ auction.current_bid }}</strong> 🐎</p>
+        <p>Валюта: {{ auction.get_currency_display }}</p>
+        <p>Стартова ціна: {{ auction.starting_price }} </p>
+        <p>Поточна ставка: <strong>{{ auction.current_bid }}</strong></p>
         <p>Лідер: {{ auction.current_bidder.username|default:"—" }}</p>
         <p>Час до завершення: <span id="timer">{{ auction.time_left }}</span></p>
 
@@ -30,7 +41,14 @@
                 <input type="number" name="bid_amount" min="{{ auction.current_bid|add:1 }}" required>
                 <button type="submit">Зробити ставку</button>
             </form>
-            <p>Ваш доступний баланс: {{ request.user.profile.horseshoes|add:"-request.user.profile.reserved_horseshoes" }} 🐎</p>
+            <p>
+                Ваш доступний баланс:
+                {% if auction.currency == 'horseshoes' %}
+                    {{ request.user.profile.horseshoes|add:"-request.user.profile.reserved_horseshoes" }} Підков
+                {% else %}
+                    {{ request.user.profile.silver_wings|add:"-request.user.profile.reserved_silver_wings" }} Пір'їв
+                {% endif %}
+            </p>
         {% else %}
             <p>Аукціон завершено.</p>
             {% if auction.current_bidder == request.user %}
@@ -39,13 +57,4 @@
         {% endif %}
     </div>
 </div>
-
-<script>
-// Простий таймер зворотного відліку (можна використати бібліотеку або написати вручну)
-// Для прикладу – оновлення кожну секунду
-function updateTimer() {
-    // Тут можна отримати час закінчення з атрибута data-end-time і рахувати різницю
-}
-setInterval(updateTimer, 1000);
-</script>
 {% endblock %}

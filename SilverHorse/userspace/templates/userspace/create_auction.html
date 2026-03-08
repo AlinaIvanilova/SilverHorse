@@ -11,16 +11,14 @@
         {% endfor %}
     </select>
 
-    <label for="duration">Тривалість (хвилин):</label>
-    <select name="duration" required>
-        <option value="5">5 хв</option>
-        <option value="15">15 хв</option>
-        <option value="30">30 хв</option>
-        <option value="60">1 год</option>
-    </select>
-
-    <label for="starting_price">Початкова ціна (Срібні Підкови):</label>
+    <label for="starting_price">Початкова ціна:</label>
     <input type="number" name="starting_price" min="1" required>
+
+    <label for="currency">Валюта:</label>
+    <select name="currency" required>
+        <option value="horseshoes">Срібні Підкови</option>
+        <option value="silver_wings">Срібні Пір'я</option>
+    </select>
 
     <button type="submit">Створити аукціон</button>
 </form>
