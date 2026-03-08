@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="market-container">
-    <h1 class="market-title">Ринок Коней</h1>
+    <h1 class="market-title"><i class="fas fa-store"></i> Ринок Коней</h1>
 
     <!-- 🛒 Магазин навігація з кнопками по центру -->
     <div class="market-shop-nav">
@@ -50,7 +50,7 @@
             <div class="filters-grid">
                 <!-- Фільтр за породою -->
                 <div class="filter-group">
-                    <label class="filter-label">Порода:</label>
+                    <label class="filter-label"><i class="fas fa-tag"></i> Порода:</label>
                     <select class="filter-select" id="breedFilter">
                         <option value="">Всі породи</option>
                         {% for breed in breeds %}
@@ -61,7 +61,7 @@
 
                 <!-- Фільтр за типом коня -->
                 <div class="filter-group">
-                    <label class="filter-label">Тип:</label>
+                    <label class="filter-label"><i class="fas fa-paw"></i> Тип:</label>
                     <select class="filter-select" id="typeFilter">
                         <option value="">Всі типи</option>
                         {% for type_value, type_display in horse_types %}
@@ -72,7 +72,7 @@
 
                 <!-- Фільтр за віком -->
                 <div class="filter-group">
-                    <label class="filter-label">Вік (роки):</label>
+                    <label class="filter-label"><i class="fas fa-calendar-alt"></i> Вік (роки):</label>
                     <div class="number-input">
                         <button type="button" onclick="decrementValue('ageFrom')">−</button>
                         <input type="number" id="ageFrom" class="filter-number" value="0" min="0" max="30">
@@ -88,7 +88,7 @@
 
                 <!-- Фільтр за ціною (з валютою) -->
                 <div class="filter-group">
-                    <label class="filter-label">Ціна:</label>
+                    <label class="filter-label"><i class="fas fa-coins"></i> Ціна:</label>
                     <div class="currency-selector">
                         <select class="filter-select" id="currencyFilter">
                             <option value="horseshoes">Срібні Підкови</option>
@@ -110,13 +110,13 @@
 
                 <!-- Фільтр за статтю -->
                 <div class="filter-group">
-                    <label class="filter-label">Стать:</label>
+                    <label class="filter-label"><i class="fas fa-venus-mars"></i> Стать:</label>
                     <div class="gender-options">
                         <label class="gender-checkbox">
-                            <input type="checkbox" name="gender" value="M"> Жеребець
+                            <input type="checkbox" name="gender" value="M"> <i class="fas fa-mars"></i> Жеребець
                         </label>
                         <label class="gender-checkbox">
-                            <input type="checkbox" name="gender" value="F"> Кобила
+                            <input type="checkbox" name="gender" value="F"> <i class="fas fa-venus"></i> Кобила
                         </label>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                                  data-age="{{ horse.age }}"
                                  data-price="{{ horse.price }}"
                                  data-gender="{{ horse.gender }}"
-                                 data-currency="horseshoes">   <!-- всі коні поки що в підковах -->
+                                 data-currency="horseshoes">
             <div class="photo-container">
                 <img src="{{ horse.get_photo_url }}"
                      alt="{{ horse.get_photo_alt }}"
@@ -144,16 +144,16 @@
             </div>
 
             <div class="horse-info">
-                <h2>{{ horse.name }}</h2>
-                <p>Порода: {{ horse.breed }}</p>
-                <p>Тип: {{ horse.get_horse_type_display }}</p>
-                <p>Вік: {{ horse.age }} р.</p>
-                <p>Стать: {{ horse.get_gender_display }}</p>
-                <p>Колір: {{ horse.coat_color }}</p>
-                <p>Швидкість: {{ horse.speed }}</p>
-                <p>Витривалість: {{ horse.endurance }}</p>
-                <p>Сила: {{ horse.strength }}</p>
-                <p>Здоров'я: {{ horse.health }}</p>
+                <h2><i class="fas fa-horse-head"></i> {{ horse.name }}</h2>
+                <p><i class="fas fa-tag"></i> Порода: {{ horse.breed }}</p>
+                <p><i class="fas fa-paw"></i> Тип: {{ horse.get_horse_type_display }}</p>
+                <p><i class="fas fa-calendar-alt"></i> Вік: {{ horse.age }} р.</p>
+                <p><i class="fas fa-venus-mars"></i> Стать: {{ horse.get_gender_display }}</p>
+                <p><i class="fas fa-palette"></i> Колір: {{ horse.coat_color }}</p>
+                <p><i class="fas fa-tachometer-alt"></i> Швидкість: {{ horse.speed }}</p>
+                <p><i class="fas fa-heartbeat"></i> Витривалість: {{ horse.endurance }}</p>
+                <p><i class="fas fa-dumbbell"></i> Сила: {{ horse.strength }}</p>
+                <p><i class="fas fa-heart"></i> Здоров'я: {{ horse.health }}</p>
                 <p class="price"><i class="fas fa-tag"></i> Ціна: <strong>{{ horse.price }}</strong> <i class="fas fa-horse"></i> Підков</p>
             </div>
 

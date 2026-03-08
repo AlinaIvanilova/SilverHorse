@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="version auction 3">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="version auction 4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/auction.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/auction.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/equestrian.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/equestrian.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/shelter.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/shelter.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/trade.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/trade.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/auction_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/auction_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/auction_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/auction_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/complex_card.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/complex_card.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/equestrian.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/equestrian.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/trade.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/trade.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/auction.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/auction.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -156,7 +164,7 @@
       <workItem from="1772369816782" duration="603000" />
       <workItem from="1772445910626" duration="3388000" />
       <workItem from="1772879766511" duration="3438000" />
-      <workItem from="1772972211449" duration="8551000" />
+      <workItem from="1772972211449" duration="13668000" />
     </task>
     <task id="LOCAL-00001" summary="?">
       <option name="closed" value="true" />
@@ -374,7 +382,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772982205649</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="version auction 4">
+      <option name="closed" value="true" />
+      <created>1772983507773</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1772983507773</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -415,7 +431,8 @@
     <MESSAGE value="bad version auction" />
     <MESSAGE value="version auction 2" />
     <MESSAGE value="version auction 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="version auction 3" />
+    <MESSAGE value="version auction 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="version auction 4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

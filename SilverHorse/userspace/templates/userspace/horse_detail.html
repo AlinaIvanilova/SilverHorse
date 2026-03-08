@@ -5,7 +5,9 @@
 
 <div class="horse-header">
     <div class="subheader-container">
-        <a href="{% url 'horses_page' %}" class="back-btn">← Назад до стайні</a>
+        <a href="{% url 'horses_page' %}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Назад до стайні
+        </a>
     </div>
 </div>
 
@@ -20,15 +22,19 @@
     <div class="horse-name-nav-container">
 
         {% if prev_horse %}
-        <a href="{% url 'horse_detail' prev_horse.id %}" class="nav-btn left-btn">←</a>
+        <a href="{% url 'horse_detail' prev_horse.id %}" class="nav-btn left-btn">
+            <i class="fas fa-chevron-left"></i>
+        </a>
         {% endif %}
 
         <div class="horse-name-box">
-            {{ horse.name }}
+            <i class="fas fa-horse-head"></i> {{ horse.name }}
         </div>
 
         {% if next_horse %}
-        <a href="{% url 'horse_detail' next_horse.id %}" class="nav-btn right-btn">→</a>
+        <a href="{% url 'horse_detail' next_horse.id %}" class="nav-btn right-btn">
+            <i class="fas fa-chevron-right"></i>
+        </a>
         {% endif %}
     </div>
 </div>
@@ -38,10 +44,10 @@
 
     <!-- Ігрові характеристики -->
     <div class="horse-game-stats">
-        <h3>Ігрові характеристики</h3>
+        <h3><i class="fas fa-chart-line"></i> Ігрові характеристики</h3>
 
         <div class="stat-bar">
-            <span class="stat-label">Здоров'я:</span>
+            <span class="stat-label"><i class="fas fa-heart"></i> Здоров'я:</span>
             <div class="bar-container">
                 <div class="bar-fill" style="width: {{ horse.health }}%;"></div>
             </div>
@@ -49,7 +55,7 @@
         </div>
 
         <div class="stat-bar">
-            <span class="stat-label">Енергія:</span>
+            <span class="stat-label"><i class="fas fa-bolt"></i> Енергія:</span>
             <div class="bar-container">
                 <div class="bar-fill" style="width: {{ horse.energy }}%;"></div>
             </div>
@@ -57,7 +63,7 @@
         </div>
 
         <div class="stat-bar">
-            <span class="stat-label">Настрій:</span>
+            <span class="stat-label"><i class="fas fa-smile"></i> Настрій:</span>
             <div class="bar-container">
                 <div class="bar-fill" style="width: {{ horse.mood }}%;"></div>
             </div>
@@ -67,18 +73,18 @@
 
     <!-- Навички -->
     <div class="horse-skills">
-        <h3>Навички</h3>
+        <h3><i class="fas fa-star"></i> Навички</h3>
         <div class="stats-grid">
             <div class="stat-item">
-                <span class="stat-label">Швидкість:</span>
+                <span class="stat-label"><i class="fas fa-tachometer-alt"></i> Швидкість:</span>
                 <span class="stat-value">{{ horse.speed }}</span>
             </div>
             <div class="stat-item">
-                <span class="stat-label">Витривалість:</span>
+                <span class="stat-label"><i class="fas fa-heartbeat"></i> Витривалість:</span>
                 <span class="stat-value">{{ horse.endurance }}</span>
             </div>
             <div class="stat-item">
-                <span class="stat-label">Сила:</span>
+                <span class="stat-label"><i class="fas fa-dumbbell"></i> Сила:</span>
                 <span class="stat-value">{{ horse.strength }}</span>
             </div>
         </div>
@@ -86,13 +92,13 @@
 
     <!-- Основна інформація -->
     <div class="horse-basic-info">
-        <h3>Основна інформація</h3>
-        <p><strong>Вік:</strong> {{ horse.age }} років</p>
-        <p><strong>Стать:</strong> {{ horse.get_gender_display }}</p>
-        <p><strong>Порода:</strong> {{ horse.breed }}</p>
-        <p><strong>Тип:</strong> {{ horse.get_horse_type_display }}</p>
-        <p><strong>Забарвлення:</strong> {{ horse.coat_color }}</p>
-        <p><strong>Статус:</strong> {{ horse.status }}</p>
+        <h3><i class="fas fa-info-circle"></i> Основна інформація</h3>
+        <p><strong><i class="fas fa-calendar-alt"></i> Вік:</strong> <span>{{ horse.age }} років</span></p>
+        <p><strong><i class="fas fa-venus-mars"></i> Стать:</strong> <span>{{ horse.get_gender_display }}</span></p>
+        <p><strong><i class="fas fa-tag"></i> Порода:</strong> <span>{{ horse.breed }}</span></p>
+        <p><strong><i class="fas fa-paw"></i> Тип:</strong> <span>{{ horse.get_horse_type_display }}</span></p>
+        <p><strong><i class="fas fa-palette"></i> Забарвлення:</strong> <span>{{ horse.coat_color }}</span></p>
+        <p><strong><i class="fas fa-info-circle"></i> Статус:</strong> <span>{{ horse.get_status_display }}</span></p>
     </div>
 
 </div>
@@ -112,28 +118,37 @@
 <div class="horse-action-section">
 
     {% if horse.owner == request.user and horse.status == 'user' %}
-        <p class="your-horse-label">🐴 Це ваш кінь</p>
+        <p class="your-horse-label"><i class="fas fa-crown"></i> Це ваш кінь</p>
 
         <div class="action-buttons">
-            <button onclick="trainHorse({{ horse.id }})">Тренувати</button>
-            <button onclick="careHorse({{ horse.id }})">Догляд</button>
-            <button onclick="breedHorse({{ horse.id }})">Розмноження</button>
-            <button onclick="sellHorse({{ horse.id }})">Продати</button>
+            <button onclick="trainHorse({{ horse.id }})">
+                <i class="fas fa-dumbbell"></i> Тренувати
+            </button>
+            <button onclick="careHorse({{ horse.id }})">
+                <i class="fas fa-hand-holding-heart"></i> Догляд
+            </button>
+            <button onclick="breedHorse({{ horse.id }})">
+                <i class="fas fa-heart"></i> Розмноження
+            </button>
+            <button onclick="sellHorse({{ horse.id }})">
+                <i class="fas fa-coins"></i> Продати
+            </button>
         </div>
 
     {% elif horse.status == 'market' %}
         <div class="market-section">
-            <p>💰 Ціна: {{ horse.price }} Срібних Підков</p>
+            <p><i class="fas fa-tag"></i> Ціна: <strong>{{ horse.price }}</strong> <i class="fas fa-horse"></i> Підков</p>
             <a href="{% url 'buy_horse' horse.id %}" class="buy-btn">
-                🐎 Купити
+                <i class="fas fa-shopping-cart"></i> Купити
             </a>
         </div>
 
     {% else %}
-        <p>👀 Ви переглядаєте чужого коня</p>
+        <p><i class="fas fa-eye"></i> Ви переглядаєте чужого коня</p>
     {% endif %}
 
 </div>
+
 {% if horse.status == 'shelter' %}
     <div class="pet-section">
         <form action="{% url 'pet_horse' horse.id %}" method="post">
@@ -146,7 +161,6 @@
 {% endif %}
 
 {% endblock %}
-
 
 {% block extra_js %}
 <script>

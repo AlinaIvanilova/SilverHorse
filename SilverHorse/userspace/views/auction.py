@@ -36,10 +36,25 @@ def auction_detail(request, auction_id):
     if auction.is_active and timezone.now() > auction.end_time:
         finalize_auction(auction)
         messages.info(request, 'Аукціон завершено.')
-        return redirect('auction_list')  # Перенаправляємо на список, оскільки аукціон видалено
+        return redirect('auction_list')
+
+    # Обчислюємо доступний баланс для поточного користувача
+    profile = request.user.profile
+    if auction.currency == 'horseshoes':
+        available_balance = profile.horseshoes - profile.reserved_horseshoes
+        currency_display = 'Підков'
+    else:
+        available_balance = profile.silver_wings - profile.reserved_silver_wings
+        currency_display = 'Пір\'їв'
+
+    # Мінімальна ставка
+    min_bid = auction.current_bid + 1
 
     return render(request, 'userspace/auction_detail.html', {
-        'auction': auction
+        'auction': auction,
+        'available_balance': available_balance,
+        'currency_display': currency_display,
+        'min_bid': min_bid,
     })
 
 @login_required

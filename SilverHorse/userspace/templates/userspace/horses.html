@@ -1,11 +1,9 @@
 {% extends 'userspace/base.html' %}
 {% load static %}
 
-
-
 {% block content %}
 <div class="market-container">
-    <h1 class="market-title">🐴 Моя стайня</h1>
+    <h1 class="market-title"><i class="fas fa-horse"></i> Моя стайня</h1>
 
     {% if user_horses %}
         <div class="horse-list">
@@ -22,29 +20,29 @@
                         <a href="{% url 'horse_detail' horse.id %}" class="horse-name-link"
                            style="text-decoration: none !important; border-bottom: none !important;">
                             <h2 style="text-decoration: none !important; border-bottom: none !important; color: #ffd700 !important;">
-                                {{ horse.name }}
+                                <i class="fas fa-horse-head"></i> {{ horse.name }}
                             </h2>
                         </a>
 
-                        <p>Порода: {{ horse.breed }}</p>
-                        <p>Тип: {{ horse.get_horse_type_display }}</p>
-                        <p>Вік: {{ horse.age }} р.</p>
-                        <p>Стать: {{ horse.get_gender_display }}</p>
-                        <p>Колір шерсті: {{ horse.coat_color }}</p>
-                        <p>Швидкість: {{ horse.speed }}</p>
-                        <p>Витривалість: {{ horse.endurance }}</p>
-                        <p>Сила: {{ horse.strength }}</p>
-                        <p>Здоров'я: {{ horse.health }}</p>
+                        <p><i class="fas fa-tag"></i> Порода: {{ horse.breed }}</p>
+                        <p><i class="fas fa-paw"></i> Тип: {{ horse.get_horse_type_display }}</p>
+                        <p><i class="fas fa-calendar-alt"></i> Вік: {{ horse.age }} р.</p>
+                        <p><i class="fas fa-venus-mars"></i> Стать: {{ horse.get_gender_display }}</p>
+                        <p><i class="fas fa-palette"></i> Колір шерсті: {{ horse.coat_color }}</p>
+                        <p><i class="fas fa-tachometer-alt"></i> Швидкість: {{ horse.speed }}</p>
+                        <p><i class="fas fa-heartbeat"></i> Витривалість: {{ horse.endurance }}</p>
+                        <p><i class="fas fa-dumbbell"></i> Сила: {{ horse.strength }}</p>
+                        <p><i class="fas fa-heart"></i> Здоров'я: {{ horse.health }}</p>
 
-                        <p class="price">💎 У вашій власності</p>
+                        <p class="price"><i class="fas fa-check-circle"></i> У вашій власності</p>
                     </div>
                 </div>
             {% endfor %}
         </div>
     {% else %}
         <div class="empty-stable">
-            <p>У вас поки немає коней 😢</p>
-            <a href="{% url 'trade_page' %}" class="buy-btn">Перейти до ринку</a>
+            <p><i class="fas fa-frown"></i> У вас поки немає коней 😢</p>
+            <a href="{% url 'trade_page' %}" class="buy-btn"><i class="fas fa-store"></i> Перейти до ринку</a>
         </div>
     {% endif %}
 </div>

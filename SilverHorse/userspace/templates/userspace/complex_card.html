@@ -1,18 +1,18 @@
 <div class="complex-card">
 
     {% if c.owner == user %}
-        <div class="owner-badge">👑 Ваш комплекс</div>
+        <div class="owner-badge"><i class="fas fa-crown"></i> Ваш комплекс</div>
     {% endif %}
 
-    <p><strong>Назва:</strong> {{ c.name }}</p>
-    <p><strong>Власник:</strong> {{ c.owner.username }}</p>
-    <p><strong>Розташування:</strong> {{ c.get_location_display }}</p>
-    <p><strong>Престиж:</strong> {{ c.prestige }}</p>
+    <p><i class="fas fa-tag"></i> <strong>Назва:</strong> {{ c.name }}</p>
+    <p><i class="fas fa-user"></i> <strong>Власник:</strong> {{ c.owner.username }}</p>
+    <p><i class="fas fa-map-marker-alt"></i> <strong>Розташування:</strong> {{ c.get_location_display }}</p>
+    <p><i class="fas fa-star"></i> <strong>Престиж:</strong> {{ c.prestige }}</p>
 
     {% if c.avg_rating %}
-        <p class="rating">⭐ {{ c.avg_rating }}</p>
+        <p class="rating"><i class="fas fa-star"></i> {{ c.avg_rating }}</p>
     {% else %}
-        <p class="no-rating">Поки що немає оцінок</p>
+        <p class="no-rating"><i class="fas fa-star"></i> Поки що немає оцінок</p>
     {% endif %}
 
     {% if c.owner != user %}
@@ -21,7 +21,7 @@
             {{ rating_form.rating }}
             <input type="hidden" name="complex_id" value="{{ c.id }}">
             <button type="submit" name="rating_submit" class="btn btn-warning">
-                Оцінити
+                <i class="fas fa-star"></i> Оцінити
             </button>
         </form>
     {% endif %}

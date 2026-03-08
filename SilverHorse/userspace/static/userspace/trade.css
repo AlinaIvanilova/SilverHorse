@@ -2,34 +2,94 @@
    🏇 Торгівельна сторінка (Ринок Коней)
 ========================= */
 
+:root {
+  --color-primary: #ffd700;
+  --color-primary-hover: #ffea70;
+  --color-primary-glow: rgba(255, 215, 0, 0.3);
+  --color-bg-glass: rgba(0, 0, 0, 0.4);
+  --color-border: rgba(255, 215, 0, 0.3);
+  --glass-effect: blur(10px);
+}
+
 .market-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 30px 20px;
+  padding: 30px 20px 50px;
   width: 100%;
 }
 
+/* Заголовок ринку */
 .market-title {
+  font-size: 2.8rem;
+  color: var(--color-primary, #ffd700);
   text-align: center;
-  font-size: 2.5rem;
   margin-bottom: 30px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(255, 215, 0, 0.5);
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 30px;
+  border-radius: 50px;
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--color-border, rgba(255, 215, 0, 0.3));
 }
 
-/* Баланс користувача */
+.market-title i {
+  margin-right: 15px;
+  color: var(--color-primary, #ffd700);
+  filter: drop-shadow(0 0 8px var(--color-primary, #ffd700));
+}
+
+/* Баланс користувача – сучасний дизайн */
 .user-balance {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  padding: 15px 20px;
+  background: rgba(20, 20, 30, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 60px;
+  padding: 16px 30px;
   margin: 0 auto 30px auto;
   text-align: center;
-  border: 2px solid rgba(255, 215, 0, 0.5);
+  border: 2px solid rgba(255, 215, 0, 0.4);
   max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-balance:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.3);
+  border-color: rgba(255, 215, 0, 0.7);
 }
 
 .user-balance p {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.user-balance i {
+  color: #ffd700;
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 8px gold);
+}
+
+.user-balance strong {
+  color: #ffd700;
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin: 0 5px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 /* Список коней – сітка */
@@ -43,9 +103,9 @@
 
 /* Картка коня */
 .horse-card {
-  background: rgba(0, 0, 0, 0.3);           /* ⚙️ трохи прозоріше, щоб було видно blur */
-  backdrop-filter: blur(10px);               /* ⚙️ додаємо розмиття фону позаду картки */
-  -webkit-backdrop-filter: blur(10px);       /* ⚙️ для Safari */
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
   overflow: hidden;
   border: 2px solid rgba(255, 215, 0, 0.3);
@@ -69,7 +129,7 @@
   object-fit: contain;
   display: block;
   flex-shrink: 0;
-  background: transparent;                  /* ⚙️ прибираємо сірий фон */
+  background: transparent;
   border-bottom: 1px solid rgba(255, 215, 0, 0.2);
   padding: 5px;
 }
@@ -251,7 +311,7 @@
 .shop-dropdown {
   position: absolute;
   top: 100%;
-  left: -10px;            /* зсув вліво відносно кнопки */
+  left: -10px;
   margin-top: 5px;
   display: none;
   background: rgba(20, 20, 20, 0.98);
@@ -317,7 +377,7 @@
   }
 
   .shop-dropdown {
-    left: 0;  /* на малих екранах меню прилягає до лівого краю кнопки */
+    left: 0;
   }
 }
 
@@ -523,4 +583,17 @@
 .reset-filters-btn:hover {
   background: linear-gradient(135deg, #d32f2f, #b71c1c);
   transform: translateY(-2px);
+}
+
+/* Адаптація для мобільних */
+@media (max-width: 768px) {
+  .market-title {
+    font-size: 2rem;
+    white-space: normal;
+    padding: 8px 20px;
+  }
+
+  .filters-grid {
+    grid-template-columns: 1fr;
+  }
 }

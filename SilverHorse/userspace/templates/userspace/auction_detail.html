@@ -45,16 +45,12 @@
             <form method="post" action="{% url 'place_bid' auction.id %}">
                 {% csrf_token %}
                 <label for="bid_amount"><i class="fas fa-hand-holding-usd"></i> Ваша ставка:</label>
-                <input type="number" name="bid_amount" min="{{ auction.current_bid|add:1 }}" required>
+                <input type="number" name="bid_amount" min="{{ min_bid }}" required>
                 <button type="submit"><i class="fas fa-gavel"></i> Зробити ставку</button>
             </form>
             <p class="available-balance">
                 <i class="fas fa-wallet"></i> Ваш доступний баланс:
-                {% if auction.currency == 'horseshoes' %}
-                    {{ request.user.profile.horseshoes|add:"-request.user.profile.reserved_horseshoes" }} Підков
-                {% else %}
-                    {{ request.user.profile.silver_wings|add:"-request.user.profile.reserved_silver_wings" }} 🪶 Пір'їв
-                {% endif %}
+                <strong>{{ available_balance }}</strong> {{ currency_display }}
             </p>
         {% else %}
             <p class="auction-ended"><i class="fas fa-hourglass-end"></i> Аукціон завершено.</p>

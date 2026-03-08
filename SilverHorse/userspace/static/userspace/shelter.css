@@ -48,14 +48,21 @@
   font-size: 2.8rem;
   color: var(--color-primary);
   text-align: center;
-  margin-bottom: 15px;
-  text-shadow: 0 0 15px var(--color-primary-glow);
+  margin-bottom: 30px;
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(255, 215, 0, 0.5);
   letter-spacing: 1px;
   position: relative;
   display: inline-block;
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 30px;
+  border-radius: 50px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 215, 0, 0.3);
 }
 
 .shelter-container h1 i {
@@ -496,25 +503,5 @@
 .visually-hidden {
   position: absolute;
   left: -9999px;
-}
-
-/* Адаптивність */
-@media (max-width: 768px) {
-  .shelter-container h1 {
-    font-size: 2rem;
-    white-space: normal;
-  }
-
-  .filters-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .action-section {
-    grid-template-columns: 1fr;
-  }
-
-  .horse-list {
-    grid-template-columns: 1fr;
-  }
 }
 
