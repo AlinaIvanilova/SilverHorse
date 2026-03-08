@@ -6,6 +6,7 @@ from django.db import transaction
 from ..models import Horse, Auction
 from django.contrib.auth.models import User
 
+
 @login_required
 def auction_list(request):
     # Показуємо тільки активні аукціони, що не закінчились
@@ -13,8 +14,18 @@ def auction_list(request):
         is_active=True,
         end_time__gt=timezone.now()
     ).order_by('end_time')
+
+    # Отримуємо унікальні породи з коней, що на аукціоні
+    breeds = Horse.objects.filter(
+        auction__in=active_auctions
+    ).values_list('breed', flat=True).distinct().order_by('breed')
+
+    horse_types = Horse.TYPE_CHOICES
+
     return render(request, 'userspace/auction_list.html', {
-        'auctions': active_auctions
+        'auctions': active_auctions,
+        'breeds': breeds,
+        'horse_types': horse_types,
     })
 
 @login_required

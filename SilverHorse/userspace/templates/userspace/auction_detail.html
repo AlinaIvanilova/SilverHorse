@@ -3,56 +3,63 @@
 
 {% block content %}
 <div class="auction-detail">
-    <h1>{{ auction.horse.name }}</h1>
+    <!-- Кнопка повернення до списку аукціонів -->
+    <div class="detail-nav">
+        <a href="{% url 'auction_list' %}" class="back-to-auction-list-btn">
+            <i class="fas fa-arrow-left"></i> Назад до списку аукціонів
+        </a>
+    </div>
+
+    <h1><i class="fas fa-gavel"></i> {{ auction.horse.name }}</h1>
 
     {% if request.user == auction.seller and auction.is_active %}
         <form method="post" action="{% url 'cancel_auction' auction.id %}">
             {% csrf_token %}
             <button type="submit" class="btn-cancel" onclick="return confirm('Скасувати аукціон? Кінь повернеться до вашої стайні.')">
-                Скасувати аукціон
+                <i class="fas fa-times-circle"></i> Скасувати аукціон
             </button>
         </form>
     {% endif %}
 
     <div class="horse-info">
-        <img src="{{ auction.horse.get_photo_url }}" alt="">
-        <p>Порода: {{ auction.horse.breed }}</p>
-        <p>Тип: {{ auction.horse.get_horse_type_display }}</p>
-        <p>Вік: {{ auction.horse.age }}</p>
-        <p>Стать: {{ auction.horse.get_gender_display }}</p>
-        <p>Колір: {{ auction.horse.coat_color }}</p>
-        <p>Швидкість: {{ auction.horse.speed }}</p>
-        <p>Витривалість: {{ auction.horse.endurance }}</p>
-        <p>Сила: {{ auction.horse.strength }}</p>
-        <p>Здоров'я: {{ auction.horse.health }}</p>
+        <img src="{{ auction.horse.get_photo_url }}" alt="{{ auction.horse.name }}">
+        <p><i class="fas fa-tag"></i> <strong>Порода:</strong> {{ auction.horse.breed }}</p>
+        <p><i class="fas fa-paw"></i> <strong>Тип:</strong> {{ auction.horse.get_horse_type_display }}</p>
+        <p><i class="fas fa-calendar-alt"></i> <strong>Вік:</strong> {{ auction.horse.age }} р.</p>
+        <p><i class="fas fa-venus-mars"></i> <strong>Стать:</strong> {{ auction.horse.get_gender_display }}</p>
+        <p><i class="fas fa-palette"></i> <strong>Колір:</strong> {{ auction.horse.coat_color }}</p>
+        <p><i class="fas fa-tachometer-alt"></i> <strong>Швидкість:</strong> {{ auction.horse.speed }}</p>
+        <p><i class="fas fa-heartbeat"></i> <strong>Витривалість:</strong> {{ auction.horse.endurance }}</p>
+        <p><i class="fas fa-dumbbell"></i> <strong>Сила:</strong> {{ auction.horse.strength }}</p>
+        <p><i class="fas fa-heart"></i> <strong>Здоров'я:</strong> {{ auction.horse.health }}</p>
     </div>
 
     <div class="auction-status">
-        <p>Валюта: {{ auction.get_currency_display }}</p>
-        <p>Стартова ціна: {{ auction.starting_price }} </p>
-        <p>Поточна ставка: <strong>{{ auction.current_bid }}</strong></p>
-        <p>Лідер: {{ auction.current_bidder.username|default:"—" }}</p>
-        <p>Час до завершення: <span id="timer">{{ auction.time_left }}</span></p>
+        <p><i class="fas fa-coins"></i> <strong>Валюта:</strong> {{ auction.get_currency_display }}</p>
+        <p><i class="fas fa-flag-checkered"></i> <strong>Стартова ціна:</strong> {{ auction.starting_price }}</p>
+        <p><i class="fas fa-chart-line"></i> <strong>Поточна ставка:</strong> <span class="current-bid">{{ auction.current_bid }}</span></p>
+        <p><i class="fas fa-crown"></i> <strong>Лідер:</strong> {{ auction.current_bidder.username|default:"—" }}</p>
+        <p><i class="fas fa-hourglass-half"></i> <strong>Час до завершення:</strong> <span id="timer">{{ auction.time_left }}</span></p>
 
         {% if auction.is_active %}
             <form method="post" action="{% url 'place_bid' auction.id %}">
                 {% csrf_token %}
-                <label for="bid_amount">Ваша ставка:</label>
+                <label for="bid_amount"><i class="fas fa-hand-holding-usd"></i> Ваша ставка:</label>
                 <input type="number" name="bid_amount" min="{{ auction.current_bid|add:1 }}" required>
-                <button type="submit">Зробити ставку</button>
+                <button type="submit"><i class="fas fa-gavel"></i> Зробити ставку</button>
             </form>
-            <p>
-                Ваш доступний баланс:
+            <p class="available-balance">
+                <i class="fas fa-wallet"></i> Ваш доступний баланс:
                 {% if auction.currency == 'horseshoes' %}
                     {{ request.user.profile.horseshoes|add:"-request.user.profile.reserved_horseshoes" }} Підков
                 {% else %}
-                    {{ request.user.profile.silver_wings|add:"-request.user.profile.reserved_silver_wings" }} Пір'їв
+                    {{ request.user.profile.silver_wings|add:"-request.user.profile.reserved_silver_wings" }} 🪶 Пір'їв
                 {% endif %}
             </p>
         {% else %}
-            <p>Аукціон завершено.</p>
+            <p class="auction-ended"><i class="fas fa-hourglass-end"></i> Аукціон завершено.</p>
             {% if auction.current_bidder == request.user %}
-                <p class="winner">Вітаємо! Ви виграли цього коня!</p>
+                <p class="winner"><i class="fas fa-trophy"></i> Вітаємо! Ви виграли цього коня!</p>
             {% endif %}
         {% endif %}
     </div>

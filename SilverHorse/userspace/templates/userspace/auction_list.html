@@ -3,22 +3,187 @@
 
 {% block content %}
 <div class="auction-container">
-    <h1>Аукціон</h1>
-    <a href="{% url 'create_auction' %}" class="btn-create-auction">+ Виставити коня</a>
+    <h1><i class="fas fa-gavel"></i> Аукціон</h1>
 
+    <!-- Навігація -->
+    <div class="auction-nav">
+        <a href="{% url 'trade_page' %}" class="back-to-market-btn">
+            <i class="fas fa-arrow-left"></i> Назад на ринок
+        </a>
+        <a href="{% url 'create_auction' %}" class="btn-create-auction">
+            <i class="fas fa-plus-circle"></i> Виставити коня
+        </a>
+    </div>
+
+    <!-- Фільтри -->
+    <div class="search-section">
+        <button class="search-toggle-btn" onclick="toggleSearchFilters()">
+            <i class="fas fa-search"></i> Розширений пошук
+        </button>
+
+        <div class="search-filters" id="searchFilters" style="display: none;">
+            <div class="filters-grid">
+                <!-- Фільтр за породою -->
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-tag"></i> Порода:</label>
+                    <select class="filter-select" id="breedFilter">
+                        <option value="">Всі породи</option>
+                        {% for breed in breeds %}
+                            <option value="{{ breed }}">{{ breed }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Фільтр за типом коня -->
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-paw"></i> Тип:</label>
+                    <select class="filter-select" id="typeFilter">
+                        <option value="">Всі типи</option>
+                        {% for type_value, type_display in horse_types %}
+                            <option value="{{ type_value }}">{{ type_display }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Фільтр за віком -->
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-calendar-alt"></i> Вік (роки):</label>
+                    <div class="number-input">
+                        <button type="button" onclick="decrementValue('ageFrom')">−</button>
+                        <input type="number" id="ageFrom" class="filter-number" value="0" min="0" max="30">
+                        <button type="button" onclick="incrementValue('ageFrom')">+</button>
+                    </div>
+                    <span class="filter-separator">до</span>
+                    <div class="number-input">
+                        <button type="button" onclick="decrementValue('ageTo')">−</button>
+                        <input type="number" id="ageTo" class="filter-number" value="30" min="0" max="30">
+                        <button type="button" onclick="incrementValue('ageTo')">+</button>
+                    </div>
+                </div>
+
+                <!-- Фільтр за статтю -->
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-venus-mars"></i> Стать:</label>
+                    <div class="gender-options">
+                        <label class="gender-checkbox">
+                            <input type="checkbox" name="gender" value="M"> <i class="fas fa-mars"></i> Жеребець
+                        </label>
+                        <label class="gender-checkbox">
+                            <input type="checkbox" name="gender" value="F"> <i class="fas fa-venus"></i> Кобила
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Фільтр за валютою -->
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-coins"></i> Валюта:</label>
+                    <select class="filter-select" id="currencyFilter">
+                        <option value="">Всі</option>
+                        <option value="horseshoes">🐎 Срібні Підкови</option>
+                        <option value="silver_wings">🪶 Срібні Пір'я</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button class="apply-filters-btn" onclick="applyFilters()"><i class="fas fa-check"></i> Застосувати</button>
+                <button class="reset-filters-btn" onclick="resetFilters()"><i class="fas fa-undo-alt"></i> Скинути</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Сітка карток аукціонів -->
     <div class="auction-grid">
         {% for auction in auctions %}
-            <div class="auction-card">
+            <div class="auction-card"
+                 data-breed="{{ auction.horse.breed }}"
+                 data-type="{{ auction.horse.horse_type }}"
+                 data-age="{{ auction.horse.age }}"
+                 data-gender="{{ auction.horse.gender }}"
+                 data-currency="{{ auction.currency }}">
                 <img src="{{ auction.horse.get_photo_url }}" alt="{{ auction.horse.name }}">
-                <h3>{{ auction.horse.name }}</h3>
-                <p>Порода: {{ auction.horse.breed }}</p>
-                <p>Поточна ставка: <strong>{{ auction.current_bid }}</strong> 🐎</p>
-                <p>Залишилось: {{ auction.time_left }}</p>
-                <a href="{% url 'auction_detail' auction.id %}" class="btn-view">Зробити ставку</a>
+                <h3><i class="fas fa-horse-head"></i> {{ auction.horse.name }}</h3>
+
+                <p><i class="fas fa-tag"></i> Порода: {{ auction.horse.breed }}</p>
+                <p><i class="fas fa-paw"></i> Тип: {{ auction.horse.get_horse_type_display }}</p>
+                <p><i class="fas fa-calendar-alt"></i> Вік: {{ auction.horse.age }} р.</p>
+                <p><i class="fas fa-venus-mars"></i> Стать: {{ auction.horse.get_gender_display }}</p>
+                <p><i class="fas fa-coins"></i> Ставка: <strong>{{ auction.current_bid }}</strong>
+                    {% if auction.currency == 'horseshoes' %}
+
+                    {% else %}
+                        🪶
+                    {% endif %}
+                </p>
+                <p><i class="fas fa-hourglass-half"></i> Залишилось: <span class="time-left">{{ auction.time_left }}</span></p>
+
+                <a href="{% url 'auction_detail' auction.id %}" class="btn-view">
+                    <i class="fas fa-hand-pointer"></i> Зробити ставку
+                </a>
             </div>
         {% empty %}
-            <p>Наразі активних аукціонів немає.</p>
+            <p class="empty-message">
+                <i class="fas fa-frown"></i><br>
+                Наразі активних аукціонів немає.
+            </p>
         {% endfor %}
     </div>
 </div>
+
+<script>
+// Функції для розширеного пошуку (ті самі, що й раніше)
+function toggleSearchFilters() {
+    const filters = document.getElementById('searchFilters');
+    filters.style.display = (filters.style.display === 'none' || filters.style.display === '') ? 'block' : 'none';
+}
+
+function incrementValue(id) {
+    const input = document.getElementById(id);
+    input.value = parseInt(input.value) + 1;
+}
+
+function decrementValue(id) {
+    const input = document.getElementById(id);
+    const currentValue = parseInt(input.value);
+    if (currentValue > 0) input.value = currentValue - 1;
+}
+
+function applyFilters() {
+    const breed = document.getElementById('breedFilter').value;
+    const type = document.getElementById('typeFilter').value;
+    const ageFrom = parseInt(document.getElementById('ageFrom').value);
+    const ageTo = parseInt(document.getElementById('ageTo').value);
+    const currency = document.getElementById('currencyFilter').value;
+
+    const selectedGenders = [];
+    document.querySelectorAll('input[name="gender"]:checked').forEach(cb => selectedGenders.push(cb.value));
+
+    document.querySelectorAll('.auction-card').forEach(card => {
+        let show = true;
+        const cardBreed = card.dataset.breed;
+        const cardType = card.dataset.type;
+        const age = parseInt(card.dataset.age);
+        const gender = card.dataset.gender;
+        const cardCurrency = card.dataset.currency;
+
+        if (breed && cardBreed !== breed) show = false;
+        if (type && cardType !== type) show = false;
+        if (age < ageFrom || age > ageTo) show = false;
+        if (selectedGenders.length && !selectedGenders.includes(gender)) show = false;
+        if (currency && cardCurrency !== currency) show = false;
+
+        card.style.display = show ? 'flex' : 'none';
+    });
+}
+
+function resetFilters() {
+    document.getElementById('breedFilter').value = '';
+    document.getElementById('typeFilter').value = '';
+    document.getElementById('ageFrom').value = 0;
+    document.getElementById('ageTo').value = 30;
+    document.getElementById('currencyFilter').value = '';
+    document.querySelectorAll('input[name="gender"]').forEach(cb => cb.checked = false);
+    document.querySelectorAll('.auction-card').forEach(card => card.style.display = 'flex');
+}
+</script>
 {% endblock %}
