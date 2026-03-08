@@ -1,25 +1,28 @@
 {% extends 'userspace/base.html' %}
+{% load static %}
 
 {% block content %}
-<h1>Виставити коня на аукціон</h1>
-<form method="post">
-    {% csrf_token %}
-    <label for="horse">Оберіть коня:</label>
-    <select name="horse" required>
-        {% for horse in user_horses %}
-            <option value="{{ horse.id }}">{{ horse.name }} ({{ horse.breed }})</option>
-        {% endfor %}
-    </select>
+<div class="create-auction-form">
+    <h1>Виставити коня на аукціон</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="horse">Оберіть коня:</label>
+        <select name="horse" required>
+            {% for horse in user_horses %}
+                <option value="{{ horse.id }}">{{ horse.name }} ({{ horse.breed }})</option>
+            {% endfor %}
+        </select>
 
-    <label for="starting_price">Початкова ціна:</label>
-    <input type="number" name="starting_price" min="1" required>
+        <label for="starting_price">Початкова ціна:</label>
+        <input type="number" name="starting_price" min="1" required>
 
-    <label for="currency">Валюта:</label>
-    <select name="currency" required>
-        <option value="horseshoes">Срібні Підкови</option>
-        <option value="silver_wings">Срібні Пір'я</option>
-    </select>
+        <label for="currency">Валюта:</label>
+        <select name="currency" required>
+            <option value="horseshoes">Срібні Підкови</option>
+            <option value="silver_wings">Срібні Пір'я</option>
+        </select>
 
-    <button type="submit">Створити аукціон</button>
-</form>
+        <button type="submit">Створити аукціон</button>
+    </form>
+</div>
 {% endblock %}
