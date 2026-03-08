@@ -13,9 +13,11 @@
   align-items: center;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
   transition: bottom 0.5s ease;
-  padding: 10px 0;
+  padding: 5px 0;                /* зменшено вертикальний padding */
   text-align: center;
   z-index: 900;
+  height: 70px;                  /* фіксована зменшена висота */
+  flex-wrap: wrap;               /* для адаптивності */
 }
 
 .site-footer.show-footer {
@@ -25,19 +27,20 @@
 .footer-contacts {
   display: flex;
   align-items: center;
-  gap: 30px;
-  margin-right: 50px;
+  gap: 20px;                     /* зменшено проміжок */
+  margin-right: 30px;            /* зменшено відступ */
+  font-size: 0.9rem;             /* дрібніший шрифт */
 }
 
 .footer-socials {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;                     /* зменшено проміжок */
 }
 
 .footer-socials a img {
-  width: 25px;
-  height: 25px;
+  width: 20px;                   /* менші іконки */
+  height: 20px;
   transition: transform 0.3s, filter 0.3s;
 }
 
@@ -47,22 +50,23 @@
 }
 
 .footer-socials a:last-child {
-  margin-right: 50px;
+  margin-right: 30px;            /* зменшено відступ */
 }
 
 .footer-bottom {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;                     /* зменшено проміжок */
+  font-size: 0.9rem;             /* дрібніший шрифт */
 }
 
 .footer-button {
   background: #222;
   color: #fff;
   text-decoration: none;
-  padding: 5px 12px;
+  padding: 4px 10px;             /* зменшено внутрішні відступи */
   border-radius: 5px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;            /* дрібніший шрифт */
   transition: background 0.3s, color 0.3s;
 }
 

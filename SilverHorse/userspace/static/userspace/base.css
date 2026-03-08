@@ -59,8 +59,8 @@ body {
   padding-top: 115px;
   padding-left: var(--spacing-lg);
   padding-right: var(--spacing-lg);
+  padding-bottom: 90px;           /* 70px (футер) + 20px запасу */
   min-height: 100vh;
-
 }
 
 
@@ -110,21 +110,4 @@ input:invalid {
 /* ✅ Успіх */
 input:valid {
   border-color: var(--color-success);
-}
-
-
-/* =========================
-   🦶 Footer
-========================= */
-
-.site-footer {
-  padding: var(--spacing-lg);
-  background-color: var(--color-bg-overlay);
-  text-align: center;
-  opacity: 0;
-  transition: var(--transition-fast);
-}
-
-.site-footer.show-footer {
-  opacity: 1;
 }
