@@ -90,3 +90,109 @@ def update_horse_stat(request, horse_id):
         horse.adjust_stat(stat, delta)
         return JsonResponse({'success': True, 'new_value': getattr(horse, stat)})
     return JsonResponse({'success': False})
+
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from ..models import Horse
+import random
+
+
+@login_required
+def breed_select(request, horse_id):
+    """Show list of potential mates for the given horse."""
+    horse = get_object_or_404(Horse, id=horse_id, owner=request.user, status='user')
+
+    # Перевірка віку (мінімум 3 роки)
+    if horse.age < 3:
+        messages.error(request, f"{horse.name} занадто молодий для розмноження. Мінімальний вік – 3 роки.")
+        return redirect('horse_detail', horse_id=horse.id)
+
+    # Знаходимо коней протилежної статі, що належать користувачу, статус 'user', вік >= 3
+    opposite_gender = 'F' if horse.gender == 'M' else 'M'
+    potential_mates = Horse.objects.filter(
+        owner=request.user,
+        status='user',
+        gender=opposite_gender,
+        age__gte=3  # також перевіряємо вік партнера
+    ).exclude(id=horse.id)
+
+    return render(request, 'userspace/breed_select.html', {
+        'horse': horse,
+        'potential_mates': potential_mates
+    })
+
+
+@login_required
+def breed_confirm(request, horse1_id, horse2_id):
+    """Create a new foal from two horses."""
+    # Отримуємо обох коней, перевіряємо, що вони належать користувачу і придатні для розмноження
+    horse1 = get_object_or_404(Horse, id=horse1_id, owner=request.user, status='user')
+    horse2 = get_object_or_404(Horse, id=horse2_id, owner=request.user, status='user')
+
+    # Перевірка статі
+    if horse1.gender == horse2.gender:
+        messages.error(request, "Коні повинні бути різної статі для розмноження.")
+        return redirect('breed_select', horse_id=horse1.id)
+
+    # Перевірка віку
+    if horse1.age < 3 or horse2.age < 3:
+        messages.error(request, "Обидва коні повинні бути віком від 3 років для розмноження.")
+        return redirect('breed_select', horse_id=horse1.id)
+
+    # Визначаємо матір і батька
+    mother = horse1 if horse1.gender == 'F' else horse2
+    father = horse2 if mother == horse1 else horse1
+
+    # Генеруємо риси лошати
+    # Порода: випадкова від батьків (або однакова, якщо однакові)
+    if mother.breed == father.breed:
+        breed = mother.breed
+    else:
+        breed = random.choice([mother.breed, father.breed])
+
+    # Колір: випадковий від батьків
+    coat_color = random.choice([mother.coat_color, father.coat_color])
+
+    # Стать: випадкова
+    gender = random.choice(['M', 'F'])
+
+    # Характеристики: середнє + випадкове відхилення
+    def inherit_stat(stat_name):
+        avg = (getattr(mother, stat_name) + getattr(father, stat_name)) // 2
+        variation = random.randint(-5, 5)
+        return max(1, min(100, avg + variation))
+
+    speed = inherit_stat('speed')
+    endurance = inherit_stat('endurance')
+    strength = inherit_stat('strength')
+    health = 100
+    energy = 100
+    mood = 100
+
+    # Ім'я (можна змінити пізніше)
+    name = f"Лоша {mother.name}"
+
+    # Створюємо нового коня
+    foal = Horse.objects.create(
+        name=name,
+        breed=breed,
+        age=1,
+        gender=gender,
+        coat_color=coat_color,
+        speed=speed,
+        endurance=endurance,
+        strength=strength,
+        health=health,
+        energy=energy,
+        mood=mood,
+        owner=request.user,
+        price=0,
+        status='user',
+        wins=0,
+        for_sale=False,
+    )
+
+    messages.success(request, f"Вітаємо! У вас народилося лоша на ім'я {foal.name}!")
+    return redirect('horse_detail', horse_id=foal.id)

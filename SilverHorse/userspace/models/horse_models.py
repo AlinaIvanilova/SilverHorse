@@ -23,6 +23,7 @@ class Horse(models.Model):
     price = models.IntegerField(default=0)
     status = models.CharField(max_length=10, choices=status_choices, default='market')
     wins = models.PositiveIntegerField(default=0, verbose_name="Перемоги")
+    for_sale = models.BooleanField(default=False)  # ← нове поле
 
     TYPE_CHOICES = [
         ('riding', 'Верховий кінь'),

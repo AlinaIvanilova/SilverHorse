@@ -20,7 +20,6 @@
 
     <!-- Ім’я коня + кнопки навігації -->
     <div class="horse-name-nav-container">
-
         {% if prev_horse %}
         <a href="{% url 'horse_detail' prev_horse.id %}" class="nav-btn left-btn">
             <i class="fas fa-chevron-left"></i>
@@ -127,9 +126,15 @@
             <button onclick="careHorse({{ horse.id }})">
                 <i class="fas fa-hand-holding-heart"></i> Догляд
             </button>
-            <button onclick="breedHorse({{ horse.id }})">
-                <i class="fas fa-heart"></i> Розмноження
-            </button>
+            {% if horse.age >= 3 %}
+<a href="{% url 'breed_select' horse.id %}" class="btn btn-primary">
+    <i class="fas fa-heart"></i> Розмноження
+</a>
+            {% else %}
+                <button class="disabled" disabled title="Кінь занадто молодий для розмноження">
+                    <i class="fas fa-heart"></i> Розмноження
+                </button>
+            {% endif %}
             <button onclick="sellHorse({{ horse.id }})">
                 <i class="fas fa-coins"></i> Продати
             </button>
@@ -169,7 +174,8 @@ function trainHorse(horseId) {
 }
 
 function breedHorse(horseId) {
-    alert('Функція розмноження для коня ' + horseId + ' буде реалізована найближчим часом!');
+    // ПРАВИЛЬНИЙ РЕДИРЕКТ
+    window.location.href = '/dashboard/horse/' + horseId + '/breed/';
 }
 
 function sellHorse(horseId) {

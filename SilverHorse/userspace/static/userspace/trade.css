@@ -584,16 +584,3 @@
   background: linear-gradient(135deg, #d32f2f, #b71c1c);
   transform: translateY(-2px);
 }
-
-/* Адаптація для мобільних */
-@media (max-width: 768px) {
-  .market-title {
-    font-size: 2rem;
-    white-space: normal;
-    padding: 8px 20px;
-  }
-
-  .filters-grid {
-    grid-template-columns: 1fr;
-  }
-}

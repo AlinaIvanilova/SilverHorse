@@ -1,0 +1,51 @@
+{% extends 'userspace/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="breed-container">
+    <h1><i class="fas fa-heart"></i> Оберіть партнера для {{ horse.name }}</h1>
+
+    <div class="selected-horse-card">
+        <img src="{{ horse.get_photo_url }}" alt="{{ horse.name }}" class="selected-horse-photo">
+        <div class="selected-horse-info">
+            <h2><i class="fas fa-horse-head"></i> {{ horse.name }}</h2>
+            <p><i class="fas fa-tag"></i> Порода: <strong>{{ horse.breed }}</strong></p>
+            <p><i class="fas fa-venus-mars"></i> Стать: <strong>{{ horse.get_gender_display }}</strong></p>
+            <p><i class="fas fa-calendar-alt"></i> Вік: <strong>{{ horse.age }} р.</strong></p>
+        </div>
+    </div>
+
+    <h2><i class="fas fa-list"></i> Доступні коні протилежної статі:</h2>
+
+    {% if potential_mates %}
+        <div class="horse-list">
+            {% for mate in potential_mates %}
+            <div class="horse-card">
+                <img src="{{ mate.get_photo_url }}" alt="{{ mate.name }}" class="horse-photo">
+                <div class="horse-info">
+                    <h3><i class="fas fa-horse-head"></i> {{ mate.name }}</h3>
+                    <p><i class="fas fa-tag"></i> Порода: {{ mate.breed }}</p>
+                    <p><i class="fas fa-venus-mars"></i> Стать: {{ mate.get_gender_display }}</p>
+                    <p><i class="fas fa-calendar-alt"></i> Вік: {{ mate.age }} р.</p>
+                    <p><i class="fas fa-tachometer-alt"></i> Швидкість: {{ mate.speed }}</p>
+                    <p><i class="fas fa-heartbeat"></i> Витривалість: {{ mate.endurance }}</p>
+                    <p><i class="fas fa-dumbbell"></i> Сила: {{ mate.strength }}</p>
+                </div>
+                <a href="{% url 'breed_confirm' horse.id mate.id %}" class="btn btn-primary"
+                   onclick="return confirm('Створити лоша від {{ horse.name }} та {{ mate.name }}?')">
+                   <i class="fas fa-heart"></i> Обрати цього коня
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-message"><i class="fas fa-frown"></i> Немає доступних коней протилежної статі для розмноження.</p>
+    {% endif %}
+
+    <div class="back-link">
+        <a href="{% url 'horse_detail' horse.id %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Назад до коня
+        </a>
+    </div>
+</div>
+{% endblock %}
