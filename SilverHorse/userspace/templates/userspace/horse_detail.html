@@ -127,25 +127,35 @@
                 <i class="fas fa-hand-holding-heart"></i> Догляд
             </button>
             {% if horse.age >= 3 %}
-<a href="{% url 'breed_select' horse.id %}" class="btn btn-primary">
-    <i class="fas fa-heart"></i> Розмноження
-</a>
-            {% else %}
-                <button class="disabled" disabled title="Кінь занадто молодий для розмноження">
+                <a href="{% url 'breed_select' horse.id %}" class="btn btn-primary">
                     <i class="fas fa-heart"></i> Розмноження
-                </button>
+                </a>
+            {% else %}
+                <span class="btn btn-primary disabled" title="Кінь занадто молодий для розмноження">
+                    <i class="fas fa-heart"></i> Розмноження
+                </span>
             {% endif %}
-            <button onclick="sellHorse({{ horse.id }})">
+            <a href="{% url 'sell_horse' horse.id %}" class="btn btn-primary">
                 <i class="fas fa-coins"></i> Продати
-            </button>
+            </a>
         </div>
 
     {% elif horse.status == 'market' %}
         <div class="market-section">
             <p><i class="fas fa-tag"></i> Ціна: <strong>{{ horse.price }}</strong> <i class="fas fa-horse"></i> Підков</p>
-            <a href="{% url 'buy_horse' horse.id %}" class="buy-btn">
-                <i class="fas fa-shopping-cart"></i> Купити
-            </a>
+
+            {% if horse.owner == request.user %}
+                <form action="{% url 'cancel_sale' horse.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-warning" onclick="return confirm('Скасувати продаж? Кінь повернеться до вашої стайні.')">
+                        <i class="fas fa-times"></i> Скасувати продаж
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'buy_horse' horse.id %}" class="buy-btn">
+                    <i class="fas fa-shopping-cart"></i> Купити
+                </a>
+            {% endif %}
         </div>
 
     {% else %}

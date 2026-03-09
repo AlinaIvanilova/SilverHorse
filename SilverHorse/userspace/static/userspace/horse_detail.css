@@ -568,3 +568,12 @@
         width: 100%;
     }
 }
+
+.action-buttons .btn.disabled,
+.action-buttons .btn:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+    background: linear-gradient(135deg, #6c757d, #495057);
+    border-color: #6c757d;
+}

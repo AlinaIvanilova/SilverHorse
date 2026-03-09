@@ -159,10 +159,19 @@
 
             <div class="buy-section">
                 {% if horse.status == 'market' %}
-                    <form action="{% url 'buy_horse' horse.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="buy-btn"><i class="fas fa-shopping-cart"></i> Купити</button>
-                    </form>
+                    {% if horse.owner == request.user %}
+                        <form action="{% url 'cancel_sale' horse.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="cancel-sale-btn" onclick="return confirm('Скасувати продаж? Кінь повернеться до вашої стайні.')">
+                                <i class="fas fa-times"></i> Скасувати продаж
+                            </button>
+                        </form>
+                    {% else %}
+                        <form action="{% url 'buy_horse' horse.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="buy-btn"><i class="fas fa-shopping-cart"></i> Купити</button>
+                        </form>
+                    {% endif %}
                 {% else %}
                     <p class="sold"><i class="fas fa-times-circle"></i> Продано</p>
                 {% endif %}
@@ -267,4 +276,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<style>
+/* Додаткові стилі для кнопки скасування */
+.cancel-sale-btn {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.cancel-sale-btn:hover {
+    background: linear-gradient(135deg, #c82333, #bd2130);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+}
+</style>
 {% endblock %}

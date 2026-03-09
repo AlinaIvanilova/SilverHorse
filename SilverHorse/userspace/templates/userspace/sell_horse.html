@@ -1,0 +1,74 @@
+{% extends 'userspace/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="sell-container">
+    <h1><i class="fas fa-coins"></i> Продати коня {{ horse.name }}</h1>
+
+    <div class="horse-summary">
+        <img src="{{ horse.get_photo_url }}" alt="{{ horse.name }}" style="width: 150px; border-radius: 10px;">
+        <div>
+            <p><strong>Вік:</strong> {{ horse.age }} років</p>
+            <p><strong>Порода:</strong> {{ horse.breed }}</p>
+            <p><strong>Стать:</strong> {{ horse.get_gender_display }}</p>
+        </div>
+    </div>
+
+    <form method="post" class="sell-form">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>Тип продажу:</label>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="sale_type" value="market" checked>
+                    <i class="fas fa-store"></i> Ринок (миттєвий продаж за фіксованою ціною)
+                </label>
+                <label>
+                    <input type="radio" name="sale_type" value="auction">
+                    <i class="fas fa-gavel"></i> Аукціон (торги, ціна зростає)
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Ціна:</label>
+            <input type="number" name="price" id="price" min="1" required class="form-control">
+        </div>
+
+        <div class="form-group" id="currency-group" style="display: none;">
+            <label for="currency">Валюта аукціону:</label>
+            <select name="currency" id="currency" class="form-control">
+                <option value="horseshoes">Підкови</option>
+                <option value="silver_wings">Срібні пір'їни</option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-check"></i> Виставити на продаж
+            </button>
+            <a href="{% url 'horse_detail' horse.id %}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Скасувати
+            </a>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const marketRadio = document.querySelector('input[value="market"]');
+        const auctionRadio = document.querySelector('input[value="auction"]');
+        const currencyGroup = document.getElementById('currency-group');
+
+        function toggleCurrency() {
+            currencyGroup.style.display = auctionRadio.checked ? 'block' : 'none';
+        }
+
+        marketRadio.addEventListener('change', toggleCurrency);
+        auctionRadio.addEventListener('change', toggleCurrency);
+
+        toggleCurrency(); // викликаємо при завантаженні
+    });
+</script>
+{% endblock %}

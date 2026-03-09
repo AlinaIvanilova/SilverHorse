@@ -5,7 +5,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from ..models import Horse
-
+from django.utils import timezone
+from ..models import Auction
 
 @login_required
 def horses_page(request):
@@ -196,3 +197,62 @@ def breed_confirm(request, horse1_id, horse2_id):
 
     messages.success(request, f"Вітаємо! У вас народилося лоша на ім'я {foal.name}!")
     return redirect('horse_detail', horse_id=foal.id)
+
+
+@login_required
+def sell_horse(request, horse_id):
+    horse = get_object_or_404(Horse, id=horse_id, owner=request.user, status='user')
+
+    if request.method == 'POST':
+        sale_type = request.POST.get('sale_type')  # 'market' або 'auction'
+        price = int(request.POST.get('price', 0))
+        currency = request.POST.get('currency', 'horseshoes')
+
+        if sale_type == 'market':
+            # Виставлення на ринок
+            horse.price = price
+            horse.status = 'market'
+            horse.save()
+            messages.success(request, f"{horse.name} виставлений на ринок за {price} підков.")
+            return redirect('trade_page')
+
+        elif sale_type == 'auction':
+            # Створення аукціону
+            # Видаляємо попередні аукціони для цього коня (якщо були)
+            Auction.objects.filter(horse=horse).delete()
+
+            end_time = timezone.now() + timezone.timedelta(hours=50)
+            auction = Auction.objects.create(
+                horse=horse,
+                seller=request.user,
+                end_time=end_time,
+                starting_price=price,
+                current_bid=price,
+                current_bidder=None,
+                currency=currency,
+                is_active=True
+            )
+            horse.status = 'auction'
+            horse.save()
+
+            messages.success(request, f"Аукціон для {horse.name} створено!")
+            return redirect('auction_detail', auction_id=auction.id)
+
+        else:
+            messages.error(request, "Невірний тип продажу.")
+            return redirect('sell_horse', horse_id=horse.id)
+
+    # GET: показати форму
+    return render(request, 'userspace/sell_horse.html', {'horse': horse})
+
+@login_required
+def cancel_sale(request, horse_id):
+    horse = get_object_or_404(Horse, id=horse_id, owner=request.user, status='market')
+    if request.method == 'POST':
+        horse.status = 'user'
+        horse.price = 0  # можна скинути ціну або залишити
+        horse.save()
+        messages.success(request, f"Продаж {horse.name} скасовано. Кінь повернуто до вашої стайні.")
+        return redirect('horse_detail', horse_id=horse.id)
+    # Якщо GET, можна показати сторінку підтвердження або просто перенаправити з повідомленням
+    return redirect('horse_detail', horse_id=horse.id)
