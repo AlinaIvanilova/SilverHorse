@@ -38,6 +38,7 @@ def horse_detail(request, horse_id):
         'horse': horse,
         'prev_horse': prev_horse,
         'next_horse': next_horse,
+        'now': timezone.now()
     })
 
 @login_required
@@ -217,9 +218,18 @@ def cancel_sale(request, horse_id):
 @login_required
 def sleep_horse(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id, owner=request.user, status='user')
+
+    # Перевіряємо, чи можна спати сьогодні
+    today = timezone.now().date()
+    if horse.last_sleep and horse.last_sleep.date() == today:
+        messages.error(request, f"{horse.name} вже відпочивав сьогодні. Спробуйте завтра!")
+        return redirect('horse_detail', horse_id=horse.id)
+
     # Додаємо 2 місяці до віку та повністю відновлюємо енергію
     horse.age += 2
     horse.energy = 100
+    horse.last_sleep = timezone.now()
     horse.save()
+
     messages.success(request, f"{horse.name} добре відпочив і відновив енергію! Вік збільшився на 2 місяці.")
     return redirect('horse_detail', horse_id=horse.id)

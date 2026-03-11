@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.storage import staticfiles_storage
+from django.utils import timezone
 from ..horse_images import get_horse_image   # переконайтеся, що шлях правильний
 
 class Horse(models.Model):
@@ -24,6 +25,7 @@ class Horse(models.Model):
     status = models.CharField(max_length=10, choices=status_choices, default='market')
     wins = models.PositiveIntegerField(default=0, verbose_name="Перемоги")
     for_sale = models.BooleanField(default=False)
+    last_sleep = models.DateTimeField(null=True, blank=True, verbose_name="Останній сон")  # нове поле
 
     TYPE_CHOICES = [
         ('riding', 'Верховий кінь'),

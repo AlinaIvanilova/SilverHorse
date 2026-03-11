@@ -130,9 +130,17 @@
             <!-- Кнопка "Відправити спати" -->
             <form action="{% url 'sleep_horse' horse.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-bed"></i> Відправити спати
-                </button>
+                {% with today=now|date:"Y-m-d" %}
+                    {% if horse.last_sleep and horse.last_sleep|date:"Y-m-d" == today %}
+                        <button type="submit" class="btn btn-secondary" disabled title="Вже відпочивав сьогодні">
+                            <i class="fas fa-bed"></i> Відправити спати (доступно завтра)
+                        </button>
+                    {% else %}
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-bed"></i> Відправити спати
+                        </button>
+                    {% endif %}
+                {% endwith %}
             </form>
 
             {% if horse.age >= 36 %}
