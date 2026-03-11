@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.utils import timezone
-from ..horse_images import get_horse_image   # переконайтеся, що шлях правильний
+from ..horse_images import get_horse_image
 
 class Horse(models.Model):
     gender_choices = [('M', 'Жеребець'), ('F', 'Кобила')]
@@ -25,7 +25,12 @@ class Horse(models.Model):
     status = models.CharField(max_length=10, choices=status_choices, default='market')
     wins = models.PositiveIntegerField(default=0, verbose_name="Перемоги")
     for_sale = models.BooleanField(default=False)
-    last_sleep = models.DateTimeField(null=True, blank=True, verbose_name="Останній сон")  # нове поле
+    last_sleep = models.DateTimeField(null=True, blank=True, verbose_name="Останній сон")
+
+    # Нові поля для вагітності
+    is_pregnant = models.BooleanField(default=False, verbose_name="Вагітна")
+    pregnancy_due_age = models.IntegerField(null=True, blank=True, verbose_name="Вік пологів (міс.)")
+    sire = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='offspring', verbose_name="Батько")
 
     TYPE_CHOICES = [
         ('riding', 'Верховий кінь'),
@@ -62,7 +67,8 @@ class Horse(models.Model):
                 f"Колір шерсті: {self.coat_color}\nШвидкість: {self.speed}\n"
                 f"Витривалість: {self.endurance}\nСила: {self.strength}\nЗдоров'я: {self.health}\n"
                 f"Ціна: {self.price}\nСтатус: {self.get_status_display()}\n"
-                f"Власник: {self.owner.username if self.owner else 'На ринку'}")
+                f"Власник: {self.owner.username if self.owner else 'На ринку'}"
+                f"{' (вагітна)' if self.is_pregnant else ''}")
 
     def get_photo_url(self):
         if self.photo:

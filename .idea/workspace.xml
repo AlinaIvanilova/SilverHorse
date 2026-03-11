@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="version sleep 2">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="version sleep 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" afterDir="false" />
@@ -27,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="25-breading-sleping-v3.2" />
+        <entry key="$PROJECT_DIR$" value="25-breading-sleping-v3.3" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,7 +62,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "25-breading-sleping-v3.3",
+    "git-widget-placeholder": "25-breading-v4",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/img/horses",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -158,7 +158,7 @@
       <workItem from="1772879766511" duration="3438000" />
       <workItem from="1772972211449" duration="13853000" />
       <workItem from="1773056385597" duration="6030000" />
-      <workItem from="1773227483181" duration="2698000" />
+      <workItem from="1773227483181" duration="4529000" />
     </task>
     <task id="LOCAL-00001" summary="?">
       <option name="closed" value="true" />
@@ -424,7 +424,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773229592095</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="version sleep 3">
+      <option name="closed" value="true" />
+      <created>1773230219204</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1773230219204</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -442,7 +450,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="20 Added: energy, mood, health for horses and now I can do tricks with this" />
     <MESSAGE value="PROBLEM PHOTO AAAAAA" />
     <MESSAGE value="Split views.py into multiple files for better organization" />
     <MESSAGE value="Split models.py into multiple files for clarity" />
@@ -467,7 +474,8 @@
     <MESSAGE value="version breed 2" />
     <MESSAGE value="version breed and sleep 1" />
     <MESSAGE value="version sleep 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="version sleep 2" />
+    <MESSAGE value="version sleep 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="version sleep 3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

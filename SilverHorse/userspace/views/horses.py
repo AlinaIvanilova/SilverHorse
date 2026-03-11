@@ -96,7 +96,8 @@ def breed_select(request, horse_id):
         owner=request.user,
         status='user',
         gender=opposite_gender,
-        age__gte=36
+        age__gte=36,
+        is_pregnant = False
     ).exclude(id=horse.id)
 
     return render(request, 'userspace/breed_select.html', {
@@ -117,52 +118,23 @@ def breed_confirm(request, horse1_id, horse2_id):
         messages.error(request, "Обидва коні повинні бути віком від 3 років для розмноження.")
         return redirect('breed_select', horse_id=horse1.id)
 
+    # Визначаємо матір і батька
     mother = horse1 if horse1.gender == 'F' else horse2
     father = horse2 if mother == horse1 else horse1
 
-    if mother.breed == father.breed:
-        breed = mother.breed
-    else:
-        breed = random.choice([mother.breed, father.breed])
+    # Перевіряємо, чи мати не вагітна
+    if mother.is_pregnant:
+        messages.error(request, f"{mother.name} вже вагітна і не може брати участь у розмноженні.")
+        return redirect('breed_select', horse_id=horse1.id)
 
-    coat_color = random.choice([mother.coat_color, father.coat_color])
-    gender = random.choice(['M', 'F'])
+    # Записуємо батька для матері
+    mother.sire = father
+    mother.is_pregnant = True
+    mother.pregnancy_due_age = mother.age + 12  # пологи через 12 місяців
+    mother.save()
 
-    def inherit_stat(stat_name):
-        avg = (getattr(mother, stat_name) + getattr(father, stat_name)) // 2
-        variation = random.randint(-5, 5)
-        return max(1, min(100, avg + variation))
-
-    speed = inherit_stat('speed')
-    endurance = inherit_stat('endurance')
-    strength = inherit_stat('strength')
-    health = 100
-    energy = 100
-    mood = 100
-
-    name = f"Лоша {mother.name}"
-
-    foal = Horse.objects.create(
-        name=name,
-        breed=breed,
-        age=0,  # новонароджене – 0 місяців
-        gender=gender,
-        coat_color=coat_color,
-        speed=speed,
-        endurance=endurance,
-        strength=strength,
-        health=health,
-        energy=energy,
-        mood=mood,
-        owner=request.user,
-        price=0,
-        status='user',
-        wins=0,
-        for_sale=False,
-    )
-
-    messages.success(request, f"Вітаємо! У вас народилося лоша на ім'я {foal.name}!")
-    return redirect('horse_detail', horse_id=foal.id)
+    messages.success(request, f"{mother.name} запліднена! Вона народить лоша через 12 місяців.")
+    return redirect('horse_detail', horse_id=mother.id)
 
 @login_required
 def sell_horse(request, horse_id):
@@ -215,6 +187,7 @@ def cancel_sale(request, horse_id):
         return redirect('horse_detail', horse_id=horse.id)
     return redirect('horse_detail', horse_id=horse.id)
 
+
 @login_required
 def sleep_horse(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id, owner=request.user, status='user')
@@ -225,11 +198,75 @@ def sleep_horse(request, horse_id):
         messages.error(request, f"{horse.name} вже відпочивав сьогодні. Спробуйте завтра!")
         return redirect('horse_detail', horse_id=horse.id)
 
-    # Додаємо 2 місяці до віку та повністю відновлюємо енергію
+    # Додаємо 2 місяці до віку
     horse.age += 2
     horse.energy = 100
     horse.last_sleep = timezone.now()
     horse.save()
 
+    # Перевіряємо, чи настав час пологів (для вагітних кобил)
+    if horse.is_pregnant and horse.pregnancy_due_age and horse.age >= horse.pregnancy_due_age:
+        give_birth(request, horse)
+
     messages.success(request, f"{horse.name} добре відпочив і відновив енергію! Вік збільшився на 2 місяці.")
     return redirect('horse_detail', horse_id=horse.id)
+
+def give_birth(request, mother):
+    """Створює лоша від матері та її sire."""
+    father = mother.sire
+    if not father:
+        mother.is_pregnant = False
+        mother.pregnancy_due_age = None
+        mother.save()
+        return
+
+    # Генеруємо риси лошати (аналогічно breed_confirm)
+    if mother.breed == father.breed:
+        breed = mother.breed
+    else:
+        breed = random.choice([mother.breed, father.breed])
+
+    coat_color = random.choice([mother.coat_color, father.coat_color])
+    gender = random.choice(['M', 'F'])
+
+    def inherit_stat(stat_name):
+        avg = (getattr(mother, stat_name) + getattr(father, stat_name)) // 2
+        variation = random.randint(-5, 5)
+        return max(1, min(100, avg + variation))
+
+    speed = inherit_stat('speed')
+    endurance = inherit_stat('endurance')
+    strength = inherit_stat('strength')
+    health = 100
+    energy = 100
+    mood = 100
+
+    name = f"Лоша {mother.name}"
+
+    foal = Horse.objects.create(
+        name=name,
+        breed=breed,
+        age=0,
+        gender=gender,
+        coat_color=coat_color,
+        speed=speed,
+        endurance=endurance,
+        strength=strength,
+        health=health,
+        energy=energy,
+        mood=mood,
+        owner=mother.owner,
+        price=0,
+        status='user',
+        wins=0,
+        for_sale=False,
+    )
+
+    # Скидаємо вагітність матері
+    mother.is_pregnant = False
+    mother.pregnancy_due_age = None
+    mother.sire = None
+    mother.save()
+
+    # Використовуємо request для повідомлення
+    messages.success(request, f"У {mother.name} народилося лоша на ім'я {foal.name}!")
