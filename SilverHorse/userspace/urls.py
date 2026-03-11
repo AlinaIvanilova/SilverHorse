@@ -50,5 +50,7 @@ urlpatterns = [
     path('horse/breed/<int:horse1_id>/<int:horse2_id>/', views.breed_confirm, name='breed_confirm'),
 
     path('horse/<int:horse_id>/sell/', views.sell_horse, name='sell_horse'),
-path('horse/<int:horse_id>/cancel_sale/', views.cancel_sale, name='cancel_sale'),
+    path('horse/<int:horse_id>/cancel_sale/', views.cancel_sale, name='cancel_sale'),
+
+path('horse/<int:horse_id>/sleep/', views.sleep_horse, name='sleep_horse'),
 ]

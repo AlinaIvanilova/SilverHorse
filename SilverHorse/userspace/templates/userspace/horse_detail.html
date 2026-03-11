@@ -126,6 +126,15 @@
             <button onclick="careHorse({{ horse.id }})">
                 <i class="fas fa-hand-holding-heart"></i> Догляд
             </button>
+
+                <!-- Кнопка "Відправити спати" -->
+            <form action="{% url 'sleep_horse' horse.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-bed"></i> Відправити спати
+                </button>
+            </form>
+
             {% if horse.age >= 3 %}
                 <a href="{% url 'breed_select' horse.id %}" class="btn btn-primary">
                     <i class="fas fa-heart"></i> Розмноження

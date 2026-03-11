@@ -256,3 +256,14 @@ def cancel_sale(request, horse_id):
         return redirect('horse_detail', horse_id=horse.id)
     # Якщо GET, можна показати сторінку підтвердження або просто перенаправити з повідомленням
     return redirect('horse_detail', horse_id=horse.id)
+
+
+@login_required
+def sleep_horse(request, horse_id):
+    horse = get_object_or_404(Horse, id=horse_id, owner=request.user, status='user')
+    # Відновлюємо енергію до 100
+    horse.energy = 100
+    # Можна також додати невелике відновлення настрою або здоров'я
+    horse.save()
+    messages.success(request, f"{horse.name} добре відпочив і відновив енергію!")
+    return redirect('horse_detail', horse_id=horse.id)
