@@ -11,7 +11,7 @@
             <h2><i class="fas fa-horse-head"></i> {{ horse.name }}</h2>
             <p><i class="fas fa-tag"></i> Порода: <strong>{{ horse.breed }}</strong></p>
             <p><i class="fas fa-venus-mars"></i> Стать: <strong>{{ horse.get_gender_display }}</strong></p>
-            <p><i class="fas fa-calendar-alt"></i> Вік: <strong>{{ horse.age }} р.</strong></p>
+            <p><i class="fas fa-calendar-alt"></i> Вік: <strong>{{ horse.get_age_display }}</strong></p>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
                     <h3><i class="fas fa-horse-head"></i> {{ mate.name }}</h3>
                     <p><i class="fas fa-tag"></i> Порода: {{ mate.breed }}</p>
                     <p><i class="fas fa-venus-mars"></i> Стать: {{ mate.get_gender_display }}</p>
-                    <p><i class="fas fa-calendar-alt"></i> Вік: {{ mate.age }} р.</p>
+                    <p><i class="fas fa-calendar-alt"></i> Вік: {{ mate.get_age_display }}</p>
                     <p><i class="fas fa-tachometer-alt"></i> Швидкість: {{ mate.speed }}</p>
                     <p><i class="fas fa-heartbeat"></i> Витривалість: {{ mate.endurance }}</p>
                     <p><i class="fas fa-dumbbell"></i> Сила: {{ mate.strength }}</p>

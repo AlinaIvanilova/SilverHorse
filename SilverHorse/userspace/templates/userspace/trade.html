@@ -70,7 +70,7 @@
                     </select>
                 </div>
 
-                <!-- Фільтр за віком -->
+                <!-- Фільтр за віком (в роках, але фільтруємо по місяцях) -->
                 <div class="filter-group">
                     <label class="filter-label"><i class="fas fa-calendar-alt"></i> Вік (роки):</label>
                     <div class="number-input">
@@ -133,7 +133,7 @@
         {% for horse in horses %}
         <div class="horse-card" data-breed="{{ horse.breed }}"
                                  data-type="{{ horse.horse_type }}"
-                                 data-age="{{ horse.age }}"
+                                 data-age="{{ horse.age }}"  {# вік у місяцях #}
                                  data-price="{{ horse.price }}"
                                  data-gender="{{ horse.gender }}"
                                  data-currency="horseshoes">
@@ -147,7 +147,7 @@
                 <h2><i class="fas fa-horse-head"></i> {{ horse.name }}</h2>
                 <p><i class="fas fa-tag"></i> Порода: {{ horse.breed }}</p>
                 <p><i class="fas fa-paw"></i> Тип: {{ horse.get_horse_type_display }}</p>
-                <p><i class="fas fa-calendar-alt"></i> Вік: {{ horse.age }} р.</p>
+                <p><i class="fas fa-calendar-alt"></i> Вік: {{ horse.get_age_display }}</p>
                 <p><i class="fas fa-venus-mars"></i> Стать: {{ horse.get_gender_display }}</p>
                 <p><i class="fas fa-palette"></i> Колір: {{ horse.coat_color }}</p>
                 <p><i class="fas fa-tachometer-alt"></i> Швидкість: {{ horse.speed }}</p>
@@ -204,11 +204,15 @@ function decrementValue(id) {
 function applyFilters() {
     const breed = document.getElementById('breedFilter').value;
     const type = document.getElementById('typeFilter').value;
-    const ageFrom = parseInt(document.getElementById('ageFrom').value);
-    const ageTo = parseInt(document.getElementById('ageTo').value);
+    const ageFromYears = parseInt(document.getElementById('ageFrom').value);
+    const ageToYears = parseInt(document.getElementById('ageTo').value);
     const priceFrom = parseInt(document.getElementById('priceFrom').value);
     const priceTo = parseInt(document.getElementById('priceTo').value);
     const currency = document.getElementById('currencyFilter').value;
+
+    // Конвертуємо роки в місяці для фільтрації
+    const ageFrom = ageFromYears * 12;
+    const ageTo = ageToYears * 12;
 
     const selectedGenders = [];
     document.querySelectorAll('input[name="gender"]:checked').forEach(cb => selectedGenders.push(cb.value));
@@ -226,7 +230,7 @@ function applyFilters() {
         if (breed && horseBreed !== breed) show = false;
         // Фільтр за типом
         if (type && horseType !== type) show = false;
-        // Фільтр за віком
+        // Фільтр за віком (у місяцях)
         if (age < ageFrom || age > ageTo) show = false;
         // Фільтр за статтю
         if (selectedGenders.length && !selectedGenders.includes(gender)) show = false;

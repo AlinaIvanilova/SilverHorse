@@ -92,7 +92,7 @@
     <!-- Основна інформація -->
     <div class="horse-basic-info">
         <h3><i class="fas fa-info-circle"></i> Основна інформація</h3>
-        <p><strong><i class="fas fa-calendar-alt"></i> Вік:</strong> <span>{{ horse.age }} років</span></p>
+        <p><strong><i class="fas fa-calendar-alt"></i> Вік:</strong> <span>{{ horse.get_age_display }}</span></p>
         <p><strong><i class="fas fa-venus-mars"></i> Стать:</strong> <span>{{ horse.get_gender_display }}</span></p>
         <p><strong><i class="fas fa-tag"></i> Порода:</strong> <span>{{ horse.breed }}</span></p>
         <p><strong><i class="fas fa-paw"></i> Тип:</strong> <span>{{ horse.get_horse_type_display }}</span></p>
@@ -127,7 +127,7 @@
                 <i class="fas fa-hand-holding-heart"></i> Догляд
             </button>
 
-                <!-- Кнопка "Відправити спати" -->
+            <!-- Кнопка "Відправити спати" -->
             <form action="{% url 'sleep_horse' horse.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-primary">
@@ -135,7 +135,7 @@
                 </button>
             </form>
 
-            {% if horse.age >= 3 %}
+            {% if horse.age >= 36 %}
                 <a href="{% url 'breed_select' horse.id %}" class="btn btn-primary">
                     <i class="fas fa-heart"></i> Розмноження
                 </a>
@@ -193,7 +193,6 @@ function trainHorse(horseId) {
 }
 
 function breedHorse(horseId) {
-    // ПРАВИЛЬНИЙ РЕДИРЕКТ
     window.location.href = '/dashboard/horse/' + horseId + '/breed/';
 }
 
