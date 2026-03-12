@@ -160,15 +160,18 @@
                 {% endwith %}
             </form>
 
-            {% if horse.age >= 36 %}
+            <!-- Кнопка "Розмноження" (неактивна для вагітних) -->
+            {% if horse.age >= 36 and not horse.is_pregnant %}
                 <a href="{% url 'breed_select' horse.id %}" class="btn btn-primary">
                     <i class="fas fa-heart"></i> Розмноження
                 </a>
             {% else %}
-                <span class="btn btn-primary disabled" title="Кінь занадто молодий для розмноження">
+                <span class="btn btn-primary disabled"
+                      title="{% if horse.age < 36 %}Кінь занадто молодий для розмноження{% else %}Кобила вагітна{% endif %}">
                     <i class="fas fa-heart"></i> Розмноження
                 </span>
             {% endif %}
+
             <a href="{% url 'sell_horse' horse.id %}" class="btn btn-primary">
                 <i class="fas fa-coins"></i> Продати
             </a>

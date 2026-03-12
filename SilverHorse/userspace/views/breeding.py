@@ -117,42 +117,23 @@ def purchase_breeding(request, offer_id):
         mother = buyer_horse if buyer_horse.gender == 'F' else offer.horse
         father = offer.horse if mother == buyer_horse else buyer_horse
 
-        # Create foal (same logic as breed_confirm)
-        if mother.breed == father.breed:
-            breed = mother.breed
-        else:
-            breed = random.choice([mother.breed, father.breed])
-        coat_color = random.choice([mother.coat_color, father.coat_color])
-        gender = random.choice(['M', 'F'])
+        # Check that mother is not already pregnant (should be already filtered, but just in case)
+        if mother.is_pregnant:
+            messages.error(request, "Мати вже вагітна.")
+            return redirect('purchase_breeding', offer_id=offer.id)
 
-        def inherit_stat(stat_name):
-            avg = (getattr(mother, stat_name) + getattr(father, stat_name)) // 2
-            variation = random.randint(-5, 5)
-            return max(1, min(100, avg + variation))
+        # Set pregnancy for the mother
+        mother.is_pregnant = True
+        mother.sire = father
+        mother.pregnancy_due_age = mother.age + 12  # foal will be born after 12 months
+        mother.save()
 
-        foal = Horse.objects.create(
-            name=f"Лоша {mother.name}",
-            breed=breed,
-            age=0,
-            gender=gender,
-            coat_color=coat_color,
-            speed=inherit_stat('speed'),
-            endurance=inherit_stat('endurance'),
-            strength=inherit_stat('strength'),
-            health=100,
-            energy=100,
-            mood=100,
-            owner=request.user,  # buyer gets the foal
-            price=0,
-            status='user',
-            wins=0,
-            for_sale=False,
-            original_owner=request.user,
-            name_customized=False,
-        )
+        # Deactivate the offer so it cannot be used again
+        offer.is_active = False
+        offer.save()
 
-        messages.success(request, f"Вітаємо! У вас народилося лоша {foal.name}.")
-        return redirect('horse_detail', horse_id=foal.id)
+        messages.success(request, f"Кобила {mother.name} запліднена! Вона народить лоша через 12 місяців.")
+        return redirect('horse_detail', horse_id=mother.id)
 
     return render(request, 'userspace/purchase_breeding.html', {
         'offer': offer,
