@@ -132,6 +132,8 @@ class BreedingOffer(models.Model):
     currency = models.CharField(max_length=20, choices=CURRENCY_CHOICES, default='horseshoes')
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    max_uses = models.PositiveIntegerField(null=True, blank=True, verbose_name="Максимальна кількість використань")
+    remaining_uses = models.PositiveIntegerField(null=True, blank=True, verbose_name="Залишилось використань")
 
     def __str__(self):
         return f"{self.horse.name} – {self.price} {self.get_currency_display()}"

@@ -109,6 +109,7 @@
                 <p><i class="fas fa-heartbeat"></i> Витривалість: {{ offer.horse.endurance }}</p>
                 <p><i class="fas fa-dumbbell"></i> Сила: {{ offer.horse.strength }}</p>
                 <p class="price"><i class="fas fa-coins"></i> Ціна: <strong>{{ offer.price }}</strong> {{ offer.get_currency_display }}</p>
+                <p><i class="fas fa-repeat"></i> Використань: {% if offer.max_uses %}{{ offer.remaining_uses }}/{{ offer.max_uses }}{% else %}необмежено{% endif %}</p>
                 <p><i class="fas fa-user"></i> Власник: {{ offer.owner.username }}</p>
             </div>
             {% if offer.owner == request.user %}

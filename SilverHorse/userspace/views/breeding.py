@@ -31,6 +31,19 @@ def create_breeding_offer(request):
         horse_id = request.POST.get('horse')
         price = int(request.POST.get('price', 0))
         currency = request.POST.get('currency', 'horseshoes')
+        max_uses = request.POST.get('max_uses')
+        if max_uses:
+            try:
+                max_uses = int(max_uses)
+                if max_uses <= 0:
+                    messages.error(request, "Кількість використань має бути більше 0.")
+                    return redirect('create_breeding_offer')
+            except ValueError:
+                messages.error(request, "Невірне значення кількості використань.")
+                return redirect('create_breeding_offer')
+        else:
+            max_uses = None
+
         horse = get_object_or_404(Horse, id=horse_id, owner=request.user)
 
         # Validation
@@ -52,7 +65,9 @@ def create_breeding_offer(request):
             owner=request.user,
             price=price,
             currency=currency,
-            is_active=True
+            is_active=True,
+            max_uses=max_uses,
+            remaining_uses=max_uses
         )
         messages.success(request, f"{horse.name} виставлений для парування.")
         return redirect('breeding_market')
@@ -128,8 +143,12 @@ def purchase_breeding(request, offer_id):
         mother.pregnancy_due_age = mother.age + 12  # foal will be born after 12 months
         mother.save()
 
-        # Deactivate the offer so it cannot be used again
-        offer.is_active = False
+        # Update the breeding offer (decrement remaining uses if limited)
+        if offer.remaining_uses is not None:
+            offer.remaining_uses -= 1
+            if offer.remaining_uses <= 0:
+                offer.is_active = False
+        # For unlimited, leave as active
         offer.save()
 
         messages.success(request, f"Кобила {mother.name} запліднена! Вона народить лоша через 12 місяців.")
