@@ -120,3 +120,18 @@ class HorsePet(models.Model):
     class Meta:
         verbose_name = "Погладжування коня"
         verbose_name_plural = "Погладжування коней"
+
+class BreedingOffer(models.Model):
+    CURRENCY_CHOICES = [
+        ('horseshoes', 'Підкови'),
+        ('silver_wings', 'Срібні пір\'їни'),
+    ]
+    horse = models.ForeignKey(Horse, on_delete=models.CASCADE, related_name='breeding_offers')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='breeding_offers')
+    price = models.IntegerField()
+    currency = models.CharField(max_length=20, choices=CURRENCY_CHOICES, default='horseshoes')
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.horse.name} – {self.price} {self.get_currency_display()}"

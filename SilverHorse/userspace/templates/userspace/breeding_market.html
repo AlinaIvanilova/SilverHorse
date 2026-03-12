@@ -1,0 +1,195 @@
+{% extends 'userspace/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="market-container">
+    <h1 class="market-title"><i class="fas fa-heart"></i> Ринок парування</h1>
+    <div class="user-balance">
+        <p><i class="fas fa-coins"></i> Ваш баланс: <strong>{{ request.user.profile.horseshoes }}</strong> Підков | <strong>{{ request.user.profile.silver_wings }}</strong> Пір'їн</p>
+    </div>
+
+    <!-- Кнопка створення пропозиції -->
+    <div style="text-align: right; margin-bottom: 20px;">
+        <a href="{% url 'create_breeding_offer' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Виставити коня
+        </a>
+    </div>
+
+    <!-- Фільтри (скопійовано з trade.html) -->
+    <div class="search-section">
+        <button class="search-toggle-btn" onclick="toggleSearchFilters()">
+            <i class="fas fa-search"></i> Розширений пошук
+        </button>
+        <div class="search-filters" id="searchFilters" style="display: none;">
+            <div class="filters-grid">
+                <!-- Фільтр за породою -->
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-tag"></i> Порода:</label>
+                    <select class="filter-select" id="breedFilter">
+                        <option value="">Всі породи</option>
+                        {% for breed in breeds %}
+                            <option value="{{ breed }}">{{ breed }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!-- Фільтр за типом коня -->
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-paw"></i> Тип:</label>
+                    <select class="filter-select" id="typeFilter">
+                        <option value="">Всі типи</option>
+                        {% for type_value, type_display in horse_types %}
+                            <option value="{{ type_value }}">{{ type_display }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!-- Фільтр за віком -->
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-calendar-alt"></i> Вік (роки):</label>
+                    <div class="number-input">
+                        <button type="button" onclick="decrementValue('ageFrom')">−</button>
+                        <input type="number" id="ageFrom" class="filter-number" value="0" min="0" max="30">
+                        <button type="button" onclick="incrementValue('ageFrom')">+</button>
+                    </div>
+                    <span class="filter-separator">до</span>
+                    <div class="number-input">
+                        <button type="button" onclick="decrementValue('ageTo')">−</button>
+                        <input type="number" id="ageTo" class="filter-number" value="30" min="0" max="30">
+                        <button type="button" onclick="incrementValue('ageTo')">+</button>
+                    </div>
+                </div>
+                <!-- Фільтр за ціною -->
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-coins"></i> Ціна:</label>
+                    <div class="number-input">
+                        <button type="button" onclick="decrementValue('priceFrom')">−</button>
+                        <input type="number" id="priceFrom" class="filter-number" value="0" min="0">
+                        <button type="button" onclick="incrementValue('priceFrom')">+</button>
+                    </div>
+                    <span class="filter-separator">до</span>
+                    <div class="number-input">
+                        <button type="button" onclick="decrementValue('priceTo')">−</button>
+                        <input type="number" id="priceTo" class="filter-number" value="10000" min="0">
+                        <button type="button" onclick="incrementValue('priceTo')">+</button>
+                    </div>
+                </div>
+                <!-- Фільтр за статтю -->
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-venus-mars"></i> Стать:</label>
+                    <div class="gender-options">
+                        <label class="gender-checkbox">
+                            <input type="checkbox" name="gender" value="M"> <i class="fas fa-mars"></i> Жеребець
+                        </label>
+                        <label class="gender-checkbox">
+                            <input type="checkbox" name="gender" value="F"> <i class="fas fa-venus"></i> Кобила
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button class="apply-filters-btn" onclick="applyFilters()"><i class="fas fa-check"></i> Застосувати</button>
+                <button class="reset-filters-btn" onclick="resetFilters()"><i class="fas fa-undo-alt"></i> Скинути</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="horse-list">
+        {% for offer in offers %}
+        <div class="horse-card" data-breed="{{ offer.horse.breed }}"
+                                 data-type="{{ offer.horse.horse_type }}"
+                                 data-age="{{ offer.horse.age }}"
+                                 data-price="{{ offer.price }}"
+                                 data-gender="{{ offer.horse.gender }}">
+            <img src="{{ offer.horse.get_photo_url }}" alt="{{ offer.horse.name }}">
+            <div class="horse-info">
+                <h3>{{ offer.horse.name }}</h3>
+                <p><i class="fas fa-tag"></i> Порода: {{ offer.horse.breed }}</p>
+                <p><i class="fas fa-venus-mars"></i> Стать: {{ offer.horse.get_gender_display }}</p>
+                <p><i class="fas fa-calendar-alt"></i> Вік: {{ offer.horse.get_age_display }}</p>
+                <p><i class="fas fa-tachometer-alt"></i> Швидкість: {{ offer.horse.speed }}</p>
+                <p><i class="fas fa-heartbeat"></i> Витривалість: {{ offer.horse.endurance }}</p>
+                <p><i class="fas fa-dumbbell"></i> Сила: {{ offer.horse.strength }}</p>
+                <p class="price"><i class="fas fa-coins"></i> Ціна: <strong>{{ offer.price }}</strong> {{ offer.get_currency_display }}</p>
+                <p><i class="fas fa-user"></i> Власник: {{ offer.owner.username }}</p>
+            </div>
+            {% if offer.owner == request.user %}
+                <form action="{% url 'cancel_breeding_offer' offer.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-warning" onclick="return confirm('Скасувати пропозицію?')">
+                        <i class="fas fa-times"></i> Скасувати
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'purchase_breeding' offer.id %}" class="btn btn-primary">
+                    <i class="fas fa-shopping-cart"></i> Купити парування
+                </a>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p>Немає активних пропозицій.</p>
+        {% endfor %}
+    </div>
+    <div class="back-link">
+        <a href="{% url 'horses_page' %}" class="btn btn-secondary">Назад до стайні</a>
+    </div>
+</div>
+
+<script>
+function toggleSearchFilters() {
+    const filters = document.getElementById('searchFilters');
+    filters.style.display = (filters.style.display === 'none' || filters.style.display === '') ? 'block' : 'none';
+}
+
+function incrementValue(id) {
+    const input = document.getElementById(id);
+    input.value = parseInt(input.value) + 1;
+}
+
+function decrementValue(id) {
+    const input = document.getElementById(id);
+    const currentValue = parseInt(input.value);
+    if (currentValue > 0) input.value = currentValue - 1;
+}
+
+function applyFilters() {
+    const breed = document.getElementById('breedFilter').value;
+    const type = document.getElementById('typeFilter').value;
+    const ageFromYears = parseInt(document.getElementById('ageFrom').value);
+    const ageToYears = parseInt(document.getElementById('ageTo').value);
+    const priceFrom = parseInt(document.getElementById('priceFrom').value);
+    const priceTo = parseInt(document.getElementById('priceTo').value);
+    const selectedGenders = [];
+    document.querySelectorAll('input[name="gender"]:checked').forEach(cb => selectedGenders.push(cb.value));
+
+    const ageFrom = ageFromYears * 12;
+    const ageTo = ageToYears * 12;
+
+    document.querySelectorAll('.horse-card').forEach(card => {
+        let show = true;
+        const cardBreed = card.dataset.breed;
+        const cardType = card.dataset.type;
+        const cardAge = parseInt(card.dataset.age);
+        const cardPrice = parseInt(card.dataset.price);
+        const cardGender = card.dataset.gender;
+
+        if (breed && cardBreed !== breed) show = false;
+        if (type && cardType !== type) show = false;
+        if (cardAge < ageFrom || cardAge > ageTo) show = false;
+        if (selectedGenders.length && !selectedGenders.includes(cardGender)) show = false;
+        if (cardPrice < priceFrom || cardPrice > priceTo) show = false;
+
+        card.style.display = show ? 'flex' : 'none';
+    });
+}
+
+function resetFilters() {
+    document.getElementById('breedFilter').value = '';
+    document.getElementById('typeFilter').value = '';
+    document.getElementById('ageFrom').value = 0;
+    document.getElementById('ageTo').value = 30;
+    document.getElementById('priceFrom').value = 0;
+    document.getElementById('priceTo').value = 10000;
+    document.querySelectorAll('input[name="gender"]').forEach(cb => cb.checked = false);
+    document.querySelectorAll('.horse-card').forEach(card => card.style.display = 'flex');
+}
+</script>
+{% endblock %}

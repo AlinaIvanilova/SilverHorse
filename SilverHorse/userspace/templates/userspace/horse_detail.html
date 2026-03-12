@@ -172,6 +172,21 @@
             <a href="{% url 'sell_horse' horse.id %}" class="btn btn-primary">
                 <i class="fas fa-coins"></i> Продати
             </a>
+
+            <!-- Кнопка "Виставити на парування" -->
+            {% if horse.age >= 36 %}
+                {% if horse.gender == 'F' and horse.is_pregnant %}
+                    {# вагітна кобила не може #}
+                {% else %}
+                    <a href="{% url 'create_breeding_offer' %}" class="btn btn-primary">
+                        <i class="fas fa-heart"></i> Виставити на парування
+                    </a>
+                {% endif %}
+            {% else %}
+                <span class="btn btn-primary disabled" title="Кінь занадто молодий для парування">
+                    <i class="fas fa-heart"></i> Виставити на парування
+                </span>
+            {% endif %}
         </div>
 
     {% elif horse.status == 'market' %}

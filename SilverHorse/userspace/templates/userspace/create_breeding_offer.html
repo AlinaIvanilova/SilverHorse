@@ -1,0 +1,32 @@
+{% extends 'userspace/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Виставити коня на парування</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="horse">Виберіть коня:</label>
+            <select name="horse" id="horse" required>
+                <option value="">-- Оберіть --</option>
+                {% for horse in user_horses %}
+                <option value="{{ horse.id }}">{{ horse.name }} ({{ horse.breed }}, {{ horse.get_gender_display }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="price">Ціна:</label>
+            <input type="number" name="price" id="price" min="1" required>
+        </div>
+        <div class="form-group">
+            <label for="currency">Валюта:</label>
+            <select name="currency" id="currency">
+                <option value="horseshoes">Підкови</option>
+                <option value="silver_wings">Срібні пір'їни</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Виставити</button>
+    </form>
+</div>
+{% endblock %}

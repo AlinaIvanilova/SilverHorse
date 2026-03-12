@@ -1,0 +1,28 @@
+{% extends 'userspace/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Купівля парування</h1>
+    <div class="horse-card">
+        <img src="{{ offer.horse.get_photo_url }}" alt="{{ offer.horse.name }}" style="width:200px;">
+        <h3>{{ offer.horse.name }}</h3>
+        <p>Власник: {{ offer.owner.username }}</p>
+        <p>Ціна: {{ offer.price }} {{ offer.get_currency_display }}</p>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="buyer_horse">Виберіть свого коня для парування (протилежної статі):</label>
+            <select name="buyer_horse" id="buyer_horse" required>
+                <option value="">-- Оберіть --</option>
+                {% for horse in buyer_horses %}
+                <option value="{{ horse.id }}">{{ horse.name }} ({{ horse.breed }}, {{ horse.get_gender_display }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Сплатити та отримати лоша</button>
+        <a href="{% url 'breeding_market' %}" class="btn btn-secondary">Скасувати</a>
+    </form>
+</div>
+{% endblock %}
