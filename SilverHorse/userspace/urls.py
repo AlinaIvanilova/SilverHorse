@@ -52,5 +52,6 @@ urlpatterns = [
     path('horse/<int:horse_id>/sell/', views.sell_horse, name='sell_horse'),
     path('horse/<int:horse_id>/cancel_sale/', views.cancel_sale, name='cancel_sale'),
 
-path('horse/<int:horse_id>/sleep/', views.sleep_horse, name='sleep_horse'),
+    path('horse/<int:horse_id>/sleep/', views.sleep_horse, name='sleep_horse'),
+    path('horse/<int:horse_id>/change_name/', views.change_foal_name, name='change_foal_name'),
 ]

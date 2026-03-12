@@ -192,35 +192,38 @@ def cancel_sale(request, horse_id):
 def sleep_horse(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id, owner=request.user, status='user')
 
-    # Перевіряємо, чи можна спати сьогодні
     today = timezone.now().date()
     if horse.last_sleep and horse.last_sleep.date() == today:
         messages.error(request, f"{horse.name} вже відпочивав сьогодні. Спробуйте завтра!")
         return redirect('horse_detail', horse_id=horse.id)
 
-    # Додаємо 2 місяці до віку
     horse.age += 2
     horse.energy = 100
     horse.last_sleep = timezone.now()
     horse.save()
 
-    # Перевіряємо, чи настав час пологів (для вагітних кобил)
+    # Перевіряємо пологи
     if horse.is_pregnant and horse.pregnancy_due_age and horse.age >= horse.pregnancy_due_age:
-        give_birth(request, horse)
+        foal = give_birth(request, horse)
+        if foal:
+            return redirect('horse_detail', horse_id=foal.id)
+        else:
+            # Якщо щось пішло не так, все одно повертаємо на сторінку матері
+            return redirect('horse_detail', horse_id=horse.id)
 
     messages.success(request, f"{horse.name} добре відпочив і відновив енергію! Вік збільшився на 2 місяці.")
     return redirect('horse_detail', horse_id=horse.id)
 
 def give_birth(request, mother):
-    """Створює лоша від матері та її sire."""
+    """Створює лоша від матері та її sire. Повертає об'єкт лошати."""
     father = mother.sire
     if not father:
         mother.is_pregnant = False
         mother.pregnancy_due_age = None
         mother.save()
-        return
+        return None
 
-    # Генеруємо риси лошати (аналогічно breed_confirm)
+    # Генерація рис (як у breed_confirm)
     if mother.breed == father.breed:
         breed = mother.breed
     else:
@@ -241,7 +244,7 @@ def give_birth(request, mother):
     energy = 100
     mood = 100
 
-    name = f"Лоша {mother.name}"
+    name = f"Лоша {mother.name}"  # тимчасове ім'я
 
     foal = Horse.objects.create(
         name=name,
@@ -260,6 +263,7 @@ def give_birth(request, mother):
         status='user',
         wins=0,
         for_sale=False,
+        name_customized=False,  # нове поле
     )
 
     # Скидаємо вагітність матері
@@ -268,5 +272,22 @@ def give_birth(request, mother):
     mother.sire = None
     mother.save()
 
-    # Використовуємо request для повідомлення
-    messages.success(request, f"У {mother.name} народилося лоша на ім'я {foal.name}!")
+    messages.success(request, f"У {mother.name} народилося лоша! Дайте йому ім'я.")
+    return foal
+
+@login_required
+def change_foal_name(request, horse_id):
+    horse = get_object_or_404(Horse, id=horse_id, owner=request.user)
+    if horse.name_customized:
+        messages.error(request, "Ви вже змінювали ім'я цього коня.")
+        return redirect('horse_detail', horse_id=horse.id)
+    if request.method == 'POST':
+        new_name = request.POST.get('name', '').strip()
+        if new_name:
+            horse.name = new_name
+            horse.name_customized = True
+            horse.save()
+            messages.success(request, f"Ім'я змінено на {new_name}.")
+        else:
+            messages.error(request, "Ім'я не може бути порожнім.")
+    return redirect('horse_detail', horse_id=horse.id)

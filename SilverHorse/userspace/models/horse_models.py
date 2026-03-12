@@ -10,7 +10,7 @@ class Horse(models.Model):
 
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=50)
-    age = models.IntegerField()  # вік у місяцях
+    age = models.IntegerField()
     gender = models.CharField(max_length=1, choices=gender_choices)
     coat_color = models.CharField(max_length=50)
     speed = models.IntegerField(default=50)
@@ -26,6 +26,7 @@ class Horse(models.Model):
     wins = models.PositiveIntegerField(default=0, verbose_name="Перемоги")
     for_sale = models.BooleanField(default=False)
     last_sleep = models.DateTimeField(null=True, blank=True, verbose_name="Останній сон")
+    name_customized = models.BooleanField(default=False, verbose_name="Ім'я змінено")
 
     # Нові поля для вагітності
     is_pregnant = models.BooleanField(default=False, verbose_name="Вагітна")
