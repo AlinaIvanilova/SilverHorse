@@ -102,8 +102,8 @@
 
 </div>
 
-<!-- Блок для зміни імені лошати (тільки для новонароджених без власного імені) -->
-{% if horse.age == 0 and not horse.name_customized and horse.owner == request.user %}
+<!-- Блок для зміни імені лошати (тільки для новонароджених, які ще не мають імені, і тільки для первинного власника) -->
+{% if horse.age == 0 and not horse.name_customized and horse.original_owner == request.user %}
 <div class="name-change-form" style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 10px; max-width: 500px; margin-left: auto; margin-right: auto;">
     <h4 style="color: #ffd700; text-align: center;"><i class="fas fa-pencil-alt"></i> Дайте ім'я лошаті</h4>
     <form action="{% url 'change_foal_name' horse.id %}" method="post">

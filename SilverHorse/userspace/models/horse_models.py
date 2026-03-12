@@ -10,7 +10,7 @@ class Horse(models.Model):
 
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=50)
-    age = models.IntegerField()
+    age = models.IntegerField()  # вік у місяцях
     gender = models.CharField(max_length=1, choices=gender_choices)
     coat_color = models.CharField(max_length=50)
     speed = models.IntegerField(default=50)
@@ -20,18 +20,26 @@ class Horse(models.Model):
     energy = models.IntegerField(default=100)
     mood = models.IntegerField(default=100)
     photo = models.ImageField(upload_to='horses/', null=True, blank=True)
-    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='horses')
     price = models.IntegerField(default=0)
     status = models.CharField(max_length=10, choices=status_choices, default='market')
     wins = models.PositiveIntegerField(default=0, verbose_name="Перемоги")
     for_sale = models.BooleanField(default=False)
     last_sleep = models.DateTimeField(null=True, blank=True, verbose_name="Останній сон")
-    name_customized = models.BooleanField(default=False, verbose_name="Ім'я змінено")
 
     # Нові поля для вагітності
     is_pregnant = models.BooleanField(default=False, verbose_name="Вагітна")
     pregnancy_due_age = models.IntegerField(null=True, blank=True, verbose_name="Вік пологів (міс.)")
     sire = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='offspring', verbose_name="Батько")
+
+    # Поле для фіксації первинного власника (хто створив/народив лоша)
+    original_owner = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True,
+        related_name='original_horses', verbose_name="Первинний власник"
+    )
+
+    # Прапор, чи було змінено ім'я
+    name_customized = models.BooleanField(default=False, verbose_name="Ім'я змінено")
 
     TYPE_CHOICES = [
         ('riding', 'Верховий кінь'),

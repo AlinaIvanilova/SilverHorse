@@ -54,4 +54,5 @@ urlpatterns = [
 
     path('horse/<int:horse_id>/sleep/', views.sleep_horse, name='sleep_horse'),
     path('horse/<int:horse_id>/change_name/', views.change_foal_name, name='change_foal_name'),
+    path('horse/<int:horse_id>/change_name/', views.change_foal_name, name='change_foal_name'),
 ]

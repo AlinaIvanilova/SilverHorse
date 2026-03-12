@@ -208,11 +208,11 @@ def sleep_horse(request, horse_id):
         if foal:
             return redirect('horse_detail', horse_id=foal.id)
         else:
-            # Якщо щось пішло не так, все одно повертаємо на сторінку матері
             return redirect('horse_detail', horse_id=horse.id)
 
     messages.success(request, f"{horse.name} добре відпочив і відновив енергію! Вік збільшився на 2 місяці.")
     return redirect('horse_detail', horse_id=horse.id)
+
 
 def give_birth(request, mother):
     """Створює лоша від матері та її sire. Повертає об'єкт лошати."""
@@ -263,7 +263,8 @@ def give_birth(request, mother):
         status='user',
         wins=0,
         for_sale=False,
-        name_customized=False,  # нове поле
+        original_owner=mother.owner,  # фіксуємо первинного власника
+        name_customized=False,
     )
 
     # Скидаємо вагітність матері
@@ -275,12 +276,20 @@ def give_birth(request, mother):
     messages.success(request, f"У {mother.name} народилося лоша! Дайте йому ім'я.")
     return foal
 
+
 @login_required
 def change_foal_name(request, horse_id):
-    horse = get_object_or_404(Horse, id=horse_id, owner=request.user)
+    horse = get_object_or_404(Horse, id=horse_id)
+
+    # Перевіряємо, чи поточний користувач є первинним власником
+    if horse.original_owner != request.user:
+        messages.error(request, "Тільки первинний власник може змінити ім'я лошати.")
+        return redirect('horse_detail', horse_id=horse.id)
+
     if horse.name_customized:
         messages.error(request, "Ви вже змінювали ім'я цього коня.")
         return redirect('horse_detail', horse_id=horse.id)
+
     if request.method == 'POST':
         new_name = request.POST.get('name', '').strip()
         if new_name:
@@ -290,4 +299,5 @@ def change_foal_name(request, horse_id):
             messages.success(request, f"Ім'я змінено на {new_name}.")
         else:
             messages.error(request, "Ім'я не може бути порожнім.")
+
     return redirect('horse_detail', horse_id=horse.id)
