@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Вхід</title>
     {% load static %}
+    {# 1. Завантажуємо теги socialaccount #}
+    {% load socialaccount %}
     <link rel="stylesheet" href="{% static 'main/style.css' %}">
 </head>
 <body>
@@ -14,6 +16,7 @@
             <p style="color: red;">{{ error }}</p>
         {% endif %}
 
+        {# Стандартна форма входу за логіном/паролем #}
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
             <label>Ім'я користувача:</label><br>
@@ -22,6 +25,14 @@
             <input type="password" name="password" placeholder="Пароль" required><br>
             <button type="submit" class="btn">Увійти</button>
         </form>
+
+        {# 2. Додаємо роздільник або текст #}
+        <p style="margin: 15px 0; text-align: center;">або</p>
+
+        {# 3. Кнопка входу через Google #}
+        <a href="{% provider_login_url 'google' %}" class="btn-google">
+            Увійти через Google
+        </a>
 
         <p style="margin-top: 15px;">
             Ще немає акаунта?

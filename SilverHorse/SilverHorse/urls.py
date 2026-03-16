@@ -25,6 +25,7 @@ urlpatterns = [
     path('', views.home, name='home'),          # головна сторінка
     path('', include('main.urls')),             # всі інші шляхи з main
     path('dashboard/', include('userspace.urls')),  # шляхи з userspace
+    path('accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:

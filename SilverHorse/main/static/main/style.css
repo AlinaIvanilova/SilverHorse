@@ -245,3 +245,21 @@ body {
     left: 0;
 }
 
+.btn-google {
+    display: inline-block;
+    background-color: #4285F4;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #357ae8;
+    transition: background-color 0.3s;
+}
+
+.btn-google:hover {
+    background-color: #357ae8;
+}
