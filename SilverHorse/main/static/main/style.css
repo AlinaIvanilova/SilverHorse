@@ -244,22 +244,54 @@ body {
 #about-panel.open {
     left: 0;
 }
-
 .btn-google {
-    display: inline-block;
-    background-color: #4285F4;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid #357ae8;
-    transition: background-color 0.3s;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.btn-google::before {
+    content: "G";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853);
+    background-size: 200% 200%;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-right: 8px;
+    transition: all 0.4s ease;
+    flex-shrink: 0;
 }
 
 .btn-google:hover {
-    background-color: #357ae8;
+    background: white;
+    color: black;
+    border-color: white;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    transform: translateY(-3px);
+}
+
+.btn-google:hover::before {
+    transform: rotate(360deg);
+    background-position: 100% 100%;
 }
