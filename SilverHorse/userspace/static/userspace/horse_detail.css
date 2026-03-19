@@ -1,154 +1,201 @@
-/* Контейнер фото */
+/* ===============================
+   Глобальні змінні та скидання
+================================== */
+:root {
+    --color-bg-dark: rgba(0, 0, 0, 0.75);
+    --color-bg-darker: rgba(0, 0, 0, 0.85);
+    --color-bg-card: rgba(0, 0, 0, 0.65);
+    --color-gold: #ffd700;
+    --color-gold-dim: rgba(255, 215, 0, 0.5);
+    --color-gold-soft: rgba(255, 215, 0, 0.2);
+    --color-border: rgba(255, 215, 0, 0.3);
+    --color-text-light: #fff;
+    --spacing-sm: 8px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 25px;
+    --border-radius: 16px;
+    --border-radius-sm: 12px;
+    --transition: all 0.3s ease;
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    --font-size-base: 1rem;
+    --font-size-lg: 1.5rem;
+    --font-size-xl: 1.8rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* ===============================
+   Шапка та навігація назад
+================================== */
+.horse-header {
+    margin-bottom: var(--spacing-lg);
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 12px 25px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(50,50,50,0.8));
+    color: var(--color-gold);
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    border: 2px solid var(--color-border);
+    transition: var(--transition);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    font-size: var(--font-size-base);
+}
+
+.back-btn:hover {
+    background: linear-gradient(135deg, var(--color-gold-soft), rgba(255,215,0,0.3));
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255,215,0,0.2);
+}
+
+/* ===============================
+   Фото коня та ім'я з навігацією
+================================== */
 .horse-detail-photo-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px auto;
+    margin: var(--spacing-lg) auto;
     max-width: 500px;
 }
 
-/* Фото коня */
 .horse-detail-photo {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 15px;
-    border-radius: 16px;
-    border: 3px solid rgba(255, 215, 0, 0.3);
+    background: var(--color-bg-dark);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border: 3px solid var(--color-border);
     width: 100%;
 }
 
 .detail-photo {
     width: 100%;
     height: auto;
-    border-radius: 12px;
+    border-radius: var(--border-radius-sm);
     display: block;
 }
 
-/* Контейнер імені + кнопок */
 .horse-name-nav-container {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 40px;
-    margin-top: 15px;
+    margin-top: var(--spacing-md);
 }
 
-/* Ім'я коня */
 .horse-name-box {
-    font-size: 1.8rem;
+    font-size: var(--font-size-xl);
     font-weight: bold;
-    color: #ffd700;
+    color: var(--color-gold);
     padding: 10px 20px;
-    border-radius: 12px;
-    border: 2px solid rgba(255, 215, 0, 0.3);
-    background: rgba(0, 0, 0, 0.5);
+    border-radius: var(--border-radius-sm);
+    border: 2px solid var(--color-border);
+    background: var(--color-bg-dark);
     text-align: center;
 }
 
-/* Кнопки навігації */
 .nav-btn {
-    background: rgba(0, 0, 0, 0.6);
-    color: #ffd700;
+    background: rgba(0,0,0,0.6);
+    color: var(--color-gold);
     text-decoration: none;
     padding: 10px 15px;
     border-radius: 50%;
-    font-size: 1.5rem;
-    border: 2px solid rgba(255, 215, 0, 0.3);
-    transition: background 0.3s ease, color 0.3s ease;
+    font-size: var(--font-size-lg);
+    border: 2px solid var(--color-border);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
 }
 
 .nav-btn:hover {
-    background: rgba(255, 215, 0, 0.2);
+    background: var(--color-gold-soft);
     color: #000;
 }
 
-/* Контейнер характеристик та інформації */
+/* ===============================
+   Загальний контейнер інформації
+================================== */
 .horse-info-container {
-    margin: 20px auto;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 25px;
-    border-radius: 16px;
-    border: 3px solid rgba(255, 215, 0, 0.7);
+    margin: var(--spacing-lg) auto;
+    background: var(--color-bg-card);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius);
+    border: 3px solid var(--color-gold-dim);
     max-width: 500px;
     width: 100%;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(4px);
 }
 
-/* Заголовки секцій */
 .horse-info-container h3 {
-    color: #ffd700;
-    border-bottom: 2px solid rgba(255, 215, 0, 0.5);
+    color: var(--color-gold);
+    border-bottom: 2px solid var(--color-border);
     padding-bottom: 10px;
-    margin-bottom: 20px;
-    width: 100%;
+    margin-bottom: var(--spacing-lg);
     text-align: center;
-    font-size: 1.5rem;
+    font-size: var(--font-size-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
-/* Секції */
-.horse-game-stats,
-.horse-skills,
-.horse-basic-info {
+/* ===============================
+   Ігрові характеристики (прогрес-бари)
+================================== */
+.horse-game-stats {
     margin-bottom: 30px;
     width: 100%;
 }
 
-/* Прогрес-бари ігрових характеристик з градієнтом енергії */
-.horse-game-stats .stat-bar {
+.stat-bar {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-lg);
     width: 100%;
-    position: relative;
 }
 
 .stat-bar .stat-label {
     width: 120px;
     font-weight: bold;
-    color: #ffd700;
+    color: var(--color-gold);
     font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-/* Контейнер для бару */
 .bar-container {
     flex: 1;
     height: 35px;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
     border-radius: 20px;
     overflow: hidden;
-    margin: 0 15px;
-    position: relative;
-    border: 2px solid rgba(255, 215, 0, 0.3);
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+    margin: 0 var(--spacing-md);
+    border: 2px solid var(--color-border);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
 }
 
-/* Заповнення бару з градієнтом енергії */
 .bar-fill {
     height: 100%;
-    background: linear-gradient(
-        90deg,
-        #ff0000 0%,        /* Червоний для 0% */
-        #ff3300 10%,
-        #ff6600 20%,
-        #ff9900 30%,
-        #ffcc00 40%,       /* Оранжево-жовтий */
-        #ffff00 50%,       /* Яскраво-жовтий для 50% */
-        #ccff00 60%,
-        #99ff00 70%,
-        #66ff00 80%,
-        #33ff00 90%,
-        #00ff00 100%       /* Яскраво-зелений для 100% */
-    );
+    background: linear-gradient(90deg, #ff0000, #ff3300, #ff6600, #ff9900, #ffcc00, #ffff00, #ccff00, #99ff00, #66ff00, #33ff00, #00ff00);
     border-radius: 18px;
     position: relative;
     overflow: hidden;
     transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Вертикальні смуги на заповненні */
 .bar-fill::after {
     content: "";
     position: absolute;
@@ -156,16 +203,10 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 6px,
-        rgba(255, 255, 255, 0.15) 6px,
-        rgba(255, 255, 255, 0.15) 8px
-    );
+    background: repeating-linear-gradient(90deg, transparent, transparent 6px, rgba(255,255,255,0.15) 6px, rgba(255,255,255,0.15) 8px);
 }
 
-/* Ефект світіння для високих значень (>70%) */
+/* Ефекти для високих/низьких значень */
 .bar-fill[style*="width: 7"]::before,
 .bar-fill[style*="width: 8"]::before,
 .bar-fill[style*="width: 9"]::before,
@@ -176,14 +217,10 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.15) 50%,
-        transparent 100%);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
     animation: shine 2s infinite;
 }
 
-/* Ефект пульсації для критично низьких значень (<20%) */
 .bar-fill[style*="width: 1"]::before,
 .bar-fill[style*="width: 2"]::before {
     content: "";
@@ -192,7 +229,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 0, 0, 0.3);
+    background: rgba(255,0,0,0.3);
     animation: pulse 1.5s infinite;
 }
 
@@ -207,373 +244,351 @@
     100% { opacity: 0.3; }
 }
 
-/* Додатковий ефект для середніх значень (20-50%) */
-.bar-fill[style*="width: 2"]::after,
-.bar-fill[style*="width: 3"]::after,
-.bar-fill[style*="width: 4"]::after {
-    background: repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 6px,
-        rgba(255, 165, 0, 0.2) 6px,
-        rgba(255, 165, 0, 0.2) 8px
-    );
-}
-
-/* Відсоткове значення */
 .stat-bar .stat-value {
     width: 70px;
     text-align: right;
     font-weight: bold;
-    color: #ffd700;
+    color: var(--color-gold);
     font-size: 1.3rem;
-    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    text-shadow: 0 0 5px rgba(255,215,0,0.5);
 }
 
-/* Навички */
-.horse-skills .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+/* ===============================
+   Навички (як у фото — табличний стиль)
+================================== */
+.horse-skills {
+    margin-bottom: 30px;
     width: 100%;
-    margin-top: 15px;
 }
 
-.stat-item {
+.skills-table {
+    width: 100%;
+    background: rgba(0,0,0,0.3);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+}
+
+.skill-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 15px;
-    background: rgba(255, 215, 0, 0.1);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    transition: transform 0.3s ease, background 0.3s ease;
+    padding: 10px 15px;
+    margin: 5px 0;
+    background: rgba(255,215,0,0.05);
+    border-radius: 8px;
+    border-left: 3px solid transparent;
+    transition: var(--transition);
 }
 
-.stat-item:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 215, 0, 0.2);
+.skill-row:hover {
+    background: rgba(255,215,0,0.1);
+    border-left-color: var(--color-gold);
+    transform: translateX(5px);
 }
 
-.stat-item .stat-label {
-    color: #ffd700;
-    font-weight: bold;
-    font-size: 1rem;
+.skill-row span:first-child {
+    color: var(--color-gold);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.stat-item .stat-value {
-    color: #fff;
+.skill-row span:first-child i {
+    width: 24px;
+    font-size: 1.1rem;
+}
+
+.skill-row span:last-child {
+    color: var(--color-text-light);
     font-size: 1.2rem;
     font-weight: bold;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 5px 12px;
-    border-radius: 6px;
-    min-width: 40px;
+    background: rgba(0,0,0,0.5);
+    padding: 4px 12px;
+    border-radius: 20px;
+    min-width: 70px;
     text-align: center;
+    border: 1px solid var(--color-border);
 }
 
-/* Основна інформація */
-.horse-basic-info {
-    width: 100%;
-    margin-top: 20px;
+.total-row {
+    background: rgba(255,215,0,0.15);
+    border: 1px solid var(--color-gold);
+    margin-bottom: 15px;
 }
 
+.total-row span:last-child {
+    background: linear-gradient(135deg, var(--color-gold), #ffaa00);
+    color: #000;
+    font-weight: bold;
+    font-size: 1.3rem;
+    border: none;
+    box-shadow: 0 0 10px rgba(255,215,0,0.5);
+    animation: goldPulse 2s infinite;
+}
+
+@keyframes goldPulse {
+    0% { box-shadow: 0 0 5px rgba(255,215,0,0.5); }
+    50% { box-shadow: 0 0 15px rgba(255,215,0,0.8); }
+    100% { box-shadow: 0 0 5px rgba(255,215,0,0.5); }
+}
+
+/* ===============================
+   Основна інформація
+================================== */
 .horse-basic-info p {
-    color: #fff;
+    color: var(--color-text-light);
     margin: 12px 0;
     padding: 8px 15px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255,255,255,0.05);
     border-radius: 8px;
-    border-left: 3px solid rgba(255, 215, 0, 0.5);
+    border-left: 3px solid var(--color-border);
     display: flex;
     justify-content: space-between;
 }
 
 .horse-basic-info p strong {
-    color: #ffd700;
+    color: var(--color-gold);
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .horse-basic-info p span {
-    color: #fff;
-    font-weight: normal;
+    color: var(--color-text-light);
 }
 
-/* Кнопка "Назад" */
-.back-btn {
-    display: inline-block;
-    padding: 12px 25px;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(50, 50, 50, 0.8) 100%);
-    color: #ffd700;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: bold;
-    border: 2px solid rgba(255, 215, 0, 0.5);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    font-size: 1rem;
+/* ===============================
+   Форма для імені лошати
+================================== */
+.name-change-form {
+    max-width: 500px;
+    margin: var(--spacing-lg) auto;
+    padding: var(--spacing-lg);
+    background: var(--color-bg-card);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--color-border);
 }
 
-.back-btn:hover {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.3) 100%);
-    color: #000;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(255, 215, 0, 0.2);
-}
-
-/* Спеціальні класи для різних станів енергії (опціонально) */
-.energy-low .bar-fill {
-    background: linear-gradient(90deg, #ff0000, #ff5500, #ff9900);
-}
-
-.energy-medium .bar-fill {
-    background: linear-gradient(90deg, #ff9900, #ffcc00, #ffff00);
-}
-
-.energy-high .bar-fill {
-    background: linear-gradient(90deg, #ffff00, #99ff00, #00ff00);
-}
-
-.horse-action-section,
-.pet-section {
-    margin-bottom: 100px;
-}
-
-/* =========================
-   🌟 Стилі для сторінки вибору партнера (breed_select.html)
-========================= */
-
-.breed-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 30px 20px;
-    color: #fff;
-}
-
-.breed-container h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #ffd700;
-    margin-bottom: 40px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.breed-container h1 i {
-    margin-right: 15px;
-}
-
-.selected-horse-card {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 25px;
-    margin-bottom: 30px;
-    border: 2px solid rgba(255, 215, 0, 0.5);
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.selected-horse-photo {
-    width: 200px;
-    height: 200px;
-    object-fit: contain;
-    border-radius: 12px;
-    border: 2px solid rgba(255, 215, 0, 0.3);
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.selected-horse-info h2 {
-    font-size: 2rem;
-    margin: 0 0 15px 0;
-    color: #ffd700;
-}
-
-.selected-horse-info p {
-    font-size: 1.2rem;
-    margin: 10px 0;
+.name-change-form h4 {
+    color: var(--color-gold);
+    margin-bottom: var(--spacing-md);
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.selected-horse-info p i {
-    width: 30px;
-    color: #ffd700;
-}
-
-.breed-container .horse-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
-    margin: 30px 0;
-}
-
-.breed-container .horse-card {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    border: 2px solid rgba(255, 215, 0, 0.3);
-    padding: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.name-input-group {
     display: flex;
-    flex-direction: column;
+    gap: 10px;
 }
 
-.breed-container .horse-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    border-color: rgba(255, 215, 0, 0.7);
-}
-
-.breed-container .horse-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: contain;
-    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-    margin-bottom: 15px;
+.name-input {
+    flex: 1;
     padding: 10px;
+    border-radius: 8px;
+    border: 2px solid var(--color-border);
+    background: rgba(0,0,0,0.5);
+    color: var(--color-text-light);
+    font-size: 1rem;
 }
 
-.breed-container .horse-info h3 {
-    font-size: 1.5rem;
-    color: #ffd700;
-    margin: 0 0 10px;
+.name-input:focus {
+    outline: none;
+    border-color: var(--color-gold);
+}
+
+/* ===============================
+   Кнопка відправки до притулку
+================================== */
+.shelter-action-container {
+    max-width: 500px;
+    margin: var(--spacing-lg) auto;
     text-align: center;
 }
 
-.breed-container .horse-info p {
-    margin: 8px 0;
+.btn-shelter {
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #8b0000, #a52a2a);
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+
+.btn-shelter:hover {
+    background: linear-gradient(135deg, #a52a2a, #8b0000);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255,215,0,0.2);
+}
+
+/* ===============================
+   Секція дій (кнопки)
+================================== */
+.horse-action-section {
+    max-width: 500px;
+    margin: 30px auto;
+}
+
+.your-horse-label {
+    color: var(--color-gold);
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-md);
     display: flex;
     align-items: center;
-    gap: 8px;
-    color: #fff;
-    font-size: 0.95rem;
-}
-
-.breed-container .horse-info p i {
-    width: 24px;
-    color: #ffd700;
-}
-
-.breed-container .btn {
-    display: inline-flex;
-    align-items: center;
+    gap: 10px;
     justify-content: center;
-    gap: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 15px;
+    border-radius: 30px;
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(2px);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-action, .btn, .btn-primary, .btn-secondary, .buy-btn, .pet-btn {
     padding: 12px 24px;
     border: none;
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
     text-decoration: none;
-    transition: all 0.3s ease;
-    margin-top: 15px;
+    transition: var(--transition);
     font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 2px solid transparent;
 }
 
-.breed-container .btn-primary {
-    background: linear-gradient(135deg, #ffd700, #ffaa00);
+.btn-primary, .btn-action, .buy-btn {
+    background: linear-gradient(135deg, var(--color-gold), #ffaa00);
     color: #000;
 }
 
-.breed-container .btn-primary:hover {
-    background: linear-gradient(135deg, #ffaa00, #ffd700);
+.btn-primary:hover, .btn-action:hover, .buy-btn:hover {
+    background: linear-gradient(135deg, #ffaa00, var(--color-gold));
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    box-shadow: 0 5px 15px rgba(255,215,0,0.4);
 }
 
-.breed-container .btn-secondary {
+.btn-secondary {
     background: transparent;
-    color: #ffd700;
-    border: 2px solid #ffd700;
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
 }
 
-.breed-container .btn-secondary:hover {
-    background: rgba(255, 215, 0, 0.1);
+.btn-secondary:hover {
+    background: var(--color-gold-soft);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(255,215,0,0.3);
 }
 
-.empty-message {
-    text-align: center;
-    padding: 60px 20px;
-    font-size: 1.3rem;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    border: 2px dashed rgba(255, 215, 0, 0.3);
+.btn-warning {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
 }
 
-.empty-message i {
-    font-size: 3rem;
-    color: #ffd700;
-    margin-bottom: 20px;
-    display: block;
+.btn-warning:hover {
+    background: linear-gradient(135deg, #c82333, #dc3545);
 }
 
-.back-link {
-    text-align: center;
-    margin-top: 40px;
-}
-
-/* Адаптивність для мобільних */
-@media (max-width: 768px) {
-    .selected-horse-card {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-
-    .selected-horse-photo {
-        width: 150px;
-        height: 150px;
-    }
-
-    .selected-horse-info p {
-        justify-content: center;
-    }
-
-    .breed-container h1 {
-        font-size: 2rem;
-    }
-
-    .breed-container .horse-list {
-        grid-template-columns: 1fr;
-    }
-
-    .breed-container .horse-card {
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .selected-horse-card {
-        padding: 15px;
-    }
-
-    .selected-horse-info h2 {
-        font-size: 1.5rem;
-    }
-
-    .selected-horse-info p {
-        font-size: 1rem;
-    }
-
-    .breed-container .btn {
-        width: 100%;
-    }
-}
-
-.action-buttons .btn.disabled,
-.action-buttons .btn:disabled {
+.btn.disabled, .btn:disabled {
     opacity: 0.5;
     pointer-events: none;
     cursor: not-allowed;
     background: linear-gradient(135deg, #6c757d, #495057);
     border-color: #6c757d;
+}
+
+.inline-form {
+    display: inline;
+}
+
+.market-section {
+    text-align: center;
+    color: var(--color-text-light);
+    font-size: 1.2rem;
+}
+
+.pet-btn {
+    background: linear-gradient(135deg, #4caf50, #45a049);
+    color: white;
+    border: 2px solid var(--color-gold);
+}
+
+.pet-btn:hover {
+    background: linear-gradient(135deg, #45a049, #4caf50);
+}
+
+/* ===============================
+   Адаптація для мобільних
+================================== */
+@media (max-width: 480px) {
+    :root {
+        --font-size-xl: 1.5rem;
+        --font-size-lg: 1.3rem;
+    }
+
+    .horse-name-nav-container {
+        gap: 15px;
+    }
+
+    .nav-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+
+    .stat-bar .stat-label {
+        width: 80px;
+        font-size: 0.9rem;
+    }
+
+    .bar-container {
+        height: 30px;
+        margin: 0 8px;
+    }
+
+    .stat-bar .stat-value {
+        width: 50px;
+        font-size: 1rem;
+    }
+
+    .skill-row {
+        padding: 8px 10px;
+    }
+
+    .skill-row span:first-child {
+        font-size: 0.9rem;
+    }
+
+    .skill-row span:last-child {
+        font-size: 1rem;
+        min-width: 60px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-action, .btn-primary, .btn-secondary {
+        text-align: center;
+        justify-content: center;
+    }
 }

@@ -70,24 +70,43 @@
         </div>
     </div>
 
-    <!-- Навички -->
-    <div class="horse-skills">
-        <h3><i class="fas fa-star"></i> Навички</h3>
-        <div class="stats-grid">
-            <div class="stat-item">
-                <span class="stat-label"><i class="fas fa-tachometer-alt"></i> Швидкість:</span>
-                <span class="stat-value">{{ horse.speed }}</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label"><i class="fas fa-heartbeat"></i> Витривалість:</span>
-                <span class="stat-value">{{ horse.endurance }}</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label"><i class="fas fa-dumbbell"></i> Сила:</span>
-                <span class="stat-value">{{ horse.strength }}</span>
-            </div>
+ <!-- Навички (як на фото) -->
+<div class="horse-skills">
+    <h3><i class="fas fa-star"></i> Навички</h3>
+    <div class="skills-table">
+        <!-- Підсумок зверху -->
+        <div class="skill-row total-row">
+            <span><i class="fas fa-calculator"></i> Підсумок:</span>
+            <span>{{ total_skills|floatformat:2 }}</span>
+        </div>
+
+        <!-- Список навичок -->
+        <div class="skill-row">
+            <span><i class="fas fa-heartbeat"></i> Витривалість:</span>
+            <span>{{ horse.endurance|floatformat:2 }}</span>
+        </div>
+        <div class="skill-row">
+            <span><i class="fas fa-tachometer-alt"></i> Швидкість:</span>
+            <span>{{ horse.speed|floatformat:2 }}</span>
+        </div>
+        <div class="skill-row">
+            <span><i class="fas fa-tshirt"></i> Виїздка:</span>
+            <span>{{ horse.dressage|floatformat:2 }}</span>
+        </div>
+        <div class="skill-row">
+            <span><i class="fas fa-horse"></i> Галоп:</span>
+            <span>{{ horse.gallop|floatformat:2 }}</span>
+        </div>
+        <div class="skill-row">
+            <span><i class="fas fa-running"></i> Рись:</span>
+            <span>{{ horse.trot|floatformat:2 }}</span>
+        </div>
+        <div class="skill-row">
+            <span><i class="fas fa-arrow-up"></i> Стрибки:</span>
+            <span>{{ horse.jumping|floatformat:2 }}</span>
         </div>
     </div>
+</div>
 
     <!-- Основна інформація -->
     <div class="horse-basic-info">
@@ -102,16 +121,15 @@
 
 </div>
 
-<!-- Блок для зміни імені лошати (тільки для новонароджених, які ще не мають імені, і тільки для первинного власника) -->
+<!-- Блок для зміни імені лошати -->
 {% if horse.age == 0 and not horse.name_customized and horse.original_owner == request.user %}
-<div class="name-change-form" style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 10px; max-width: 500px; margin-left: auto; margin-right: auto;">
-    <h4 style="color: #ffd700; text-align: center;"><i class="fas fa-pencil-alt"></i> Дайте ім'я лошаті</h4>
+<div class="name-change-form">
+    <h4><i class="fas fa-pencil-alt"></i> Дайте ім'я лошаті</h4>
     <form action="{% url 'change_foal_name' horse.id %}" method="post">
         {% csrf_token %}
-        <div style="display: flex; gap: 10px;">
-            <input type="text" name="name" placeholder="Введіть ім'я" required
-                   style="flex: 1; padding: 10px; border-radius: 5px; border: 1px solid #ffd700; background: rgba(0,0,0,0.5); color: #fff;">
-            <button type="submit" class="btn btn-primary" style="white-space: nowrap;">
+        <div class="name-input-group">
+            <input type="text" name="name" placeholder="Введіть ім'я" required class="name-input">
+            <button type="submit" class="btn btn-primary">
                 <i class="fas fa-save"></i> Зберегти
             </button>
         </div>
@@ -119,9 +137,9 @@
 </div>
 {% endif %}
 
-<!-- ➕ КНОПКА ВІДПРАВКИ ДО ПРИТУЛКУ (тільки для своїх коней) -->
+<!-- Кнопка відправки до притулку -->
 {% if horse.owner == request.user and horse.status == 'user' %}
-<div class="shelter-action-container" style="margin: 20px 0; text-align: center;">
+<div class="shelter-action-container">
     <button class="btn-shelter"
             onclick="if(confirm('Ви впевнені? Ви отримаєте 500 підков, і кінь потрапить до притулку.'))
                      location.href='{% url 'send_to_shelter' horse.id %}'">
@@ -130,22 +148,21 @@
 </div>
 {% endif %}
 
-<!-- КНОПКИ ДІЇ (Тренувати, Догляд, тощо) -->
+<!-- Кнопки дій -->
 <div class="horse-action-section">
 
     {% if horse.owner == request.user and horse.status == 'user' %}
         <p class="your-horse-label"><i class="fas fa-crown"></i> Це ваш кінь</p>
 
         <div class="action-buttons">
-            <button onclick="trainHorse({{ horse.id }})">
+            <button onclick="trainHorse({{ horse.id }})" class="btn-action">
                 <i class="fas fa-dumbbell"></i> Тренувати
             </button>
-            <button onclick="careHorse({{ horse.id }})">
+            <button onclick="careHorse({{ horse.id }})" class="btn-action">
                 <i class="fas fa-hand-holding-heart"></i> Догляд
             </button>
 
-            <!-- Кнопка "Відправити спати" -->
-            <form action="{% url 'sleep_horse' horse.id %}" method="post" style="display: inline;">
+            <form action="{% url 'sleep_horse' horse.id %}" method="post" class="inline-form">
                 {% csrf_token %}
                 {% with today=now|date:"Y-m-d" %}
                     {% if horse.last_sleep and horse.last_sleep|date:"Y-m-d" == today %}
@@ -160,7 +177,6 @@
                 {% endwith %}
             </form>
 
-            <!-- Кнопка "Розмноження" (неактивна для вагітних) -->
             {% if horse.age >= 36 and not horse.is_pregnant %}
                 <a href="{% url 'breed_select' horse.id %}" class="btn btn-primary">
                     <i class="fas fa-heart"></i> Розмноження
@@ -176,11 +192,8 @@
                 <i class="fas fa-coins"></i> Продати
             </a>
 
-            <!-- Кнопка "Виставити на парування" -->
             {% if horse.age >= 36 %}
-                {% if horse.gender == 'F' and horse.is_pregnant %}
-                    {# вагітна кобила не може #}
-                {% else %}
+                {% if not horse.gender == 'F' or not horse.is_pregnant %}
                     <a href="{% url 'create_breeding_offer' %}" class="btn btn-primary">
                         <i class="fas fa-heart"></i> Виставити на парування
                     </a>
@@ -197,7 +210,7 @@
             <p><i class="fas fa-tag"></i> Ціна: <strong>{{ horse.price }}</strong> <i class="fas fa-horse"></i> Підков</p>
 
             {% if horse.owner == request.user %}
-                <form action="{% url 'cancel_sale' horse.id %}" method="post" style="display: inline;">
+                <form action="{% url 'cancel_sale' horse.id %}" method="post" class="inline-form">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-warning" onclick="return confirm('Скасувати продаж? Кінь повернеться до вашої стайні.')">
                         <i class="fas fa-times"></i> Скасувати продаж
@@ -218,7 +231,7 @@
 
 {% if horse.status == 'shelter' %}
     <div class="pet-section">
-        <form action="{% url 'pet_horse' horse.id %}" method="post">
+        <form action="{% url 'pet_horse' horse.id %}" method="post" class="inline-form">
             {% csrf_token %}
             <button type="submit" class="pet-btn">
                 <i class="fas fa-hand-sparkles"></i> Погладити коня (+10 підков)

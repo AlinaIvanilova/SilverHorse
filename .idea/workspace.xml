@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="login by google 2 + desigh">
-      <change afterPath="$PROJECT_DIR$/SilverHorse/main/authentication.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SilverHorse/main/templates/main/password_reset_complete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SilverHorse/main/templates/main/password_reset_confirm.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SilverHorse/main/templates/main/password_reset_done.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SilverHorse/main/templates/main/password_reset_form.html" afterDir="false" />
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="passoword">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/SilverHorse/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/SilverHorse/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/main/templates/main/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/templates/main/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/main/templates/main/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/templates/main/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/main/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/horse_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/horse_detail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/horses.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/horses.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="26-update-login" />
+        <entry key="$PROJECT_DIR$" value="27-password" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -69,7 +63,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "27-password",
+    "git-widget-placeholder": "28-skills",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/img/horses",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -200,7 +194,8 @@
       <workItem from="1773314734501" duration="1978000" />
       <workItem from="1773671776756" duration="82000" />
       <workItem from="1773913963263" duration="5937000" />
-      <workItem from="1773920738568" duration="3802000" />
+      <workItem from="1773920738568" duration="3891000" />
+      <workItem from="1773926960911" duration="1983000" />
     </task>
     <task id="LOCAL-00001" summary="?">
       <option name="closed" value="true" />
@@ -538,7 +533,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773917505943</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="passoword">
+      <option name="closed" value="true" />
+      <created>1773925125291</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1773925125291</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -556,7 +559,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ааааааа" />
     <MESSAGE value="Added horse types (Riding Horse, Pony, Unicorn, Pegasus).&#10;Updated models.&#10;Implemented default base image logic for Pony." />
     <MESSAGE value="master 06.03.26" />
     <MESSAGE value="master - 06.03.26" />
@@ -581,7 +583,8 @@
     <MESSAGE value="login by google" />
     <MESSAGE value="login by google 2" />
     <MESSAGE value="login by google 2 + desigh" />
-    <option name="LAST_COMMIT_MESSAGE" value="login by google 2 + desigh" />
+    <MESSAGE value="passoword" />
+    <option name="LAST_COMMIT_MESSAGE" value="passoword" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -596,12 +599,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/SilverHorse/userspace/views/horses.py</url>
-          <line>191</line>
+          <line>198</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/SilverHorse/userspace/views/horses.py</url>
-          <line>280</line>
+          <line>287</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

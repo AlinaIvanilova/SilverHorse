@@ -34,11 +34,18 @@ def horse_detail(request, horse_id):
                 else None
             )
 
+    # Обчислюємо суму навичок
+    total_skills = (
+        horse.endurance + horse.speed + horse.dressage +
+        horse.gallop + horse.trot + horse.jumping
+    )
+
     return render(request, 'userspace/horse_detail.html', {
         'horse': horse,
         'prev_horse': prev_horse,
         'next_horse': next_horse,
-        'now': timezone.now()
+        'now': timezone.now(),
+        'total_skills': total_skills,
     })
 
 @login_required

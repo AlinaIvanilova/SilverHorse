@@ -26,6 +26,11 @@ class Horse(models.Model):
     wins = models.PositiveIntegerField(default=0, verbose_name="Перемоги")
     for_sale = models.BooleanField(default=False)
     last_sleep = models.DateTimeField(null=True, blank=True, verbose_name="Останній сон")
+    dressage = models.FloatField(default=0.0, verbose_name="Виїздка")
+    gallop = models.FloatField(default=0.0, verbose_name="Галоп")
+    trot = models.FloatField(default=0.0, verbose_name="Рись")
+    jumping = models.FloatField(default=0.0, verbose_name="Стрибки")
+
 
     # Нові поля для вагітності
     is_pregnant = models.BooleanField(default=False, verbose_name="Вагітна")
