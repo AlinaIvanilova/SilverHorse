@@ -121,7 +121,7 @@ ACCOUNT_USERNAME_REQUIRED = False             # не вимагати username
 SOCIALACCOUNT_AUTO_SIGNUP = True              # автоматична реєстрація без форми
 SOCIALACCOUNT_EMAIL_REQUIRED = True           # вимагати email від Google
 SOCIALACCOUNT_QUERY_EMAIL = True              # запитувати email у Google
-
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 
 SOCIALACCOUNT_EMAIL_AUTHENTICATION = True   # для нових версій allauth (0.57+)
