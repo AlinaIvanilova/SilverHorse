@@ -46,7 +46,7 @@ ROOT_URLCONF = 'SilverHorse.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # можна додати глобальну папку templates
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,6 +104,7 @@ SITE_ID = 1
 # Бекенди аутентифікації
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
+    'main.authentication.EmailOrUsernameModelBackend',  # ваш кастомний бекенд
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
@@ -128,3 +129,13 @@ SOCIALACCOUNT_EMAIL_AUTHENTICATION = True   # для нових версій all
 
 # Якщо ви створили власний адаптер, розкоментуйте:
 # SOCIALACCOUNT_ADAPTER = 'userspace.adapters.MySocialAccountAdapter'
+
+
+# ----- Налаштування електронної пошти (Gmail) -----
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'alinatelf@gmail.com'
+EMAIL_HOST_PASSWORD = 'cdojnzupsbggcdva'   # ваш пароль додатка
+DEFAULT_FROM_EMAIL = 'alinatelf@gmail.com'

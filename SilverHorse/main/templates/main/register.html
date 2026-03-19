@@ -16,8 +16,10 @@
 
         <form method="post">
             {% csrf_token %}
-            <label>Ім'я користувача:</label><br>
+            <label>Ім'я користувача (логін):</label><br>
             <input type="text" name="username" placeholder="Логін" required><br>
+            <label>Email:</label><br>
+            <input type="email" name="email" placeholder="Email" required><br>
             <label>Пароль:</label><br>
             <input type="password" name="password1" placeholder="Пароль" required><br>
             <label>Підтвердити пароль:</label><br>
