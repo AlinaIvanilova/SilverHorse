@@ -4,18 +4,21 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.utils import timezone
 from ..horse_images import get_horse_image
 
+
 class Horse(models.Model):
     gender_choices = [('M', 'Жеребець'), ('F', 'Кобила')]
-    status_choices = [('market', 'На ринку'), ('user', 'У користувача'), ('shelter', 'У притулку'), ('auction', 'На аукціоні')]
+    status_choices = [('market', 'На ринку'), ('user', 'У користувача'), ('shelter', 'У притулку'),
+                      ('auction', 'На аукціоні')]
 
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=50)
     age = models.IntegerField()  # вік у місяцях
     gender = models.CharField(max_length=1, choices=gender_choices)
     coat_color = models.CharField(max_length=50)
-    speed = models.IntegerField(default=50)
-    endurance = models.IntegerField(default=50)
-    strength = models.IntegerField(default=50)
+    # Змінено на FloatField для підтримки десяткових значень
+    speed = models.FloatField(default=50.0)
+    endurance = models.FloatField(default=50.0)
+    strength = models.IntegerField(default=50)  # залишено IntegerField, якщо не потрібні десяткові
     health = models.IntegerField(default=100)
     energy = models.IntegerField(default=100)
     mood = models.IntegerField(default=100)
@@ -26,24 +29,26 @@ class Horse(models.Model):
     wins = models.PositiveIntegerField(default=0, verbose_name="Перемоги")
     for_sale = models.BooleanField(default=False)
     last_sleep = models.DateTimeField(null=True, blank=True, verbose_name="Останній сон")
+
+    # Нові поля навичок (FloatField – з десятковими)
     dressage = models.FloatField(default=0.0, verbose_name="Виїздка")
     gallop = models.FloatField(default=0.0, verbose_name="Галоп")
     trot = models.FloatField(default=0.0, verbose_name="Рись")
     jumping = models.FloatField(default=0.0, verbose_name="Стрибки")
 
-
-    # Нові поля для вагітності
+    # Поля для вагітності
     is_pregnant = models.BooleanField(default=False, verbose_name="Вагітна")
     pregnancy_due_age = models.IntegerField(null=True, blank=True, verbose_name="Вік пологів (міс.)")
-    sire = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='offspring', verbose_name="Батько")
+    sire = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='offspring',
+                             verbose_name="Батько")
 
-    # Поле для фіксації первинного власника (хто створив/народив лоша)
+    # Первинний власник
     original_owner = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, blank=True,
         related_name='original_horses', verbose_name="Первинний власник"
     )
 
-    # Прапор, чи було змінено ім'я
+    # Прапор зміни імені
     name_customized = models.BooleanField(default=False, verbose_name="Ім'я змінено")
 
     TYPE_CHOICES = [
@@ -125,6 +130,7 @@ class HorsePet(models.Model):
     class Meta:
         verbose_name = "Погладжування коня"
         verbose_name_plural = "Погладжування коней"
+
 
 class BreedingOffer(models.Model):
     CURRENCY_CHOICES = [
