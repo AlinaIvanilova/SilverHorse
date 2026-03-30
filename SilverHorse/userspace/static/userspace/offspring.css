@@ -28,31 +28,19 @@
     background: transparent;
 }
 
-/* Заголовок */
+/* ===== ХЕДЕР: кнопка зліва, заголовок по центру ===== */
 .offspring-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
     margin-bottom: 40px;
+    min-height: 60px;
 }
 
-.offspring-header h1 {
-    text-align: center;
-    margin-top: 20px;
-    color: var(--color-primary);
-    font-weight: 700;
-    font-size: clamp(1.5rem, 5vw, 2.2rem);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px var(--color-primary-glow);
-    background: rgba(0,0,0,0.5);
-    padding: 10px 30px;
-    border-radius: 50px;
-    backdrop-filter: blur(5px);
-    border: 1px solid var(--color-border);
-    display: inline-block;
-    left: 50%;
-    transform: translateX(-50%);
-    position: relative;
-}
-
-/* Кнопка назад */
+/* Кнопка назад – ліва колонка */
 .back-btn {
+    grid-column: 1;
+    justify-self: start; /* притискаємо до лівого краю */
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -75,7 +63,41 @@
     box-shadow: 0 0 15px var(--color-primary-glow);
 }
 
-/* Сітка карток */
+/* Заголовок – центральна колонка */
+.offspring-header h1 {
+    grid-column: 2;
+    margin: 0;
+    text-align: center;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px var(--color-primary-glow);
+    background: rgba(0,0,0,0.5);
+    padding: 10px 30px;
+    border-radius: 50px;
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--color-border);
+    display: inline-block;
+    white-space: nowrap; /* запобігає переносу на широких екранах */
+}
+
+/* Адаптивність для малих екранів – переходимо на вертикальне розташування */
+@media (max-width: 600px) {
+    .offspring-header {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        text-align: center;
+    }
+    .back-btn {
+        justify-self: center;
+    }
+    .offspring-header h1 {
+        grid-column: 1;
+        white-space: normal; /* дозволяє переносити текст */
+    }
+}
+
+/* ===== Сітка карток ===== */
 .offspring-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -103,18 +125,19 @@
     box-shadow: var(--shadow-hover);
 }
 
-/* Фото */
+/* Фото – не обрізається, вписується в блок */
 .offspring-photo-link {
     display: block;
     height: 220px;
     overflow: hidden;
     border-bottom: 2px solid var(--color-border);
+    background: rgba(0, 0, 0, 0.3); /* темний фон для пустих зон */
 }
 
 .offspring-photo {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* фото повністю вміщується без обрізання */
     transition: transform 0.4s ease;
 }
 
