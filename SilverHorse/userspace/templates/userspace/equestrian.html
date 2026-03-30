@@ -3,7 +3,6 @@
 
 {% block content %}
 <div class="equestrian-container">
-
     <h1><i class="fas fa-building"></i> Кінноспортивні комплекси</h1>
 
     <!-- =====================
@@ -15,12 +14,10 @@
 
             <div class="complex-card">
                 <div class="owner-badge"><i class="fas fa-crown"></i> Ваш комплекс</div>
-
                 <p><i class="fas fa-tag"></i> <strong>Назва:</strong> {{ complex_obj.name }}</p>
                 <p><i class="fas fa-user"></i> <strong>Власник:</strong> {{ complex_obj.owner.username }}</p>
                 <p><i class="fas fa-map-marker-alt"></i> <strong>Розташування:</strong> {{ complex_obj.get_location_display }}</p>
                 <p><i class="fas fa-star"></i> <strong>Престиж:</strong> {{ complex_obj.prestige }}</p>
-
                 {% if average_rating %}
                     <p class="rating"><i class="fas fa-star"></i> {{ average_rating }}</p>
                 {% else %}
@@ -30,7 +27,6 @@
 
             <form method="post" class="complex-form">
                 {% csrf_token %}
-
                 <div class="form-field">
                     <label for="{{ complex_form.name.id_for_label }}">
                         <i class="fas fa-tag"></i> Назва:
@@ -40,7 +36,6 @@
                         <div class="errors">{{ complex_form.name.errors }}</div>
                     {% endif %}
                 </div>
-
                 <div class="form-field">
                     <label for="{{ complex_form.location.id_for_label }}">
                         <i class="fas fa-map-marker-alt"></i> Розташування:
@@ -50,11 +45,17 @@
                         <div class="errors">{{ complex_form.location.errors }}</div>
                     {% endif %}
                 </div>
-
                 <button type="submit" name="create_complex" class="btn btn-primary">
                     <i class="fas fa-save"></i> Зберегти зміни
                 </button>
             </form>
+
+            <!-- Кнопка складу -->
+            <div class="complex-actions" style="margin-top: 20px;">
+                <a href="{% url 'storage' %}" class="btn btn-secondary">
+                    <i class="fas fa-warehouse"></i> Склад
+                </a>
+            </div>
         </section>
     {% else %}
         <section class="empty-complex">
@@ -73,16 +74,9 @@
     ====================== -->
     <section class="search-section">
         <h2><i class="fas fa-search"></i> Пошук комплексів</h2>
-
         <form method="get" class="search-form">
-            <input
-                type="text"
-                name="search"
-                placeholder="Назва або власник"
-                value="{{ search_query }}"
-            >
+            <input type="text" name="search" placeholder="Назва або власник" value="{{ search_query }}">
             <button type="submit" class="btn btn-info"><i class="fas fa-search"></i> Пошук</button>
-
             {% if search_query %}
                 <a href="{% url 'equestrian_page' %}" class="btn btn-secondary">
                     <i class="fas fa-undo-alt"></i> Скинути
@@ -97,27 +91,22 @@
     {% if search_query %}
         <section>
             <h2><i class="fas fa-filter"></i> Результати пошуку "{{ search_query }}"</h2>
-
             {% if other_complexes %}
                 <div class="complex-grid">
                     {% for c in other_complexes %}
                         <div class="complex-card">
-
                             {% if c.owner == user %}
                                 <div class="owner-badge"><i class="fas fa-crown"></i> Ваш комплекс</div>
                             {% endif %}
-
                             <p><i class="fas fa-tag"></i> <strong>Назва:</strong> {{ c.name }}</p>
                             <p><i class="fas fa-user"></i> <strong>Власник:</strong> {{ c.owner.username }}</p>
                             <p><i class="fas fa-map-marker-alt"></i> <strong>Розташування:</strong> {{ c.get_location_display }}</p>
                             <p><i class="fas fa-star"></i> <strong>Престиж:</strong> {{ c.prestige }}</p>
-
                             {% if c.avg_rating %}
                                 <p class="rating"><i class="fas fa-star"></i> {{ c.avg_rating }}</p>
                             {% else %}
                                 <p class="no-rating"><i class="fas fa-star-half-alt"></i> Поки що немає оцінок</p>
                             {% endif %}
-
                             {% if c.owner != user %}
                                 <form method="post" class="rating-form">
                                     {% csrf_token %}
@@ -142,27 +131,22 @@
     ====================== -->
     <section>
         <h2><i class="fas fa-list"></i> Усі комплекси ({{ all_complexes.count }})</h2>
-
         {% if all_complexes %}
             <div class="complex-grid">
                 {% for c in all_complexes %}
                     <div class="complex-card">
-
                         {% if c.owner == user %}
                             <div class="owner-badge"><i class="fas fa-crown"></i> Ваш комплекс</div>
                         {% endif %}
-
                         <p><i class="fas fa-tag"></i> <strong>Назва:</strong> {{ c.name }}</p>
                         <p><i class="fas fa-user"></i> <strong>Власник:</strong> {{ c.owner.username }}</p>
                         <p><i class="fas fa-map-marker-alt"></i> <strong>Розташування:</strong> {{ c.get_location_display }}</p>
                         <p><i class="fas fa-star"></i> <strong>Престиж:</strong> {{ c.prestige }}</p>
-
                         {% if c.avg_rating %}
                             <p class="rating"><i class="fas fa-star"></i> {{ c.avg_rating }}</p>
                         {% else %}
                             <p class="no-rating"><i class="fas fa-star-half-alt"></i> Поки що немає оцінок</p>
                         {% endif %}
-
                         {% if c.owner != user %}
                             <form method="post" class="rating-form">
                                 {% csrf_token %}
@@ -180,6 +164,5 @@
             <p class="empty-text"><i class="fas fa-frown"></i> Комплексів поки немає</p>
         {% endif %}
     </section>
-
 </div>
 {% endblock %}

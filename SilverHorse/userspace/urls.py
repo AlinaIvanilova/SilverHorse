@@ -61,5 +61,9 @@ urlpatterns = [
     path('breeding/cancel/<int:offer_id>/', views.cancel_breeding_offer, name='cancel_breeding_offer'),
 
     path('horse/<int:horse_id>/pedigree/', horses.horse_pedigree, name='horse_pedigree'),
-path('horse/<int:horse_id>/offspring/', views.horse_offspring, name='horse_offspring'),
+    path('horse/<int:horse_id>/offspring/', views.horse_offspring, name='horse_offspring'),
+
+    path('equestrian/', views.equestrian_page, name='equestrian_page'),
+    path('complex/manage/', views.manage_complex, name='manage_complex'),
+    path('complex/storage/', views.storage_view, name='storage'),
 ]

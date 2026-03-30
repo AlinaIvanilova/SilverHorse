@@ -40,3 +40,29 @@ class ComplexRating(models.Model):
 
     class Meta:
         unique_together = ('complex', 'user')
+
+
+class Resource(models.Model):
+    """Тип ресурсу (їжа, будівельний матеріал)"""
+    TYPE_CHOICES = [
+        ('food', 'Їжа'),
+        ('building', 'Будівельний ресурс'),
+    ]
+    name = models.CharField(max_length=50, unique=True, verbose_name="Назва")
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES, verbose_name="Тип")
+
+    def __str__(self):
+        return self.name
+
+
+class ComplexResource(models.Model):
+    """Кількість ресурсів у конкретному комплексі"""
+    complex = models.ForeignKey(EquestrianComplex, on_delete=models.CASCADE, related_name='resources')
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=0, verbose_name="Кількість")
+
+    class Meta:
+        unique_together = ('complex', 'resource')
+
+    def __str__(self):
+        return f"{self.complex.name} - {self.resource.name}: {self.quantity}"

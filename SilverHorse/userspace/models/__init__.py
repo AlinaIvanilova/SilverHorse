@@ -1,7 +1,7 @@
 # Імпортуємо моделі з відповідних файлів
 from .messaging_models import Message, BlockedUser, SystemMessage
 from .note_models import Note
-from .user_models import Profile, Notification, EquestrianComplex, ComplexRating
+from .user_models import Profile, Notification, EquestrianComplex, ComplexRating, Resource, ComplexResource
 from .horse_models import Horse, HorsePet, BreedingOffer
 from .auction_models import Auction
 

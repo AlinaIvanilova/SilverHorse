@@ -5,7 +5,7 @@ from .messages import messages_page, mark_message_read, block_user_view, unblock
 from .profile import profile_page, account_page, language_page
 from .subscription import subscription_page
 from .horses import horses_page, horse_detail, buy_horse, update_horse_stat
-from .equestrian import equestrian_page, manage_complex
+from .equestrian import equestrian_page, manage_complex, storage_view
 from .market import market_view
 from .shelter import shelter_view, send_to_shelter, pet_horse
 from .auction import auction_list, auction_detail, create_auction, place_bid, finalize_auction, cancel_auction

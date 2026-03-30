@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Q
-from ..models import EquestrianComplex, ComplexRating, Horse
+from ..models import EquestrianComplex, ComplexRating, Horse, Resource, ComplexResource
 from ..forms import EquestrianComplexForm, RatingForm
 
 @login_required
@@ -120,3 +120,33 @@ def equestrian_page(request):
     }
 
     return render(request, 'userspace/equestrian.html', context)
+
+
+@login_required
+def storage_view(request):
+    # Отримуємо комплекс поточного користувача
+    complex_obj = EquestrianComplex.objects.filter(owner=request.user).first()
+    if not complex_obj:
+        messages.error(request, "У вас немає власного комплексу.")
+        return redirect('equestrian_page')
+
+    # Отримуємо всі ресурси, які є в системі
+    all_resources = Resource.objects.all()
+
+    # Для кожного ресурсу отримуємо його кількість у комплексі
+    resources_data = []
+    for res in all_resources:
+        try:
+            complex_res = ComplexResource.objects.get(complex=complex_obj, resource=res)
+            quantity = complex_res.quantity
+        except ComplexResource.DoesNotExist:
+            quantity = 0
+        resources_data.append({
+            'resource': res,
+            'quantity': quantity,
+        })
+
+    return render(request, 'userspace/storage.html', {
+        'complex': complex_obj,
+        'resources': resources_data,
+    })
