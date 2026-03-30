@@ -1,0 +1,157 @@
+{% extends 'userspace/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="pedigree-container">
+    <div class="pedigree-header">
+        <a href="{% url 'horse_detail' horse.id %}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Назад до коня
+        </a>
+        <h1><i class="fas fa-tree"></i> Родинне дерево: {{ horse.name }}</h1>
+    </div>
+
+    <div class="tree-wrapper" id="pedigree-tree-wrapper">
+        <ul class="tree">
+            {% include "userspace/tree_node.html" with node=pedigree %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pedigree.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function() {
+    // Функція для малювання ліній (використовує .tree-wrapper як контейнер)
+    function drawPedigreeLines() {
+        const wrapper = document.getElementById('pedigree-tree-wrapper');
+        if (!wrapper) return;
+
+        // Видаляємо попередні лінії
+        const oldLines = wrapper.querySelectorAll('.pedigree-line');
+        oldLines.forEach(line => line.remove());
+
+        const rootLi = wrapper.querySelector('.tree > li');
+        if (!rootLi) return;
+
+        // Отримуємо позицію wrapper відносно viewport
+        const wrapperRect = wrapper.getBoundingClientRect();
+
+        // Функція для перетворення координат елемента в координати відносно wrapper
+        function getRelativeRect(el) {
+            const rect = el.getBoundingClientRect();
+            return {
+                top: rect.top - wrapperRect.top,
+                left: rect.left - wrapperRect.left,
+                bottom: rect.bottom - wrapperRect.top,
+                right: rect.right - wrapperRect.left,
+                width: rect.width,
+                height: rect.height,
+                centerX: (rect.left + rect.width / 2) - wrapperRect.left,
+                centerY: (rect.top + rect.height / 2) - wrapperRect.top
+            };
+        }
+
+        // Рекурсивний обхід вузлів
+        function processNode(li) {
+            const parentLink = li.querySelector(':scope > .node-container > a');
+            if (!parentLink) return;
+            const parentRectRel = getRelativeRect(parentLink);
+            const parentBottom = parentRectRel.bottom;
+            const parentCenterX = parentRectRel.centerX;
+
+            const childUl = li.querySelector(':scope > ul');
+            if (!childUl) return;
+
+            const childLis = Array.from(childUl.children);
+            if (childLis.length === 0) return;
+
+            // Отримуємо позиції дітей
+            const childRects = childLis.map(childLi => {
+                const childLink = childLi.querySelector(':scope > .node-container > a');
+                if (!childLink) return null;
+                return getRelativeRect(childLink);
+            }).filter(r => r !== null);
+
+            if (childRects.length === 0) return;
+
+            // Вертикальна лінія від батька до першої дитини (або до спільної горизонталі)
+            const firstChildTop = Math.min(...childRects.map(r => r.top));
+            const verticalHeight = firstChildTop - parentBottom;
+            if (verticalHeight > 0) {
+                const verticalLine = document.createElement('div');
+                verticalLine.className = 'pedigree-line vertical';
+                verticalLine.style.cssText = `
+                    position: absolute;
+                    top: ${parentBottom}px;
+                    left: ${parentCenterX}px;
+                    width: 2px;
+                    height: ${verticalHeight}px;
+                    background-color: #c0a86a;
+                    z-index: 100;
+                    pointer-events: none;
+                `;
+                wrapper.appendChild(verticalLine);
+            }
+
+            // Горизонтальна лінія, що з'єднує всіх дітей
+            if (childRects.length > 1) {
+                const leftmost = Math.min(...childRects.map(r => r.centerX));
+                const rightmost = Math.max(...childRects.map(r => r.centerX));
+                const y = childRects[0].top - 5; // трохи вище дітей
+                const horLine = document.createElement('div');
+                horLine.className = 'pedigree-line horizontal';
+                horLine.style.cssText = `
+                    position: absolute;
+                    top: ${y}px;
+                    left: ${leftmost}px;
+                    width: ${rightmost - leftmost}px;
+                    height: 2px;
+                    background-color: #c0a86a;
+                    z-index: 100;
+                    pointer-events: none;
+                `;
+                wrapper.appendChild(horLine);
+            }
+
+            // Рекурсивно для кожної дитини
+            childLis.forEach(childLi => processNode(childLi));
+        }
+
+        processNode(rootLi);
+    }
+
+    // Викликати після завантаження всіх ресурсів (зображення впливають на висоту)
+    function init() {
+        drawPedigreeLines();
+        // Стежимо за зміною розміру вікна та прокручуванням всередині wrapper
+        const wrapper = document.getElementById('pedigree-tree-wrapper');
+        if (wrapper) {
+            window.addEventListener('resize', () => setTimeout(drawPedigreeLines, 100));
+            wrapper.addEventListener('scroll', () => setTimeout(drawPedigreeLines, 50));
+        }
+        // Також перемальовуємо після завантаження всіх зображень
+        const images = document.querySelectorAll('.tree .horse-node img');
+        let pending = 0;
+        images.forEach(img => {
+            if (img.complete) return;
+            pending++;
+            img.addEventListener('load', () => {
+                pending--;
+                if (pending === 0) drawPedigreeLines();
+            });
+        });
+        if (pending === 0) drawPedigreeLines();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
+{% endblock %}

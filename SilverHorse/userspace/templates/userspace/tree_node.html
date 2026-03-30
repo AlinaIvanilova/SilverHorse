@@ -1,0 +1,45 @@
+{% load static %}
+<li class="tree-node">
+    <div class="node-container">
+        <a href="{% if node.id %}{% url 'horse_detail' node.id %}{% else %}#{% endif %}"
+           class="horse-node {% if not node.id %}unknown{% endif %}">
+            {% if node.photo_url %}
+                <img src="{{ node.photo_url }}" alt="{{ node.name }}">
+            {% endif %}
+            <span class="name">{{ node.name|default:"Невідомо" }}</span>
+            {% if node.breed %}
+                <span class="breed">{{ node.breed }}</span>
+            {% elif not node.id %}
+                <span class="breed">—</span>
+            {% endif %}
+        </a>
+    </div>
+    {% if node.sire or node.dam %}
+        <ul class="parents">
+            <li class="parent">
+                {% if node.sire %}
+                    {% include "userspace/tree_node.html" with node=node.sire %}
+                {% else %}
+                    <div class="node-container">
+                        <a href="#" class="horse-node unknown">
+                            <span class="name">Невідомо</span>
+                            <span class="breed">—</span>
+                        </a>
+                    </div>
+                {% endif %}
+            </li>
+            <li class="parent">
+                {% if node.dam %}
+                    {% include "userspace/tree_node.html" with node=node.dam %}
+                {% else %}
+                    <div class="node-container">
+                        <a href="#" class="horse-node unknown">
+                            <span class="name">Невідомо</span>
+                            <span class="breed">—</span>
+                        </a>
+                    </div>
+                {% endif %}
+            </li>
+        </ul>
+    {% endif %}
+</li>

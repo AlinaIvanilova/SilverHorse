@@ -2,7 +2,7 @@
 from django.urls import path
 from . import views
 from .views import auction
-
+from .views import horses
 urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('dashboard/messages/', views.messages_page, name='messages_page'),
@@ -59,4 +59,7 @@ urlpatterns = [
     path('breeding/create/', views.create_breeding_offer, name='create_breeding_offer'),
     path('breeding/buy/<int:offer_id>/', views.purchase_breeding, name='purchase_breeding'),
     path('breeding/cancel/<int:offer_id>/', views.cancel_breeding_offer, name='cancel_breeding_offer'),
+
+    path('horse/<int:horse_id>/pedigree/', horses.horse_pedigree, name='horse_pedigree'),
+path('horse/<int:horse_id>/offspring/', views.horse_offspring, name='horse_offspring'),
 ]

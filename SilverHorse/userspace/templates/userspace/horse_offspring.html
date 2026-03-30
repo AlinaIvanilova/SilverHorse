@@ -1,0 +1,45 @@
+{% extends 'userspace/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="offspring-container">
+    <div class="offspring-header">
+        <a href="{% url 'horse_detail' horse.id %}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Назад до коня
+        </a>
+        <h1><i class="fas fa-child"></i> Діти коня {{ horse.name }}</h1>
+    </div>
+
+    {% if offspring %}
+        <div class="offspring-list">
+            {% for foal in offspring %}
+                <div class="offspring-card">
+                    <a href="{% url 'horse_detail' foal.id %}" class="offspring-photo-link">
+                        <img src="{{ foal.get_photo_url }}" alt="{{ foal.get_photo_alt }}" class="offspring-photo">
+                    </a>
+                    <div class="offspring-info">
+                        <h3>
+                            <a href="{% url 'horse_detail' foal.id %}" class="offspring-name">
+                                {{ foal.name }}
+                            </a>
+                        </h3>
+                        <p><i class="fas fa-tag"></i> Порода: {{ foal.breed }}</p>
+                        <p><i class="fas fa-venus-mars"></i> Стать: {{ foal.get_gender_display }}</p>
+                        <p><i class="fas fa-calendar-alt"></i> Вік: {{ foal.get_age_display }}</p>
+                        <p><i class="fas fa-chart-line"></i> Швидкість: {{ foal.speed|floatformat:0 }}</p>
+                        <p><i class="fas fa-heartbeat"></i> Витривалість: {{ foal.endurance|floatformat:0 }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-offspring">
+            <p><i class="fas fa-frown"></i> У цього коня поки немає дітей.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/offspring.css' %}">
+{% endblock %}

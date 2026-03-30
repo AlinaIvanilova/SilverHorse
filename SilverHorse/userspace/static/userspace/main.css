@@ -7,6 +7,7 @@
 @import "./base.css";
 
 /* Компоненти */
+
 @import "./header.css";
 @import "./footer.css";
 @import "./buttons.css";
@@ -19,3 +20,5 @@
 @import "./equestrian.css";
 @import "./shelter.css";
 @import "./auction.css";
+@import "./offspring.css";
+@import "./pedigree.css";

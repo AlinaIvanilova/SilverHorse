@@ -253,6 +253,7 @@ def give_birth(request, mother):
 
     name = f"Лоша {mother.name}"  # тимчасове ім'я
 
+    # MODIFIED: додаємо батька та матір для лошати
     foal = Horse.objects.create(
         name=name,
         breed=breed,
@@ -272,6 +273,8 @@ def give_birth(request, mother):
         for_sale=False,
         original_owner=mother.owner,  # фіксуємо первинного власника
         name_customized=False,
+        sire=father,      # NEW
+        dam=mother,       # NEW
     )
 
     # Скидаємо вагітність матері
@@ -308,3 +311,74 @@ def change_foal_name(request, horse_id):
             messages.error(request, "Ім'я не може бути порожнім.")
 
     return redirect('horse_detail', horse_id=horse.id)
+
+
+@login_required
+def horse_pedigree(request, horse_id):
+    horse = get_object_or_404(Horse, id=horse_id)
+
+    # Вузол для поточного коня
+    pedigree = {
+        'id': horse.id,
+        'name': horse.name,
+        'breed': horse.breed,
+        'photo_url': horse.get_photo_url(),
+        'sire': None,
+        'dam': None,
+    }
+
+    generations = 3  # глибина дерева
+
+    def get_ancestors(h, depth, parent_dict):
+        if depth > generations or h is None:
+            return
+
+        # Батько
+        sire = h.sire
+        if sire:
+            parent_dict['sire'] = {
+                'id': sire.id,
+                'name': sire.name,
+                'breed': sire.breed,
+                'photo_url': sire.get_photo_url(),
+                'sire': None,
+                'dam': None,
+            }
+            get_ancestors(sire, depth + 1, parent_dict['sire'])
+        else:
+            parent_dict['sire'] = None
+
+        # Мати
+        dam = h.dam
+        if dam:
+            parent_dict['dam'] = {
+                'id': dam.id,
+                'name': dam.name,
+                'breed': dam.breed,
+                'photo_url': dam.get_photo_url(),
+                'sire': None,
+                'dam': None,
+            }
+            get_ancestors(dam, depth + 1, parent_dict['dam'])
+        else:
+            parent_dict['dam'] = None
+
+    get_ancestors(horse, 1, pedigree)
+
+    return render(request, 'userspace/horse_pedigree.html', {
+        'horse': horse,
+        'pedigree': pedigree,
+    })
+
+@login_required
+def horse_offspring(request, horse_id):
+    horse = get_object_or_404(Horse, id=horse_id)
+    # Знаходимо всіх коней, у яких цей кінь є sire (батьком) або dam (матір'ю)
+    offspring_as_sire = Horse.objects.filter(sire=horse)
+    offspring_as_dam = Horse.objects.filter(dam=horse)
+    # Об'єднуємо, усуваючи дублікати (якщо кінь є і батьком, і матір'ю - неможливо, але на всяк випадок)
+    offspring = (offspring_as_sire | offspring_as_dam).distinct().order_by('-age')
+    return render(request, 'userspace/horse_offspring.html', {
+        'horse': horse,
+        'offspring': offspring,
+    })

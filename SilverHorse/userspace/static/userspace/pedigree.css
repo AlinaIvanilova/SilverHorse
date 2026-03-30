@@ -1,0 +1,305 @@
+/* ==========================================
+   ГЕНЕТИЧНЕ ДЕРЕВО – єдиний стиль із сайтом
+   (покращений фон, більші фото)
+   ========================================== */
+
+:root {
+    --color-primary: #ffd700;
+    --color-primary-hover: #ffea70;
+    --color-primary-glow: rgba(255, 215, 0, 0.3);
+    --color-bg-glass: rgba(0, 0, 0, 0.6);
+    --color-bg-card: rgba(0, 0, 0, 0.7);
+    --color-border: rgba(255, 215, 0, 0.4);
+    --color-border-hover: rgba(255, 215, 0, 0.9);
+    --color-text: #ffffff;
+    --color-text-secondary: #dddddd;
+    --glass-effect: blur(12px);
+    --radius-card: 20px;
+    --radius-sm: 12px;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    --shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.7), 0 0 15px var(--color-primary-glow);
+    --transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Контейнер дерева */
+.pedigree-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: transparent;
+}
+
+.pedigree-header {
+    margin-bottom: 40px;
+}
+
+.pedigree-header h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px var(--color-primary-glow);
+    background: rgba(0,0,0,0.5);
+    padding: 10px 30px;
+    border-radius: 50px;
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--color-border);
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background: rgba(0,0,0,0.6);
+    color: var(--color-primary);
+    text-decoration: none;
+    border-radius: 40px;
+    transition: var(--transition);
+    font-weight: 500;
+    border: 2px solid var(--color-border);
+    backdrop-filter: blur(4px);
+}
+
+.back-btn:hover {
+    background: var(--color-primary);
+    color: #000;
+    border-color: var(--color-primary-hover);
+    transform: translateX(-4px);
+    box-shadow: 0 0 15px var(--color-primary-glow);
+}
+
+/* Обгортка – тепер з щільним темним фоном і розмиттям */
+.tree-wrapper {
+    position: relative;
+    text-align: center;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 30px 20px 40px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    border-radius: 32px;
+    border: 2px solid var(--color-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.tree {
+    display: inline-block;
+    text-align: center;
+    padding: 20px 0 0;
+    margin: 0 auto;
+}
+
+/* Скидаємо всі CSS-лінії (їх малює JS) */
+.tree li::before,
+.tree li::after,
+.tree li > ul::before {
+    display: none !important;
+}
+
+/* Стилі списків */
+.tree ul {
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+.tree li {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    position: relative;
+    padding: 30px 12px 0 12px;
+    margin: 0;
+}
+
+/* ========== КАРТКИ (скло + золото) ========== */
+.node-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.tree li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background: var(--color-bg-card);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: 16px 20px;
+    min-width: 160px;
+    max-width: 200px;
+    min-height: 150px;
+    justify-content: center;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    text-align: center;
+    color: var(--color-text);
+    box-sizing: border-box;
+}
+
+/* Кореневий вузол – ще більший акцент */
+.tree > li > .node-container a {
+    min-height: 170px;
+    min-width: 190px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 3px solid var(--color-primary);
+    box-shadow: 0 0 30px var(--color-primary-glow);
+}
+
+.tree > li > .node-container a .name {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--color-primary);
+}
+
+/* Звичайний кінь */
+.tree .horse-node {
+    background: var(--color-bg-card);
+    border-color: var(--color-border);
+}
+
+.tree .horse-node:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-hover);
+    background: rgba(0, 0, 0, 0.85);
+}
+
+/* Фото – ЗБІЛЬШЕНО */
+.tree .horse-node img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 12px;
+    border: 3px solid var(--color-primary);
+    box-shadow: 0 0 12px var(--color-primary-glow);
+    background: #1a1a1a;
+}
+
+/* Плейсхолдер без фото – теж більший */
+.tree .horse-node:not(:has(img))::before {
+    content: "🐴";
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 8px;
+    opacity: 0.9;
+    filter: drop-shadow(0 0 6px gold);
+}
+
+/* Ім'я */
+.tree .horse-node .name {
+    font-weight: 700;
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    word-break: break-word;
+    max-width: 160px;
+    color: var(--color-text);
+}
+
+/* Порода (бейдж) */
+.tree .horse-node .breed {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    background: rgba(255, 215, 0, 0.2);
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 30px;
+    margin-top: 6px;
+    backdrop-filter: blur(4px);
+}
+
+/* Невідомі предки */
+.tree .unknown {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px dashed var(--color-border);
+    color: var(--color-text-secondary);
+    cursor: default;
+    box-shadow: none;
+    backdrop-filter: blur(5px);
+}
+
+.tree .unknown:hover {
+    transform: none;
+    background: rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+.tree .unknown .name {
+    font-style: italic;
+    color: #ccc;
+}
+
+.tree .unknown:not(:has(img))::before {
+    content: "?";
+    font-size: 2.5rem;
+    font-weight: 300;
+    background: rgba(0,0,0,0.6);
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: 10px;
+    color: var(--color-primary);
+    border: 1px solid var(--color-border);
+}
+
+/* Адаптивність */
+@media (max-width: 900px) {
+    .tree li a {
+        min-width: 130px;
+        min-height: 130px;
+        padding: 12px 14px;
+    }
+    .tree .horse-node .name { font-size: 0.85rem; }
+    .tree .horse-node img { width: 60px; height: 60px; }
+    .tree .horse-node:not(:has(img))::before { font-size: 2.2rem; }
+    .tree > li > .node-container a { min-width: 150px; min-height: 150px; }
+    .tree ul { padding-top: 20px; }
+    .tree li { padding-top: 20px; }
+}
+
+@media (max-width: 600px) {
+    .tree li a {
+        min-width: 100px;
+        min-height: 110px;
+        padding: 10px;
+        font-size: 0.75rem;
+    }
+    .tree .horse-node .name { font-size: 0.7rem; }
+    .tree .horse-node img { width: 45px; height: 45px; }
+    .tree .unknown:not(:has(img))::before { width: 45px; height: 45px; line-height: 45px; font-size: 1.8rem; }
+    .tree .horse-node:not(:has(img))::before { font-size: 1.8rem; }
+}
+
+/* Скролбар – золотий */
+.tree-wrapper::-webkit-scrollbar {
+    height: 10px;
+}
+.tree-wrapper::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.4);
+    border-radius: 10px;
+}
+.tree-wrapper::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 10px;
+}

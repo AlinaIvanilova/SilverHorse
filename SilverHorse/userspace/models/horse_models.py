@@ -42,6 +42,10 @@ class Horse(models.Model):
     sire = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='offspring',
                              verbose_name="Батько")
 
+    # NEW: поле для матері
+    dam = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='offspring_dam',
+                            verbose_name="Мати")
+
     # Первинний власник
     original_owner = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, blank=True,

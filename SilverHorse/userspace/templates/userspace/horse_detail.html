@@ -70,43 +70,40 @@
         </div>
     </div>
 
- <!-- Навички (як на фото) -->
-<div class="horse-skills">
-    <h3><i class="fas fa-star"></i> Навички</h3>
-    <div class="skills-table">
-        <!-- Підсумок зверху -->
-        <div class="skill-row total-row">
-            <span><i class="fas fa-calculator"></i> Підсумок:</span>
-            <span>{{ total_skills|floatformat:2 }}</span>
-        </div>
-
-        <!-- Список навичок -->
-        <div class="skill-row">
-            <span><i class="fas fa-heartbeat"></i> Витривалість:</span>
-            <span>{{ horse.endurance|floatformat:2 }}</span>
-        </div>
-        <div class="skill-row">
-            <span><i class="fas fa-tachometer-alt"></i> Швидкість:</span>
-            <span>{{ horse.speed|floatformat:2 }}</span>
-        </div>
-        <div class="skill-row">
-            <span><i class="fas fa-tshirt"></i> Виїздка:</span>
-            <span>{{ horse.dressage|floatformat:2 }}</span>
-        </div>
-        <div class="skill-row">
-            <span><i class="fas fa-horse"></i> Галоп:</span>
-            <span>{{ horse.gallop|floatformat:2 }}</span>
-        </div>
-        <div class="skill-row">
-            <span><i class="fas fa-running"></i> Рись:</span>
-            <span>{{ horse.trot|floatformat:2 }}</span>
-        </div>
-        <div class="skill-row">
-            <span><i class="fas fa-arrow-up"></i> Стрибки:</span>
-            <span>{{ horse.jumping|floatformat:2 }}</span>
+    <!-- Навички -->
+    <div class="horse-skills">
+        <h3><i class="fas fa-star"></i> Навички</h3>
+        <div class="skills-table">
+            <div class="skill-row total-row">
+                <span><i class="fas fa-calculator"></i> Підсумок:</span>
+                <span>{{ total_skills|floatformat:2 }}</span>
+            </div>
+            <div class="skill-row">
+                <span><i class="fas fa-heartbeat"></i> Витривалість:</span>
+                <span>{{ horse.endurance|floatformat:2 }}</span>
+            </div>
+            <div class="skill-row">
+                <span><i class="fas fa-tachometer-alt"></i> Швидкість:</span>
+                <span>{{ horse.speed|floatformat:2 }}</span>
+            </div>
+            <div class="skill-row">
+                <span><i class="fas fa-tshirt"></i> Виїздка:</span>
+                <span>{{ horse.dressage|floatformat:2 }}</span>
+            </div>
+            <div class="skill-row">
+                <span><i class="fas fa-horse"></i> Галоп:</span>
+                <span>{{ horse.gallop|floatformat:2 }}</span>
+            </div>
+            <div class="skill-row">
+                <span><i class="fas fa-running"></i> Рись:</span>
+                <span>{{ horse.trot|floatformat:2 }}</span>
+            </div>
+            <div class="skill-row">
+                <span><i class="fas fa-arrow-up"></i> Стрибки:</span>
+                <span>{{ horse.jumping|floatformat:2 }}</span>
+            </div>
         </div>
     </div>
-</div>
 
     <!-- Основна інформація -->
     <div class="horse-basic-info">
@@ -190,6 +187,15 @@
 
             <a href="{% url 'sell_horse' horse.id %}" class="btn btn-primary">
                 <i class="fas fa-coins"></i> Продати
+            </a>
+
+            <a href="{% url 'horse_pedigree' horse.id %}" class="btn btn-primary">
+                <i class="fas fa-tree"></i> Родинне дерево
+            </a>
+
+            <!-- Кнопка нащадків -->
+            <a href="{% url 'horse_offspring' horse.id %}" class="btn btn-primary">
+                <i class="fas fa-child"></i> Нащадки
             </a>
 
             {% if horse.age >= 36 %}
