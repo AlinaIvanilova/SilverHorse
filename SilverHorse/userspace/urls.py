@@ -3,6 +3,9 @@ from django.urls import path
 from . import views
 from .views import auction
 from .views import horses
+from .views.shop import shop_view
+
+
 urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('dashboard/messages/', views.messages_page, name='messages_page'),
@@ -66,4 +69,7 @@ urlpatterns = [
     path('equestrian/', views.equestrian_page, name='equestrian_page'),
     path('complex/manage/', views.manage_complex, name='manage_complex'),
     path('complex/storage/', views.storage_view, name='storage'),
+
+    path('shop/', shop_view, name='shop'),
+    path('shop/<str:resource_type>/', shop_view, name='shop_filtered'),
 ]

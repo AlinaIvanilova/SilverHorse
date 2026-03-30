@@ -50,6 +50,7 @@ class Resource(models.Model):
     ]
     name = models.CharField(max_length=50, unique=True, verbose_name="Назва")
     type = models.CharField(max_length=20, choices=TYPE_CHOICES, verbose_name="Тип")
+    price = models.PositiveIntegerField(default=0, verbose_name="Ціна (Срібні Підкови)")
 
     def __str__(self):
         return self.name

@@ -237,13 +237,9 @@
   max-width: fit-content;
 }
 
-/* Контейнер для кнопки "Магазин" + меню */
-.market-container .shop-main-container {
-  position: relative;
-  display: inline-block;
-}
-
+/* Пряме посилання "Магазин" */
 .market-container .shop-main-btn {
+  display: inline-block;
   background: linear-gradient(135deg, #ffd700, #ffed4e);
   color: #000;
   padding: 12px 24px;
@@ -255,12 +251,16 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   min-width: 140px;
+  text-decoration: none;
+  text-align: center;
 }
 
 .market-container .shop-main-btn:hover {
   background: linear-gradient(135deg, #ffed4e, #ffd700);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  color: #000;
+  text-decoration: none;
 }
 
 .market-container .shop-secondary-btn {
@@ -307,59 +307,6 @@
   background: rgba(0, 188, 212, 0.1);
 }
 
-/* Випадаюче меню Магазину */
-.market-container .shop-dropdown {
-  position: absolute;
-  top: 100%;
-  left: -10px;
-  margin-top: 5px;
-  display: none;
-  background: rgba(20, 20, 20, 0.98);
-  min-width: 220px;
-  border-radius: 8px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-  border: 2px solid #ffd700;
-  z-index: 1000;
-  backdrop-filter: blur(5px);
-}
-
-.market-container .shop-dropdown.visible {
-  display: block;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.market-container .shop-dropdown a {
-  color: #ffd700;
-  padding: 14px 18px;
-  text-decoration: none;
-  display: block;
-  font-size: 1rem;
-  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-  transition: all 0.2s ease;
-  text-align: center;
-}
-
-.market-container .shop-dropdown a:last-child {
-  border-bottom: none;
-}
-
-.market-container .shop-dropdown a:hover {
-  background: rgba(255, 215, 0, 0.2);
-  color: #fff;
-  padding-left: 25px;
-}
-
 /* Адаптація навігації для мобільних */
 @media (max-width: 768px) {
   .market-container .shop-buttons-row {
@@ -374,10 +321,6 @@
     width: 100%;
     max-width: 300px;
     min-width: auto;
-  }
-
-  .market-container .shop-dropdown {
-    left: 0;
   }
 }
 

@@ -4,15 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="three update">
-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/storage.html" afterDir="false" />
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="Resource v1">
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/shop.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templatetags/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templatetags/custom_filters.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/shop.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models/user_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/user_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/equestrian.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/equestrian.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/trade.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/trade.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/trade.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/trade.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/equestrian.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/equestrian.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,16 +24,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
-        <option value="HTML File" />
         <option value="CSS File" />
+        <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="29.3-family-tree-update" />
+        <entry key="$PROJECT_DIR$" value="29.4-resourses" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,7 +69,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "29.4-resourses",
+    "git-widget-placeholder": "29.5-resourses-market",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/img/horses",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -210,7 +212,7 @@
       <workItem from="1774860757016" duration="2830000" />
       <workItem from="1774866743365" duration="780000" />
       <workItem from="1774868271902" duration="338000" />
-      <workItem from="1774870630518" duration="1587000" />
+      <workItem from="1774870630518" duration="3841000" />
     </task>
     <task id="LOCAL-00001" summary="?">
       <option name="closed" value="true" />
@@ -588,7 +590,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774867293519</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Resource v1">
+      <option name="closed" value="true" />
+      <created>1774872382789</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1774872382789</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -606,7 +616,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="-" />
     <MESSAGE value="css" />
     <MESSAGE value="bad version auction" />
     <MESSAGE value="version auction 2" />
@@ -631,7 +640,8 @@
     <MESSAGE value="breed fixed" />
     <MESSAGE value="three done" />
     <MESSAGE value="three update" />
-    <option name="LAST_COMMIT_MESSAGE" value="three update" />
+    <MESSAGE value="Resource v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Resource v1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -651,12 +661,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/SilverHorse/userspace/urls.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SilverHorse/userspace/urls.py</url>
-          <line>63</line>
+          <line>66</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

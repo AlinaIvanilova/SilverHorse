@@ -8,18 +8,10 @@
     <!-- 🛒 Магазин навігація з кнопками по центру -->
     <div class="market-shop-nav">
         <div class="shop-buttons-row">
-            <div class="shop-main-container">
-                <button class="shop-main-btn" id="shopMainBtn">
-                    <i class="fas fa-store"></i> Магазин
-                </button>
-                <div class="shop-dropdown" id="shopDropdown">
-                    <a href="#" class="shop-item"><i class="fas fa-apple-alt"></i> Харчування</a>
-                    <a href="#" class="shop-item"><i class="fas fa-tools"></i> Спорядження</a>
-                    <a href="#" class="shop-item"><i class="fas fa-box"></i> Ресурси</a>
-                    <a href="#" class="shop-item"><i class="fas fa-tractor"></i> Сільське господарство</a>
-                    <a href="#" class="shop-item"><i class="fas fa-wrench"></i> Поліпшення</a>
-                </div>
-            </div>
+            <!-- Пряме посилання на магазин -->
+            <a href="{% url 'shop' %}" class="shop-main-btn">
+                <i class="fas fa-store"></i> Магазин
+            </a>
 
             <button class="shop-secondary-btn">
                 <i class="fas fa-exchange-alt"></i> Обмін предметами
@@ -256,31 +248,5 @@ function resetFilters() {
     document.querySelectorAll('input[name="gender"]').forEach(cb => cb.checked = false);
     document.querySelectorAll('.horse-card').forEach(horse => horse.style.display = 'flex');
 }
-
-// Випадаюче меню "Магазин" (hover)
-document.addEventListener('DOMContentLoaded', function() {
-    const shopContainer = document.querySelector('.shop-main-container');
-    const dropdown = document.getElementById('shopDropdown');
-    let hideTimeout;
-
-    function showDropdown() {
-        clearTimeout(hideTimeout);
-        dropdown.classList.add('visible');
-    }
-
-    function hideDropdown() {
-        hideTimeout = setTimeout(() => {
-            dropdown.classList.remove('visible');
-        }, 200);
-    }
-
-    shopContainer.addEventListener('mouseenter', showDropdown);
-    shopContainer.addEventListener('mouseleave', hideDropdown);
-
-    document.getElementById('shopMainBtn').addEventListener('click', (e) => {
-        e.preventDefault();
-        // тут можна додати перехід на сторінку магазину
-    });
-});
 </script>
 {% endblock %}
