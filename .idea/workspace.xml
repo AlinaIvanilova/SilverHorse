@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="Resource v? market: buy and save">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="Resource v6 horse can walk">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/horse_detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/horse_detail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/horses.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/horses.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="29.5-resourses-market" />
+        <entry key="$PROJECT_DIR$" value="29.6-walk" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -60,7 +65,7 @@
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;29.6-walk&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;29.6.1-walk-add-resourses&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/img/horses&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -204,14 +209,9 @@
       <workItem from="1774866743365" duration="780000" />
       <workItem from="1774868271902" duration="338000" />
       <workItem from="1774870630518" duration="4474000" />
-    </task>
-    <task id="LOCAL-00001" summary="?">
-      <option name="closed" value="true" />
-      <created>1767174197956</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1767174197956</updated>
+      <workItem from="1774875947384" duration="910000" />
+      <workItem from="1774877733724" duration="184000" />
+      <workItem from="1774879280847" duration="585000" />
     </task>
     <task id="LOCAL-00002" summary="I made a design for the complex's page">
       <option name="closed" value="true" />
@@ -597,7 +597,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774875093481</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Resource v6 horse can walk">
+      <option name="closed" value="true" />
+      <created>1774876142347</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1774876142348</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -615,7 +623,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="bad version auction" />
     <MESSAGE value="version auction 2" />
     <MESSAGE value="version auction 3" />
     <MESSAGE value="version auction 4" />
@@ -640,7 +647,8 @@
     <MESSAGE value="three update" />
     <MESSAGE value="Resource v1" />
     <MESSAGE value="Resource v2 market: buy and save" />
-    <option name="LAST_COMMIT_MESSAGE" value="Resource v2 market: buy and save" />
+    <MESSAGE value="Resource v6 horse can walk" />
+    <option name="LAST_COMMIT_MESSAGE" value="Resource v6 horse can walk" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -650,18 +658,8 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SilverHorse/userspace/views/horses.py</url>
-          <line>198</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/SilverHorse/userspace/views/__init__.py</url>
           <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SilverHorse/userspace/urls.py</url>
-          <line>66</line>
-          <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/SilverHorse/userspace/views/equestrian.py</url>

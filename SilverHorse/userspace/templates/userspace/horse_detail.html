@@ -159,12 +159,10 @@
                 <i class="fas fa-hand-holding-heart"></i> Догляд
             </button>
 
-            <form action="{% url 'walk_horse' horse.id %}" method="post" style="display: inline;">
-                {% csrf_token %}
-                <button type="submit" class="btn-action" {% if horse.energy < 10 %}disabled{% endif %}>
-                    <i class="fas fa-walking"></i> Прогулянка (-10 енергії)
-                </button>
-            </form>
+            <!-- Кнопка, що відкриває модальне вікно для прогулянок -->
+            <button class="btn-action" id="walkModalBtn" {% if horse.energy < 10 %}disabled{% endif %}>
+                <i class="fas fa-walking"></i> Прогулянка (-10 енергії)
+            </button>
 
             <form action="{% url 'sleep_horse' horse.id %}" method="post" class="inline-form">
                 {% csrf_token %}
@@ -241,6 +239,108 @@
     {% endif %}
 
 </div>
+
+<!-- Модальне вікно для вибору кількості прогулянок -->
+{% if horse.owner == request.user and horse.status == 'user' and horse.energy > 0 %}
+<div id="walkModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h4><i class="fas fa-tree"></i> Прогулянка в лісі</h4>
+        <p>Длительность: 30 мин за раз</p>
+        <form action="{% url 'walk_multiple' horse.id %}" method="post" id="walk-multiple-form">
+            {% csrf_token %}
+            <div class="slider-container">
+                <label for="walks-slider-modal">Кількість прогулянок:</label>
+                <input type="range" id="walks-slider-modal" name="walks" min="0" max="10" step="1" value="1">
+                <span id="walks-value-modal">1</span>
+            </div>
+            <p>Витрати енергії: <strong id="energy-cost-modal">10</strong> (всього: <span id="total-energy-cost-modal">10</span>)</p>
+            <p>Доступна енергія: {{ horse.energy }}</p>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-walking"></i> Прогуляти
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Отримуємо доступну енергію коня (передаємо з сервера)
+    const energy = parseInt("{{ horse.energy }}");
+    const maxWalks = Math.floor(energy / 10);
+
+    const modal = document.getElementById("walkModal");
+    const btn = document.getElementById("walkModalBtn");
+    const span = document.getElementsByClassName("close")[0];
+    const slider = document.getElementById("walks-slider-modal");
+    const walksValueSpan = document.getElementById("walks-value-modal");
+    const energyCostSpan = document.getElementById("energy-cost-modal");
+    const totalCostSpan = document.getElementById("total-energy-cost-modal");
+
+    // Налаштування слайдера
+    slider.max = maxWalks;
+    if (maxWalks > 0) {
+        slider.value = Math.min(1, maxWalks);
+        walksValueSpan.textContent = slider.value;
+        const cost = slider.value * 10;
+        energyCostSpan.textContent = cost;
+        totalCostSpan.textContent = cost;
+    } else {
+        slider.disabled = true;
+        walksValueSpan.textContent = "0";
+        energyCostSpan.textContent = "0";
+        totalCostSpan.textContent = "0";
+    }
+
+    function updateWalkCost() {
+        const walks = parseInt(slider.value);
+        const cost = walks * 10;
+        walksValueSpan.textContent = walks;
+        energyCostSpan.textContent = cost;
+        totalCostSpan.textContent = cost;
+    }
+
+    slider.addEventListener('input', updateWalkCost);
+
+    // Відкрити модальне вікно при кліку на кнопку
+    btn.onclick = function() {
+        modal.style.display = "block";
+        // Оновлюємо максимальне значення при відкритті (якщо енергія змінилась)
+        const currentMax = Math.floor(energy / 10);
+        slider.max = currentMax;
+        if (currentMax > 0) {
+            slider.value = Math.min(1, currentMax);
+            updateWalkCost();
+            slider.disabled = false;
+        } else {
+            slider.disabled = true;
+            walksValueSpan.textContent = "0";
+            energyCostSpan.textContent = "0";
+            totalCostSpan.textContent = "0";
+        }
+    }
+
+    // Закрити модальне вікно при кліку на хрестик
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Закрити при кліку поза вікном
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Перевірка перед відправкою форми
+    document.getElementById('walk-multiple-form').addEventListener('submit', function(e) {
+        const walks = parseInt(slider.value);
+        if (walks <= 0) {
+            e.preventDefault();
+            alert('Виберіть хоча б одну прогулянку.');
+        }
+    });
+</script>
+{% endif %}
 
 {% if horse.status == 'shelter' %}
     <div class="pet-section">

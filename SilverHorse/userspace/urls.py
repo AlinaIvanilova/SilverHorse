@@ -75,4 +75,5 @@ urlpatterns = [
 
     path('shop/', shop_view, name='shop'),
     path('shop/<str:resource_type>/', shop_view, name='shop_filtered'),
+path('horse/<int:horse_id>/walk-multiple/', horses.walk_multiple, name='walk_multiple'),
 ]

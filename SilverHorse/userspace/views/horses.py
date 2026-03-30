@@ -8,6 +8,7 @@ from ..models import Horse
 from django.utils import timezone
 from ..models import Auction
 import random
+from django.db import transaction
 
 @login_required
 def horses_page(request):
@@ -396,4 +397,37 @@ def walk_horse(request, horse_id):
     horse.save()
     messages.success(request, f"Ви погуляли з {horse.name}. Енергія зменшена на 10 (тепер {horse.energy}).")
 
+    return redirect('horse_detail', horse_id=horse.id)
+
+@login_required
+def walk_multiple(request, horse_id):
+    horse = get_object_or_404(Horse, id=horse_id)
+
+    # Перевірки
+    if horse.owner != request.user:
+        messages.error(request, "Ви не можете гуляти з чужим конем.")
+        return redirect('horse_detail', horse_id=horse.id)
+
+    if horse.status != 'user':
+        messages.error(request, "Ви можете гуляти лише зі своїм конем, який у вас у стайні.")
+        return redirect('horse_detail', horse_id=horse.id)
+
+    if request.method != 'POST':
+        return redirect('horse_detail', horse_id=horse.id)
+
+    walks = int(request.POST.get('walks', 0))
+    if walks <= 0:
+        messages.error(request, "Кількість прогулянок має бути більше 0.")
+        return redirect('horse_detail', horse_id=horse.id)
+
+    total_cost = walks * 10
+    if horse.energy < total_cost:
+        messages.error(request, f"Недостатньо енергії. Потрібно {total_cost}, у коня {horse.energy}.")
+        return redirect('horse_detail', horse_id=horse.id)
+
+    with transaction.atomic():
+        horse.energy -= total_cost
+        horse.save()
+
+    messages.success(request, f"Ви погуляли з {horse.name} {walks} разів. Витрачено {total_cost} енергії.")
     return redirect('horse_detail', horse_id=horse.id)
