@@ -27,7 +27,7 @@ urlpatterns = [
     path('language/', views.language_page, name='language_page'),
 
     path('horses/', views.horses_page, name='horses_page'),
-    path('equestrian/', views.equestrian_page, name='equestrian_page'),  # тут все відображається
+    path('equestrian/', views.equestrian_page, name='equestrian_page'),
     path('trade/', views.market_view, name='trade_page'),
 
     path('horse/<int:horse_id>/', views.horse_detail, name='horse_detail'),
@@ -57,6 +57,9 @@ urlpatterns = [
 
     path('horse/<int:horse_id>/sleep/', views.sleep_horse, name='sleep_horse'),
     path('horse/<int:horse_id>/change_name/', views.change_foal_name, name='change_foal_name'),
+
+    # НОВИЙ МАРШРУТ ДЛЯ ПРОГУЛЯНКИ
+    path('horse/<int:horse_id>/walk/', horses.walk_horse, name='walk_horse'),
 
     path('breeding/', views.breeding_market, name='breeding_market'),
     path('breeding/create/', views.create_breeding_offer, name='create_breeding_offer'),

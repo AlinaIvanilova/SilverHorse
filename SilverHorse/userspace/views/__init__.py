@@ -9,7 +9,9 @@ from .equestrian import equestrian_page, manage_complex, storage_view
 from .market import market_view
 from .shelter import shelter_view, send_to_shelter, pet_horse
 from .auction import auction_list, auction_detail, create_auction, place_bid, finalize_auction, cancel_auction
-from .horses import horses_page, horse_detail, buy_horse, update_horse_stat, breed_select, breed_confirm, sell_horse, cancel_sale, sleep_horse, change_foal_name, horse_pedigree, horse_offspring
+from .horses import (horses_page, horse_detail, buy_horse, update_horse_stat, breed_select, breed_confirm,
+                     sell_horse, cancel_sale, sleep_horse, change_foal_name, horse_pedigree, horse_offspring,
+                     walk_horse)
 from .breeding import breeding_market, create_breeding_offer, purchase_breeding, cancel_breeding_offer
 from .shop import shop_view
 """

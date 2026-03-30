@@ -88,7 +88,6 @@ def update_horse_stat(request, horse_id):
         return JsonResponse({'success': True, 'new_value': getattr(horse, stat)})
     return JsonResponse({'success': False})
 
-
 @login_required
 def breed_select(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id, owner=request.user, status='user')
@@ -194,7 +193,6 @@ def cancel_sale(request, horse_id):
         return redirect('horse_detail', horse_id=horse.id)
     return redirect('horse_detail', horse_id=horse.id)
 
-
 @login_required
 def sleep_horse(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id, owner=request.user, status='user')
@@ -219,7 +217,6 @@ def sleep_horse(request, horse_id):
 
     messages.success(request, f"{horse.name} добре відпочив і відновив енергію! Вік збільшився на 2 місяці.")
     return redirect('horse_detail', horse_id=horse.id)
-
 
 def give_birth(request, mother):
     """Створює лоша від матері та її sire. Повертає об'єкт лошати."""
@@ -253,7 +250,6 @@ def give_birth(request, mother):
 
     name = f"Лоша {mother.name}"  # тимчасове ім'я
 
-    # MODIFIED: додаємо батька та матір для лошати
     foal = Horse.objects.create(
         name=name,
         breed=breed,
@@ -271,10 +267,10 @@ def give_birth(request, mother):
         status='user',
         wins=0,
         for_sale=False,
-        original_owner=mother.owner,  # фіксуємо первинного власника
+        original_owner=mother.owner,
         name_customized=False,
-        sire=father,      # NEW
-        dam=mother,       # NEW
+        sire=father,
+        dam=mother,
     )
 
     # Скидаємо вагітність матері
@@ -286,12 +282,10 @@ def give_birth(request, mother):
     messages.success(request, f"У {mother.name} народилося лоша! Дайте йому ім'я.")
     return foal
 
-
 @login_required
 def change_foal_name(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id)
 
-    # Перевіряємо, чи поточний користувач є первинним власником
     if horse.original_owner != request.user:
         messages.error(request, "Тільки первинний власник може змінити ім'я лошати.")
         return redirect('horse_detail', horse_id=horse.id)
@@ -312,12 +306,10 @@ def change_foal_name(request, horse_id):
 
     return redirect('horse_detail', horse_id=horse.id)
 
-
 @login_required
 def horse_pedigree(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id)
 
-    # Вузол для поточного коня
     pedigree = {
         'id': horse.id,
         'name': horse.name,
@@ -327,13 +319,12 @@ def horse_pedigree(request, horse_id):
         'dam': None,
     }
 
-    generations = 3  # глибина дерева
+    generations = 3
 
     def get_ancestors(h, depth, parent_dict):
         if depth > generations or h is None:
             return
 
-        # Батько
         sire = h.sire
         if sire:
             parent_dict['sire'] = {
@@ -348,7 +339,6 @@ def horse_pedigree(request, horse_id):
         else:
             parent_dict['sire'] = None
 
-        # Мати
         dam = h.dam
         if dam:
             parent_dict['dam'] = {
@@ -373,12 +363,37 @@ def horse_pedigree(request, horse_id):
 @login_required
 def horse_offspring(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id)
-    # Знаходимо всіх коней, у яких цей кінь є sire (батьком) або dam (матір'ю)
     offspring_as_sire = Horse.objects.filter(sire=horse)
     offspring_as_dam = Horse.objects.filter(dam=horse)
-    # Об'єднуємо, усуваючи дублікати (якщо кінь є і батьком, і матір'ю - неможливо, але на всяк випадок)
     offspring = (offspring_as_sire | offspring_as_dam).distinct().order_by('-age')
     return render(request, 'userspace/horse_offspring.html', {
         'horse': horse,
         'offspring': offspring,
     })
+
+# ----- НОВА ФУНКЦІЯ ДЛЯ ПРОГУЛЯНКИ -----
+@login_required
+def walk_horse(request, horse_id):
+    horse = get_object_or_404(Horse, id=horse_id)
+
+    # Перевіряємо, що кінь належить користувачеві
+    if horse.owner != request.user:
+        messages.error(request, "Ви не можете гуляти з чужим конем.")
+        return redirect('horse_detail', horse_id=horse.id)
+
+    # Перевіряємо статус – тільки власний кінь зі статусом 'user'
+    if horse.status != 'user':
+        messages.error(request, "Ви можете гуляти лише зі своїм конем, який у вас у стайні.")
+        return redirect('horse_detail', horse_id=horse.id)
+
+    # Перевіряємо достатність енергії
+    if horse.energy < 10:
+        messages.error(request, f"У {horse.name} недостатньо енергії для прогулянки. Потрібно 10, є {horse.energy}.")
+        return redirect('horse_detail', horse_id=horse.id)
+
+    # Зменшуємо енергію на 10 і зберігаємо
+    horse.energy -= 10
+    horse.save()
+    messages.success(request, f"Ви погуляли з {horse.name}. Енергія зменшена на 10 (тепер {horse.energy}).")
+
+    return redirect('horse_detail', horse_id=horse.id)

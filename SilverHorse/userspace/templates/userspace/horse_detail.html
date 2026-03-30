@@ -159,6 +159,13 @@
                 <i class="fas fa-hand-holding-heart"></i> Догляд
             </button>
 
+            <form action="{% url 'walk_horse' horse.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn-action" {% if horse.energy < 10 %}disabled{% endif %}>
+                    <i class="fas fa-walking"></i> Прогулянка (-10 енергії)
+                </button>
+            </form>
+
             <form action="{% url 'sleep_horse' horse.id %}" method="post" class="inline-form">
                 {% csrf_token %}
                 {% with today=now|date:"Y-m-d" %}
