@@ -29,10 +29,11 @@ class Horse(models.Model):
     wins = models.PositiveIntegerField(default=0, verbose_name="Перемоги")
     for_sale = models.BooleanField(default=False)
 
+    # Поля для механіки сну (лише один раз!)
     last_sleep = models.DateTimeField(null=True, blank=True, verbose_name="Останній сон")
-
+    last_sleep_processed = models.DateField(null=True, blank=True, verbose_name="Дата застосування ефектів сну")
+    energy_at_sleep = models.PositiveSmallIntegerField(null=True, blank=True, verbose_name="Енергія на момент сну")
     pending_health_loss = models.IntegerField(default=0, verbose_name="Відкладена втрата здоров'я")
-
 
     # Нові поля навичок (FloatField – з десятковими)
     dressage = models.FloatField(default=0.0, verbose_name="Виїздка")

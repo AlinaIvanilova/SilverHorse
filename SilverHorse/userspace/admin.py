@@ -53,6 +53,11 @@ class ProfileAdmin(admin.ModelAdmin):
 # -------------------------
 @admin.register(Horse)
 class HorseAdmin(admin.ModelAdmin):
-    list_display = ('name', 'owner', 'age', 'status', 'last_sleep')
+    list_display = ('name', 'owner', 'age', 'status', 'last_sleep', 'last_sleep_processed')
     list_filter = ('status', 'gender')
     search_fields = ('name', 'owner__username')
+    fieldsets = (
+        (None, {'fields': ('name', 'owner', 'breed', 'gender', 'coat_color', 'age', 'status', 'price')}),
+        ('Характеристики', {'fields': ('speed', 'endurance', 'strength', 'health', 'energy', 'mood')}),
+        ('Сон', {'fields': ('last_sleep', 'last_sleep_processed', 'energy_at_sleep')}),
+    )

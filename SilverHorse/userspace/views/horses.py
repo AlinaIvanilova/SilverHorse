@@ -19,6 +19,9 @@ def horses_page(request):
 def horse_detail(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id)
 
+    # Застосовуємо добове оновлення, якщо потрібно
+    apply_daily_update(request, horse)
+
     # Навігація
     prev_horse = None
     next_horse = None
@@ -32,9 +35,9 @@ def horse_detail(request, horse_id):
     total_skills = (horse.endurance + horse.speed + horse.dressage +
                     horse.gallop + horse.trot + horse.jumping)
 
-    # Проста перевірка, чи можна спати сьогодні
+    # Перевірка, чи можна відправити коня спати сьогодні
     today = timezone.now().date()
-    can_sleep = not (horse.last_sleep and horse.last_sleep.date() == today)
+    can_sleep = (horse.last_sleep is None) or (horse.last_sleep_processed and horse.last_sleep_processed >= today)
 
     return render(request, 'userspace/horse_detail.html', {
         'horse': horse,
@@ -44,6 +47,7 @@ def horse_detail(request, horse_id):
         'total_skills': total_skills,
         'can_sleep': can_sleep,
     })
+
 
 @login_required
 def buy_horse(request, horse_id):
@@ -195,24 +199,32 @@ def sleep_horse(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id, owner=request.user, status='user')
 
     today = timezone.now().date()
-    if horse.last_sleep and horse.last_sleep.date() == today:
-        messages.error(request, f"{horse.name} вже відпочивав сьогодні. Спробуйте завтра!")
+    can_sleep = (horse.last_sleep is None) or (horse.last_sleep_processed and horse.last_sleep_processed >= today)
+
+    if not can_sleep:
+        messages.error(request, f"{horse.name} ще не відновився після минулого сну. Зачекайте до наступного дня.")
         return redirect('horse_detail', horse_id=horse.id)
 
-    # Збільшення віку, відновлення енергії, збереження часу сну
-    horse.age += 2
-    horse.energy = 100
+    # Запам'ятовуємо час та енергію на момент сну
     horse.last_sleep = timezone.now()
+    horse.energy_at_sleep = horse.energy
+
+    # Збільшення віку
+    horse.age += 2
+
+    # Скидаємо прапорець обробки (ефекти ще не застосовані)
+    horse.last_sleep_processed = None
+
     horse.save()
 
-    # Перевірка пологів
+    # Перевірка пологів (якщо кобила вагітна)
     if horse.is_pregnant and horse.pregnancy_due_age and horse.age >= horse.pregnancy_due_age:
         foal = give_birth(request, horse)
         if foal:
             return redirect('horse_detail', horse_id=foal.id)
         return redirect('horse_detail', horse_id=horse.id)
 
-    messages.success(request, f"{horse.name} добре відпочив і відновив енергію! Вік збільшився на 2 місяці.")
+    messages.success(request, f"{horse.name} ліг спати. Енергія відновиться після настання наступного дня.")
     return redirect('horse_detail', horse_id=horse.id)
 
 def give_birth(request, mother):
@@ -432,30 +444,33 @@ def walk_multiple(request, horse_id):
 def apply_daily_update(request, horse):
     """
     Застосовує добове оновлення після сну.
-    Викликається при кожному перегляді сторінки коня.
+    Викликається в horse_detail.
     """
     today = timezone.now().date()
     # Якщо коня ніколи не відправляли спати – нічого не робимо
     if horse.last_sleep is None:
         return
-    # Якщо вже оновлено сьогодні – виходимо
-    if horse.last_daily_update and horse.last_daily_update >= today:
+    # Якщо кінь ліг спати сьогодні – не обробляємо (чекаємо наступного дня)
+    if horse.last_sleep.date() == today:
+        return
+    # Якщо ефекти вже застосовані сьогодні – виходимо (на випадок, якщо вже оброблено)
+    if horse.last_sleep_processed and horse.last_sleep_processed >= today:
         return
 
-    # Відновлення енергії з можливою втратою здоров'я
-    if horse.energy_at_sleep is not None and horse.energy_at_sleep < 20:
-        health_loss = random.randint(5, 25)
+    # Відновлення енергії та можлива втрата здоров'я
+    if horse.energy_at_sleep is not None and horse.energy_at_sleep < 25:
+        health_loss = random.randint(3, 12)
         horse.health = max(0, horse.health - health_loss)
-        new_energy = random.randint(70, 90)
-        horse.energy = new_energy
-        messages.warning(request,
-            f"Через низьку енергію перед сном ({horse.energy_at_sleep}%) {horse.name} втратив {health_loss} здоров'я. "
-            f"Енергія відновилась до {new_energy}%.")
+        messages.warning(
+            request,
+            f"{horse.name} погано спав через низьку енергію ({horse.energy_at_sleep}%). "
+            f"Здоров'я зменшилось на {health_loss} одиниць."
+        )
     else:
-        horse.energy = 100
-        messages.success(request, f"{horse.name} виспався! Енергія повністю відновлена.")
+        messages.success(request, f"{horse.name} добре виспався!")
 
-    # Позначаємо, що оновлення застосоване сьогодні
-    horse.last_daily_update = today
+    # Відновлення енергії до 100
+    horse.energy = 100
+    horse.last_sleep_processed = today
     horse.energy_at_sleep = None
     horse.save()

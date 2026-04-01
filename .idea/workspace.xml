@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="Resource v6.1 horse can walk (add css desigh)">
-      <change beforePath="$PROJECT_DIR$/SilverHorse/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/requirements.txt" afterDir="false" />
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="sleep old version back">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/horses.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/horses.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="29.0-requirement.txt" />
+        <entry key="$PROJECT_DIR$" value="29.7-update-sleep" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -53,29 +52,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;JavaScript Debug.base.html.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.generate_horses.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;29.7-update-sleep&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/img/horses&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "JavaScript Debug.base.html.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.generate_horses.executor": "Run",
+    "Python.test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "git-widget-placeholder": "29.8-health-after-min-energy",
+    "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/img/horses",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\OMEN\PycharmProjects\SilverHorse\SilverHorse\userspace\static\img\horses" />
@@ -212,14 +211,6 @@
       <workItem from="1774877733724" duration="184000" />
       <workItem from="1774879280847" duration="1528000" />
       <workItem from="1774895710315" duration="1952000" />
-    </task>
-    <task id="LOCAL-00003" summary="I started making the main dashboard page.">
-      <option name="closed" value="true" />
-      <created>1767966038535</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1767966038535</updated>
     </task>
     <task id="LOCAL-00004" summary="19-v2">
       <option name="closed" value="true" />
@@ -605,7 +596,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774879903842</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="sleep old version back">
+      <option name="closed" value="true" />
+      <created>1775029530742</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1775029530742</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,7 +622,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="version auction 3" />
     <MESSAGE value="version auction 4" />
     <MESSAGE value="version auction 4 and new desigh" />
     <MESSAGE value="version breed 1" />
@@ -648,7 +646,8 @@
     <MESSAGE value="Resource v2 market: buy and save" />
     <MESSAGE value="Resource v6 horse can walk" />
     <MESSAGE value="Resource v6.1 horse can walk (add css desigh)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Resource v6.1 horse can walk (add css desigh)" />
+    <MESSAGE value="sleep old version back" />
+    <option name="LAST_COMMIT_MESSAGE" value="sleep old version back" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
