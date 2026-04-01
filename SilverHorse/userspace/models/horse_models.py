@@ -30,6 +30,9 @@ class Horse(models.Model):
     for_sale = models.BooleanField(default=False)
     last_sleep = models.DateTimeField(null=True, blank=True, verbose_name="Останній сон")
 
+    pending_health_loss = models.IntegerField(default=0, verbose_name="Відкладена втрата здоров'я")
+
+
     # Нові поля навичок (FloatField – з десятковими)
     dressage = models.FloatField(default=0.0, verbose_name="Виїздка")
     gallop = models.FloatField(default=0.0, verbose_name="Галоп")
