@@ -212,6 +212,16 @@ def sleep_horse(request, horse_id):
     # Збільшення віку
     horse.age += 2
 
+    # Втрата здоров'я через старість
+    if horse.age >= 360:  # 30 років
+        health_loss = 10
+        horse.health = max(0, horse.health - health_loss)
+        messages.warning(request, f"{horse.name} вже дуже старий (понад 30 років) і втратив {health_loss} здоров'я після сну.")
+    elif horse.age >= 300:  # 25 років
+        health_loss = 5
+        horse.health = max(0, horse.health - health_loss)
+        messages.warning(request, f"{horse.name} старий (понад 25 років) і втратив {health_loss} здоров'я після сну.")
+
     # Скидаємо прапорець обробки (ефекти ще не застосовані)
     horse.last_sleep_processed = None
 
