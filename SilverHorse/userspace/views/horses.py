@@ -5,79 +5,36 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from ..models import Horse
-from django.utils import timezone
 from ..models import Auction
-import random
 from django.db import transaction
+import random
+from django.utils import timezone
 
 @login_required
 def horses_page(request):
     user_horses = Horse.objects.filter(owner=request.user, status='user')
     return render(request, 'userspace/horses.html', {'user_horses': user_horses})
 
-
 @login_required
 def horse_detail(request, horse_id):
     horse = get_object_or_404(Horse, id=horse_id)
 
-    # Перевірка: чи минуло більше доби з останнього сну?
-    if horse.last_sleep and horse.status == 'user' and horse.owner == request.user:
-        now = timezone.now()
-        days_since_sleep = (now - horse.last_sleep).days
-
-        # Якщо минуло більше 0 днів (тобто наступний день)
-        if days_since_sleep >= 1:
-            # Застосовуємо відкладену втрату здоров'я (якщо є)
-            if horse.pending_health_loss > 0:
-                old_health = horse.health
-                horse.health = max(0, horse.health - horse.pending_health_loss)
-                health_message = f"Після сну {horse.name} втратив {horse.pending_health_loss} одиниць здоров'я через низьку енергію напередодні."
-                horse.pending_health_loss = 0
-            else:
-                health_message = ""
-                old_health = horse.health
-
-            # Відновлюємо енергію (перевіряємо, яка була енергія ДО сну)
-            # Для цього нам потрібно знати, якою була енергія перед сном
-            # Оскільки ми її не зберігали, перевіряємо поточне значення
-            if horse.energy < 20:
-                new_energy = random.randint(70, 90)
-                horse.energy = new_energy
-                energy_message = f"Після нічного відпочинку енергія відновилась до {new_energy}%."
-            else:
-                horse.energy = 100
-                energy_message = "Після нічного відпочинку енергія повністю відновилась!"
-
-            # Оновлюємо час останнього сну, щоб не відновлювати повторно
-            horse.last_sleep = now
-            horse.save()
-
-            # Додаємо повідомлення
-            if health_message:
-                messages.warning(request, health_message)
-            messages.success(request, energy_message)
-
+    # Навігація
     prev_horse = None
     next_horse = None
-
     if horse.owner == request.user and horse.status == 'user':
-        user_horses = list(
-            Horse.objects.filter(owner=request.user, status='user').order_by('id')
-        )
+        user_horses = list(Horse.objects.filter(owner=request.user, status='user').order_by('id'))
         if horse in user_horses:
             current_index = user_horses.index(horse)
             prev_horse = user_horses[current_index - 1] if current_index > 0 else None
-            next_horse = (
-                user_horses[current_index + 1]
-                if current_index < len(user_horses) - 1
-                else None
-            )
+            next_horse = user_horses[current_index + 1] if current_index < len(user_horses) - 1 else None
 
-    # Обчислюємо суму навичок
-    total_skills = (
-            horse.endurance + horse.speed + horse.dressage +
-            horse.gallop + horse.trot + horse.jumping
-    )
+    total_skills = (horse.endurance + horse.speed + horse.dressage +
+                    horse.gallop + horse.trot + horse.jumping)
+
+    # Проста перевірка, чи можна спати сьогодні
+    today = timezone.now().date()
+    can_sleep = not (horse.last_sleep and horse.last_sleep.date() == today)
 
     return render(request, 'userspace/horse_detail.html', {
         'horse': horse,
@@ -85,6 +42,7 @@ def horse_detail(request, horse_id):
         'next_horse': next_horse,
         'now': timezone.now(),
         'total_skills': total_skills,
+        'can_sleep': can_sleep,
     })
 
 @login_required
@@ -241,41 +199,20 @@ def sleep_horse(request, horse_id):
         messages.error(request, f"{horse.name} вже відпочивав сьогодні. Спробуйте завтра!")
         return redirect('horse_detail', horse_id=horse.id)
 
-    # Запам'ятовуємо енергію до сну
-    previous_energy = horse.energy
-
-    # Збільшення віку (завжди)
+    # Збільшення віку, відновлення енергії, збереження часу сну
     horse.age += 2
-
-    # Якщо енергія була низькою, розраховуємо відкладену втрату здоров'я
-    if previous_energy < 20:
-        health_loss = random.randint(5, 25)
-        horse.pending_health_loss = health_loss
-        energy_status = "низькою"
-        health_message = f"Через низьку енергію ({previous_energy}%) {horse.name} втратить {health_loss} одиниць здоров'я після сну."
-    else:
-        horse.pending_health_loss = 0
-        energy_status = "нормальною"
-        health_message = ""
-
-    # Зберігаємо час сну, але НЕ змінюємо енергію та здоров'я
+    horse.energy = 100
     horse.last_sleep = timezone.now()
     horse.save()
 
-    # Перевірка пологів (якщо кобила вагітна)
+    # Перевірка пологів
     if horse.is_pregnant and horse.pregnancy_due_age and horse.age >= horse.pregnancy_due_age:
         foal = give_birth(request, horse)
         if foal:
             return redirect('horse_detail', horse_id=foal.id)
-        else:
-            return redirect('horse_detail', horse_id=horse.id)
+        return redirect('horse_detail', horse_id=horse.id)
 
-    # Повідомлення про результат
-    success_message = f"{horse.name} ліг спати! Вік збільшився на 2 місяці. Енергія ({horse.energy}%) залишиться до завтра."
-    messages.success(request, success_message)
-    if health_message:
-        messages.warning(request, health_message)
-
+    messages.success(request, f"{horse.name} добре відпочив і відновив енергію! Вік збільшився на 2 місяці.")
     return redirect('horse_detail', horse_id=horse.id)
 
 def give_birth(request, mother):
@@ -490,3 +427,35 @@ def walk_multiple(request, horse_id):
 
     messages.success(request, f"Ви погуляли з {horse.name} {walks} разів. Витрачено {total_cost} енергії.")
     return redirect('horse_detail', horse_id=horse.id)
+
+
+def apply_daily_update(request, horse):
+    """
+    Застосовує добове оновлення після сну.
+    Викликається при кожному перегляді сторінки коня.
+    """
+    today = timezone.now().date()
+    # Якщо коня ніколи не відправляли спати – нічого не робимо
+    if horse.last_sleep is None:
+        return
+    # Якщо вже оновлено сьогодні – виходимо
+    if horse.last_daily_update and horse.last_daily_update >= today:
+        return
+
+    # Відновлення енергії з можливою втратою здоров'я
+    if horse.energy_at_sleep is not None and horse.energy_at_sleep < 20:
+        health_loss = random.randint(5, 25)
+        horse.health = max(0, horse.health - health_loss)
+        new_energy = random.randint(70, 90)
+        horse.energy = new_energy
+        messages.warning(request,
+            f"Через низьку енергію перед сном ({horse.energy_at_sleep}%) {horse.name} втратив {health_loss} здоров'я. "
+            f"Енергія відновилась до {new_energy}%.")
+    else:
+        horse.energy = 100
+        messages.success(request, f"{horse.name} виспався! Енергія повністю відновлена.")
+
+    # Позначаємо, що оновлення застосоване сьогодні
+    horse.last_daily_update = today
+    horse.energy_at_sleep = None
+    horse.save()

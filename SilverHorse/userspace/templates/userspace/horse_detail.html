@@ -166,17 +166,15 @@
 
             <form action="{% url 'sleep_horse' horse.id %}" method="post" class="inline-form">
                 {% csrf_token %}
-                {% with today=now|date:"Y-m-d" %}
-                    {% if horse.last_sleep and horse.last_sleep|date:"Y-m-d" == today %}
-                        <button type="submit" class="btn btn-secondary" disabled title="Вже відпочивав сьогодні">
-                            <i class="fas fa-bed"></i> Відправити спати (доступно завтра)
-                        </button>
-                    {% else %}
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-bed"></i> Відправити спати
-                        </button>
-                    {% endif %}
-                {% endwith %}
+                {% if can_sleep %}
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-bed"></i> Відправити спати
+                    </button>
+                {% else %}
+                    <button type="submit" class="btn btn-secondary" disabled title="Вже відпочивав сьогодні">
+                        <i class="fas fa-bed"></i> Відправити спати (доступно завтра)
+                    </button>
+                {% endif %}
             </form>
 
             {% if horse.age >= 36 and not horse.is_pregnant %}

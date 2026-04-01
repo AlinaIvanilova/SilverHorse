@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="Resource v6.1 horse can walk (add css desigh)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horse_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/horses.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/horses.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="29.6.1-walk-add-resourses" />
+        <entry key="$PROJECT_DIR$" value="29.0-requirement.txt" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

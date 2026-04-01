@@ -1,0 +1,19 @@
+Index: SilverHorse/requirements.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>asgiref==3.11.1\r\ncertifi==2026.2.25\r\ncffi==2.0.0\r\ncharset-normalizer==3.4.6\r\ncryptography==46.0.6\r\nDjango==6.0.3\r\ndjango-allauth==65.15.0\r\nidna==3.11\r\npillow==12.1.1\r\npycparser==3.0\r\nPyJWT==2.12.1\r\nPyMySQL==1.1.2\r\nrequests==2.33.0\r\nsqlparse==0.5.5\r\ntzdata==2025.3\r\nurllib3==2.6.3\r\n\r\n\r\n#requirement.txt
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-16LE
+===================================================================
+diff --git a/SilverHorse/requirements.txt b/SilverHorse/requirements.txt
+--- a/SilverHorse/requirements.txt	(revision 8f11d85674094058de206d9de11fbf08aeafe012)
++++ b/SilverHorse/requirements.txt	(date 1775028340962)
+@@ -16,4 +16,5 @@
+ urllib3==2.6.3
+ 
+ 
+-#requirement.txt
+\ No newline at end of file
++#requirement.txt
++# py -m pip install -r requirements.txt
+\ No newline at end of file

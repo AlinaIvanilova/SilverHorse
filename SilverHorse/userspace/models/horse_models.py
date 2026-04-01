@@ -28,6 +28,7 @@ class Horse(models.Model):
     status = models.CharField(max_length=10, choices=status_choices, default='market')
     wins = models.PositiveIntegerField(default=0, verbose_name="Перемоги")
     for_sale = models.BooleanField(default=False)
+
     last_sleep = models.DateTimeField(null=True, blank=True, verbose_name="Останній сон")
 
     pending_health_loss = models.IntegerField(default=0, verbose_name="Відкладена втрата здоров'я")
