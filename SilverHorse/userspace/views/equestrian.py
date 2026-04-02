@@ -7,7 +7,7 @@ from ..forms import EquestrianComplexForm, RatingForm
 
 @login_required
 def equestrian_page(request):
-    return render(request, 'userspace/equestrian.html')
+    return render(request, 'userspace/equestrian/equestrian.html')
 
 @login_required
 def manage_complex(request):
@@ -21,7 +21,7 @@ def manage_complex(request):
     else:
         form = EquestrianComplexForm(instance=complex_obj)
 
-    return render(request, 'userspace/equestrian.html', {'form': form, 'complex': complex_obj})
+    return render(request, 'userspace/equestrian/equestrian.html', {'form': form, 'complex': complex_obj})
 
 
 @login_required
@@ -119,7 +119,7 @@ def equestrian_page(request):
         'user': user,
     }
 
-    return render(request, 'userspace/equestrian.html', context)
+    return render(request, 'userspace/equestrian/equestrian.html', context)
 
 
 @login_required
@@ -146,7 +146,7 @@ def storage_view(request):
             'quantity': quantity,
         })
 
-    return render(request, 'userspace/storage.html', {
+    return render(request, 'userspace/shop/storage.html', {
         'complex': complex_obj,
         'resources': resources_data,
     })

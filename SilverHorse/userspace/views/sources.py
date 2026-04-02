@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
 def sources(request):
-    return render(request, 'userspace/sources.html')
+    return render(request, 'userspace/other/sources.html')

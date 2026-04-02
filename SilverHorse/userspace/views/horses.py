@@ -13,7 +13,7 @@ from django.utils import timezone
 @login_required
 def horses_page(request):
     user_horses = Horse.objects.filter(owner=request.user, status='user')
-    return render(request, 'userspace/horses.html', {'user_horses': user_horses})
+    return render(request, 'userspace/horses/horses.html', {'user_horses': user_horses})
 
 @login_required
 def horse_detail(request, horse_id):
@@ -39,7 +39,7 @@ def horse_detail(request, horse_id):
     today = timezone.now().date()
     can_sleep = (horse.last_sleep is None) or (horse.last_sleep_processed and horse.last_sleep_processed >= today)
 
-    return render(request, 'userspace/horse_detail.html', {
+    return render(request, 'userspace/horses/horse_detail.html', {
         'horse': horse,
         'prev_horse': prev_horse,
         'next_horse': next_horse,
@@ -107,7 +107,7 @@ def breed_select(request, horse_id):
         is_pregnant = False
     ).exclude(id=horse.id)
 
-    return render(request, 'userspace/breed_select.html', {
+    return render(request, 'userspace/horses/breed_select.html', {
         'horse': horse,
         'potential_mates': potential_mates
     })
@@ -181,7 +181,7 @@ def sell_horse(request, horse_id):
             messages.error(request, "Невірний тип продажу.")
             return redirect('sell_horse', horse_id=horse.id)
 
-    return render(request, 'userspace/sell_horse.html', {'horse': horse})
+    return render(request, 'userspace/market/sell_horse.html', {'horse': horse})
 
 @login_required
 def cancel_sale(request, horse_id):
@@ -374,7 +374,7 @@ def horse_pedigree(request, horse_id):
 
     get_ancestors(horse, 1, pedigree)
 
-    return render(request, 'userspace/horse_pedigree.html', {
+    return render(request, 'userspace/horses/horse_pedigree.html', {
         'horse': horse,
         'pedigree': pedigree,
     })
@@ -385,7 +385,7 @@ def horse_offspring(request, horse_id):
     offspring_as_sire = Horse.objects.filter(sire=horse)
     offspring_as_dam = Horse.objects.filter(dam=horse)
     offspring = (offspring_as_sire | offspring_as_dam).distinct().order_by('-age')
-    return render(request, 'userspace/horse_offspring.html', {
+    return render(request, 'userspace/horses/horse_offspring.html', {
         'horse': horse,
         'offspring': offspring,
     })

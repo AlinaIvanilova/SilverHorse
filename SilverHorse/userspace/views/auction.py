@@ -22,7 +22,7 @@ def auction_list(request):
 
     horse_types = Horse.TYPE_CHOICES
 
-    return render(request, 'userspace/auction_list.html', {
+    return render(request, 'userspace/market/auction_list.html', {
         'auctions': active_auctions,
         'breeds': breeds,
         'horse_types': horse_types,
@@ -50,7 +50,7 @@ def auction_detail(request, auction_id):
     # Мінімальна ставка
     min_bid = auction.current_bid + 1
 
-    return render(request, 'userspace/auction_detail.html', {
+    return render(request, 'userspace/market/auction_detail.html', {
         'auction': auction,
         'available_balance': available_balance,
         'currency_display': currency_display,
@@ -91,7 +91,7 @@ def create_auction(request):
         messages.success(request, f'Аукціон для коня {horse.name} створено!')
         return redirect('auction_detail', auction_id=auction.id)
 
-    return render(request, 'userspace/create_auction.html', {
+    return render(request, 'userspace/market/create_auction.html', {
         'user_horses': user_horses
     })
 

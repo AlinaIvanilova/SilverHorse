@@ -1,0 +1,65 @@
+import os
+import re
+
+# Корінь вашого проекту (там, де знаходяться всі views)
+root_dir = '.'
+
+# Словник замін (старий шлях -> новий шлях)
+replacements = {
+    "'userspace/dashboard/dashboard.html'": "'userspace/dashboard/dashboard.html'",
+    "'userspace/horses/horse_detail.html'": "'userspace/horses/horse_detail.html'",
+    "'userspace/horses/horses.html'": "'userspace/horses/horses.html'",
+    "'userspace/horses/breed_select.html'": "'userspace/horses/breed_select.html'",
+    "'userspace/horses/horse_pedigree.html'": "'userspace/horses/horse_pedigree.html'",
+    "'userspace/horses/horse_offspring.html'": "'userspace/horses/horse_offspring.html'",
+    "'userspace/horses/tree_node.html'": "'userspace/horses/tree_node.html'",
+    "'userspace/market/trade.html'": "'userspace/market/trade.html'",
+    "'userspace/market/sell_horse.html'": "'userspace/market/sell_horse.html'",
+    "'userspace/market/auction_list.html'": "'userspace/market/auction_list.html'",
+    "'userspace/market/auction_detail.html'": "'userspace/market/auction_detail.html'",
+    "'userspace/market/create_auction.html'": "'userspace/market/create_auction.html'",
+    "'userspace/market/breeding_market.html'": "'userspace/market/breeding_market.html'",
+    "'userspace/market/create_breeding_offer.html'": "'userspace/market/create_breeding_offer.html'",
+    "'userspace/market/purchase_breeding.html'": "'userspace/market/purchase_breeding.html'",
+    "'userspace/shop/shop.html'": "'userspace/shop/shop.html'",
+    "'userspace/shop/storage.html'": "'userspace/shop/storage.html'",
+    "'userspace/other/sources.html'": "'userspace/other/sources.html'",
+    "'userspace/other/shelter.html'": "'userspace/other/shelter.html'",
+    "'userspace/user/account.html'": "'userspace/user/account.html'",
+    "'userspace/user/profile.html'": "'userspace/user/profile.html'",
+    "'userspace/user/messages.html'": "'userspace/user/messages.html'",
+    "'userspace/user/language.html'": "'userspace/user/language.html'",
+    "'userspace/user/subscription.html'": "'userspace/user/subscription.html'",
+    "'userspace/equestrian/equestrian.html'": "'userspace/equestrian/equestrian.html'",
+    "'userspace/equestrian/complex_card.html'": "'userspace/equestrian/complex_card.html'",
+}
+
+# Якщо base.html перенесли в other, розкоментуйте наступний рядок:
+# replacements["'userspace/base.html'"] = "'userspace/other/base.html'"
+
+def update_file(filepath):
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+    original = content
+    for old, new in replacements.items():
+        content = content.replace(old, new)
+    if content != original:
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+        print(f"Updated: {filepath}")
+
+# Шукаємо всі .py файли в корені та підпапках (крім venv, migrations)
+for root, dirs, files in os.walk(root_dir):
+    # Пропускаємо папки віртуального середовища та міграцій
+    if 'venv' in dirs:
+        dirs.remove('venv')
+    if 'migrations' in dirs:
+        dirs.remove('migrations')
+    if '__pycache__' in dirs:
+        dirs.remove('__pycache__')
+    for file in files:
+        if file.endswith('.py'):
+            filepath = os.path.join(root, file)
+            update_file(filepath)
+
+print("Готово!")

@@ -61,7 +61,7 @@ def dashboard_view(request):
         'unread_messages_count': unread_messages_count,
     }
 
-    return render(request, 'userspace/dashboard.html', context)
+    return render(request, 'userspace/dashboard/dashboard.html', context)
 
 
 @login_required

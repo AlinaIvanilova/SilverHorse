@@ -11,7 +11,7 @@ def breeding_market(request):
     # Filtering (similar to market)
     breeds = Horse.objects.filter(breeding_offers__is_active=True).values_list('breed', flat=True).distinct().order_by('breed')
     horse_types = Horse.TYPE_CHOICES
-    return render(request, 'userspace/breeding_market.html', {
+    return render(request, 'userspace/market/breeding_market.html', {
         'offers': offers,
         'breeds': breeds,
         'horse_types': horse_types,
@@ -72,7 +72,7 @@ def create_breeding_offer(request):
         messages.success(request, f"{horse.name} виставлений для парування.")
         return redirect('breeding_market')
 
-    return render(request, 'userspace/create_breeding_offer.html', {
+    return render(request, 'userspace/market/create_breeding_offer.html', {
         'user_horses': user_horses,
     })
 
@@ -154,7 +154,7 @@ def purchase_breeding(request, offer_id):
         messages.success(request, f"Кобила {mother.name} запліднена! Вона народить лоша через 12 місяців.")
         return redirect('horse_detail', horse_id=mother.id)
 
-    return render(request, 'userspace/purchase_breeding.html', {
+    return render(request, 'userspace/market/purchase_breeding.html', {
         'offer': offer,
         'buyer_horses': buyer_horses,
     })

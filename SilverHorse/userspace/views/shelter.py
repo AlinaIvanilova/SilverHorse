@@ -24,7 +24,7 @@ def shelter_view(request):
         .distinct() \
         .order_by('breed')
     horse_types = Horse.TYPE_CHOICES
-    return render(request, 'userspace/shelter.html', {
+    return render(request, 'userspace/other/shelter.html', {
         'horses': horses,
         'breeds': breeds,
         'horse_types': horse_types,

@@ -56,4 +56,4 @@ def subscription_page(request):
         'promo_used': promo_used,
         'notifications': notifications,
     }
-    return render(request, 'userspace/subscription.html', context)
+    return render(request, 'userspace/user/subscription.html', context)

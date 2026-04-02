@@ -75,7 +75,7 @@ def messages_page(request):
         'user': request.user,
     }
 
-    return render(request, 'userspace/messages.html', context)
+    return render(request, 'userspace/user/messages.html', context)
 
 
 # -------------------------

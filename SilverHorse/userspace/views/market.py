@@ -12,7 +12,7 @@ def market_view(request):
                 .order_by('breed')
     # Передаємо список типів коней для фільтра
     horse_types = Horse.TYPE_CHOICES
-    return render(request, 'userspace/trade.html', {
+    return render(request, 'userspace/market/trade.html', {
         'horses': horses,
         'breeds': breeds,
         'horse_types': horse_types,

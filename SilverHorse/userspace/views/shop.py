@@ -74,4 +74,4 @@ def shop_view(request):
         'resource_type': resource_type,
         'resource_types': Resource.TYPE_CHOICES,
     }
-    return render(request, 'userspace/shop.html', context)
+    return render(request, 'userspace/shop/shop.html', context)
