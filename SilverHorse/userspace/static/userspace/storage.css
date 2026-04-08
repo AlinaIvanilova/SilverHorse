@@ -1,0 +1,259 @@
+/* =========================
+   🏚️ СТИЛІ ДЛЯ СТОРІНКИ СКЛАДУ КОМПЛЕКСУ
+   (єдиний дизайн із золотаво-чорною скляною темою)
+========================= */
+
+:root {
+  --color-primary: #ffd700;
+  --color-primary-hover: #ffea70;
+  --color-primary-glow: rgba(255, 215, 0, 0.3);
+  --color-bg-glass: rgba(0, 0, 0, 0.4);
+  --color-bg-card: rgba(0, 0, 0, 0.6);
+  --color-border: rgba(255, 215, 0, 0.3);
+  --color-border-hover: rgba(255, 215, 0, 0.8);
+  --color-text: #ffffff;
+  --color-text-secondary: #cccccc;
+  --glass-effect: blur(10px);
+  --radius-card: 20px;
+  --radius-sm: 12px;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  --shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 15px var(--color-primary-glow);
+  --transition: all 0.25s ease;
+}
+
+/* Головний контейнер складу */
+.storage-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px 20px 50px;
+  width: 100%;
+}
+
+/* Заголовок */
+.storage-container h1 {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 30px;
+  border-radius: 50px;
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--color-border);
+}
+
+.storage-container h1 i {
+  margin-right: 15px;
+  color: var(--color-primary);
+  filter: drop-shadow(0 0 8px var(--color-primary));
+}
+
+/* Сітка категорій ресурсів */
+.storage-container .resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+/* Картка категорії */
+.resource-category {
+  background: var(--color-bg-card);
+  backdrop-filter: var(--glass-effect);
+  border-radius: var(--radius-card);
+  border: 2px solid var(--color-border);
+  padding: 25px;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.resource-category:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Заголовок категорії */
+.resource-category h2 {
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  text-align: center;
+  margin: 0 0 20px 0;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.resource-category h2 i {
+  font-size: 1.6rem;
+  filter: drop-shadow(0 0 5px var(--color-primary-glow));
+}
+
+/* Список ресурсів */
+.resource-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.resource-category li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  margin: 8px 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-primary);
+  transition: var(--transition);
+}
+
+.resource-category li:hover {
+  background: rgba(255, 215, 0, 0.1);
+  transform: translateX(5px);
+}
+
+.resource-category li strong {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.resource-category li .quantity {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-text);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 12px;
+  border-radius: 30px;
+  border: 1px solid var(--color-border);
+  min-width: 60px;
+  text-align: center;
+}
+
+/* Пустий список (якщо в категорії немає ресурсів) */
+.resource-category ul:empty::before {
+  content: "Немає ресурсів";
+  display: block;
+  text-align: center;
+  padding: 20px;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+/* Кнопка повернення */
+.back-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary);
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--color-primary-glow);
+}
+
+.btn-primary i {
+  font-size: 1rem;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .storage-container h1 {
+    font-size: 1.8rem;
+    white-space: normal;
+    padding: 8px 20px;
+  }
+
+  .storage-container .resources-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .resource-category {
+    padding: 20px;
+  }
+
+  .resource-category h2 {
+    font-size: 1.5rem;
+  }
+
+  .resource-category li {
+    padding: 10px 12px;
+  }
+
+  .resource-category li strong {
+    font-size: 1rem;
+  }
+
+  .resource-category li .quantity {
+    font-size: 1rem;
+    padding: 3px 10px;
+    min-width: 50px;
+  }
+
+  .btn {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .storage-container {
+    padding: 20px 15px;
+  }
+
+  .storage-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .resource-category {
+    padding: 15px;
+  }
+
+  .resource-category h2 {
+    font-size: 1.3rem;
+  }
+
+  .resource-category li {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .resource-category li .quantity {
+    width: fit-content;
+  }
+}

@@ -74,6 +74,6 @@ urlpatterns = [
     path('complex/storage/', views.storage_view, name='storage'),
 
     path('shop/', shop_view, name='shop'),
-    path('shop/<str:resource_type>/', shop_view, name='shop_filtered'),
-path('horse/<int:horse_id>/walk-multiple/', horses.walk_multiple, name='walk_multiple'),
+
+    path('horse/<int:horse_id>/walk-multiple/', horses.walk_multiple, name='walk_multiple'),
 ]

@@ -9,13 +9,13 @@
         <p><i class="fas fa-coins"></i> Ваш баланс: <strong>{{ request.user.profile.horseshoes }}</strong> Срібних Підков</p>
     </div>
 
-    <!-- Фільтри за типом -->
+    <!-- Фільтри за типом – тепер через GET-параметр -->
     <div class="shop-categories">
         <a href="{% url 'shop' %}" class="category-btn {% if not resource_type %}active{% endif %}">
             <i class="fas fa-list"></i> Всі ресурси
         </a>
         {% for type_code, type_name in resource_types %}
-        <a href="{% url 'shop_filtered' resource_type=type_code %}" class="category-btn {% if resource_type == type_code %}active{% endif %}">
+        <a href="{% url 'shop' %}?type={{ type_code }}" class="category-btn {% if resource_type == type_code %}active{% endif %}">
             {% if type_code == 'food' %}<i class="fas fa-apple-alt"></i>{% else %}<i class="fas fa-tools"></i>{% endif %}
             {{ type_name }}
         </a>

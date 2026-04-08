@@ -1,0 +1,393 @@
+/* =========================
+   🛍️ СТИЛІ ДЛЯ СТОРІНКИ МАГАЗИНУ РЕСУРСІВ
+   (єдиний дизайн із золотаво-чорною скляною темою)
+========================= */
+
+:root {
+  --color-primary: #ffd700;
+  --color-primary-hover: #ffea70;
+  --color-primary-glow: rgba(255, 215, 0, 0.3);
+  --color-bg-glass: rgba(0, 0, 0, 0.4);
+  --color-bg-card: rgba(0, 0, 0, 0.6);
+  --color-border: rgba(255, 215, 0, 0.3);
+  --color-border-hover: rgba(255, 215, 0, 0.8);
+  --color-text: #ffffff;
+  --color-text-secondary: #cccccc;
+  --glass-effect: blur(10px);
+  --radius-card: 16px;
+  --radius-sm: 12px;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  --shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 15px var(--color-primary-glow);
+  --transition: all 0.25s ease;
+}
+
+/* Головний контейнер магазину */
+.shop-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px 50px;
+  width: 100%;
+}
+
+/* Заголовок */
+.shop-container h1 {
+  font-size: 2.8rem;
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 30px;
+  border-radius: 50px;
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--color-border);
+}
+
+.shop-container h1 i {
+  margin-right: 15px;
+  color: var(--color-primary);
+  filter: drop-shadow(0 0 8px var(--color-primary));
+}
+
+/* Баланс користувача */
+.shop-container .user-balance {
+  background: rgba(20, 20, 30, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 60px;
+  padding: 16px 30px;
+  margin: 0 auto 30px auto;
+  text-align: center;
+  border: 2px solid var(--color-border);
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-primary-glow);
+  transition: var(--transition);
+}
+
+.shop-container .user-balance:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-border-hover);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--color-primary-glow);
+}
+
+.shop-container .user-balance p {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.shop-container .user-balance i {
+  color: var(--color-primary);
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 8px gold);
+}
+
+.shop-container .user-balance strong {
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin: 0 5px;
+  text-shadow: 0 0 10px var(--color-primary-glow);
+}
+
+/* Категорії (фільтри) */
+.shop-categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.category-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: bold;
+  border: 2px solid var(--color-border);
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+.category-btn i {
+  font-size: 1.1rem;
+  color: inherit;
+}
+
+.category-btn:hover {
+  background: var(--color-primary);
+  color: #000;
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px var(--color-primary-glow);
+}
+
+.category-btn.active {
+  background: var(--color-primary);
+  color: #000;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 15px var(--color-primary-glow);
+  pointer-events: none;
+}
+
+/* Сітка товарів */
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* Картка ресурсу */
+.resource-card {
+  background: var(--color-bg-card);
+  backdrop-filter: var(--glass-effect);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  border: 2px solid var(--color-border);
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  text-align: center;
+}
+
+.resource-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Іконка ресурсу */
+.resource-icon {
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 8px var(--color-primary-glow));
+}
+
+.resource-card h3 {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin: 0 0 15px 0;
+  text-shadow: 0 0 5px var(--color-primary-glow);
+}
+
+.resource-card .price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.resource-card .price i {
+  font-size: 1.1rem;
+}
+
+.resource-card .quantity {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin: 5px 0 15px 0;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* Форма покупки */
+.purchase-form {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Кастомний інпут кількості */
+.quantity-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50px;
+  padding: 5px;
+  border: 1px solid var(--color-border);
+}
+
+.quantity-input button {
+  background: transparent;
+  border: none;
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  transition: var(--transition);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-input button:hover {
+  background: var(--color-primary);
+  color: #000;
+  transform: scale(1.05);
+}
+
+.quantity-input input {
+  width: 70px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--color-text);
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 8px 0;
+  border-radius: 30px;
+  -moz-appearance: textfield;
+}
+
+.quantity-input input::-webkit-inner-spin-button,
+.quantity-input input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantity-input input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-primary-glow);
+}
+
+/* Кнопка "Купити" */
+.buy-btn {
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.buy-btn:hover {
+  background: var(--color-primary);
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--color-primary-glow);
+}
+
+.buy-btn:active {
+  transform: translateY(1px);
+}
+
+/* Пусте повідомлення */
+.empty-text {
+  text-align: center;
+  padding: 60px 40px;
+  background: var(--color-bg-glass);
+  backdrop-filter: var(--glass-effect);
+  border-radius: var(--radius-card);
+  border: 2px solid var(--color-border);
+  font-size: 1.3rem;
+  color: var(--color-text-secondary);
+  grid-column: 1 / -1;
+}
+
+.empty-text i {
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* Адаптивність для мобільних */
+@media (max-width: 768px) {
+  .shop-container h1 {
+    font-size: 2rem;
+    white-space: normal;
+    padding: 8px 20px;
+  }
+
+  .resources-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .shop-categories {
+    gap: 10px;
+  }
+
+  .category-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .resource-card {
+    padding: 15px;
+  }
+
+  .resource-icon {
+    font-size: 2.5rem;
+  }
+
+  .resource-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .quantity-input button {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+
+  .quantity-input input {
+    width: 60px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .shop-container .user-balance p {
+    font-size: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .shop-container .user-balance strong {
+    font-size: 1.3rem;
+  }
+
+  .category-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}
