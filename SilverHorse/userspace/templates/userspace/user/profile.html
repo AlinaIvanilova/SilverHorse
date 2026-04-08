@@ -1,7 +1,119 @@
 {% extends 'userspace/base.html' %}
-{% block title %}Профіль{% endblock %}
+{% load static %}
+
+{% block title %}Профіль користувача{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Сторінка профілю</h1>
-<p>Тут інформація про користувача.</p>
+<div class="profile-container">
+    <h1><i class="fas fa-user-circle"></i> Профіль користувача</h1>
+
+    <div class="profile-grid">
+        <!-- Загальна інформація -->
+        <div class="profile-card">
+            <h2><i class="fas fa-id-card"></i> Загальна інформація</h2>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-user"></i> Ім'я:</span>
+                <span class="value">{{ user.username }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-envelope"></i> Email:</span>
+                <span class="value">{{ user.email|default:"Не вказано" }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-calendar-alt"></i> Реєстрація:</span>
+                <span class="value">{{ registered_since|date:"d.m.Y H:i" }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-star"></i> Статус:</span>
+                <span class="value">{% if profile.is_new_user %}Новачок{% else %}Досвідчений{% endif %}</span>
+            </div>
+        </div>
+
+        <!-- Фінанси -->
+        <div class="profile-card">
+            <h2><i class="fas fa-coins"></i> Фінанси</h2>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-horseshoe"></i> Срібні Підкови:</span>
+                <span class="value highlight">{{ profile.horseshoes }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-feather-alt"></i> Срібні Пір'я:</span>
+                <span class="value highlight">{{ profile.silver_wings }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-lock"></i> Зарезервовано (підкови):</span>
+                <span class="value">{{ profile.reserved_horseshoes }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-lock"></i> Зарезервовано (пір'я):</span>
+                <span class="value">{{ profile.reserved_silver_wings }}</span>
+            </div>
+        </div>
+
+        <!-- Коні -->
+        <div class="profile-card">
+            <h2><i class="fas fa-horse-head"></i> Коні</h2>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-warehouse"></i> У стайні:</span>
+                <span class="value">{{ horses_count }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-trophy"></i> Всього перемог:</span>
+                <span class="value">{{ total_wins }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-crown"></i> Найкращий кінь:</span>
+                <span class="value">
+                    {% if best_horse_name != "—" %}
+                        {{ best_horse_name }} ({{ best_horse_wins }} перемог)
+                    {% else %}
+                        {{ best_horse_name }}
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+
+        <!-- Комплекс -->
+        <div class="profile-card">
+            <h2><i class="fas fa-building"></i> Кінний комплекс</h2>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-tag"></i> Назва:</span>
+                <span class="value">{{ complex_name }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-map-marker-alt"></i> Локація:</span>
+                <span class="value">{{ complex_location }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-chart-line"></i> Престиж:</span>
+                <span class="value">{{ complex_prestige }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-boxes"></i> Ресурси на складі:</span>
+                <span class="value">{{ total_resources }} од.</span>
+            </div>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-cubes"></i> Типів ресурсів:</span>
+                <span class="value">{{ resource_types_count }}</span>
+            </div>
+        </div>
+
+        <!-- Активність -->
+        <div class="profile-card">
+            <h2><i class="fas fa-chart-simple"></i> Активність</h2>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-gavel"></i> Активних аукціонів:</span>
+                <span class="value">{{ active_auctions }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label"><i class="fas fa-dna"></i> Пропозицій розведення:</span>
+                <span class="value">{{ active_breeding_offers }}</span>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

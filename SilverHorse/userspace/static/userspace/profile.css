@@ -1,0 +1,119 @@
+/* =========================
+   👤 СТОРІНКА ПРОФІЛЮ
+========================= */
+:root {
+  --color-primary: #ffd700;
+  --color-primary-glow: rgba(255, 215, 0, 0.3);
+  --color-bg-card: rgba(0, 0, 0, 0.6);
+  --color-border: rgba(255, 215, 0, 0.3);
+  --color-text: #ffffff;
+  --color-text-secondary: #cccccc;
+  --glass-effect: blur(10px);
+  --radius-card: 20px;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  --transition: all 0.25s ease;
+}
+
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px 50px;
+}
+
+.profile-container h1 {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px var(--color-primary-glow);
+  background: rgba(0,0,0,0.3);
+  padding: 10px 30px;
+  border-radius: 50px;
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--color-border);
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+  white-space: nowrap;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.profile-card {
+  background: var(--color-bg-card);
+  backdrop-filter: var(--glass-effect);
+  border-radius: var(--radius-card);
+  padding: 20px 25px;
+  border: 2px solid var(--color-border);
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-primary);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 15px var(--color-primary-glow);
+}
+
+.profile-card h2 {
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  margin: 0 0 20px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.info-row .label {
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-row .label i {
+  width: 24px;
+  color: var(--color-primary);
+}
+
+.info-row .value {
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.info-row .value.highlight {
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  text-shadow: 0 0 5px var(--color-primary-glow);
+}
+
+@media (max-width: 768px) {
+  .profile-container h1 {
+    font-size: 1.8rem;
+    white-space: normal;
+  }
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+  .info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}

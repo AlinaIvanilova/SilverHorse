@@ -1,8 +1,78 @@
-<!--Сторінка Обліковий запис -->
 {% extends 'userspace/base.html' %}
-{% block title %}Профіль{% endblock %}
+{% load static %}
+
+{% block title %}Налаштування облікового запису{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/account.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Сторінка Обліковий запис</h1>
-<p>Щось про обліковий запис<p>
+<div class="account-container">
+    <h1><i class="fas fa-cogs"></i> Налаштування облікового запису</h1>
+
+    <div class="settings-grid">
+        <!-- Зміна email -->
+        <div class="settings-card">
+            <h2><i class="fas fa-envelope"></i> Зміна email</h2>
+            <form method="post" class="settings-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Поточний email:</label>
+                    <input type="email" value="{{ user.email }}" disabled class="disabled-input">
+                </div>
+                <div class="form-group">
+                    <label>Новий email:</label>
+                    <input type="email" name="email" required placeholder="Введіть новий email">
+                </div>
+                <button type="submit" name="change_email" class="settings-btn">
+                    <i class="fas fa-save"></i> Оновити email
+                </button>
+            </form>
+        </div>
+
+        <!-- Зміна пароля -->
+        <div class="settings-card">
+            <h2><i class="fas fa-lock"></i> Зміна пароля</h2>
+            <form method="post" class="settings-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Старий пароль:</label>
+                    {{ password_form.old_password }}
+                    {% if password_form.old_password.errors %}
+                        <div class="error">{{ password_form.old_password.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label>Новий пароль:</label>
+                    {{ password_form.new_password1 }}
+                    {% if password_form.new_password1.errors %}
+                        <div class="error">{{ password_form.new_password1.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label>Підтвердження нового пароля:</label>
+                    {{ password_form.new_password2 }}
+                    {% if password_form.new_password2.errors %}
+                        <div class="error">{{ password_form.new_password2.errors }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" name="change_password" class="settings-btn">
+                    <i class="fas fa-key"></i> Змінити пароль
+                </button>
+            </form>
+        </div>
+
+        <!-- Додаткові налаштування (можна розширити) -->
+        <div class="settings-card">
+            <h2><i class="fas fa-bell"></i> Сповіщення</h2>
+            <p class="info-text">Налаштування сповіщень будуть доступні пізніше.</p>
+            <hr>
+            <h2><i class="fas fa-trash-alt"></i> Небезпечна зона</h2>
+            <button class="danger-btn" disabled>
+                <i class="fas fa-exclamation-triangle"></i> Видалити акаунт (тимчасово недоступно)
+            </button>
+        </div>
+    </div>
+</div>
 {% endblock %}

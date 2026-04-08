@@ -1,86 +1,192 @@
 {% extends "userspace/base.html" %}
+{% load static %}
+
+{% block title %}Головна панель{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
 
 {% block content %}
+<div class="dashboard-container">
+    <div class="welcome-block">
+        <h1><i class="fas fa-tachometer-alt"></i> Панель керування</h1>
+        <div class="greeting">
+            <i class="fas fa-smile-wink"></i> {{ greeting }}, {{ user.username }}!
+        </div>
+    </div>
 
-<!-- Вітання та туторіал -->
-{% if is_new_user %}
-<div>
-    <h2>🎉 Вітаємо з реєстрацією, {{ user.username }}!</h2>
-    <p>Хочете пройти короткий туторіал?</p>
-    <a href="{% url 'start_tutorial' %}">Почати</a>
-    <a href="{% url 'skip_tutorial' %}">Пропустити</a>
-</div>
-{% endif %}
+    <!-- 🐎 Центральний блок: випадковий кінь -->
+    <div class="featured-horse">
+        <h2><i class="fas fa-shuffle"></i> Ваш випадковий кінь сьогодні</h2>
+        {% if random_horse %}
+        <div class="featured-card">
+            <div class="featured-photo">
+                <img src="{{ random_horse.get_photo_url }}" alt="{{ random_horse.name }}">
+            </div>
+            <div class="featured-info">
+                <h3>{{ random_horse.name }}</h3>
+                <div class="featured-details">
+                    <span><i class="fas fa-paw"></i> {{ random_horse.breed }}</span>
+                    <span><i class="fas fa-venus-mars"></i> {{ random_horse.get_gender_display }}</span>
+                    <span><i class="fas fa-calendar"></i> {{ random_horse.get_age_display }}</span>
+                    <span><i class="fas fa-chart-line"></i> Рівень: {{ random_horse_total_skills }}/700</span>
+                </div>
+                <div class="featured-stats">
+                    <div class="stat"><span>Швидкість</span><div class="bar"><div style="width: {{ random_horse.speed }}%"></div></div><span>{{ random_horse.speed }}</span></div>
+                    <div class="stat"><span>Витривалість</span><div class="bar"><div style="width: {{ random_horse.endurance }}%"></div></div><span>{{ random_horse.endurance }}</span></div>
+                    <div class="stat"><span>Сила</span><div class="bar"><div style="width: {{ random_horse.strength }}%"></div></div><span>{{ random_horse.strength }}</span></div>
+                </div>
+                <a href="{% url 'horse_detail' random_horse.id %}" class="featured-btn">
+                    <i class="fas fa-eye"></i> Переглянути деталі
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <div class="featured-empty">
+            <i class="fas fa-horse"></i>
+            <p>У вас ще немає коней. Завітайте на <a href="{% url 'trade_page' %}">ринок</a>, щоб придбати першого коня!</p>
+        </div>
+        {% endif %}
+    </div>
 
-<h1>Вітаємо, {{ user.username }} 🐎</h1>
+    <div class="dashboard-grid">
+        <!-- Фінанси -->
+        <div class="dashboard-card">
+            <h2><i class="fas fa-coins"></i> Ваші активи</h2>
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-horseshoe"></i> Срібні Підкови</span>
+                <span class="stat-value highlight">{{ horseshoes }}</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-feather-alt"></i> Срібні Пір'я</span>
+                <span class="stat-value highlight">{{ silver_wings }}</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-lock"></i> Зарезервовано (підкови)</span>
+                <span class="stat-value">{{ reserved_horseshoes }}</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-lock"></i> Зарезервовано (пір'я)</span>
+                <span class="stat-value">{{ reserved_silver_wings }}</span>
+            </div>
+        </div>
 
-<!-- Комплекс -->
-{% if has_complex %}
-    <h2>Ваш комплекс: {{ complex.name }}</h2>
-{% else %}
-    <p>У вас ще немає комплексу.</p>
-    <a href="{% url 'equestrian_page' %}">Створити комплекс</a>
-{% endif %}
-
-<!-- Статистика користувача -->
-<div>
-    <h3>Статистика:</h3>
-    <p>🐴 Коней: {{ horses_count }}</p>
-    <p>🏆 Перемог: {{ wins_count }}</p>
-    <p>📝 Змагань всього: {{ total_competitions }}</p>
-    <p>💰 Зароблено на змаганнях: {{ total_earnings }}</p>
-    <p>🥇 Рейтинг: #{{ overall_rank }}</p>
-</div>
-
-<!-- Нові повідомлення / сповіщення -->
-{% if new_messages_count > 0 %}
-<div>
-    <p>📬 У вас {{ new_messages_count }} нових повідомлень/сповіщень!</p>
-    <a href="{% url 'messages_page' %}">Перейти до повідомлень</a>
-</div>
-{% endif %}
-
-<!-- Кінь дня -->
-{% if horse_of_the_day %}
-<div>
-    <h3>Кінь дня</h3>
-    <p>{{ horse_of_the_day.name }}</p>
-    <a href="{% url 'horse_detail' horse_of_the_day.id %}">Перейти</a>
-</div>
-{% endif %}
-
-<!-- Рекомендований кінь / пропозиції -->
-{% if recommended_horse %}
-<div>
-    <h3>Рекомендований кінь на продаж</h3>
-    <p>{{ recommended_horse.name }} — ціна: {{ recommended_horse.price }} Срібних Підков</p>
-    <a href="{% url 'horse_detail' recommended_horse.id %}">Перейти</a>
-</div>
-{% endif %}
-
-<!-- Пропозиції / реклама -->
-{% if promo_offers %}
-<div>
-    <h3>Пропозиції цього тижня</h3>
-    <ul>
-        {% for offer in promo_offers %}
-        <li>
-            {{ offer.title }}
-            {% if offer.link %}
-            <a href="{{ offer.link }}">Детальніше</a>
+        <!-- Статистика коней -->
+        <div class="dashboard-card">
+            <h2><i class="fas fa-horse-head"></i> Стайня</h2>
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-warehouse"></i> Коней у стайні</span>
+                <span class="stat-value">{{ horses_count }}</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-trophy"></i> Всього перемог</span>
+                <span class="stat-value">{{ total_wins }}</span>
+            </div>
+            {% if best_horse %}
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-crown"></i> Найкращий кінь</span>
+                <span class="stat-value">{{ best_horse.name }} ({{ best_horse.wins }} перемог)</span>
+            </div>
             {% endif %}
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-{% endif %}
+            <div class="quick-links">
+                <a href="{% url 'horses_page' %}" class="quick-link"><i class="fas fa-eye"></i> Переглянути</a>
+                <a href="{% url 'trade_page' %}" class="quick-link"><i class="fas fa-shopping-cart"></i> Купити коня</a>
+            </div>
+        </div>
 
-<!-- Непрочитані повідомлення -->
-{% if unread_messages_count > 0 %}
-<div>
-    <p>⚠️ У вас {{ unread_messages_count }} непрочитане повідомлення{% if unread_messages_count > 1 %}я{% endif %}!</p>
-    <a href="{% url 'messages_page' %}">Перейти до повідомлень</a>
-</div>
-{% endif %}
+        <!-- Кінний комплекс -->
+        <div class="dashboard-card">
+            <h2><i class="fas fa-building"></i> Комплекс</h2>
+            {% if has_complex %}
+                <div class="stat-row">
+                    <span class="stat-label"><i class="fas fa-tag"></i> Назва</span>
+                    <span class="stat-value">{{ complex_name }}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label"><i class="fas fa-chart-line"></i> Престиж</span>
+                    <span class="stat-value">{{ complex_prestige }}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label"><i class="fas fa-boxes"></i> Ресурсів на складі</span>
+                    <span class="stat-value">{{ total_resources }} од.</span>
+                </div>
+                <div class="quick-links">
+                    <a href="{% url 'equestrian_page' %}" class="quick-link"><i class="fas fa-cog"></i> Керувати</a>
+                    <a href="{% url 'storage' %}" class="quick-link"><i class="fas fa-warehouse"></i> Склад</a>
+                </div>
+            {% else %}
+                <p class="stat-row">У вас ще немає комплексу. Створіть його, щоб відкрити більше можливостей!</p>
+                <a href="{% url 'equestrian_page' %}" class="action-btn"><i class="fas fa-plus-circle"></i> Створити комплекс</a>
+            {% endif %}
+        </div>
 
+        <!-- Активність на ринках -->
+        <div class="dashboard-card">
+            <h2><i class="fas fa-chart-simple"></i> Активність</h2>
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-gavel"></i> Активних аукціонів</span>
+                <span class="stat-value">{{ active_auctions_count }}</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-dna"></i> Пропозицій розведення</span>
+                <span class="stat-value">{{ active_breeding_count }}</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-envelope"></i> Непрочитані повідомлення</span>
+                <span class="stat-value">{{ unread_messages_count }}</span>
+            </div>
+            <div class="quick-links">
+                <a href="{% url 'auction_list' %}" class="quick-link"><i class="fas fa-gavel"></i> Аукціони</a>
+                <a href="{% url 'breeding_market' %}" class="quick-link"><i class="fas fa-dna"></i> Розведення</a>
+                <a href="{% url 'messages_page' %}" class="quick-link"><i class="fas fa-envelope"></i> Повідомлення</a>
+            </div>
+        </div>
+
+        <!-- Кінь дня -->
+        {% if horse_of_the_day %}
+        <div class="dashboard-card">
+            <h2><i class="fas fa-star"></i> Кінь дня</h2>
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-horse"></i> Ім'я</span>
+                <span class="stat-value">{{ horse_of_the_day.name }}</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-chart-line"></i> Порода</span>
+                <span class="stat-value">{{ horse_of_the_day.breed }}</span>
+            </div>
+            <a href="{% url 'horse_detail' horse_of_the_day.id %}" class="action-btn">Перейти до коня</a>
+        </div>
+        {% endif %}
+
+        <!-- Рекомендований кінь -->
+        {% if recommended_horse %}
+        <div class="dashboard-card">
+            <h2><i class="fas fa-tag"></i> Рекомендований кінь</h2>
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-horse"></i> {{ recommended_horse.name }}</span>
+                <span class="stat-value highlight">{{ recommended_horse.price }} підков</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label"><i class="fas fa-chart-line"></i> Порода</span>
+                <span class="stat-value">{{ recommended_horse.breed }}</span>
+            </div>
+            <a href="{% url 'horse_detail' recommended_horse.id %}" class="action-btn">Переглянути</a>
+        </div>
+        {% endif %}
+
+        <!-- Пропозиції тижня -->
+        <div class="dashboard-card">
+            <h2><i class="fas fa-gift"></i> Пропозиції тижня</h2>
+            <ul class="promo-list">
+                {% for offer in promo_offers %}
+                <li>
+                    <i class="fas fa-{{ offer.icon }}"></i>
+                    <a href="{{ offer.link }}">{{ offer.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}

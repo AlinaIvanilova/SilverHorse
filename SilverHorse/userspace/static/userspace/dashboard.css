@@ -1,0 +1,440 @@
+/* =========================
+   📊 ГОЛОВНА ПАНЕЛЬ (DASHBOARD)
+   Ефект скла з розмиттям
+========================= */
+:root {
+  --color-primary: #ffd700;
+  --color-primary-glow: rgba(255, 215, 0, 0.4);
+  --color-bg-card: rgba(0, 0, 0, 0.55);
+  --color-bg-glass: rgba(0, 0, 0, 0.4);
+  --color-border: rgba(255, 215, 0, 0.35);
+  --color-border-hover: rgba(255, 215, 0, 0.8);
+  --color-text: #ffffff;
+  --color-text-secondary: #e0e0e0;
+  --glass-effect: blur(12px);
+  --radius-card: 24px;
+  --radius-sm: 12px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-primary-glow);
+  --transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 20px 50px;
+}
+
+/* Вітальний блок */
+.welcome-block {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.welcome-block h1 {
+  font-size: 2.8rem;
+  color: var(--color-primary);
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.8), 0 0 25px var(--color-primary-glow);
+  margin-bottom: 10px;
+}
+
+.welcome-block .greeting {
+  font-size: 1.3rem;
+  color: var(--color-text);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  display: inline-block;
+  padding: 8px 28px;
+  border-radius: 50px;
+  border: 1px solid var(--color-border);
+}
+
+/* =========================
+   🐎 ЦЕНТРАЛЬНА КАРТКА – ЕФЕКТ РОЗМИТОГО СКЛА
+========================= */
+.featured-horse {
+    margin: 40px auto 50px;
+    text-align: center;
+}
+
+.featured-horse h2 {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    padding: 8px 32px;
+    border-radius: 60px;
+    border: 1px solid var(--color-border);
+    text-shadow: 0 0 6px black;
+}
+
+.featured-card {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(15, 15, 20, 0.45);  /* напівпрозорий */
+    backdrop-filter: blur(16px);          /* сильне розмиття */
+    border-radius: 40px;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    transition: var(--transition);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.featured-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-primary);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px var(--color-primary-glow);
+    background: rgba(20, 20, 30, 0.55);
+}
+
+/* Фото коня */
+.featured-photo {
+    flex: 1;
+    min-width: 260px;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.featured-photo img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 28px;
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease;
+}
+
+.featured-card:hover .featured-photo img {
+    transform: scale(1.02);
+}
+
+/* Інформація */
+.featured-info {
+    flex: 1.5;
+    padding: 28px 32px;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+.featured-info h3 {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin: 0 0 15px 0;
+    text-shadow: 1px 1px 3px black;
+    letter-spacing: 1px;
+}
+
+/* Деталі (порода, стать, вік, рівень) */
+.featured-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 22px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255,215,0,0.3);
+}
+
+.featured-details span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    padding: 6px 16px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    color: #fff;
+    border: 1px solid rgba(255,215,0,0.2);
+}
+
+.featured-details i {
+    color: var(--color-primary);
+    font-size: 1rem;
+}
+
+/* Прогрес-бари */
+.featured-stats {
+    margin: 22px 0;
+}
+
+.featured-stats .stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.featured-stats .stat span:first-child {
+    width: 105px;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-shadow: 0 0 2px black;
+}
+
+.featured-stats .stat .bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255,215,0,0.3);
+}
+
+.featured-stats .stat .bar div {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), #ffcc33);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+}
+
+.featured-stats .stat span:last-child {
+    width: 50px;
+    text-align: right;
+    font-weight: bold;
+    color: var(--color-primary);
+    background: rgba(0,0,0,0.6);
+    padding: 3px 10px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+}
+
+/* Кнопка */
+.featured-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: var(--transition);
+    margin-top: 10px;
+}
+
+.featured-btn:hover {
+    background: var(--color-primary);
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--color-primary-glow);
+}
+
+/* Порожній стан */
+.featured-empty {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    border-radius: 40px;
+    border: 1px solid var(--color-border);
+    text-align: center;
+}
+
+.featured-empty i {
+    font-size: 4rem;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+
+/* =========================
+   СІТКА КАРТОК (ІНШІ БЛОКИ)
+========================= */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.dashboard-card {
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(12px);
+  border-radius: 28px;
+  padding: 22px;
+  border: 1px solid var(--color-border);
+  transition: var(--transition);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-hover);
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.dashboard-card h2 {
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  margin: 0 0 15px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.stat-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.stat-label i {
+  width: 24px;
+  color: var(--color-primary);
+}
+
+.stat-value {
+  font-weight: bold;
+  color: var(--color-text);
+  font-size: 1.1rem;
+}
+
+.stat-value.highlight {
+  color: var(--color-primary);
+  font-size: 1.3rem;
+  text-shadow: 0 0 5px var(--color-primary-glow);
+}
+
+/* Кнопки та посилання */
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.quick-link {
+  background: rgba(255,215,0,0.12);
+  border: 1px solid var(--color-border);
+  border-radius: 40px;
+  padding: 8px 18px;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.quick-link:hover {
+  background: var(--color-primary);
+  color: #000;
+  transform: translateY(-2px);
+}
+
+.action-btn {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: 10px 22px;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: var(--transition);
+  margin-top: 15px;
+  text-align: center;
+}
+
+.action-btn:hover {
+  background: var(--color-primary);
+  color: #000;
+  transform: translateY(-2px);
+}
+
+.promo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.promo-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.promo-list li i {
+  color: var(--color-primary);
+  width: 28px;
+  font-size: 1.2rem;
+}
+
+.promo-list li a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.promo-list li a:hover {
+  color: var(--color-primary);
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .welcome-block h1 {
+    font-size: 2rem;
+  }
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .featured-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .featured-info {
+    text-align: center;
+  }
+  .featured-details {
+    justify-content: center;
+  }
+  .featured-stats .stat {
+    justify-content: center;
+  }
+  .featured-horse h2 {
+    font-size: 1.5rem;
+    padding: 6px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .featured-info h3 {
+    font-size: 1.5rem;
+  }
+  .featured-stats .stat span:first-child {
+    width: 85px;
+    font-size: 0.85rem;
+  }
+}

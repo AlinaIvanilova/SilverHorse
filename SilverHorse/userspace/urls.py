@@ -24,7 +24,6 @@ urlpatterns = [
     path('profile/', views.profile_page, name='profile_page'),
     path('subscription/', views.subscription_page, name='subscription_page'),
     path('account/', views.account_page, name='account_page'),
-    path('language/', views.language_page, name='language_page'),
 
     path('horses/', views.horses_page, name='horses_page'),
     path('equestrian/', views.equestrian_page, name='equestrian_page'),

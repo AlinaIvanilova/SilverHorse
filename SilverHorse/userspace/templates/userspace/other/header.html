@@ -1,6 +1,6 @@
 {% load static %}
 
-<!-- 🌿 Фіксований верхній хедер -->
+<!-- Фіксований верхній хедер -->
 <header class="top-bar">
     <div class="logo-with-icon">
         <a href="{% url 'dashboard' %}">
@@ -11,7 +11,7 @@
 
     {% if user.is_authenticated %}
     <div class="currencies">
-        <!-- 💰 Срібні Підкови -->
+        <!-- Срібні Підкови -->
         <a href="{% url 'subscription_page' %}" class="currency-item-link">
             <div class="currency-item">
                 <img src="{% static 'userspace/Silver_Horseshoe.png' %}" alt="Срібні Підкови" class="currency-icon">
@@ -22,7 +22,7 @@
 
         <span class="divider">|</span>
 
-        <!-- 🪽 Срібні Пір'я -->
+        <!-- Срібні Пір'я -->
         <a href="{% url 'subscription_page' %}" class="currency-item-link">
             <div class="currency-item">
                 <img src="{% static 'userspace/silver_feather.png' %}" alt="Срібні Пір'я" class="currency-icon">
@@ -44,11 +44,10 @@
                 <img src="{% static 'userspace/avatar.png' %}" alt="Профіль">
             </label>
             <div class="dropdown">
-                <a href="{% url 'profile_page' %}">👤 Профіль</a>
-                <a href="{% url 'subscription_page' %}">💎 Підписка</a>
-                <a href="{% url 'account_page' %}">⚙️ Обліковий запис</a>
-                <a href="{% url 'language_page' %}">🌍 Мова</a>
-                <a href="{% url 'logout' %}">🚪 Вийти</a>
+                <a href="{% url 'profile_page' %}">Профіль</a>
+                <a href="{% url 'subscription_page' %}">Підписка</a>
+                <a href="{% url 'account_page' %}">Обліковий запис</a>
+                <a href="{% url 'logout' %}">Вийти</a>
             </div>
         </div>
     </div>

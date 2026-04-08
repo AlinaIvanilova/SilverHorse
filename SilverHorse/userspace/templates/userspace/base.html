@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- ✅ Підключаємо головний файл стилів -->
+    <!-- Підключаємо головний файл стилів -->
     <link rel="stylesheet" href="{% static 'userspace/main.css' %}">
 </head>
 <body>
@@ -17,16 +17,16 @@
     <!-- Підключаємо підхедер -->
     {% include 'userspace/other/sub-header.html' %}
 
-    <!-- 🧩 Основний контент -->
+    <!-- Основний контент -->
     <main class="main-content">
         {% block content %}
         {% endblock %}
     </main>
 
-    <!-- 🌙 Підключення футера -->
+    <!-- Підключення футера -->
     {% include 'userspace/other/footer.html' %}
 
-    <!-- 📜 Скрипт для проявлення футера при прокручуванні -->
+    <!-- Скрипт для проявлення футера при прокручуванні -->
     <script>
         const footer = document.querySelector('.site-footer');
 
