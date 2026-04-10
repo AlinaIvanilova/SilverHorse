@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="v1">
+    <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="v2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/competitions/competition_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/competitions/competition_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/competitions/my_competitions.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/competitions/my_competitions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/competitions/name.txt" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/competitions/name.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses/horses.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses/horses.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/competitions/competition_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/competitions/competition_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/competitions.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/competitions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="31.1-competition-start-working" />
+        <entry key="$PROJECT_DIR$" value="31.2-competition-admin" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -69,7 +67,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "31.2-competition-messages",
+    "git-widget-placeholder": "31.3-competition-messages",
     "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/img/horses",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -296,15 +294,7 @@
       <workItem from="1775121254470" duration="9000" />
       <workItem from="1775122380377" duration="2517000" />
       <workItem from="1775821421495" duration="26000" />
-      <workItem from="1775822163620" duration="2320000" />
-    </task>
-    <task id="LOCAL-00008" summary="Split views.py into multiple files for better organization">
-      <option name="closed" value="true" />
-      <created>1771879532656</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1771879532656</updated>
+      <workItem from="1775822163620" duration="3286000" />
     </task>
     <task id="LOCAL-00009" summary="Split models.py into multiple files for clarity">
       <option name="closed" value="true" />
@@ -690,7 +680,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775829169163</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="v2">
+      <option name="closed" value="true" />
+      <created>1775830179293</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1775830179293</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -708,7 +706,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="version breed 2" />
     <MESSAGE value="version breed and sleep 1" />
     <MESSAGE value="version sleep 2" />
     <MESSAGE value="version sleep 3" />
@@ -733,7 +730,8 @@
     <MESSAGE value="html update" />
     <MESSAGE value="update" />
     <MESSAGE value="v1" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1" />
+    <MESSAGE value="v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="v2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

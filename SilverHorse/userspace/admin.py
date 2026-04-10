@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
+from django.utils import timezone  # додано
 from .models import SystemMessage, Message, Note, BlockedUser
 from .models import Profile
 from .models import Horse
-from .models import Competition, CompetitionRegistration  # імпортуємо нові моделі
+from .models import Competition, CompetitionRegistration
 
 
 # -------------------------
@@ -75,6 +76,27 @@ class HorseAdmin(admin.ModelAdmin):
 
 
 # -------------------------
+# Дія для примусового завершення змагань
+# -------------------------
+@admin.action(description="Завершити обрані змагання прямо зараз")
+def force_finish_competition(modeladmin, request, queryset):
+    for comp in queryset:
+        if not comp.is_active:
+            modeladmin.message_user(request, f"Змагання {comp} вже неактивне.", level='warning')
+            continue
+        # Якщо час початку ще не настав, зсуваємо в минуле
+        if comp.start_time > timezone.now():
+            comp.start_time = timezone.now() - timezone.timedelta(hours=1)
+            comp.end_time = timezone.now() + timezone.timedelta(minutes=1)
+            comp.save()
+        try:
+            comp.process_results()
+            modeladmin.message_user(request, f"Змагання {comp} завершено, результати оброблено.")
+        except Exception as e:
+            modeladmin.message_user(request, f"Помилка при обробці {comp}: {e}", level='error')
+
+
+# -------------------------
 # Реєстрація моделі Competition
 # -------------------------
 @admin.register(Competition)
@@ -86,7 +108,7 @@ class CompetitionAdmin(admin.ModelAdmin):
     list_filter = ('competition_type', 'is_active', 'start_time')
     search_fields = ('name', 'description')
     ordering = ('-start_time',)
-    readonly_fields = ('created_at',)  # додано, щоб бачити дату створення без можливості редагування
+    readonly_fields = ('created_at',)
     fieldsets = (
         ('Основна інформація', {
             'fields': ('name', 'competition_type', 'description', 'is_active', 'created_at')
@@ -101,6 +123,8 @@ class CompetitionAdmin(admin.ModelAdmin):
             'fields': ('max_participants', 'energy_cost')
         }),
     )
+    actions = [force_finish_competition]  # <-- додано дію
+
 
 # -------------------------
 # Окрема реєстрація для CompetitionRegistration

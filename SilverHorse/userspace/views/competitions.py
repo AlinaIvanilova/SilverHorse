@@ -20,6 +20,16 @@ def competition_list_for_horse(request, horse_id):
         messages.error(request, "Ви не можете переглядати змагання для цього коня.")
         return redirect('horse_detail', horse_id=horse.id)
 
+    # Обробка завершених змагань
+    finished_comps = Competition.objects.filter(
+        is_active=True,
+        start_time__lte=timezone.now()
+    ).exclude(
+        registrations__status='finished'
+    )
+    for comp in finished_comps:
+        comp.process_results()
+
     # Отримуємо активні змагання, які ще не почалися
     now = timezone.now()
     available_competitions = Competition.objects.filter(
@@ -53,9 +63,7 @@ def competition_list_for_horse(request, horse_id):
         'selected_type': comp_type,
         'now': now,
     }
-    # ✅ Виправлено: додано "userspace/"
     return render(request, 'userspace/competitions/competition_list.html', context)
-
 
 @login_required
 def register_for_competition(request, horse_id, competition_id):

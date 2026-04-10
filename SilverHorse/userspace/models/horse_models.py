@@ -225,6 +225,60 @@ class Competition(models.Model):
         random_factor = 1 + random.uniform(-0.1, 0.1)
         return round(total * random_factor, 2)
 
+    # Додати в кінець класу Competition (перед класом CompetitionRegistration)
+    def process_results(self):
+        from django.utils import timezone
+        from ..models import SystemMessage  # імпорт всередині, щоб уникнути циклічних імпортів
+        if self.start_time > timezone.now():
+            return  # ще не час
+        if self.registrations.filter(status='finished').exists():
+            return  # вже оброблено
+
+        registrations = self.registrations.filter(status='registered').select_related('horse', 'horse__owner')
+        if not registrations.exists():
+            return
+
+        # Обчислюємо бали
+        scores = []
+        for reg in registrations:
+            score = self.calculate_horse_score(reg.horse)
+            scores.append((reg, score))
+        scores.sort(key=lambda x: x[1], reverse=True)
+
+        # Призначаємо місця та нагороди
+        for place, (reg, score) in enumerate(scores, start=1):
+            reg.result_place = place
+            reg.score = score
+            if place == 1:
+                reward = 500
+            elif place == 2:
+                reward = 300
+            elif place == 3:
+                reward = 200
+            else:
+                reward = 100
+            reg.reward_horseshoes = reward
+            reg.status = 'finished'
+            reg.save()
+
+            # Нарахування власнику
+            if reg.horse.owner:
+                profile = reg.horse.owner.profile
+                profile.horseshoes += reward
+                profile.save()
+
+                # Створення системного повідомлення
+                SystemMessage.objects.create(
+                    user=reg.horse.owner,
+                    title=f"Результати змагання «{self.name}»",
+                    content=(
+                        f"Ваш кінь {reg.horse.name} взяв участь у змаганні «{self.name}».\n"
+                        f"Тип: {self.get_competition_type_display()}.\n"
+                        f"Місце: {place}.\n"
+                        f"Зароблено: {reward} підков."
+                    )
+                )
+
 
 class CompetitionRegistration(models.Model):
     STATUS_CHOICES = [
