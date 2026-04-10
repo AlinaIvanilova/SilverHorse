@@ -44,6 +44,12 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    background: rgba(0, 0, 0, 0.6);          /* темний фон */
+    padding: 10px 30px;                      /* овальна форма */
+    border-radius: 50px;                     /* овал */
+    border: 2px solid rgba(255, 215, 0, 0.4); /* золота облямівка */
+    backdrop-filter: blur(4px);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 /* Фільтр за типом */
