@@ -2,7 +2,7 @@
 from .messaging_models import Message, BlockedUser, SystemMessage
 from .note_models import Note
 from .user_models import Profile, Notification, EquestrianComplex, ComplexRating, Resource, ComplexResource
-from .horse_models import Horse, HorsePet, BreedingOffer
+from .horse_models import Horse, HorsePet, BreedingOffer, Competition, CompetitionRegistration
 from .auction_models import Auction
 
 # Якщо ви залишили сигнал створення профілю в цьому файлі – він теж має бути тут

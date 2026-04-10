@@ -1,0 +1,107 @@
+{% extends 'userspace/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="competitions-container">
+    <div class="header-with-back">
+        <a href="{% url 'horse_detail' horse.id %}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Назад до коня
+        </a>
+        <h2><i class="fas fa-trophy"></i> Змагання для {{ horse.name }}</h2>
+    </div>
+
+    <!-- Фільтр за типом -->
+    <div class="type-filter">
+        <span>Фільтр за типом:</span>
+        <a href="?" class="{% if not selected_type %}active{% endif %}">Всі</a>
+        {% for type_code, type_name in comp_types %}
+            <a href="?type={{ type_code }}" class="{% if selected_type == type_code %}active{% endif %}">{{ type_name }}</a>
+        {% endfor %}
+    </div>
+
+    <div class="competition-layout">
+        <!-- Ліва колонка: доступні змагання -->
+        <div class="available-competitions">
+            <h3><i class="fas fa-calendar-alt"></i> Доступні змагання</h3>
+            {% if available_competitions %}
+                <div class="competition-list">
+                    {% for comp in available_competitions %}
+                        <div class="competition-card">
+                            <div class="comp-header">
+                                <span class="comp-type">{{ comp.get_competition_type_display }}</span>
+                                <span class="comp-time"><i class="far fa-clock"></i> {{ comp.start_time|date:"d.m.Y H:i" }}</span>
+                            </div>
+                            <p>{{ comp.description|truncatewords:20 }}</p>
+                            <div class="comp-details">
+                                <span><i class="fas fa-star"></i> Головна навичка: {{ comp.get_primary_skill_display }}</span>
+                                {% if comp.secondary_skill %}
+                                    <span><i class="fas fa-star-half-alt"></i> Друга: {{ comp.get_secondary_skill_display }}</span>
+                                {% endif %}
+                                <span><i class="fas fa-users"></i> Місць: {{ comp.registrations.count }}/{{ comp.max_participants }}</span>
+                                <span><i class="fas fa-bolt"></i> Енергія: {{ comp.energy_cost }}</span>
+                            </div>
+                            <div class="comp-actions">
+                                {% if comp.id in registered_comp_ids %}
+                                    <button class="btn btn-secondary" disabled>Вже зареєстровано</button>
+                                {% else %}
+                                    <form method="post" action="{% url 'register_competition' horse.id comp.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-primary"
+                                            {% if horse.energy < comp.energy_cost %}disabled title="Недостатньо енергії"{% endif %}>
+                                            <i class="fas fa-check"></i> Зареєструвати
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="no-items">Немає доступних змагань. Завітайте пізніше!</p>
+            {% endif %}
+        </div>
+
+        <!-- Права колонка: мої реєстрації -->
+        <div class="my-registrations">
+            <h3><i class="fas fa-list"></i> Мої реєстрації ({{ horse.name }})</h3>
+            {% if my_registrations %}
+                <div class="registration-list">
+                    {% for reg in my_registrations %}
+                        <div class="registration-item {% if reg.competition.start_time < now %}past{% endif %}">
+                            <div class="reg-status">
+                                {% if reg.status == 'registered' %}
+                                    <span class="badge badge-success">Зареєстровано</span>
+                                {% elif reg.status == 'finished' %}
+                                    <span class="badge badge-info">Завершено</span>
+                                    {% if reg.result_place %}
+                                        <span>Місце: {{ reg.result_place }}</span>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="badge badge-secondary">{{ reg.get_status_display }}</span>
+                                {% endif %}
+                            </div>
+                            <strong>{{ reg.competition.get_competition_type_display }}</strong>
+                            <div class="reg-time">{{ reg.competition.start_time|date:"d.m.Y H:i" }}</div>
+                            <div>Енергія: {{ reg.competition.energy_cost }}</div>
+                            {% if reg.status == 'registered' and reg.competition.start_time > now %}
+                                <form method="post" action="{% url 'cancel_registration' reg.id %}" style="margin-top:5px;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"
+                                            onclick="return confirm('Скасувати реєстрацію? Повернеться половина енергії.');">
+                                        <i class="fas fa-times"></i> Скасувати
+                                    </button>
+                                </form>
+                            {% endif %}
+                            {% if reg.status == 'finished' and reg.reward_horseshoes %}
+                                <div class="reward">🏆 +{{ reg.reward_horseshoes }} підков</div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="no-items">Немає активних реєстрацій.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

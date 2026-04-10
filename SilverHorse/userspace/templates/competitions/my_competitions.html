@@ -1,0 +1,53 @@
+{% extends 'userspace/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="competitions-container">
+    <div class="header-with-back">
+        <a href="{% url 'dashboard' %}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Назад
+        </a>
+        <h2><i class="fas fa-trophy"></i> Мої змагання</h2>
+    </div>
+
+    {% if registrations %}
+        <div class="registration-list full-width">
+            {% for reg in registrations %}
+                <div class="registration-item {% if reg.competition.start_time < now %}past{% endif %}">
+                    <div class="reg-status">
+                        {% if reg.status == 'registered' %}
+                            <span class="badge badge-success">Зареєстровано</span>
+                        {% elif reg.status == 'finished' %}
+                            <span class="badge badge-info">Завершено</span>
+                            {% if reg.result_place %}
+                                <span>Місце: {{ reg.result_place }}</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="badge badge-secondary">{{ reg.get_status_display }}</span>
+                        {% endif %}
+                    </div>
+                    <strong>{{ reg.competition.get_competition_type_display }}</strong>
+                    <div><i class="fas fa-horse"></i> {{ reg.horse.name }}</div>
+                    <div class="reg-time">{{ reg.competition.start_time|date:"d.m.Y H:i" }}</div>
+                    <div>Енергія: {{ reg.competition.energy_cost }}</div>
+                    {% if reg.status == 'registered' and reg.competition.start_time > now %}
+                        <form method="post" action="{% url 'cancel_registration' reg.id %}" style="margin-top:10px;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-danger"
+                                    onclick="return confirm('Скасувати реєстрацію? Повернеться половина енергії.');">
+                                <i class="fas fa-times"></i> Скасувати
+                            </button>
+                        </form>
+                    {% endif %}
+                    {% if reg.status == 'finished' and reg.reward_horseshoes %}
+                        <div class="reward">🏆 +{{ reg.reward_horseshoes }} підков</div>
+                    {% endif %}
+                    <a href="{% url 'horse_detail' reg.horse.id %}" class="btn btn-sm btn-outline-light mt-2">До коня</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="no-items">Ви ще не брали участь у змаганнях.</p>
+    {% endif %}
+</div>
+{% endblock %}

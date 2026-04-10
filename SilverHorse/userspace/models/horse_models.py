@@ -157,3 +157,95 @@ class BreedingOffer(models.Model):
 
     def __str__(self):
         return f"{self.horse.name} – {self.price} {self.get_currency_display()}"
+
+# Додати в кінець файлу models.py
+
+class Competition(models.Model):
+    COMPETITION_TYPES = [
+        ('barrel_racing', 'Перегони навколо бочок'),
+        ('cutting', 'Каттинг'),
+        ('trail', 'Трейл'),
+        ('reining', 'Рейнінг'),
+        ('grand_prix', 'Гран-Прі'),
+        ('western_pleasure', 'Вестерн плежер'),
+    ]
+
+    name = models.CharField(max_length=100)
+    competition_type = models.CharField(max_length=30, choices=COMPETITION_TYPES)
+    description = models.TextField(blank=True)
+    # Вимоги до навичок (наприклад, які навички найважливіші)
+    primary_skill = models.CharField(max_length=20, choices=[
+        ('speed', 'Швидкість'),
+        ('endurance', 'Витривалість'),
+        ('dressage', 'Виїздка'),
+        ('gallop', 'Галоп'),
+        ('trot', 'Рись'),
+        ('jumping', 'Стрибки'),
+    ])
+    secondary_skill = models.CharField(max_length=20, blank=True, null=True, choices=[
+        ('speed', 'Швидкість'),
+        ('endurance', 'Витривалість'),
+        ('dressage', 'Виїздка'),
+        ('gallop', 'Галоп'),
+        ('trot', 'Рись'),
+        ('jumping', 'Стрибки'),
+    ])
+    energy_cost = models.PositiveSmallIntegerField(default=20)  # витрати енергії
+    max_participants = models.PositiveSmallIntegerField(default=8)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Змагання"
+        verbose_name_plural = "Змагання"
+        ordering = ['start_time']
+
+    def __str__(self):
+        return f"{self.get_competition_type_display()} - {self.start_time.strftime('%d.%m.%Y %H:%M')}"
+
+    def get_skill_weight(self, skill_name):
+        """Повертає вагу навички для цього типу змагань (1.0 для primary, 0.7 для secondary, 0.3 для інших)."""
+        if skill_name == self.primary_skill:
+            return 1.0
+        elif skill_name == self.secondary_skill:
+            return 0.7
+        return 0.3
+
+    def calculate_horse_score(self, horse):
+        """Обчислює зважений бал коня для цього змагання."""
+        skills = ['speed', 'endurance', 'dressage', 'gallop', 'trot', 'jumping']
+        total = 0
+        for skill in skills:
+            weight = self.get_skill_weight(skill)
+            total += getattr(horse, skill) * weight
+        # Додаємо випадковий фактор ±10%
+        import random
+        random_factor = 1 + random.uniform(-0.1, 0.1)
+        return round(total * random_factor, 2)
+
+
+class CompetitionRegistration(models.Model):
+    STATUS_CHOICES = [
+        ('registered', 'Зареєстровано'),
+        ('finished', 'Завершено'),
+        ('cancelled', 'Скасовано'),
+    ]
+
+    horse = models.ForeignKey('Horse', on_delete=models.CASCADE, related_name='competition_registrations')
+    competition = models.ForeignKey(Competition, on_delete=models.CASCADE, related_name='registrations')
+    registered_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='registered')
+    result_place = models.PositiveSmallIntegerField(null=True, blank=True)  # місце
+    score = models.FloatField(null=True, blank=True)  # набраний бал
+    reward_horseshoes = models.PositiveIntegerField(default=0)
+    reward_experience = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        verbose_name = "Реєстрація на змагання"
+        verbose_name_plural = "Реєстрації на змагання"
+        unique_together = ['horse', 'competition']  # один кінь не може бути зареєстрований двічі на те саме змагання
+
+    def __str__(self):
+        return f"{self.horse.name} -> {self.competition}"

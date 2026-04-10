@@ -5,21 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c26cf16d-e3eb-408e-9cb2-a4199e428b6d" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/account.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/dashboard.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/profile.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/management/commands/create_competitions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/competitions.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/competitions/competition_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/competitions/my_competitions.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/competitions/name.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/competitions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_04_2026_10_32_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_04_2026_10_32__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_03_2026_19_41_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_03_2026_19_41_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_03_2026_19_41__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_03_2026_19_41__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_03_2026_19_48_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_03_2026_19_48__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/models/horse_models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/static/userspace/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/dashboard/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/dashboard/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/other/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/other/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/user/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/user/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/user/language.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/user/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/user/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses/horse_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/templates/userspace/horses/horse_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/dashboard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SilverHorse/userspace/views/profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/SilverHorse/userspace/views/profile.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,9 +35,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
         <option value="HTML File" />
         <option value="Python Script" />
-        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -63,31 +69,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "JavaScript Debug.base.html.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.generate_horses.executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.update_template_paths (1).executor": "Run",
-    "Python.update_template_paths.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "30.2-profile",
-    "last_opened_file_path": "C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/img/horses",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.base.html.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.create_competitions.executor&quot;: &quot;Run&quot;,
+    &quot;Python.generate_horses.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.update_template_paths (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.update_template_paths.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;31.1-competition-start-working&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/OMEN/PycharmProjects/SilverHorse/SilverHorse/userspace/static/img/horses&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\OMEN\PycharmProjects\SilverHorse\SilverHorse\userspace\static\img\horses" />
@@ -100,8 +107,31 @@
       <recent name="C:\Users\OMEN\PycharmProjects\SilverHorse\SilverHorse\userspace\templates\userspace\user" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.update_template_paths (1)">
+  <component name="RunManager" selected="Python.create_competitions">
     <configuration name="base.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/SilverHorse/SilverHorse/userspace/templates/userspace/base.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="create_competitions" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="SilverHorse" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SilverHorse/userspace/management/commands" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SilverHorse/userspace/management/commands/create_competitions.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="generate_horses" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -198,7 +228,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.update_template_paths (1)" />
+        <item itemvalue="Python.create_competitions" />
         <item itemvalue="Python.update_template_paths" />
         <item itemvalue="Python.test" />
         <item itemvalue="JavaScript Debug.base.html" />
@@ -279,6 +309,8 @@
       <workItem from="1775119806090" duration="838000" />
       <workItem from="1775121254470" duration="9000" />
       <workItem from="1775122380377" duration="2517000" />
+      <workItem from="1775821421495" duration="26000" />
+      <workItem from="1775822163620" duration="1123000" />
     </task>
     <task id="LOCAL-00007" summary="PROBLEM PHOTO AAAAAA">
       <option name="closed" value="true" />
@@ -739,6 +771,7 @@
     <SUITE FILE_PATH="coverage/SilverHorse$update_template_paths.coverage" NAME="update_template_paths Coverage Results" MODIFIED="1775123816919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SilverHorse/userspace" />
     <SUITE FILE_PATH="coverage/SilverHorse$test.coverage" NAME="test Coverage Results" MODIFIED="1773923137470" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SilverHorse$generate_horses.coverage" NAME="generate_horses Coverage Results" MODIFIED="1772108148283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SilverHorse/userspace" />
+    <SUITE FILE_PATH="coverage/SilverHorse$create_competitions.coverage" NAME="create_competitions Coverage Results" MODIFIED="1775740089033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SilverHorse/userspace/management/commands" />
     <SUITE FILE_PATH="coverage/SilverHorse$update_template_paths__1_.coverage" NAME="update_template_paths (1) Coverage Results" MODIFIED="1775664752561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SilverHorse/userspace" />
   </component>
 </project>

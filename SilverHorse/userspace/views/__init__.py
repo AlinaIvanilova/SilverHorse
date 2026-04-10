@@ -14,6 +14,9 @@ from .horses import (horses_page, horse_detail, buy_horse, update_horse_stat, br
                      walk_horse, walk_multiple)
 from .breeding import breeding_market, create_breeding_offer, purchase_breeding, cancel_breeding_offer
 from .shop import shop_view
+from .competitions import competition_list_for_horse, register_for_competition, cancel_registration, my_competitions
+
+
 """
 dashboard.py — відображення дашборду.
 

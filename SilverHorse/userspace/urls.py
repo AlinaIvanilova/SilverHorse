@@ -4,7 +4,7 @@ from . import views
 from .views import auction
 from .views import horses
 from .views.shop import shop_view
-
+from .views import competitions
 
 urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
@@ -75,4 +75,9 @@ urlpatterns = [
     path('shop/', shop_view, name='shop'),
 
     path('horse/<int:horse_id>/walk-multiple/', horses.walk_multiple, name='walk_multiple'),
+
+    path('horse/<int:horse_id>/competitions/', competitions.competition_list_for_horse, name='competition_list'),
+    path('horse/<int:horse_id>/competitions/register/<int:competition_id>/', competitions.register_for_competition, name='register_competition'),
+    path('competitions/registration/<int:registration_id>/cancel/', competitions.cancel_registration, name='cancel_registration'),
+    path('competitions/my/', competitions.my_competitions, name='my_competitions'),
 ]

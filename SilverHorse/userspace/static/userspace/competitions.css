@@ -1,0 +1,389 @@
+/* =========================
+   🏆 Стилі для сторінки змагань
+   ========================= */
+
+.competitions-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.header-with-back {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.header-with-back .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(50,50,50,0.8));
+    color: var(--color-gold, #ffd700);
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    border: 2px solid rgba(255,215,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.header-with-back .back-btn:hover {
+    background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,215,0,0.3));
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255,215,0,0.2);
+}
+
+.header-with-back h2 {
+    color: var(--color-gold, #ffd700);
+    margin: 0;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Фільтр за типом */
+.type-filter {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0,0,0,0.3);
+    padding: 15px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,215,0,0.2);
+}
+
+.type-filter span {
+    color: var(--color-gold, #ffd700);
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.type-filter a {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(42,42,42,0.8);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid rgba(255,215,0,0.3);
+    transition: all 0.2s ease;
+}
+
+.type-filter a.active {
+    background: var(--color-gold, #ffd700);
+    color: #000;
+    border-color: var(--color-gold, #ffd700);
+    box-shadow: 0 0 10px rgba(255,215,0,0.5);
+}
+
+.type-filter a:hover:not(.active) {
+    background: rgba(255,215,0,0.2);
+    color: #fff;
+    border-color: rgba(255,215,0,0.7);
+}
+
+/* Основна двоколоночна сітка */
+.competition-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 25px;
+}
+
+/* Заголовки секцій */
+.available-competitions h3,
+.my-registrations h3 {
+    color: var(--color-gold, #ffd700);
+    border-bottom: 2px solid rgba(255,215,0,0.3);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Список доступних змагань */
+.competition-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.competition-card {
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    padding: 20px;
+    border: 2px solid rgba(255,215,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.competition-card:hover {
+    border-color: rgba(255,215,0,0.6);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    transform: translateY(-2px);
+}
+
+.comp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.comp-type {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--color-gold, #ffd700);
+}
+
+.comp-time {
+    color: #ccc;
+    font-size: 0.9rem;
+    background: rgba(0,0,0,0.5);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,215,0,0.2);
+}
+
+.competition-card p {
+    color: #ddd;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.comp-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px 20px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    color: #ccc;
+}
+
+.comp-details span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.comp-details i {
+    color: var(--color-gold, #ffd700);
+    width: 18px;
+}
+
+.comp-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.comp-actions .btn {
+    min-width: 150px;
+}
+
+/* Права колонка - мої реєстрації */
+.registration-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.registration-item {
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(4px);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid rgba(255,215,0,0.15);
+    transition: all 0.2s ease;
+}
+
+.registration-item.past {
+    opacity: 0.7;
+    background: rgba(0,0,0,0.2);
+}
+
+.registration-item:hover {
+    border-color: rgba(255,215,0,0.4);
+}
+
+.reg-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.badge-success {
+    background: #28a745;
+    color: white;
+}
+
+.badge-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.badge-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.registration-item strong {
+    color: var(--color-gold, #ffd700);
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.reg-time {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.registration-item .btn-outline-danger {
+    background: transparent;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.registration-item .btn-outline-danger:hover {
+    background: #dc3545;
+    color: white;
+}
+
+.reward {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #ffd700;
+    text-align: right;
+}
+
+.no-items {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 12px;
+}
+
+/* Адаптивність */
+@media (max-width: 900px) {
+    .competition-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .my-registrations {
+        order: -1; /* показуємо спочатку реєстрації на мобільних */
+    }
+}
+
+@media (max-width: 600px) {
+    .header-with-back {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .type-filter {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .comp-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .comp-actions .btn {
+        width: 100%;
+    }
+}
+
+/* Кнопки (використовуються спільні стилі з buttons.css, але додамо специфічні) */
+.competitions-container .btn-primary {
+    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+    border: 2px solid #ffd700;
+    color: #ffd700;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.competitions-container .btn-primary:hover:not(:disabled) {
+    background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
+    border-color: #ffea70;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+}
+
+.competitions-container .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.competitions-container .btn-secondary {
+    background: transparent;
+    border: 2px solid #888;
+    color: #ccc;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: default;
+}
+/* =========================
+   🏆 Додаткові стилі для сторінки "Мої змагання"
+   ========================= */
+
+/* Контейнер для повної ширини на сторінці моїх реєстрацій */
+.registration-list.full-width {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Кнопка переходу до коня */
+.registration-item .btn-outline-light {
+    background: transparent;
+    border: 1px solid #ffd700;
+    color: #ffd700;
+    padding: 5px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+}
+
+.registration-item .btn-outline-light:hover {
+    background: rgba(255, 215, 0, 0.2);
+    color: #fff;
+}
