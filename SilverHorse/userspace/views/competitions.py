@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.db import transaction
-from django.db.models import Q, Count, F  # додано F
+from django.db.models import Q, Count, F
 from ..models import Horse, Competition, CompetitionRegistration
 import random
 
@@ -28,7 +28,7 @@ def competition_list_for_horse(request, horse_id):
     ).annotate(
         registered_count=Count('registrations')
     ).filter(
-        registered_count__lt=F('max_participants')  # виправлено: замість models.F
+        registered_count__lt=F('max_participants')
     ).order_by('start_time')
 
     # Фільтрація за типом, якщо передано параметр
@@ -53,7 +53,8 @@ def competition_list_for_horse(request, horse_id):
         'selected_type': comp_type,
         'now': now,
     }
-    return render(request, 'competitions/competition_list.html', context)
+    # ✅ Виправлено: додано "userspace/"
+    return render(request, 'userspace/competitions/competition_list.html', context)
 
 
 @login_required
@@ -140,7 +141,8 @@ def my_competitions(request):
         horse__in=user_horses
     ).select_related('horse', 'competition').order_by('-registered_at')
 
-    return render(request, 'competitions/my_competitions.html', {
+    # ✅ Виправлено: додано "userspace/"
+    return render(request, 'userspace/competitions/my_competitions.html', {
         'registrations': registrations,
         'now': timezone.now(),
     })

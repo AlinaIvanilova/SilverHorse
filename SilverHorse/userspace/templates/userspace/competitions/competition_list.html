@@ -31,12 +31,35 @@
                                 <span class="comp-type">{{ comp.get_competition_type_display }}</span>
                                 <span class="comp-time"><i class="far fa-clock"></i> {{ comp.start_time|date:"d.m.Y H:i" }}</span>
                             </div>
-                            <p>{{ comp.description|truncatewords:20 }}</p>
+                            <p>{{ comp.description }}</p>
                             <div class="comp-details">
-                                <span><i class="fas fa-star"></i> Головна навичка: {{ comp.get_primary_skill_display }}</span>
-                                {% if comp.secondary_skill %}
-                                    <span><i class="fas fa-star-half-alt"></i> Друга: {{ comp.get_secondary_skill_display }}</span>
-                                {% endif %}
+                                <div class="skills-list">
+                                    <i class="fas fa-star"></i> Ключові навички:
+                                    <ul>
+                                        {% if comp.competition_type == 'barrel_racing' %}
+                                            <li>Швидкість</li>
+                                            <li>Галоп</li>
+                                        {% elif comp.competition_type == 'cutting' %}
+                                            <li>Виїздка</li>
+                                            <li>Витривалість</li>
+                                        {% elif comp.competition_type == 'trail' %}
+                                            <li>Рись</li>
+                                            <li>Витривалість</li>
+                                            <li>Виїздка</li>
+                                        {% elif comp.competition_type == 'reining' %}
+                                            <li>Виїздка</li>
+                                            <li>Галоп</li>
+                                        {% elif comp.competition_type == 'grand_prix' %}
+                                            <li>Стрибки</li>
+                                            <li>Швидкість</li>
+                                            <li>Витривалість</li>
+                                        {% elif comp.competition_type == 'western_pleasure' %}
+                                            <li>Рись</li>
+                                            <li>Виїздка</li>
+                                            <li>Витривалість</li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
                                 <span><i class="fas fa-users"></i> Місць: {{ comp.registrations.count }}/{{ comp.max_participants }}</span>
                                 <span><i class="fas fa-bolt"></i> Енергія: {{ comp.energy_cost }}</span>
                             </div>

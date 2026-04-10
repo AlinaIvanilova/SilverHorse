@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from .models import SystemMessage, Message, Note, BlockedUser
 from .models import Profile
 from .models import Horse
+from .models import Competition, CompetitionRegistration  # імпортуємо нові моделі
+
 
 # -------------------------
 # Повідомлення між користувачами
@@ -49,8 +51,16 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 # -------------------------
-# Реєстрація моделі Horse (проста, без зайвих налаштувань)
+# Реєстрація моделі Horse
 # -------------------------
+class CompetitionRegistrationInline(admin.TabularInline):
+    model = CompetitionRegistration
+    extra = 0
+    fields = ('competition', 'status', 'result_place', 'score', 'reward_horseshoes')
+    readonly_fields = ('registered_at',)
+    can_delete = True
+
+
 @admin.register(Horse)
 class HorseAdmin(admin.ModelAdmin):
     list_display = ('name', 'owner', 'age', 'status', 'last_sleep', 'last_sleep_processed')
@@ -61,3 +71,47 @@ class HorseAdmin(admin.ModelAdmin):
         ('Характеристики', {'fields': ('speed', 'endurance', 'strength', 'health', 'energy', 'mood')}),
         ('Сон', {'fields': ('last_sleep', 'last_sleep_processed', 'energy_at_sleep')}),
     )
+    inlines = [CompetitionRegistrationInline]
+
+
+# -------------------------
+# Реєстрація моделі Competition
+# -------------------------
+@admin.register(Competition)
+class CompetitionAdmin(admin.ModelAdmin):
+    list_display = (
+        'name', 'competition_type', 'start_time', 'end_time',
+        'is_active', 'max_participants', 'energy_cost'
+    )
+    list_filter = ('competition_type', 'is_active', 'start_time')
+    search_fields = ('name', 'description')
+    ordering = ('-start_time',)
+    readonly_fields = ('created_at',)  # додано, щоб бачити дату створення без можливості редагування
+    fieldsets = (
+        ('Основна інформація', {
+            'fields': ('name', 'competition_type', 'description', 'is_active', 'created_at')
+        }),
+        ('Дата та час', {
+            'fields': ('start_time', 'end_time')
+        }),
+        ('Вимоги та навички', {
+            'fields': ('primary_skill', 'secondary_skill')
+        }),
+        ('Умови участі', {
+            'fields': ('max_participants', 'energy_cost')
+        }),
+    )
+
+# -------------------------
+# Окрема реєстрація для CompetitionRegistration
+# -------------------------
+@admin.register(CompetitionRegistration)
+class CompetitionRegistrationAdmin(admin.ModelAdmin):
+    list_display = (
+        'horse', 'competition', 'status', 'registered_at',
+        'result_place', 'score', 'reward_horseshoes'
+    )
+    list_filter = ('status', 'competition__competition_type', 'registered_at')
+    search_fields = ('horse__name', 'competition__name')
+    autocomplete_fields = ('horse', 'competition')
+    readonly_fields = ('registered_at',)
