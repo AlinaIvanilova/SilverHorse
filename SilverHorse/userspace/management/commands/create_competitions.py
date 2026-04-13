@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 from datetime import timedelta
-from userspace.models import Competition
+from userspace.models import Competition  # абсолютний імпорт
 
 class Command(BaseCommand):
     help = 'Create initial competitions'

@@ -18,7 +18,7 @@
         <ul class="parents">
             <li class="parent">
                 {% if node.sire %}
-                    {% include "userspace/tree_node.html" with node=node.sire %}
+                    {% include "userspace/horses/tree_node.html" with node=node.sire %}
                 {% else %}
                     <div class="node-container">
                         <a href="#" class="horse-node unknown">

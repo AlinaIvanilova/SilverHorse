@@ -25,6 +25,18 @@ class Horse(models.Model):
     photo = models.ImageField(upload_to='horses/', null=True, blank=True)
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='horses')
     price = models.IntegerField(default=0)
+
+    CURRENCY_CHOICES = [
+        ('horseshoes', 'Срібні підкови'),
+        ('silver_wings', 'Срібні пір\'їни'),
+    ]
+    currency = models.CharField(
+        max_length=20,
+        choices=CURRENCY_CHOICES,
+        default='horseshoes',
+        verbose_name="Валюта"
+    )
+
     status = models.CharField(max_length=10, choices=status_choices, default='market')
     wins = models.PositiveIntegerField(default=0, verbose_name="Перемоги")
     for_sale = models.BooleanField(default=False)

@@ -8,11 +8,9 @@
     <!-- 🛒 Магазин навігація з кнопками по центру -->
     <div class="market-shop-nav">
         <div class="shop-buttons-row">
-            <!-- Пряме посилання на магазин -->
             <a href="{% url 'shop' %}" class="shop-main-btn">
                 <i class="fas fa-store"></i> Магазин
             </a>
-
             <button class="shop-secondary-btn">
                 <i class="fas fa-exchange-alt"></i> Обмін предметами
             </button>
@@ -43,7 +41,6 @@
 
         <div class="search-filters" id="searchFilters" style="display: none;">
             <div class="filters-grid">
-                <!-- Фільтр за породою -->
                 <div class="filter-group">
                     <label class="filter-label"><i class="fas fa-tag"></i> Порода:</label>
                     <select class="filter-select" id="breedFilter">
@@ -54,7 +51,6 @@
                     </select>
                 </div>
 
-                <!-- Фільтр за типом коня -->
                 <div class="filter-group">
                     <label class="filter-label"><i class="fas fa-paw"></i> Тип:</label>
                     <select class="filter-select" id="typeFilter">
@@ -65,7 +61,6 @@
                     </select>
                 </div>
 
-                <!-- Фільтр за віком (в роках, але фільтруємо по місяцях) -->
                 <div class="filter-group">
                     <label class="filter-label"><i class="fas fa-calendar-alt"></i> Вік (роки):</label>
                     <div class="number-input">
@@ -81,13 +76,12 @@
                     </div>
                 </div>
 
-                <!-- Фільтр за ціною (з валютою) -->
                 <div class="filter-group">
                     <label class="filter-label"><i class="fas fa-coins"></i> Ціна:</label>
                     <div class="currency-selector">
                         <select class="filter-select" id="currencyFilter">
                             <option value="horseshoes">Срібні Підкови</option>
-                            <option value="feathers">Срібні Пір'я</option>
+                            <option value="silver_wings">Срібні Пір'я</option>
                         </select>
                     </div>
                     <div class="number-input">
@@ -103,7 +97,6 @@
                     </div>
                 </div>
 
-                <!-- Фільтр за статтю -->
                 <div class="filter-group">
                     <label class="filter-label"><i class="fas fa-venus-mars"></i> Стать:</label>
                     <div class="gender-options">
@@ -128,10 +121,10 @@
         {% for horse in horses %}
         <div class="horse-card" data-breed="{{ horse.breed }}"
                                  data-type="{{ horse.horse_type }}"
-                                 data-age="{{ horse.age }}"  {# вік у місяцях #}
+                                 data-age="{{ horse.age }}"
                                  data-price="{{ horse.price }}"
                                  data-gender="{{ horse.gender }}"
-                                 data-currency="horseshoes">
+                                 data-currency="{{ horse.currency }}">
             <div class="photo-container">
                 <img src="{{ horse.get_photo_url }}"
                      alt="{{ horse.get_photo_alt }}"
@@ -149,7 +142,14 @@
                 <p><i class="fas fa-heartbeat"></i> Витривалість: {{ horse.endurance }}</p>
                 <p><i class="fas fa-dumbbell"></i> Сила: {{ horse.strength }}</p>
                 <p><i class="fas fa-heart"></i> Здоров'я: {{ horse.health }}</p>
-                <p class="price"><i class="fas fa-tag"></i> Ціна: <strong>{{ horse.price }}</strong> <i class="fas fa-horse"></i> Підков</p>
+                <p class="price">
+                    <i class="fas fa-tag"></i> Ціна: <strong>{{ horse.price }}</strong>
+                    {% if horse.currency == 'silver_wings' %}
+                        <i class="fas fa-feather-alt"></i> Пір'їн
+                    {% else %}
+                        <i class="fas fa-horseshoe"></i> Підков
+                    {% endif %}
+                </p>
             </div>
 
             <div class="buy-section">
@@ -179,7 +179,6 @@
 </div>
 
 <script>
-// Функції для розширеного пошуку
 function toggleSearchFilters() {
     const filters = document.getElementById('searchFilters');
     filters.style.display = (filters.style.display === 'none' || filters.style.display === '') ? 'block' : 'none';
@@ -205,7 +204,6 @@ function applyFilters() {
     const priceTo = parseInt(document.getElementById('priceTo').value);
     const currency = document.getElementById('currencyFilter').value;
 
-    // Конвертуємо роки в місяці для фільтрації
     const ageFrom = ageFromYears * 12;
     const ageTo = ageToYears * 12;
 
@@ -221,15 +219,10 @@ function applyFilters() {
         const gender = horse.dataset.gender;
         const horseCurrency = horse.dataset.currency;
 
-        // Фільтр за породою
         if (breed && horseBreed !== breed) show = false;
-        // Фільтр за типом
         if (type && horseType !== type) show = false;
-        // Фільтр за віком (у місяцях)
         if (age < ageFrom || age > ageTo) show = false;
-        // Фільтр за статтю
         if (selectedGenders.length && !selectedGenders.includes(gender)) show = false;
-        // Фільтр за валютою та ціною
         if (currency && horseCurrency !== currency) show = false;
         if (price < priceFrom || price > priceTo) show = false;
 

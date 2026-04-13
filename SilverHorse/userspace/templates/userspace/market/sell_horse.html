@@ -8,13 +8,13 @@
     <div class="horse-summary">
         <img src="{{ horse.get_photo_url }}" alt="{{ horse.name }}" style="width: 150px; border-radius: 10px;">
         <div>
-            <p><strong>Вік:</strong> {{ horse.age }} років</p>
+            <p><strong>Вік:</strong> {{ horse.get_age_display }}</p>
             <p><strong>Порода:</strong> {{ horse.breed }}</p>
             <p><strong>Стать:</strong> {{ horse.get_gender_display }}</p>
         </div>
     </div>
 
-    <form method="post" class="sell-form">
+    <form method="post" class="sell-form" id="sellForm">
         {% csrf_token %}
 
         <div class="form-group">
@@ -31,17 +31,34 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="price">Ціна:</label>
-            <input type="number" name="price" id="price" min="1" required class="form-control">
+        <!-- Блок для РИНКУ (ціна + валюта) -->
+        <div id="marketFields">
+            <div class="form-group">
+                <label for="market_price"><i class="fas fa-coins"></i> Ціна:</label>
+                <input type="number" name="market_price" id="market_price" min="1" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="market_currency"><i class="fas fa-exchange-alt"></i> Валюта:</label>
+                <select name="market_currency" id="market_currency" class="form-control">
+                    <option value="horseshoes">Срібні підкови</option>
+                    <option value="silver_wings">Срібні пір'їни</option>
+                </select>
+            </div>
         </div>
 
-        <div class="form-group" id="currency-group" style="display: none;">
-            <label for="currency">Валюта аукціону:</label>
-            <select name="currency" id="currency" class="form-control">
-                <option value="horseshoes">Підкови</option>
-                <option value="silver_wings">Срібні пір'їни</option>
-            </select>
+        <!-- Блок для АУКЦІОНУ (стартова ставка + валюта) -->
+        <div id="auctionFields" style="display: none;">
+            <div class="form-group">
+                <label for="auction_price"><i class="fas fa-gavel"></i> Стартова ставка:</label>
+                <input type="number" name="auction_price" id="auction_price" min="1" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="auction_currency"><i class="fas fa-exchange-alt"></i> Валюта:</label>
+                <select name="auction_currency" id="auction_currency" class="form-control">
+                    <option value="horseshoes">Срібні підкови</option>
+                    <option value="silver_wings">Срібні пір'їни</option>
+                </select>
+            </div>
         </div>
 
         <div class="form-actions">
@@ -59,16 +76,64 @@
     document.addEventListener('DOMContentLoaded', function() {
         const marketRadio = document.querySelector('input[value="market"]');
         const auctionRadio = document.querySelector('input[value="auction"]');
-        const currencyGroup = document.getElementById('currency-group');
+        const marketFields = document.getElementById('marketFields');
+        const auctionFields = document.getElementById('auctionFields');
 
-        function toggleCurrency() {
-            currencyGroup.style.display = auctionRadio.checked ? 'block' : 'none';
+        const marketPrice = document.getElementById('market_price');
+        const marketCurrency = document.getElementById('market_currency');
+        const auctionPrice = document.getElementById('auction_price');
+        const auctionCurrency = document.getElementById('auction_currency');
+
+        function toggleForms() {
+            if (marketRadio.checked) {
+                marketFields.style.display = 'block';
+                auctionFields.style.display = 'none';
+                marketPrice.required = true;
+                auctionPrice.required = false;
+                marketCurrency.disabled = false;
+                auctionCurrency.disabled = true;
+            } else {
+                marketFields.style.display = 'none';
+                auctionFields.style.display = 'block';
+                marketPrice.required = false;
+                auctionPrice.required = true;
+                marketCurrency.disabled = true;
+                auctionCurrency.disabled = false;
+            }
         }
 
-        marketRadio.addEventListener('change', toggleCurrency);
-        auctionRadio.addEventListener('change', toggleCurrency);
+        marketRadio.addEventListener('change', toggleForms);
+        auctionRadio.addEventListener('change', toggleForms);
+        toggleForms();
 
-        toggleCurrency(); // викликаємо при завантаженні
+        // Перед відправкою форми об'єднуємо дані в поля price та currency
+        const form = document.getElementById('sellForm');
+        form.addEventListener('submit', function(e) {
+            let priceInput = document.createElement('input');
+            let currencyInput = document.createElement('input');
+            priceInput.type = 'hidden';
+            priceInput.name = 'price';
+            currencyInput.type = 'hidden';
+            currencyInput.name = 'currency';
+
+            if (marketRadio.checked) {
+                priceInput.value = marketPrice.value;
+                currencyInput.value = marketCurrency.value;
+                // Видаляємо можливі старі поля тривалості (якщо були)
+                document.querySelectorAll('input[name="duration_hours"]').forEach(el => el.remove());
+            } else {
+                priceInput.value = auctionPrice.value;
+                currencyInput.value = auctionCurrency.value;
+                // Додаємо тривалість (за замовчуванням 48 годин)
+                let durInput = document.createElement('input');
+                durInput.type = 'hidden';
+                durInput.name = 'duration_hours';
+                durInput.value = '48';
+                form.appendChild(durInput);
+            }
+            form.appendChild(priceInput);
+            form.appendChild(currencyInput);
+        });
     });
 </script>
 {% endblock %}

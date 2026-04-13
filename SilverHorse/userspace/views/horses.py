@@ -154,14 +154,21 @@ def sell_horse(request, horse_id):
 
         if sale_type == 'market':
             horse.price = price
+            horse.currency = currency
             horse.status = 'market'
             horse.save()
-            messages.success(request, f"{horse.name} виставлений на ринок за {price} підков.")
+            messages.success(
+                request,
+                f"{horse.name} виставлений на ринок за {price} "
+                f"{dict(Horse.CURRENCY_CHOICES).get(currency, currency)}."
+            )
             return redirect('trade_page')
 
         elif sale_type == 'auction':
             Auction.objects.filter(horse=horse).delete()
-            end_time = timezone.now() + timezone.timedelta(hours=50)
+            end_time = timezone.now() + timezone.timedelta(
+                hours=int(request.POST.get('duration_hours', 50))
+            )
             auction = Auction.objects.create(
                 horse=horse,
                 seller=request.user,
@@ -182,6 +189,36 @@ def sell_horse(request, horse_id):
             return redirect('sell_horse', horse_id=horse.id)
 
     return render(request, 'userspace/market/sell_horse.html', {'horse': horse})
+
+
+@login_required
+def buy_horse(request, horse_id):
+    horse = get_object_or_404(Horse, id=horse_id, status='market')
+    buyer_profile = request.user.profile
+
+    if horse.currency == 'horseshoes':
+        if buyer_profile.horseshoes < horse.price:
+            messages.error(
+                request,
+                f"Недостатньо Срібних Підков. Потрібно {horse.price}, у вас {buyer_profile.horseshoes}."
+            )
+            return redirect('trade_page')
+        buyer_profile.horseshoes -= horse.price
+    else: 
+        if buyer_profile.silver_wings < horse.price:
+            messages.error(
+                request,
+                f"Недостатньо Срібних Пір'їн. Потрібно {horse.price}, у вас {buyer_profile.silver_wings}."
+            )
+            return redirect('trade_page')
+        buyer_profile.silver_wings -= horse.price
+
+    buyer_profile.save()
+    horse.owner = request.user
+    horse.status = 'user'
+    horse.save()
+    messages.success(request, f"Вітаємо! Ви купили коня {horse.name} 🐎")
+    return redirect('horses_page')
 
 @login_required
 def cancel_sale(request, horse_id):
